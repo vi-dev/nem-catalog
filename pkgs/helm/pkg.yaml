@@ -1,0 +1,26 @@
+name: helm
+description: The Kubernetes Package Manager
+homepage: https://github.com/helm/helm
+license: Apache-2.0
+
+archive:
+  fetcher:
+    http:
+      url: "https://get.helm.sh/helm-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+      versionsFrom:
+        github_release:
+          repo: helm/helm
+  verify:
+    sha256URL: "https://get.helm.sh/helm-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz.sha256sum"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/{{.OS}}-{{.Arch}}/helm"
+      to: "{{.InstallDir}}/bin/helm"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/helm", "version", "--short"]

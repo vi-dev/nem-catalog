@@ -1,0 +1,29 @@
+name: trivy
+description: Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more
+homepage: https://github.com/aquasecurity/trivy
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: aquasecurity/trivy
+      assetName: 'trivy_{{.Version | trimPrefix "v"}}_{{.OS}}-{{.Arch}}.tar.gz'
+      templateOverrides:
+        linux: Linux
+        darwin: macOS
+        amd64: 64bit
+        arm64: ARM64
+  verify:
+    sha256GitHubAsset: 'trivy_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/trivy"
+      to: "{{.InstallDir}}/bin/trivy"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/trivy", "--version"]

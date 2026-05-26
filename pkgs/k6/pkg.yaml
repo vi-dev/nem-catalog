@@ -1,0 +1,26 @@
+name: k6
+description: A modern load testing tool, using Go and JavaScript
+homepage: https://github.com/grafana/k6
+license: AGPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: grafana/k6
+      assetName: 'k6-{{.Version}}-{{.OS}}-{{.Arch}}{{if eq .OS "macos"}}.zip{{else}}.tar.gz{{end}}'
+      templateOverrides:
+        darwin: macos
+  verify:
+    sha256GitHubAsset: "k6-{{.Version}}-checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: '{{.Var.src}}/k6-{{.Version}}-{{.OS | replace "darwin" "macos"}}-{{.Arch}}/k6'
+      to: "{{.InstallDir}}/bin/k6"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/k6", "version"]

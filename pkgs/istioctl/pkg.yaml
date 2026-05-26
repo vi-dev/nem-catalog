@@ -1,0 +1,29 @@
+name: istioctl
+description: Command-line interface for Istio service mesh
+homepage: https://istio.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: istio/istio
+      assetName: 'istioctl-{{ trimPrefix "v" .Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: osx
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "v{{.Capture}}"
+      releaseTemplate: '{{ trimPrefix "v" .Version }}'
+  verify:
+    sha256GitHubAsset: 'istioctl-{{ trimPrefix "v" .Version}}-{{.OS}}-{{.Arch}}.tar.gz.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/istioctl"
+      to: "{{.InstallDir}}/bin/istioctl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/istioctl", "version", "--remote=false"]

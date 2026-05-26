@@ -1,0 +1,23 @@
+name: kubectl
+description: The Kubernetes command-line tool
+homepage: https://kubernetes.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    http:
+      url: "https://dl.k8s.io/release/{{.Version}}/bin/{{.OS}}/{{.Arch}}/kubectl"
+      versionsFrom:
+        github_release:
+          repo: kubernetes/kubernetes
+  verify:
+    sha256URL: "https://dl.k8s.io/release/{{.Version}}/bin/{{.OS}}/{{.Arch}}/kubectl.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kubectl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubectl", "version", "--client"]

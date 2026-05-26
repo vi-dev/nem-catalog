@@ -1,0 +1,21 @@
+name: minikube
+description: Run Kubernetes locally
+homepage: https://minikube.sigs.k8s.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: kubernetes/minikube
+      assetName: "minikube-{{.OS}}-{{.Arch}}"
+  verify:
+    sha256GitHubAsset: "minikube-{{.OS}}-{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/minikube"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/minikube", "version", "--short"]

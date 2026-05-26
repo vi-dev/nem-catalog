@@ -1,0 +1,26 @@
+name: kustomize
+description: Customization of kubernetes YAML configurations
+homepage: https://github.com/kubernetes-sigs/kustomize
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+        repo: kubernetes-sigs/kustomize
+        releaseFilter: "^kustomize/(.*)$"
+        releaseTemplate: "kustomize/{{.Version}}"
+        assetName: "kustomize_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kustomize"
+      to: "{{.InstallDir}}/bin/kustomize"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kustomize", "version"]

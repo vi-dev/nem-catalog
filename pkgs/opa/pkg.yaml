@@ -1,0 +1,21 @@
+name: opa
+description: An open source, general-purpose policy engine (Open Policy Agent)
+homepage: https://www.openpolicyagent.org
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: open-policy-agent/opa
+      assetName: "opa_{{.OS}}_{{.Arch}}"
+  verify:
+    sha256GitHubAsset: "opa_{{.OS}}_{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/opa"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/opa", "version"]

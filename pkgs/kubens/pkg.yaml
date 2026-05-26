@@ -1,0 +1,26 @@
+name: kubens
+description: Fast way to switch between Kubernetes namespaces (ships in the kubectx repo)
+homepage: https://github.com/ahmetb/kubectx
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: ahmetb/kubectx
+      assetName: "kubens_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubens"
+      to: "{{.InstallDir}}/bin/kubens"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubens", "--help"]

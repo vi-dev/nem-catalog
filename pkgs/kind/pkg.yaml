@@ -1,0 +1,21 @@
+name: kind
+description: Kubernetes IN Docker - local clusters for testing Kubernetes
+homepage: https://github.com/kubernetes-sigs/kind
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: kubernetes-sigs/kind
+      assetName: "kind-{{.OS}}-{{.Arch}}"
+  verify:
+    sha256GitHubAsset: "kind-{{.OS}}-{{.Arch}}.sha256sum"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kind"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kind", "version"]

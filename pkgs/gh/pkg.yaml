@@ -1,0 +1,26 @@
+name: gh
+description: GitHub's official command line tool
+homepage: https://github.com/cli/cli
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: cli/cli
+      assetName: 'gh_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}{{if eq .OS "macOS"}}.zip{{else}}.tar.gz{{end}}'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    sha256GitHubAsset: 'gh_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: '{{.Var.src}}/gh_{{.Version | trimPrefix "v"}}_{{.OS | replace "darwin" "macOS"}}_{{.Arch}}/bin/gh'
+      to: "{{.InstallDir}}/bin/gh"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gh", "--version"]

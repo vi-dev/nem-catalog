@@ -1,0 +1,24 @@
+name: cilium-hubble
+description: Hubble - Network, Service & Security Observability for Kubernetes using eBPF
+homepage: https://github.com/cilium/hubble
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: cilium/hubble
+      assetName: "hubble-{{.OS}}-{{.Arch}}.tar.gz"
+  verify:
+    sha256GitHubAsset: "hubble-{{.OS}}-{{.Arch}}.tar.gz.sha256sum"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/hubble"
+      to: "{{.InstallDir}}/bin/hubble"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/hubble", "version"]

@@ -1,0 +1,24 @@
+name: syft
+description: CLI tool and Go library for generating SBOMs from container images and filesystems
+homepage: https://github.com/anchore/syft
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: anchore/syft
+      assetName: 'syft_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+  verify:
+    sha256GitHubAsset: 'syft_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/syft"
+      to: "{{.InstallDir}}/bin/syft"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/syft", "version"]

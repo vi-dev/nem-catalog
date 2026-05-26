@@ -1,0 +1,24 @@
+name: cilium-cli
+description: CLI to install, manage & troubleshoot Kubernetes clusters running Cilium
+homepage: https://github.com/cilium/cilium-cli
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: cilium/cilium-cli
+      assetName: "cilium-{{.OS}}-{{.Arch}}.tar.gz"
+  verify:
+    sha256GitHubAsset: "cilium-{{.OS}}-{{.Arch}}.tar.gz.sha256sum"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/cilium"
+      to: "{{.InstallDir}}/bin/cilium"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cilium", "version", "--client"]

@@ -1,0 +1,27 @@
+name: k9s
+description: Kubernetes CLI to manage your clusters in style
+homepage: https://github.com/derailed/k9s
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: derailed/k9s
+      assetName: "k9s_{{.OS}}_{{.Arch}}.tar.gz"
+      templateOverrides:
+        linux: Linux
+        darwin: Darwin
+  verify:
+    sha256GitHubAsset: "checksums.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/k9s"
+      to: "{{.InstallDir}}/bin/k9s"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/k9s", "version", "--short"]

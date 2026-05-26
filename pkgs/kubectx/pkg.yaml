@@ -1,0 +1,26 @@
+name: kubectx
+description: Fast way to switch between clusters and namespaces in kubectl
+homepage: https://github.com/ahmetb/kubectx
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: ahmetb/kubectx
+      assetName: "kubectx_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubectx"
+      to: "{{.InstallDir}}/bin/kubectx"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubectx", "--help"]
