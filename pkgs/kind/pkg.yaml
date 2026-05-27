@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: kind
 description: Kubernetes IN Docker - local clusters for testing Kubernetes
 homepage: https://github.com/kubernetes-sigs/kind

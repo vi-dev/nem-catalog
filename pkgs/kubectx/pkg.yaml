@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: kubectx
 description: Fast way to switch between clusters and namespaces in kubectl
 homepage: https://github.com/ahmetb/kubectx

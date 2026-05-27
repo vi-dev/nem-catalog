@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: k9s
 description: Kubernetes CLI to manage your clusters in style
 homepage: https://github.com/derailed/k9s

@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: istioctl
 description: Command-line interface for Istio service mesh
 homepage: https://istio.io

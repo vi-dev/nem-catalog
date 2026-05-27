@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: gitleaks
 description: Find secrets in git repos, files, and stdin
 homepage: https://github.com/gitleaks/gitleaks

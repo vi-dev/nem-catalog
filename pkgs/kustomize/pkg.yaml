@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: kustomize
 description: Customization of kubernetes YAML configurations
 homepage: https://github.com/kubernetes-sigs/kustomize

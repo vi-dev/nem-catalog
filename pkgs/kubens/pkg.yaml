@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: kubens
 description: Fast way to switch between Kubernetes namespaces (ships in the kubectx repo)
 homepage: https://github.com/ahmetb/kubectx

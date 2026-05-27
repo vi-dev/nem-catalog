@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: grype
 description: A vulnerability scanner for container images and filesystems
 homepage: https://github.com/anchore/grype

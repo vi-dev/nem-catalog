@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: cosign
 description: Code signing and transparency for containers and binaries
 homepage: https://github.com/sigstore/cosign

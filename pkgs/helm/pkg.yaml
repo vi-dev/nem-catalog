@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: helm
 description: The Kubernetes Package Manager
 homepage: https://github.com/helm/helm

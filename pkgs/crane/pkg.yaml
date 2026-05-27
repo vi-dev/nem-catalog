@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: crane
 description: Tool for managing container images, from the go-containerregistry project
 homepage: https://github.com/google/go-containerregistry

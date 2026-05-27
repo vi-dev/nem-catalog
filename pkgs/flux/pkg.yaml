@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: flux
 description: Flux is a tool for keeping Kubernetes clusters in sync with sources of configuration
 homepage: https://fluxcd.io

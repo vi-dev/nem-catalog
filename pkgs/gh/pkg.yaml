@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: gh
 description: GitHub's official command line tool
 homepage: https://github.com/cli/cli

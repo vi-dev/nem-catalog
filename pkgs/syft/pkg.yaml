@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: syft
 description: CLI tool and Go library for generating SBOMs from container images and filesystems
 homepage: https://github.com/anchore/syft

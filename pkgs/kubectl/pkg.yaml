@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: kubectl
 description: The Kubernetes command-line tool
 homepage: https://kubernetes.io

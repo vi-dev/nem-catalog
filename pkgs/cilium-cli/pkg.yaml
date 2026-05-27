@@ -1,3 +1,4 @@
+schemaVersion: 1
 name: cilium-cli
 description: CLI to install, manage & troubleshoot Kubernetes clusters running Cilium
 homepage: https://github.com/cilium/cilium-cli
