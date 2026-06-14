@@ -23,9 +23,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NEM_VERSION: v0.4.0
+  NEM_VERSION: v0.5.0
   REGISTRY_BASE: ghcr.io/vi-dev/nem-catalog
-  CATALOG_REPO: ghcr.io/vi-dev/nem-catalog/catalog
 
 jobs:
   publish:
@@ -88,7 +87,7 @@ jobs:
             exit 1
           fi
           echo "digest=${digest}" >> "${GITHUB_OUTPUT}"
-          echo "Published ${CATALOG_REPO}@${digest} (tags: ${IMMUTABLE}, v1, latest)"
+          echo "Published ${REGISTRY_BASE}@${digest} (tags: ${IMMUTABLE}, v1, latest)"
 
       - name: Install cosign
         if: steps.mode.outputs.publish == 'true'
@@ -98,13 +97,13 @@ jobs:
         if: steps.mode.outputs.publish == 'true'
         env:
           DIGEST: ${{ steps.publish.outputs.digest }}
-        run: cosign sign --yes "${CATALOG_REPO}@${DIGEST}"
+        run: cosign sign --yes "${REGISTRY_BASE}@${DIGEST}"
 
       - name: Attest provenance
         if: steps.mode.outputs.publish == 'true'
         uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32  # v4
         with:
-          subject-name: ${{ env.CATALOG_REPO }}
+          subject-name: ${{ env.REGISTRY_BASE }}
           subject-digest: ${{ steps.publish.outputs.digest }}
           push-to-registry: true
 

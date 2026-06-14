@@ -11,8 +11,9 @@ The catalog is published as an OCI image index to
 
 ## Using this catalog
 
-Install `nem` first (see the [nem README](https://github.com/vi-dev/nem)), then
-add this catalog and start using packages:
+Install `nem` first (see the
+[nem README](https://github.com/vi-dev/nem)), then add this catalog and start
+using packages:
 
 ```sh
 # Add the catalog. v1 tracks the catalog schema generation.
@@ -51,7 +52,7 @@ package you add or change is installed and tested on Linux and macOS.
 Merges to `main` that touch `pkgs/**` are published automatically by
 [`.github/workflows/publish.yml`](.github/workflows/publish.yml):
 
-- the catalog index is pushed to `ghcr.io/vi-dev/nem-catalog/catalog`, tagged
+- the catalog index is pushed to `ghcr.io/vi-dev/nem-catalog`, tagged
   with an immutable `vYYYY.MM.DD-<sha>` plus the moving `v1` and `latest` tags;
 - the index digest is signed with cosign (keyless) and a build-provenance
   attestation is pushed alongside it.
