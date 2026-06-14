@@ -27,32 +27,6 @@ nem package info helm
 For reproducible setups, pin to an immutable date tag (`vYYYY.MM.DD-<sha>`) or a
 digest (`@sha256:…`) instead of `v1`.
 
-## Available packages
-
-| Package | Description |
-| --- | --- |
-| cilium-cli | CLI to install, manage & troubleshoot Kubernetes clusters running Cilium |
-| cilium-hubble | Network, service & security observability for Kubernetes using eBPF |
-| cosign | Code signing and transparency for containers and binaries |
-| crane | Tool for managing container images, from the go-containerregistry project |
-| flux | Keeps Kubernetes clusters in sync with sources of configuration |
-| gh | GitHub's official command-line tool |
-| gitleaks | Find secrets in git repos, files, and stdin |
-| grype | A vulnerability scanner for container images and filesystems |
-| helm | The Kubernetes package manager |
-| istioctl | Command-line interface for the Istio service mesh |
-| k6 | A modern load-testing tool, using Go and JavaScript |
-| k9s | Kubernetes CLI to manage your clusters in style |
-| kind | Kubernetes IN Docker — local clusters for testing Kubernetes |
-| kubectl | The Kubernetes command-line tool |
-| kubectx | Fast way to switch between clusters in kubectl |
-| kubens | Fast way to switch between Kubernetes namespaces |
-| kustomize | Customization of Kubernetes YAML configurations |
-| minikube | Run Kubernetes locally |
-| opa | Open Policy Agent — a general-purpose policy engine |
-| syft | Generate SBOMs from container images and filesystems |
-| trivy | Find vulnerabilities, misconfigurations, secrets & SBOMs across containers, Kubernetes, code, and clouds |
-
 ## Contributing a package
 
 Each package is a single manifest at `pkgs/<name>/pkg.yaml`. The schema —
