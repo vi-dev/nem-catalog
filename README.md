@@ -11,22 +11,26 @@ The catalog is published as an OCI image index to
 
 ## Using this catalog
 
-Install `nem` first (see the
-[nem README](https://github.com/vi-dev/nem)), then add this catalog and start
-using packages:
+This catalog is `nem`'s built-in default. Once `nem` is installed (see the
+[nem README](https://github.com/vi-dev/nem)), it is available out of the box —
+no `nem catalog add` step. Just start using packages:
 
 ```sh
-# Add the catalog. v1 tracks the catalog schema generation.
-nem catalog add oci official ghcr.io/vi-dev/nem-catalog:v1
-
 # Find and use packages in the current directory's environment.
 nem search kubectl
 nem use kubectl
 nem package info helm
 ```
 
-For reproducible setups, pin to an immutable date tag (`vYYYY.MM.DD-<sha>`) or a
-digest (`@sha256:…`) instead of `v1`.
+You can still add it explicitly to pin a specific version. For reproducible
+setups, pin to an immutable date tag (`vYYYY.MM.DD-<sha>`) or a digest
+(`@sha256:…`) instead of the moving `v1`:
+
+```sh
+nem catalog add oci official ghcr.io/vi-dev/nem-catalog:vYYYY.MM.DD-<sha>
+```
+
+To opt out of the built-in default entirely, set `NEM_NO_DEFAULT_CATALOG=1`.
 
 ## Contributing a package
 
