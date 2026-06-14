@@ -119,4 +119,4 @@ jobs:
           nem catalog add oci smoke "${REGISTRY_BASE}:${IMMUTABLE}"
           out="$(nem search kubectl)"
           grep -q kubectl <<< "${out}"
-          nem packages info kubectl
+          nem package info kubectl
