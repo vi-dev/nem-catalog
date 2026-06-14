@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - LICENSE
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - LICENSE
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  NEM_VERSION: v0.4.0
+  REGISTRY_BASE: ghcr.io/vi-dev/nem-catalog
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+      - uses: ./.github/actions/setup-nem
+        with:
+          version: ${{ env.NEM_VERSION }}
+      - name: Offline-lint all manifests
+        run: nem author lint pkgs
+      - name: Dry-run publish (assemble index, no push)
+        run: nem author publish "${REGISTRY_BASE}" . --dry-run
+
+  install-lint:
+    if: github.event_name == 'pull_request'
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-nem
+        with:
+          version: ${{ env.NEM_VERSION }}
+      - name: Install bubblewrap (Linux sandbox)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bubblewrap
+      - name: Configure GitHub auth for the install pass
+        run: |
+          mkdir -p "${HOME}/.nem"
+          cat > "${HOME}/.nem/config.yaml" <<'EOF'
+          auth:
+            github:
+              token: '{{ env "GITHUB_TOKEN" }}'
+          EOF
+      - name: Install-lint changed packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+          diff_out="$(git diff --name-only "origin/${BASE_REF}...HEAD" -- pkgs/ \
+                      | awk -F/ 'NF>=2 {print $2}' | sort -u)"
+          changed=()
+          while IFS= read -r p; do
+            [ -n "${p}" ] && [ -d "pkgs/${p}" ] && changed+=("${p}")
+          done <<< "${diff_out}"
+          if [ "${#changed[@]}" -eq 0 ]; then
+            echo "No package manifests changed; nothing to install-lint."
+            exit 0
+          fi
+          echo "Install-linting: ${changed[*]}"
+          for p in "${changed[@]}"; do
+            echo "::group::nem author lint pkgs/${p} --install"
+            nem author lint "pkgs/${p}" --install
+            echo "::endgroup::"
+          done

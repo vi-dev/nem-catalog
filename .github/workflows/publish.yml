@@ -1,0 +1,122 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pkgs/**"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Assemble and report the index without pushing, signing, or smoke-testing.
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  attestations: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+env:
+  NEM_VERSION: v0.4.0
+  REGISTRY_BASE: ghcr.io/vi-dev/nem-catalog
+  CATALOG_REPO: ghcr.io/vi-dev/nem-catalog/catalog
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+
+      - uses: ./.github/actions/setup-nem
+        with:
+          version: ${{ env.NEM_VERSION }}
+
+      - name: Resolve mode (publish vs dry-run)
+        id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          if [ "${EVENT_NAME}" = "workflow_dispatch" ] && [ "${DRY_RUN}" = "true" ]; then
+            echo "publish=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "publish=true" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Derive tags
+        id: tags
+        run: |
+          set -euo pipefail
+          date="$(date -u +%Y.%m.%d)"
+          sha="$(git rev-parse --short HEAD)"
+          echo "immutable=v${date}-${sha}" >> "${GITHUB_OUTPUT}"
+
+      - name: Dry-run publish
+        if: steps.mode.outputs.publish == 'false'
+        run: nem author publish "${REGISTRY_BASE}" . --dry-run
+
+      - name: Log in to GHCR
+        if: steps.mode.outputs.publish == 'true'
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee  # v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish catalog index
+        id: publish
+        if: steps.mode.outputs.publish == 'true'
+        env:
+          IMMUTABLE: ${{ steps.tags.outputs.immutable }}
+        run: |
+          set -euo pipefail
+          nem author publish "${REGISTRY_BASE}" . \
+            --tag "${IMMUTABLE}" \
+            --tag v1 \
+            --tag latest | tee publish.out
+          digest="$(sed -n 's/^published .*@\(sha256:[0-9a-f]\{64\}\).*/\1/p' publish.out)"
+          if [ -z "${digest}" ]; then
+            echo "::error::could not parse published digest from publish output"
+            exit 1
+          fi
+          echo "digest=${digest}" >> "${GITHUB_OUTPUT}"
+          echo "Published ${CATALOG_REPO}@${digest} (tags: ${IMMUTABLE}, v1, latest)"
+
+      - name: Install cosign
+        if: steps.mode.outputs.publish == 'true'
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6  # v4
+
+      - name: Sign the index (keyless)
+        if: steps.mode.outputs.publish == 'true'
+        env:
+          DIGEST: ${{ steps.publish.outputs.digest }}
+        run: cosign sign --yes "${CATALOG_REPO}@${DIGEST}"
+
+      - name: Attest provenance
+        if: steps.mode.outputs.publish == 'true'
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32  # v4
+        with:
+          subject-name: ${{ env.CATALOG_REPO }}
+          subject-digest: ${{ steps.publish.outputs.digest }}
+          push-to-registry: true
+
+      - name: Smoke-test via the consumer path
+        if: steps.mode.outputs.publish == 'true'
+        env:
+          IMMUTABLE: ${{ steps.tags.outputs.immutable }}
+        run: |
+          set -euo pipefail
+          NEM_HOME="$(mktemp -d)"
+          export NEM_HOME
+          nem catalog add oci smoke "${REGISTRY_BASE}:${IMMUTABLE}"
+          out="$(nem search kubectl)"
+          grep -q kubectl <<< "${out}"
+          nem packages info kubectl

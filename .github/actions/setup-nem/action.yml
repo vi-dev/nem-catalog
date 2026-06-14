@@ -1,0 +1,21 @@
+name: Setup nem
+description: Install a pinned nem release onto PATH via the official install.sh.
+
+inputs:
+  version:
+    description: nem release tag to install (e.g. v0.4.0).
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install nem ${{ inputs.version }}
+      shell: bash
+      env:
+        NEM_VERSION: ${{ inputs.version }}
+        NEM_INSTALL_DIR: ${{ runner.temp }}/nem-bin
+      run: |
+        set -euo pipefail
+        curl -fsSL "https://raw.githubusercontent.com/vi-dev/nem/${NEM_VERSION}/install.sh" | bash
+        echo "${NEM_INSTALL_DIR}" >> "${GITHUB_PATH}"
+        "${NEM_INSTALL_DIR}/nem" version
