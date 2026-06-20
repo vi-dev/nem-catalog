@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: goreleaser
+description: Deliver Go binaries as fast and easily as possible
+homepage: https://github.com/goreleaser/goreleaser
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: goreleaser/goreleaser
+      assetName: 'goreleaser_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/goreleaser"
+      to: "{{.InstallDir}}/bin/goreleaser"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/goreleaser", "--version"]

@@ -1,0 +1,22 @@
+schemaVersion: 1
+name: sops
+description: Simple and flexible tool for managing secrets
+homepage: https://github.com/getsops/sops
+license: MPL-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: getsops/sops
+      assetName: "sops-{{.Version}}.{{.OS}}.{{.Arch}}"
+  verify:
+    sha256GitHubAsset: "sops-{{.Version}}.checksums.txt"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/sops"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/sops", "--version"]

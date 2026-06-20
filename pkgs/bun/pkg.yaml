@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: bun
+description: Fast all-in-one JavaScript runtime, bundler, transpiler, and package manager
+homepage: https://github.com/oven-sh/bun
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: oven-sh/bun
+      releaseFilter: '^bun-(v\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      releaseTemplate: "bun-{{.Version}}"
+      assetName: "bun-{{.OS}}-{{.Arch}}.zip"
+      templateOverrides:
+        amd64: x64
+        arm64: aarch64
+  verify:
+    sha256GitHubAsset: "SHASUMS256.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bun"
+      to: "{{.InstallDir}}/bin/bun"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/bun", "--version"]

@@ -1,0 +1,22 @@
+schemaVersion: 1
+name: argocd
+description: Declarative GitOps continuous delivery tool for Kubernetes
+homepage: https://argo-cd.readthedocs.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: argoproj/argo-cd
+      assetName: "argocd-{{.OS}}-{{.Arch}}"
+  verify:
+    sha256GitHubAsset: "cli_checksums.txt"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/argocd"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/argocd", "version", "--client"]

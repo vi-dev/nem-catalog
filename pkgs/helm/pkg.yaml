@@ -18,8 +18,9 @@ install:
   - extract:
       from: "{{.Archive}}"
       as: src
+      stripComponents: 1
   - copy:
-      from: "{{.Var.src}}/{{.OS}}-{{.Arch}}/helm"
+      from: "{{.Var.src}}/helm"
       to: "{{.InstallDir}}/bin/helm"
 
 test:

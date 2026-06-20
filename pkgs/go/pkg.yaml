@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: go
+description: The Go programming language toolchain
+homepage: https://go.dev
+license: BSD-3-Clause
+
+binPaths:
+  - go/bin
+
+archive:
+  fetcher:
+    http:
+      url: 'https://dl.google.com/go/go{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz'
+  verify:
+    sha256URL: 'https://dl.google.com/go/go{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz.sha256'
+
+versions:
+  - version: v1.26.4
+  - version: v1.25.11
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/go"
+      to: "{{.InstallDir}}/go"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/go/bin/go", "version"]

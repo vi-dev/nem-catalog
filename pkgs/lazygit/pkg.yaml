@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: lazygit
+description: Simple terminal UI for git commands
+homepage: https://github.com/jesseduffield/lazygit
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: jesseduffield/lazygit
+      assetName: 'lazygit_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/lazygit"
+      to: "{{.InstallDir}}/bin/lazygit"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/lazygit", "--version"]

@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: jq
+description: Command-line JSON processor
+homepage: https://jqlang.github.io/jq/
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: jqlang/jq
+      assetName: "jq-{{.OS}}-{{.Arch}}"
+      templateOverrides:
+        darwin: macos
+      releaseFilter: '^jq-(\d+\.\d+\.\d+)$'
+      versionTemplate: "v{{.Capture}}"
+      releaseTemplate: 'jq-{{.Version | trimPrefix "v"}}'
+  verify:
+    sha256GitHubAsset: "sha256sum.txt"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/jq"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/jq", "--version"]

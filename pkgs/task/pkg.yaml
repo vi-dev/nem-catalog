@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: task
+description: A task runner / build tool that aims to be simpler and easier to use than GNU Make
+homepage: https://github.com/go-task/task
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: go-task/task
+      assetName: "task_{{.OS}}_{{.Arch}}.tar.gz"
+  verify:
+    sha256GitHubAsset: "task_checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/task"
+      to: "{{.InstallDir}}/bin/task"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/task", "--version"]

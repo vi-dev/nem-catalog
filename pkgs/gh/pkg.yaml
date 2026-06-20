@@ -18,8 +18,9 @@ install:
   - extract:
       from: "{{.Archive}}"
       as: src
+      stripComponents: 1
   - copy:
-      from: '{{.Var.src}}/gh_{{.Version | trimPrefix "v"}}_{{.OS | replace "darwin" "macOS"}}_{{.Arch}}/bin/gh'
+      from: "{{.Var.src}}/bin/gh"
       to: "{{.InstallDir}}/bin/gh"
 
 test:

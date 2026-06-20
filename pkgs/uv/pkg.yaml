@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: uv
+description: An extremely fast Python package and project manager, written in Rust
+homepage: https://github.com/astral-sh/uv
+license: MIT OR Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: astral-sh/uv
+      assetName: "uv-{{.Arch}}-{{.OS}}.tar.gz"
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "v{{.Capture}}"
+      releaseTemplate: '{{.Version | trimPrefix "v"}}'
+  verify:
+    sha256GitHubAsset: "uv-{{.Arch}}-{{.OS}}.tar.gz.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/uv"
+      to: "{{.InstallDir}}/bin/uv"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/uv", "--version"]

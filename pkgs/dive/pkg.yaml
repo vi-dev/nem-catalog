@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: dive
+description: A tool for exploring a docker image, layer contents, and discovering ways to shrink the size of your image
+homepage: https://github.com/wagoodman/dive
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: wagoodman/dive
+      assetName: 'dive_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+  verify:
+    sha256GitHubAsset: 'dive_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/dive"
+      to: "{{.InstallDir}}/bin/dive"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dive", "--version"]

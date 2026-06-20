@@ -18,8 +18,9 @@ install:
   - extract:
       from: "{{.Archive}}"
       as: src
+      stripComponents: 1
   - copy:
-      from: '{{.Var.src}}/k6-{{.Version}}-{{.OS | replace "darwin" "macos"}}-{{.Arch}}/k6'
+      from: "{{.Var.src}}/k6"
       to: "{{.InstallDir}}/bin/k6"
 
 test:

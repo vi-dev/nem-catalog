@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: terraform
+description: Infrastructure as code tool to provision and manage cloud infrastructure
+homepage: https://www.terraform.io
+license: BUSL-1.1
+
+archive:
+  fetcher:
+    http:
+      url: 'https://releases.hashicorp.com/terraform/{{.Version | trimPrefix "v"}}/terraform_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      versionsFrom:
+        github_release:
+          repo: hashicorp/terraform
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256URL: 'https://releases.hashicorp.com/terraform/{{.Version | trimPrefix "v"}}/terraform_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/terraform"
+      to: "{{.InstallDir}}/bin/terraform"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/terraform", "version"]

@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: vault
+description: A tool for secrets management, encryption as a service, and privileged access management
+homepage: https://www.vaultproject.io
+license: BUSL-1.1
+
+archive:
+  fetcher:
+    http:
+      url: 'https://releases.hashicorp.com/vault/{{.Version | trimPrefix "v"}}/vault_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      versionsFrom:
+        github_release:
+          repo: hashicorp/vault
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256URL: 'https://releases.hashicorp.com/vault/{{.Version | trimPrefix "v"}}/vault_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/vault"
+      to: "{{.InstallDir}}/bin/vault"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/vault", "version"]
