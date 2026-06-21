@@ -3,7 +3,7 @@ description: Install a pinned nem release onto PATH via the official install.sh.
 
 inputs:
   version:
-    description: nem release tag to install (e.g. v0.6.0).
+    description: nem release tag to install.
     required: true
 
 runs:
