@@ -81,13 +81,12 @@ jobs:
             --tag "${IMMUTABLE}" \
             --tag v1 \
             --tag latest | tee publish.out
-          digest="$(sed -n 's/^published .*@\(sha256:[0-9a-f]\{64\}\).*/\1/p' publish.out)"
+          digest="$(sed -n "s|.*${REGISTRY_BASE}@\(sha256:[0-9a-f]\{64\}\).*|\1|p" publish.out | head -1)"
           if [ -z "${digest}" ]; then
             echo "::error::could not parse published digest from publish output"
             exit 1
           fi
           echo "digest=${digest}" >> "${GITHUB_OUTPUT}"
-          echo "Published ${REGISTRY_BASE}@${digest} (tags: ${IMMUTABLE}, v1, latest)"
 
       - name: Install cosign
         if: steps.mode.outputs.publish == 'true'
