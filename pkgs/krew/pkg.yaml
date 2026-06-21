@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: krew
+description: Package manager for kubectl plugins
+homepage: https://github.com/kubernetes-sigs/krew
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: kubernetes-sigs/krew
+      assetName: "krew-{{.OS}}_{{.Arch}}.tar.gz"
+  verify:
+    sha256GitHubAsset: "krew-{{.OS}}_{{.Arch}}.tar.gz.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/krew-{{.OS}}_{{.Arch}}"
+      to: "{{.InstallDir}}/bin/krew"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/krew", "version"]

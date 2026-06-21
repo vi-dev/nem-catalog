@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: stern
+description: Multi pod and container log tailing for Kubernetes
+homepage: https://github.com/stern/stern
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: stern/stern
+      assetName: 'stern_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/stern"
+      to: "{{.InstallDir}}/bin/stern"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/stern", "--version"]

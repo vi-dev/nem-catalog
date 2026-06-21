@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: opentofu
+description: A drop-in replacement for Terraform for declaratively managing cloud infrastructure
+homepage: https://github.com/opentofu/opentofu
+license: MPL-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: opentofu/opentofu
+      assetName: 'tofu_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+  verify:
+    sha256GitHubAsset: 'tofu_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tofu"
+      to: "{{.InstallDir}}/bin/tofu"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tofu", "version"]

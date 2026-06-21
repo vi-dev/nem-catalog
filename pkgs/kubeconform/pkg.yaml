@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: kubeconform
+description: Fast Kubernetes manifest validation against the official schemas
+homepage: https://github.com/yannh/kubeconform
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: yannh/kubeconform
+      assetName: 'kubeconform-{{.OS}}-{{.Arch}}.tar.gz'
+  verify:
+    sha256GitHubAsset: CHECKSUMS
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubeconform"
+      to: "{{.InstallDir}}/bin/kubeconform"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubeconform", "-v"]

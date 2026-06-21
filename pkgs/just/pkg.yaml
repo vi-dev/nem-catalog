@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: just
+description: A handy way to save and run project-specific commands
+homepage: https://github.com/casey/just
+license: CC0-1.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: casey/just
+      assetName: 'just-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.gz'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "v{{.Capture}}"
+      releaseTemplate: '{{.Version | trimPrefix "v"}}'
+  verify:
+    sha256GitHubAsset: "SHA256SUMS"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/just"
+      to: "{{.InstallDir}}/bin/just"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/just", "--version"]

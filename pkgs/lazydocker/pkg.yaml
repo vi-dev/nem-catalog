@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: lazydocker
+description: A simple terminal UI for both docker and docker-compose
+homepage: https://github.com/jesseduffield/lazydocker
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: jesseduffield/lazydocker
+      assetName: 'lazydocker_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/lazydocker"
+      to: "{{.InstallDir}}/bin/lazydocker"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/lazydocker", "--version"]

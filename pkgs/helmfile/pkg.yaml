@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: helmfile
+description: Declarative spec for deploying Helm charts
+homepage: https://github.com/helmfile/helmfile
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: helmfile/helmfile
+      assetName: 'helmfile_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+  verify:
+    sha256GitHubAsset: 'helmfile_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/helmfile"
+      to: "{{.InstallDir}}/bin/helmfile"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/helmfile", "--version"]
