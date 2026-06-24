@@ -1,11 +1,29 @@
-# nem-catalog
+<p align="center">
+  <img src=".github/nem-icon.svg" alt="nem logo" width="110" height="110">
+</p>
+
+<h1 align="center">nem-catalog</h1>
+
+<p align="center">
+  The default package catalog for <a href="https://github.com/vi-dev/nem">nem</a>.
+</p>
+
+<p align="center">
+  <a href="https://github.com/vi-dev/nem-catalog/actions/workflows/ci.yml"><img src="https://github.com/vi-dev/nem-catalog/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="pkgs/"><img src="https://img.shields.io/github/directory-file-count/vi-dev/nem-catalog/pkgs?type=dir&label=packages&color=d8843a" alt="Packages"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/vi-dev/nem-catalog?color=blue" alt="License: MIT"></a>
+</p>
+
+<p align="center">
+  <b><a href="https://vi-dev.org/nem/">nem docs</a></b>&nbsp; &nbsp;•&nbsp; &nbsp;<a href="https://github.com/vi-dev/nem">nem CLI</a>&nbsp; &nbsp;•&nbsp; &nbsp;<a href="https://vi-dev.org/nem/docs/reference/catalog/">pkg.yaml schema</a>&nbsp; &nbsp;•&nbsp; &nbsp;<a href="https://vi-dev.org/nem/docs/authoring/">Authoring guide</a>
+</p>
 
 The default public package catalog for [`nem`](https://github.com/vi-dev/nem),
 a CLI for managing per-directory developer environments.
 
 This repository contains only `pkg.yaml` package manifests under [`pkgs/`](pkgs/).
 It carries no code — the manifest schema and all install behaviour are defined by
-`nem` itself (see [`nem`'s catalog reference](https://github.com/vi-dev/nem/blob/main/docs/catalog.md)).
+`nem` itself (see the [catalog reference](https://vi-dev.org/nem/docs/reference/catalog/)).
 The catalog is published as an OCI image index to
 **`ghcr.io/vi-dev/nem-catalog`** on every change to `main`.
 
@@ -22,21 +40,23 @@ nem use kubectl
 nem package info helm
 ```
 
-You can still add it explicitly to pin a specific version. For reproducible
-setups, pin to an immutable date tag (`vYYYY.MM.DD-<sha>`) or a digest
-(`@sha256:…`) instead of the moving `v1`:
+> [!TIP]
+> For reproducible setups, pin to an immutable date tag (`vYYYY.MM.DD-<sha>`) or
+> a digest (`@sha256:…`) instead of the moving `v1`. Reuse the name `default` to
+> shadow the built-in entry with your pinned version:
+>
+> ```sh
+> nem catalog add oci default ghcr.io/vi-dev/nem-catalog:vYYYY.MM.DD-<sha>
+> ```
 
-```sh
-nem catalog add oci official ghcr.io/vi-dev/nem-catalog:vYYYY.MM.DD-<sha>
-```
-
-To opt out of the built-in default entirely, set `NEM_NO_DEFAULT_CATALOG=1`.
+To opt out of the built-in default entirely, set `NEM_USE_DEFAULT_CATALOG=0`
+(or `use-default-catalog: false` in `~/.nem/config.yaml`).
 
 ## Contributing a package
 
 Each package is a single manifest at `pkgs/<name>/pkg.yaml`. The schema —
 fetchers, verification, install steps, and templating — is documented in
-[`nem`'s catalog reference](https://github.com/vi-dev/nem/blob/main/docs/catalog.md).
+[`nem`'s catalog reference](https://vi-dev.org/nem/docs/reference/catalog/).
 
 Validate a manifest before opening a pull request:
 
