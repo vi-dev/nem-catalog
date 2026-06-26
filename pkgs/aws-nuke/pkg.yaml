@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: aws-nuke
+description: Remove all resources from an AWS account
+homepage: https://github.com/ekristen/aws-nuke
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: ekristen/aws-nuke
+      assetName: "aws-nuke-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/aws-nuke"
+      to: "{{.InstallDir}}/bin/aws-nuke"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/aws-nuke", "version"]

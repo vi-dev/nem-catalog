@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: datree
+description: CLI tool to prevent Kubernetes misconfigurations by enforcing policies
+homepage: https://github.com/datreeio/datree
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: datreeio/datree
+      assetName: 'datree-cli_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "v{{.Capture}}"
+      releaseTemplate: '{{.Version | trimPrefix "v"}}'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/datree"
+      to: "{{.InstallDir}}/bin/datree"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/datree", "version"]

@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: dagger
+description: Programmable CI/CD engine that runs pipelines in containers
+homepage: https://dagger.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: dagger/dagger
+      assetName: "dagger_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/dagger"
+      to: "{{.InstallDir}}/bin/dagger"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dagger", "version"]

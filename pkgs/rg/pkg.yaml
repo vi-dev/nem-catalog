@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: rg
+description: Recursively search directories for a regex pattern with ripgrep
+homepage: https://github.com/BurntSushi/ripgrep
+license: MIT OR Unlicense
+
+archive:
+  fetcher:
+    github_release:
+      repo: BurntSushi/ripgrep
+      assetName: "ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz"
+      templateOverrides:
+        darwin: apple-darwin
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  verify:
+    sha256GitHubAsset: "ripgrep-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/rg"
+      to: "{{.InstallDir}}/bin/rg"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/rg", "--version"]

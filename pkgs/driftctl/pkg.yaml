@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: driftctl
+description: Detect, track and alert on infrastructure drift
+homepage: https://driftctl.com
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: snyk/driftctl
+      assetName: "driftctl_{{.OS}}_{{.Arch}}"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "driftctl_SHA256SUMS"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/driftctl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/driftctl", "version"]

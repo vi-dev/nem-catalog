@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: ghz
+description: Simple gRPC benchmarking and load testing tool
+homepage: https://ghz.sh
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: bojand/ghz
+      assetName: "ghz-{{.OS}}-{{.Arch}}.tar.gz"
+      templateOverrides:
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "ghz-{{.OS}}-{{.Arch}}.tar.gz.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/ghz"
+      to: "{{.InstallDir}}/bin/ghz"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ghz", "--version"]

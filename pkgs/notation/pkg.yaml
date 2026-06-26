@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: notation
+description: CLI for signing and verifying OCI artifacts in registries
+homepage: https://notaryproject.dev
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: notaryproject/notation
+      assetName: 'notation_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'notation_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/notation"
+      to: "{{.InstallDir}}/bin/notation"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/notation", "version"]

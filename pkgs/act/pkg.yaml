@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: act
+description: Run your GitHub Actions locally
+homepage: https://github.com/nektos/act
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: nektos/act
+      assetName: "act_{{.OS}}_{{.Arch}}.tar.gz"
+      templateOverrides:
+        linux: Linux
+        darwin: Darwin
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/act"
+      to: "{{.InstallDir}}/bin/act"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/act", "--version"]

@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: atmos
+description: Workflow automation tool for DevOps to manage infrastructure across environments
+homepage: https://atmos.tools
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: cloudposse/atmos
+      assetName: 'atmos_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'atmos_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/atmos"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/atmos", "version"]

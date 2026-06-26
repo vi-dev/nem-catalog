@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: atuin
+description: Magical shell history with sync, search and more
+homepage: https://atuin.sh
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: atuinsh/atuin
+      assetName: "atuin-{{.Arch}}-{{.OS}}.tar.gz"
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "atuin-{{.Arch}}-{{.OS}}.tar.gz.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/atuin"
+      to: "{{.InstallDir}}/bin/atuin"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/atuin", "--version"]

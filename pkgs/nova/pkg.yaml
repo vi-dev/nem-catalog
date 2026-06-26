@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: nova
+description: Find outdated or deprecated Helm charts and container images running in a cluster
+homepage: https://github.com/FairwindsOps/nova
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: FairwindsOps/nova
+      assetName: 'nova_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/nova"
+      to: "{{.InstallDir}}/bin/nova"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/nova", "version"]

@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: kubescape
+description: Kubernetes security platform for scanning clusters, manifests and images
+homepage: https://kubescape.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: kubescape/kubescape
+      assetName: 'kubescape_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubescape"
+      to: "{{.InstallDir}}/bin/kubescape"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubescape", "version"]

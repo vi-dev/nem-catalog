@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: mage
+description: Make/rake-like build tool using Go
+homepage: https://magefile.org
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: magefile/mage
+      assetName: 'mage_{{.Version | trimPrefix "v"}}_{{.OS}}-{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: macOS
+        arm64: ARM64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'mage_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/mage"
+      to: "{{.InstallDir}}/bin/mage"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/mage", "--version"]

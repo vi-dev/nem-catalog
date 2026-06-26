@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: air
+description: Live reload for Go apps
+homepage: https://github.com/air-verse/air
+license: GPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: air-verse/air
+      assetName: 'air_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'air_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/air"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/air", "-v"]

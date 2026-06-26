@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: popeye
+description: Kubernetes cluster resource sanitizer that scans for potential issues
+homepage: https://popeyecli.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: derailed/popeye
+      assetName: "popeye_{{.OS}}_{{.Arch}}.tar.gz"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/popeye"
+      to: "{{.InstallDir}}/bin/popeye"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/popeye", "version"]

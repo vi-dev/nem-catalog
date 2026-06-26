@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: step
+description: Zero-trust swiss army knife for working with X.509, OAuth, JWT, and more
+homepage: https://smallstep.com/cli
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: smallstep/cli
+      assetName: 'step_{{.OS}}_{{.Version | trimPrefix "v"}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/step"
+      to: "{{.InstallDir}}/bin/step"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/step", "version"]

@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: rclone
+description: Command-line program to manage files on cloud storage
+homepage: https://rclone.org
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: rclone/rclone
+      assetName: "rclone-{{.Version}}-{{.OS}}-{{.Arch}}.zip"
+      templateOverrides:
+        darwin: osx
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "SHA256SUMS"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/rclone"
+      to: "{{.InstallDir}}/bin/rclone"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/rclone", "version"]

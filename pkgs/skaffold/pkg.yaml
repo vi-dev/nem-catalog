@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: skaffold
+description: Command-line tool for continuous development of Kubernetes applications
+homepage: https://skaffold.dev
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: GoogleContainerTools/skaffold
+      assetName: "skaffold-{{.OS}}-{{.Arch}}"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "skaffold-{{.OS}}-{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/skaffold"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/skaffold", "version"]

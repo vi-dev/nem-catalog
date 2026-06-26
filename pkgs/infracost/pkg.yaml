@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: infracost
+description: Cloud cost estimates for Terraform in pull requests
+homepage: https://www.infracost.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: infracost/infracost
+      assetName: "infracost-{{.OS}}-{{.Arch}}.tar.gz"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "infracost-{{.OS}}-{{.Arch}}.tar.gz.sha256"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/infracost-{{.OS}}-{{.Arch}}"
+      to: "{{.InstallDir}}/bin/infracost"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/infracost", "--version"]

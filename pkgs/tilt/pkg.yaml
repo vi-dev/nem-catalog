@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: tilt
+description: Local Kubernetes development with no stress
+homepage: https://tilt.dev
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: tilt-dev/tilt
+      assetName: 'tilt.{{.Version | trimPrefix "v"}}.{{.OS}}.{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: mac
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tilt"
+      to: "{{.InstallDir}}/bin/tilt"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tilt", "version"]

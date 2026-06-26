@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: mlr
+description: Like awk, sed, cut, join and sort for name-indexed data such as CSV and JSON
+homepage: https://miller.readthedocs.io
+license: BSD-2-Clause
+
+archive:
+  fetcher:
+    github_release:
+      repo: johnkerl/miller
+      assetName: 'miller-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'miller-{{.Version | trimPrefix "v"}}-checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/mlr"
+      to: "{{.InstallDir}}/bin/mlr"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/mlr", "--version"]

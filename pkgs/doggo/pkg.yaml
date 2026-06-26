@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: doggo
+description: Modern command-line DNS client for humans
+homepage: https://doggo.dev
+license: GPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: mr-karan/doggo
+      assetName: "doggo-{{.OS}}-{{.Arch}}.tar.gz"
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'doggo_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/doggo"
+      to: "{{.InstallDir}}/bin/doggo"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/doggo", "--version"]

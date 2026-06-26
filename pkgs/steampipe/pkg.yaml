@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: steampipe
+description: Query cloud, code, and more with SQL using a zero-ETL engine
+homepage: https://steampipe.io
+license: AGPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: turbot/steampipe
+      assetName: "steampipe_{{.OS}}_{{.Arch}}.zip"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/steampipe"
+      to: "{{.InstallDir}}/bin/steampipe"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/steampipe", "--version"]

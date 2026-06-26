@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: terrascan
+description: Static code analyzer for Infrastructure as Code to detect security issues
+homepage: https://runterrascan.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: tenable/terrascan
+      assetName: 'terrascan_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/terrascan"
+      to: "{{.InstallDir}}/bin/terrascan"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/terrascan", "version"]
