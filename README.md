@@ -5,7 +5,7 @@
 <h1 align="center">nem-catalog</h1>
 
 <p align="center">
-  The default package catalog for <a href="https://github.com/vi-dev/nem">nem</a>.
+  The official package catalog for <a href="https://github.com/vi-dev/nem">nem</a>.
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
   <b><a href="https://vi-dev.org/nem/">nem docs</a></b>&nbsp; &nbsp;•&nbsp; &nbsp;<a href="https://github.com/vi-dev/nem">nem CLI</a>&nbsp; &nbsp;•&nbsp; &nbsp;<a href="https://vi-dev.org/nem/docs/reference/catalog/">pkg.yaml schema</a>&nbsp; &nbsp;•&nbsp; &nbsp;<a href="https://vi-dev.org/nem/docs/authoring/">Authoring guide</a>
 </p>
 
-The default public package catalog for [`nem`](https://github.com/vi-dev/nem),
+The official public package catalog for [`nem`](https://github.com/vi-dev/nem),
 a CLI for managing per-directory developer environments.
 
 This repository contains only `pkg.yaml` package manifests under [`pkgs/`](pkgs/).
@@ -29,7 +29,7 @@ The catalog is published as an OCI image index to
 
 ## Using this catalog
 
-This catalog is `nem`'s built-in default. Once `nem` is installed (see the
+This catalog is `nem`'s official catalog. Once `nem` is installed (see the
 [nem README](https://github.com/vi-dev/nem)), it is available out of the box —
 no `nem catalog add` step. Just start using packages:
 
@@ -42,15 +42,17 @@ nem package info helm
 
 > [!TIP]
 > For reproducible setups, pin to an immutable date tag (`vYYYY.MM.DD-<sha>`) or
-> a digest (`@sha256:…`) instead of the moving `v1`. Reuse the name `default` to
-> shadow the built-in entry with your pinned version:
+> a digest (`@sha256:…`) instead of the moving `v1`. The name `official` is
+> reserved, so add the pinned catalog under your own name — it is searched
+> before the official catalog and takes precedence:
 >
 > ```sh
-> nem catalog add oci default ghcr.io/vi-dev/nem-catalog:vYYYY.MM.DD-<sha>
+> nem catalog add oci nem-catalog ghcr.io/vi-dev/nem-catalog:vYYYY.MM.DD-<sha>
 > ```
 
-To opt out of the built-in default entirely, set `NEM_USE_DEFAULT_CATALOG=0`
-(or `use-default-catalog: false` in `~/.nem/config.yaml`).
+To opt out of the official catalog entirely — for example to use only the
+pinned copy above — set `NEM_USE_OFFICIAL_CATALOG=0` (or
+`use-official-catalog: false` in `~/.nem/config.yaml`).
 
 ## Contributing a package
 
