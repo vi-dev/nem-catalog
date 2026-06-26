@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: apko
+description: Build OCI images from apk packages directly without Dockerfiles
+homepage: https://github.com/chainguard-dev/apko
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: chainguard-dev/apko
+      assetName: 'apko_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/apko"
+      to: "{{.InstallDir}}/bin/apko"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/apko", "version"]

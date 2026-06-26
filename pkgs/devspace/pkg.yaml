@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: devspace
+description: CLI for developing and deploying applications to Kubernetes
+homepage: https://devspace.sh
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: loft-sh/devspace
+      assetName: "devspace-{{.OS}}-{{.Arch}}"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "devspace-{{.OS}}-{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/devspace"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/devspace", "--version"]

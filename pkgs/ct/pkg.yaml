@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: ct
+description: CLI for linting and testing Helm charts
+homepage: https://github.com/helm/chart-testing
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: helm/chart-testing
+      assetName: 'chart-testing_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/ct"
+      to: "{{.InstallDir}}/bin/ct"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ct", "version"]

@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: golangci-lint
+description: Fast linters runner for Go
+homepage: https://golangci-lint.run
+license: GPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: golangci/golangci-lint
+      assetName: 'golangci-lint-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'golangci-lint-{{.Version | trimPrefix "v"}}-checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/golangci-lint"
+      to: "{{.InstallDir}}/bin/golangci-lint"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/golangci-lint", "--version"]

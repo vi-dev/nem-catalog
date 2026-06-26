@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: watchexec
+description: Executes commands in response to file modifications
+homepage: https://watchexec.github.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: watchexec/watchexec
+      assetName: 'watchexec-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.xz'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "SHA256SUMS"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/watchexec"
+      to: "{{.InstallDir}}/bin/watchexec"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/watchexec", "--version"]

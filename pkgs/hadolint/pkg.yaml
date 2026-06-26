@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: hadolint
+description: Dockerfile linter that helps build best-practice container images
+homepage: https://github.com/hadolint/hadolint
+license: GPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: hadolint/hadolint
+      assetName: "hadolint-{{.OS}}-{{.Arch}}"
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "hadolint-{{.OS}}-{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/hadolint"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/hadolint", "--version"]

@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: terramate
+description: Orchestration and code generation for Terraform, OpenTofu, and Terragrunt
+homepage: https://terramate.io
+license: MPL-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: terramate-io/terramate
+      assetName: 'terramate_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/terramate"
+      to: "{{.InstallDir}}/bin/terramate"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/terramate", "--version"]

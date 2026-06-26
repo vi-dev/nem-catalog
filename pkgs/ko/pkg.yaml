@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: ko
+description: Build and deploy Go applications as container images without Docker
+homepage: https://ko.build
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: ko-build/ko
+      assetName: 'ko_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/ko"
+      to: "{{.InstallDir}}/bin/ko"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ko", "version"]

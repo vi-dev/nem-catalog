@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: helm-docs
+description: Auto-generate documentation from Helm charts into markdown files
+homepage: https://github.com/norwoodj/helm-docs
+license: GPL-3.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: norwoodj/helm-docs
+      assetName: 'helm-docs_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/helm-docs"
+      to: "{{.InstallDir}}/bin/helm-docs"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/helm-docs", "--version"]

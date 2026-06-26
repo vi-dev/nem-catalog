@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: duf
+description: Disk Usage/Free utility with a better, more colorful interface
+homepage: https://github.com/muesli/duf
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: muesli/duf
+      assetName: 'duf_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/duf"
+      to: "{{.InstallDir}}/bin/duf"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/duf", "--version"]

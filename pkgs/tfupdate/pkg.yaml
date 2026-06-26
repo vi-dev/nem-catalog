@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: tfupdate
+description: Update version constraints of Terraform core, providers, and modules
+homepage: https://github.com/minamijoyo/tfupdate
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: minamijoyo/tfupdate
+      assetName: 'tfupdate_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'tfupdate_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tfupdate"
+      to: "{{.InstallDir}}/bin/tfupdate"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tfupdate", "--version"]

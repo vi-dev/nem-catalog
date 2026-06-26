@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: terraform-docs
+description: Generate documentation from Terraform modules
+homepage: https://terraform-docs.io
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: terraform-docs/terraform-docs
+      assetName: "terraform-docs-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "terraform-docs-{{.Version}}.sha256sum"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/terraform-docs"
+      to: "{{.InstallDir}}/bin/terraform-docs"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/terraform-docs", "--version"]

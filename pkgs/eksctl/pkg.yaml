@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: eksctl
+description: Official CLI for Amazon EKS
+homepage: https://eksctl.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: eksctl-io/eksctl
+      assetName: "eksctl_{{.OS}}_{{.Arch}}.tar.gz"
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "eksctl_checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/eksctl"
+      to: "{{.InstallDir}}/bin/eksctl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/eksctl", "version"]

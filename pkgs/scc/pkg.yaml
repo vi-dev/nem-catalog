@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: scc
+description: Fast and accurate code counter with complexity and COCOMO estimates
+homepage: https://github.com/boyter/scc
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: boyter/scc
+      assetName: "scc_{{.OS}}_{{.Arch}}.tar.gz"
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/scc"
+      to: "{{.InstallDir}}/bin/scc"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/scc", "--version"]

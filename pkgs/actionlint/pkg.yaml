@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: actionlint
+description: Static checker for GitHub Actions workflow files
+homepage: https://github.com/rhysd/actionlint
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: rhysd/actionlint
+      assetName: 'actionlint_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'actionlint_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/actionlint"
+      to: "{{.InstallDir}}/bin/actionlint"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/actionlint", "--version"]

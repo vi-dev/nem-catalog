@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: vegeta
+description: HTTP load testing tool and library
+homepage: https://github.com/tsenart/vegeta
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: tsenart/vegeta
+      assetName: 'vegeta_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'vegeta_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/vegeta"
+      to: "{{.InstallDir}}/bin/vegeta"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/vegeta", "--version"]

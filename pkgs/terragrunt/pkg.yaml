@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: terragrunt
+description: Thin wrapper for OpenTofu/Terraform for working with multiple modules
+homepage: https://terragrunt.com
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: gruntwork-io/terragrunt
+      assetName: "terragrunt_{{.OS}}_{{.Arch}}"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "SHA256SUMS"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/terragrunt"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/terragrunt", "--version"]

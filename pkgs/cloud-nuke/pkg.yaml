@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: cloud-nuke
+description: Tool for cleaning up cloud accounts by nuking (deleting) all resources
+homepage: https://github.com/gruntwork-io/cloud-nuke
+license: MIT
+
+archive:
+  fetcher:
+    github_release:
+      repo: gruntwork-io/cloud-nuke
+      assetName: "cloud-nuke_{{.OS}}_{{.Arch}}"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "SHA256SUMS"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/cloud-nuke"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cloud-nuke", "--version"]

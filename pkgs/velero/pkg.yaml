@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: velero
+description: Backup and migration tool for Kubernetes cluster resources and persistent volumes
+homepage: https://velero.io
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: vmware-tanzu/velero
+      assetName: 'velero-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "CHECKSUM"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/velero"
+      to: "{{.InstallDir}}/bin/velero"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/velero", "version", "--client-only"]

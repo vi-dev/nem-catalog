@@ -1,0 +1,23 @@
+schemaVersion: 1
+name: kubeshark
+description: API traffic analyzer for Kubernetes providing real-time protocol visibility
+homepage: https://github.com/kubeshark/kubeshark
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: kubeshark/kubeshark
+      assetName: "kubeshark_{{.OS}}_{{.Arch}}"
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "kubeshark_{{.OS}}_{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kubeshark"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubeshark", "version"]

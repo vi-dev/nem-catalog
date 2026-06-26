@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: docker-compose
+description: Define and run multi-container applications with Docker
+homepage: https://github.com/docker/compose
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: docker/compose
+      assetName: "docker-compose-{{.OS}}-{{.Arch}}"
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "docker-compose-{{.OS}}-{{.Arch}}.sha256"
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/docker-compose"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/docker-compose", "version"]

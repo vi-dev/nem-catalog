@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: melange
+description: Build APK packages from declarative YAML using Alpine and Wolfi toolchains
+homepage: https://github.com/chainguard-dev/melange
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: chainguard-dev/melange
+      assetName: 'melange_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: "checksums.txt"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/melange"
+      to: "{{.InstallDir}}/bin/melange"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/melange", "version"]

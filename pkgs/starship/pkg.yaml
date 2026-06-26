@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: starship
+description: Minimal, blazing-fast, and infinitely customizable cross-shell prompt
+homepage: https://starship.rs
+license: ISC
+
+archive:
+  fetcher:
+    github_release:
+      repo: starship/starship
+      # starship's libc varies by platform: linux/x86_64 is gnu, linux/arm64
+      # is musl, and macOS is apple-darwin. Build the target triple per-platform.
+      assetName: 'starship-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-{{if eq .Arch "x86_64"}}gnu{{else}}musl{{end}}{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'starship-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-{{if eq .Arch "x86_64"}}gnu{{else}}musl{{end}}{{end}}.tar.gz.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/starship"
+      to: "{{.InstallDir}}/bin/starship"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/starship", "--version"]
