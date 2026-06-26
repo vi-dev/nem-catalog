@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: kubeseal
+description: Client for Sealed Secrets, encrypting secrets for safe storage in Git
+homepage: https://github.com/bitnami-labs/sealed-secrets
+license: Apache-2.0
+
+archive:
+  fetcher:
+    github_release:
+      repo: bitnami-labs/sealed-secrets
+      assetName: 'kubeseal-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'sealed-secrets_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubeseal"
+      to: "{{.InstallDir}}/bin/kubeseal"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubeseal", "--version"]
