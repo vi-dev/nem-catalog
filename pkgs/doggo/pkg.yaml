@@ -1,7 +1,7 @@
 schemaVersion: 1
 name: doggo
 description: Modern command-line DNS client for humans
-homepage: https://doggo.dev
+homepage: https://doggo.mrkaran.dev
 license: GPL-3.0
 
 archive:

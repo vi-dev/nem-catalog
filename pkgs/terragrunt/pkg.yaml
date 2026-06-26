@@ -1,7 +1,7 @@
 schemaVersion: 1
 name: terragrunt
 description: Thin wrapper for OpenTofu/Terraform for working with multiple modules
-homepage: https://terragrunt.gruntwork.io
+homepage: https://terragrunt.com
 license: MIT
 
 archive:
