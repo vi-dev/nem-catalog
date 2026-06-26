@@ -10,7 +10,9 @@ archive:
       repo: magefile/mage
       assetName: 'mage_{{.Version | trimPrefix "v"}}_{{.OS}}-{{.Arch}}.tar.gz'
       templateOverrides:
+        linux: Linux
         darwin: macOS
+        amd64: 64bit
         arm64: ARM64
       releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:

@@ -11,6 +11,7 @@ archive:
       assetName: 'tilt.{{.Version | trimPrefix "v"}}.{{.OS}}.{{.Arch}}.tar.gz'
       templateOverrides:
         darwin: mac
+        amd64: x86_64
       releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:
     sha256GitHubAsset: "checksums.txt"

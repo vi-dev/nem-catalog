@@ -11,6 +11,7 @@ archive:
       assetName: 'grpcurl_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
       templateOverrides:
         darwin: osx
+        amd64: x86_64
       releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:
     sha256GitHubAsset: 'grpcurl_{{.Version | trimPrefix "v"}}_checksums.txt'

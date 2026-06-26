@@ -9,6 +9,8 @@ archive:
     github_release:
       repo: terramate-io/terramate
       assetName: 'terramate_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
       releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:
     sha256GitHubAsset: "checksums.txt"

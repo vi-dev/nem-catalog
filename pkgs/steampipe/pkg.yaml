@@ -8,7 +8,8 @@ archive:
   fetcher:
     github_release:
       repo: turbot/steampipe
-      assetName: "steampipe_{{.OS}}_{{.Arch}}.zip"
+      # steampipe ships macOS as a .zip and Linux as a .tar.gz.
+      assetName: 'steampipe_{{.OS}}_{{.Arch}}{{if eq .OS "darwin"}}.zip{{else}}.tar.gz{{end}}'
       releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:
     sha256GitHubAsset: "checksums.txt"
