@@ -5,7 +5,7 @@ homepage: https://istio.io
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: istio/istio
       assetName: 'istioctl-{{ trimPrefix "v" .Version}}-{{.OS}}-{{.Arch}}.tar.gz'

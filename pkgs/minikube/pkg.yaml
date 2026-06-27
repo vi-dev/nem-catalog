@@ -5,7 +5,7 @@ homepage: https://minikube.sigs.k8s.io
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: kubernetes/minikube
       assetName: "minikube-{{.OS}}-{{.Arch}}"

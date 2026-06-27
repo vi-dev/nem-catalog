@@ -5,7 +5,7 @@ homepage: https://devspace.sh
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: loft-sh/devspace
       assetName: "devspace-{{.OS}}-{{.Arch}}"

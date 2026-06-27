@@ -5,7 +5,7 @@ homepage: https://github.com/grafana/k6
 license: AGPL-3.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: grafana/k6
       assetName: 'k6-{{.Version}}-{{.OS}}-{{.Arch}}{{if eq .OS "macos"}}.zip{{else}}.tar.gz{{end}}'

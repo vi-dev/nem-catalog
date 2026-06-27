@@ -5,7 +5,7 @@ homepage: https://github.com/anchore/grype
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: anchore/grype
       assetName: 'grype_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

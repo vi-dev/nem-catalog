@@ -5,7 +5,7 @@ homepage: https://www.openpolicyagent.org
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: open-policy-agent/opa
       assetName: "opa_{{.OS}}_{{.Arch}}"

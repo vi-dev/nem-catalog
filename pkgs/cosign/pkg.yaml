@@ -5,7 +5,7 @@ homepage: https://github.com/sigstore/cosign
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: sigstore/cosign
       assetName: "cosign-{{.OS}}-{{.Arch}}"

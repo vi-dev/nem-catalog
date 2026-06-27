@@ -5,7 +5,7 @@ homepage: https://ghz.sh
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: bojand/ghz
       assetName: "ghz-{{.OS}}-{{.Arch}}.tar.gz"

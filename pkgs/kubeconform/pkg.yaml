@@ -5,7 +5,7 @@ homepage: https://github.com/yannh/kubeconform
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: yannh/kubeconform
       assetName: 'kubeconform-{{.OS}}-{{.Arch}}.tar.gz'

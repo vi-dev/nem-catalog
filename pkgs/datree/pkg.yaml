@@ -5,7 +5,7 @@ homepage: https://github.com/datreeio/datree
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: datreeio/datree
       assetName: 'datree-cli_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'

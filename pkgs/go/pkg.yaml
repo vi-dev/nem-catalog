@@ -8,7 +8,7 @@ binPaths:
   - go/bin
 
 archive:
-  fetcher:
+  fetch:
     http:
       url: 'https://dl.google.com/go/go{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz'
   verify:

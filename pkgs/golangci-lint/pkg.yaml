@@ -5,7 +5,7 @@ homepage: https://golangci-lint.run
 license: GPL-3.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: golangci/golangci-lint
       assetName: 'golangci-lint-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'

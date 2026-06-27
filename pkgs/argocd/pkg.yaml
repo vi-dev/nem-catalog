@@ -5,7 +5,7 @@ homepage: https://argo-cd.readthedocs.io
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: argoproj/argo-cd
       assetName: "argocd-{{.OS}}-{{.Arch}}"

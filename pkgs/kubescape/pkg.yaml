@@ -5,7 +5,7 @@ homepage: https://kubescape.io
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: kubescape/kubescape
       assetName: 'kubescape_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

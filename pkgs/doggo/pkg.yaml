@@ -5,7 +5,7 @@ homepage: https://doggo.mrkaran.dev
 license: GPL-3.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: mr-karan/doggo
       assetName: "doggo-{{.OS}}-{{.Arch}}.tar.gz"

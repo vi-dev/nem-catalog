@@ -5,7 +5,7 @@ homepage: https://github.com/kubernetes-sigs/krew
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: kubernetes-sigs/krew
       assetName: "krew-{{.OS}}_{{.Arch}}.tar.gz"

@@ -5,7 +5,7 @@ homepage: https://github.com/terraform-linters/tflint
 license: MPL-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: terraform-linters/tflint
       assetName: "tflint_{{.OS}}_{{.Arch}}.zip"

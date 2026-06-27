@@ -5,7 +5,7 @@ homepage: https://github.com/derailed/k9s
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: derailed/k9s
       assetName: "k9s_{{.OS}}_{{.Arch}}.tar.gz"

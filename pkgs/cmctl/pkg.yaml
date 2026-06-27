@@ -5,7 +5,7 @@ homepage: https://cert-manager.io
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: cert-manager/cmctl
       assetName: "cmctl_{{.OS}}_{{.Arch}}.tar.gz"

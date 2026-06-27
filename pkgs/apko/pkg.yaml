@@ -5,7 +5,7 @@ homepage: https://github.com/chainguard-dev/apko
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: chainguard-dev/apko
       assetName: 'apko_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

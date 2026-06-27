@@ -5,7 +5,7 @@ homepage: https://miller.readthedocs.io
 license: BSD-2-Clause
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: johnkerl/miller
       assetName: 'miller-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'

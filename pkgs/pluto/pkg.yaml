@@ -5,7 +5,7 @@ homepage: https://github.com/FairwindsOps/pluto
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: FairwindsOps/pluto
       assetName: 'pluto_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

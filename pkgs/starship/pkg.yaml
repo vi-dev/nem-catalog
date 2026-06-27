@@ -5,7 +5,7 @@ homepage: https://starship.rs
 license: ISC
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: starship/starship
       # starship's libc varies by platform: linux/x86_64 is gnu, linux/arm64

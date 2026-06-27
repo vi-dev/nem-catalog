@@ -5,7 +5,7 @@ homepage: https://github.com/opentofu/opentofu
 license: MPL-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: opentofu/opentofu
       assetName: 'tofu_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'

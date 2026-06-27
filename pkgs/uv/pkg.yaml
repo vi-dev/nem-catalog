@@ -5,7 +5,7 @@ homepage: https://github.com/astral-sh/uv
 license: MIT OR Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: astral-sh/uv
       assetName: "uv-{{.Arch}}-{{.OS}}.tar.gz"

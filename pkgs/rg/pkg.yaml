@@ -5,7 +5,7 @@ homepage: https://github.com/BurntSushi/ripgrep
 license: MIT OR Unlicense
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: BurntSushi/ripgrep
       # ripgrep's libc varies by platform: linux/x86_64 is musl, linux/arm64

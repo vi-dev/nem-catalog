@@ -5,7 +5,7 @@ homepage: https://github.com/wagoodman/dive
 license: MIT
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: wagoodman/dive
       assetName: 'dive_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

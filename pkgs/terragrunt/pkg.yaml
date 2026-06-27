@@ -5,7 +5,7 @@ homepage: https://terragrunt.com
 license: MIT
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: gruntwork-io/terragrunt
       assetName: "terragrunt_{{.OS}}_{{.Arch}}"

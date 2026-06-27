@@ -5,7 +5,7 @@ homepage: https://github.com/txn2/kubefwd
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: txn2/kubefwd
       assetName: "kubefwd_{{.OS}}_{{.Arch}}.tar.gz"

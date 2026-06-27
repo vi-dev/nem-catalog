@@ -5,7 +5,7 @@ homepage: https://github.com/snyk/driftctl
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: snyk/driftctl
       assetName: "driftctl_{{.OS}}_{{.Arch}}"

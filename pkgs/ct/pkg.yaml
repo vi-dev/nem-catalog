@@ -5,7 +5,7 @@ homepage: https://github.com/helm/chart-testing
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: helm/chart-testing
       assetName: 'chart-testing_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

@@ -5,7 +5,7 @@ homepage: https://velero.io
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: vmware-tanzu/velero
       assetName: 'velero-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'

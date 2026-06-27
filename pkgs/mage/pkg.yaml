@@ -5,7 +5,7 @@ homepage: https://magefile.org
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: magefile/mage
       assetName: 'mage_{{.Version | trimPrefix "v"}}_{{.OS}}-{{.Arch}}.tar.gz'

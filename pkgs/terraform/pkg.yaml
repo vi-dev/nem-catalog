@@ -5,7 +5,7 @@ homepage: https://www.terraform.io
 license: BUSL-1.1
 
 archive:
-  fetcher:
+  fetch:
     http:
       url: 'https://releases.hashicorp.com/terraform/{{.Version | trimPrefix "v"}}/terraform_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
       versionsFrom:

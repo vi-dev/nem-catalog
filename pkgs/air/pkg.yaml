@@ -5,7 +5,7 @@ homepage: https://github.com/air-verse/air
 license: GPL-3.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: air-verse/air
       assetName: 'air_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}'

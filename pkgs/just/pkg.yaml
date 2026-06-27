@@ -5,7 +5,7 @@ homepage: https://github.com/casey/just
 license: CC0-1.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: casey/just
       assetName: 'just-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.gz'

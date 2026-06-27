@@ -5,7 +5,7 @@ homepage: https://github.com/cilium/hubble
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: cilium/hubble
       assetName: "hubble-{{.OS}}-{{.Arch}}.tar.gz"

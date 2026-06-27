@@ -5,7 +5,7 @@ homepage: https://github.com/anchore/syft
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: anchore/syft
       assetName: 'syft_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

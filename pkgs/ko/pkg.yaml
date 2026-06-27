@@ -5,7 +5,7 @@ homepage: https://ko.build
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: ko-build/ko
       assetName: 'ko_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'

@@ -5,7 +5,7 @@ homepage: https://steampipe.io
 license: AGPL-3.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: turbot/steampipe
       # steampipe ships macOS as a .zip and Linux as a .tar.gz.

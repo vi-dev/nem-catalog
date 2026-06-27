@@ -5,7 +5,7 @@ homepage: https://github.com/kubeshark/kubeshark
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: kubeshark/kubeshark
       assetName: "kubeshark_{{.OS}}_{{.Arch}}"

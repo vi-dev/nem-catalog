@@ -5,7 +5,7 @@ homepage: https://github.com/docker/compose
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: docker/compose
       assetName: "docker-compose-{{.OS}}-{{.Arch}}"

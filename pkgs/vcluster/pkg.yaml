@@ -5,7 +5,7 @@ homepage: https://www.vcluster.com
 license: Apache-2.0
 
 archive:
-  fetcher:
+  fetch:
     github_release:
       repo: loft-sh/vcluster
       assetName: "vcluster-{{.OS}}-{{.Arch}}"
