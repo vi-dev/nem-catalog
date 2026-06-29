@@ -57,11 +57,18 @@ jobs:
       - uses: ./.github/actions/setup-nem
         with:
           version: ${{ inputs.nem_version || env.NEM_VERSION }}
-      - name: Install bubblewrap (Linux sandbox)
+      - name: Set up bubblewrap (Linux sandbox)
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y bubblewrap
+          # Ubuntu 24.04 restricts unprivileged user namespaces via AppArmor,
+          # which stops bwrap from creating the sandbox ("Creating new namespace
+          # failed: Operation not permitted"). Re-allow them so the install pass
+          # runs under the real sandbox instead of failing to start it.
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then
+            sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          fi
       - name: Configure GitHub auth for the install pass
         run: |
           mkdir -p "${HOME}/.nem"
