@@ -14,7 +14,7 @@ on:
       nem_version:
         description: nem version to run with — a release tag, or 'unstable' to build the latest main.
         type: string
-        default: v0.7.0
+        default: unstable
 
 permissions:
   contents: read
@@ -27,7 +27,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NEM_VERSION: v0.7.0
+  NEM_VERSION: unstable
   REGISTRY_BASE: ghcr.io/vi-dev/nem-catalog
 
 jobs:
