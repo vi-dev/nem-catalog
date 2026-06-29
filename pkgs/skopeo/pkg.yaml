@@ -15,8 +15,6 @@ source:
       repo: containers/skopeo
       tagFilter: '^(v\d+\.\d+\.\d+)$'
 
-# GitHub source tarballs ship no upstream checksum file, so each release pins the
-# sha256 of its archive (as Homebrew does). Add a new entry per skopeo release.
 versions:
   - version: v1.23.0
     source:
