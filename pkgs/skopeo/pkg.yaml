@@ -1,0 +1,66 @@
+schemaVersion: 1
+name: skopeo
+description: Work with remote container images and registries
+homepage: https://github.com/containers/skopeo
+license: Apache-2.0
+
+buildFromSource: true
+
+source:
+  fetch:
+    github_tag:
+      repo: containers/skopeo
+      tagFilter: '^(v\d+\.\d+\.\d+)$'
+
+# GitHub source tarballs ship no upstream checksum file, so each release pins the
+# sha256 of its archive (as Homebrew does). Add a new entry per skopeo release.
+versions:
+  - version: v1.23.0
+    source:
+      verify:
+        sha256: de96bfc2bb523c852af675ffdadd934484812ce190aa8620e1d5fd6c51442e25
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.InstallDir}}/bin"
+  - mkdir:
+      path: "{{.InstallDir}}/.gotmp"
+  # containers_image_openpgp drops the libgpgme dependency and exclude_graphdriver_btrfs
+  # the btrfs C driver, so CGO stays off and the build needs no system libraries;
+  # -mod=vendor compiles offline from the vendored tree. The build sandbox confines
+  # writes to the install dir, so Go's caches are redirected under it.
+  - run:
+      cwd: "{{.Var.src}}"
+      cmd:
+        - /usr/bin/env
+        - GOCACHE={{.InstallDir}}/.gocache
+        - GOTMPDIR={{.InstallDir}}/.gotmp
+        - GOPATH={{.InstallDir}}/.gopath
+        - CGO_ENABLED=0
+        - GOTOOLCHAIN=local
+        - GOFLAGS=-mod=vendor
+        - go
+        - build
+        - -tags
+        - exclude_graphdriver_btrfs containers_image_openpgp
+        - -o
+        - "{{.InstallDir}}/bin/skopeo"
+        - ./cmd/skopeo
+  # Drop the Go caches and unpacked source so only bin/skopeo lands in the install.
+  - run:
+      cwd: "{{.InstallDir}}"
+      cmd:
+        - /bin/rm
+        - -rf
+        - "{{.InstallDir}}/.gocache"
+        - "{{.InstallDir}}/.gotmp"
+        - "{{.InstallDir}}/.gopath"
+        - "{{.InstallDir}}/.extract"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/skopeo", "--version"]
