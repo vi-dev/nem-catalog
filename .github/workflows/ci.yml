@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  NEM_VERSION: v0.7.0
+  NEM_VERSION: unstable
   REGISTRY_BASE: ghcr.io/vi-dev/nem-catalog
 
 jobs:
