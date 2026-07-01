@@ -1,0 +1,53 @@
+schemaVersion: 1
+name: ntbtls
+description: GnuPG's TLS library (Not Too Bad TLS)
+homepage: https://www.gnupg.org/software/ntbtls/index.html
+license: GPL-3.0-or-later
+
+buildFromSource: true
+dependsOn:
+  - libgpg-error
+  - libgcrypt
+  - libksba
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/ntbtls/ntbtls-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "0.3.2"
+    source:
+      verify:
+        checksum: bdfcb99024acec9c6c4b998ad63bb3921df4cfee4a772ad6c0ca324dbbf2b07c
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      # Pass explicit --with-*-prefix (discovered via the deps' config scripts on
+      # PATH) so ntbtls installs its ntbtls-config script on Linux too, for test
+      # + discovery. libgcrypt-config is present because libgcrypt is built the
+      # same way.
+      script: |
+        ge=$(dirname "$(dirname "$(command -v gpgrt-config)")")
+        gc=$(dirname "$(dirname "$(command -v libgcrypt-config)")")
+        kb=$(dirname "$(dirname "$(command -v ksba-config)")")
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc \
+          --with-libgpg-error-prefix="$ge" \
+          --with-libgcrypt-prefix="$gc" \
+          --with-ksba-prefix="$kb"
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ntbtls-config", "--version"]

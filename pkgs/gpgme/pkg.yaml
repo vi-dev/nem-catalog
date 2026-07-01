@@ -1,0 +1,47 @@
+schemaVersion: 1
+name: gpgme
+description: Library wrapper providing a high-level API to GnuPG
+homepage: https://www.gnupg.org/software/gpgme/index.html
+license: LGPL-2.1-or-later
+
+buildFromSource: true
+# libgpg-error + libassuan are build deps (found via their *-config scripts on
+# PATH); gnupg supplies the gpg/gpgconf engine gpgme drives at runtime.
+dependsOn:
+  - libgpg-error
+  - libassuan
+  - gnupg
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/gpgme/gpgme-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "2.1.1"
+    source:
+      verify:
+        checksum: 6d7ee12b209d7dce75468db53f72a90e1ad3d21f4c304ef2c002612a52f5333a
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # C library only; the empty --enable-languages= skips the cpp/qt/python bindings.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      # Serial make: gpgme's parallel build has an intermittent ordering race.
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc --enable-languages= --disable-gpg-test
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gpgme-config", "--version"]

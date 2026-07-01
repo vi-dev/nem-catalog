@@ -6,6 +6,8 @@ license: Apache-2.0
 
 dependsOn:
   - go
+  - gpgme      # libgpgme for signature verification (pulls gnupg + libassuan + libgpg-error)
+  - pkgconf    # cgo resolves libgpgme via pkg-config
 
 buildFromSource: true
 
@@ -15,13 +17,11 @@ source:
       repo: containers/skopeo
       tagFilter: '^(v\d+\.\d+\.\d+)$'
 
-# GitHub source tarballs ship no upstream checksum file, so each release pins the
-# sha256 of its archive (as Homebrew does). Add a new entry per skopeo release.
 versions:
   - version: v1.23.0
     source:
       verify:
-        sha256: de96bfc2bb523c852af675ffdadd934484812ce190aa8620e1d5fd6c51442e25
+        checksum: de96bfc2bb523c852af675ffdadd934484812ce190aa8620e1d5fd6c51442e25
 
 build:
   - extract:
@@ -29,40 +29,25 @@ build:
       as: src
       stripComponents: 1
   - mkdir:
-      path: "{{.InstallDir}}/bin"
+      path: "{{.StagingDir}}{{.InstallDir}}/bin"
   - mkdir:
-      path: "{{.InstallDir}}/.gotmp"
-  # containers_image_openpgp drops the libgpgme dependency and exclude_graphdriver_btrfs
-  # the btrfs C driver, so CGO stays off and the build needs no system libraries;
-  # -mod=vendor compiles offline from the vendored tree. The build sandbox confines
-  # writes to the install dir, so Go's caches are redirected under it.
+      path: "{{.StagingDir}}/.gotmp"
+  # No containers_image_openpgp tag => CGO links real libgpgme (signatures via gpg),
+  # resolved through `#cgo pkg-config: gpgme` — hence PKG_CONFIG=pkgconf. nem puts each
+  # dependency's lib/pkgconfig on PKG_CONFIG_PATH, so pkgconf finds gpgme.pc and its Requires.
   - run:
       cwd: "{{.Var.src}}"
-      cmd:
-        - /usr/bin/env
-        - GOCACHE={{.InstallDir}}/.gocache
-        - GOTMPDIR={{.InstallDir}}/.gotmp
-        - GOPATH={{.InstallDir}}/.gopath
-        - CGO_ENABLED=0
-        - GOTOOLCHAIN=local
-        - GOFLAGS=-mod=vendor
-        - go
-        - build
-        - -tags
-        - exclude_graphdriver_btrfs containers_image_openpgp
-        - -o
-        - "{{.InstallDir}}/bin/skopeo"
-        - ./cmd/skopeo
-  # Drop the Go caches and unpacked source so only bin/skopeo lands in the install.
-  - run:
-      cwd: "{{.InstallDir}}"
-      cmd:
-        - /bin/rm
-        - -rf
-        - "{{.InstallDir}}/.gocache"
-        - "{{.InstallDir}}/.gotmp"
-        - "{{.InstallDir}}/.gopath"
-        - "{{.InstallDir}}/.extract"
+      env:
+        GOCACHE: "{{.StagingDir}}/.gocache"
+        GOTMPDIR: "{{.StagingDir}}/.gotmp"
+        GOPATH: "{{.StagingDir}}/.gopath"
+        CGO_ENABLED: "1"
+        GOTOOLCHAIN: local
+        GOFLAGS: -mod=vendor
+        PKG_CONFIG: pkgconf
+      script: |
+        go build -tags exclude_graphdriver_btrfs \
+          -o "$NEM_STAGING_DIR$NEM_INSTALL_DIR/bin/skopeo" ./cmd/skopeo
 
 test:
   - run:

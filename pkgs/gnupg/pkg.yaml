@@ -1,0 +1,73 @@
+schemaVersion: 1
+name: gnupg
+description: GNU Privacy Guard, an OpenPGP implementation
+homepage: https://www.gnupg.org/
+license: GPL-3.0-or-later
+
+buildFromSource: true
+dependsOn:
+  - libgpg-error
+  - libgcrypt
+  - libassuan
+  - libksba
+  - npth
+  - pinentry
+  - ntbtls
+  - sqlite
+  - libusb
+  - bzip2
+  - readline
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/gnupg/gnupg-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "2.5.20"
+    source:
+      verify:
+        checksum: 6461266e99c308419a379abe6c356d54c214136c4589bd65951091138989ffc6
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # Enable TLS (ntbtls), sqlite/TOFU, smartcard/CCID (libusb), bzip2 and readline.
+  # nem only puts each dependency's bin dir on PATH, so discover each lib's prefix
+  # from a binary it ships there and feed the paths to configure explicitly (this
+  # also pins our packaged libs ahead of any the host happens to have). GnuTLS and
+  # LDAP stay off (they would need a large extra dependency tree).
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        bz=$(dirname "$(dirname "$(command -v bzip2)")")
+        sq=$(dirname "$(dirname "$(command -v sqlite3)")")
+        nc=$(dirname "$(dirname "$(command -v ncursesw6-config)")")
+        ub=$(libusb-prefix)
+        rl=$(readline-prefix)
+        export CPPFLAGS="-I$bz/include -I$ub/include/libusb-1.0"
+        export LDFLAGS="-L$bz/lib -L$ub/lib -L$nc/lib"
+        export SQLITE3_CFLAGS="-I$sq/include"
+        export SQLITE3_LIBS="-L$sq/lib -lsqlite3"
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc --disable-gnutls --disable-ldap \
+          --enable-ntbtls --enable-sqlite --enable-tofu \
+          --enable-scdaemon --enable-card-support --enable-ccid-driver \
+          --enable-bzip2 --with-readline="$rl"
+        # Fail the build if configure silently disabled any requested feature (gnupg
+        # turns optional features off when a lib is missing rather than erroring).
+        for d in HAVE_BZIP2 HAVE_LIBREADLINE HAVE_LIBUSB HTTP_USE_NTBTLS USE_TOFU; do
+          grep -q "^#define $d" config.h || { echo "feature not enabled: $d"; exit 1; }
+        done
+        make -j4
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gpg", "--version"]

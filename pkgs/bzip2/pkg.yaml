@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: bzip2
+description: Freely available high-quality data compressor
+homepage: https://sourceware.org/bzip2/
+license: bzip2-1.0.6
+
+buildFromSource: true
+
+binPaths:
+  - bin
+
+source:
+  fetch:
+    http:
+      url: 'https://sourceware.org/pub/bzip2/bzip2-{{.Version}}.tar.gz'
+
+versions:
+  - version: "1.0.8"
+    source:
+      verify:
+        checksum: ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  # bzip2 ships a hand-written Makefile (no configure). Build -fPIC so libbz2.a
+  # links into PIE executables (e.g. gpg) on Linux; `install` depends on `all`,
+  # so this one step builds the lib + binary and installs lib/header/bin/man.
+  - run:
+      cwd: "{{.Var.src}}"
+      script: |
+        make CFLAGS="-fPIC -O2 -D_FILE_OFFSET_BITS=64" \
+          PREFIX="$NEM_STAGING_DIR$NEM_INSTALL_DIR" install
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/bzip2", "--help"]

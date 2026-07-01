@@ -1,0 +1,43 @@
+schemaVersion: 1
+name: npth
+description: New portable threads library used by GnuPG
+homepage: https://www.gnupg.org/software/npth/index.html
+license: LGPL-2.1-or-later
+
+buildFromSource: true
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/npth/npth-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "1.8"
+    source:
+      verify:
+        checksum: 8bd24b4f23a3065d6e5b26e98aba9ce783ea4fd781069c1b35d149694e90ca3e
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR" --disable-nls --disable-doc
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+  # npth-config is built but left uninstalled upstream (noinst); copy it into the
+  # staged tree so the package has an executable to smoke-test.
+  - copy:
+      from: "{{.Var.src}}/npth-config"
+      to: "{{.StagingDir}}{{.InstallDir}}/bin/npth-config"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/npth-config", "--version"]

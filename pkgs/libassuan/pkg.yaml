@@ -1,0 +1,45 @@
+schemaVersion: 1
+name: libassuan
+description: IPC library used by GnuPG and related software
+homepage: https://www.gnupg.org/software/libassuan/index.html
+license: LGPL-2.1-or-later
+
+buildFromSource: true
+dependsOn:
+  - libgpg-error
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/libassuan/libassuan-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "3.0.2"
+    source:
+      verify:
+        checksum: d2931cdad266e633510f9970e1a2f346055e351bb19f9b78912475b8074c36f6
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      # --with-libgpg-error-prefix (via gpgrt-config on PATH) makes libassuan
+      # install its libassuan-config script on Linux too, for test + discovery.
+      script: |
+        ge=$(dirname "$(dirname "$(command -v gpgrt-config)")")
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc \
+          --with-libgpg-error-prefix="$ge"
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/libassuan-config", "--version"]

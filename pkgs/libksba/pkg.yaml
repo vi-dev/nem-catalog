@@ -1,0 +1,45 @@
+schemaVersion: 1
+name: libksba
+description: X.509 and CMS (PKCS#7) library used by GnuPG
+homepage: https://www.gnupg.org/software/libksba/index.html
+license: LGPL-3.0-or-later
+
+buildFromSource: true
+dependsOn:
+  - libgpg-error
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/libksba/libksba-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "1.8.0"
+    source:
+      verify:
+        checksum: 296b9db9095749f2aa104202d7ab7fd09ad10710e00780a709c9754b1a1d9292
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      # --with-libgpg-error-prefix (via gpgrt-config on PATH) makes libksba
+      # install its ksba-config script on Linux too, for test + discovery.
+      script: |
+        ge=$(dirname "$(dirname "$(command -v gpgrt-config)")")
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc \
+          --with-libgpg-error-prefix="$ge"
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ksba-config", "--version"]

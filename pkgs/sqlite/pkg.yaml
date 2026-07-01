@@ -1,0 +1,44 @@
+schemaVersion: 1
+name: sqlite
+description: Self-contained, serverless, zero-configuration SQL database engine
+homepage: https://sqlite.org/
+license: blessing
+
+buildFromSource: true
+
+binPaths:
+  - bin
+
+source:
+  fetch:
+    http:
+      # The "autoconf" amalgamation; {{.Version}} is SQLite's encoded release
+      # number (3.53.3 -> 3530300), and the year segment tracks the release.
+      url: 'https://www.sqlite.org/2026/sqlite-autoconf-{{.Version}}.tar.gz'
+
+versions:
+  - version: "3530300"
+    source:
+      verify:
+        checksum: c917d7db16648ec95f714974ace5e5dcf46b7dc70e26600a0a102a3141125db0
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # --disable-readline keeps the build from picking up a host readline/editline.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR" --disable-readline
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/sqlite3", "--version"]

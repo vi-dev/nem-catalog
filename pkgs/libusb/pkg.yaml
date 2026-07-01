@@ -1,0 +1,60 @@
+schemaVersion: 1
+name: libusb
+description: Library for USB device access from userspace
+homepage: https://libusb.info/
+license: LGPL-2.1-or-later
+
+buildFromSource: true
+
+binPaths:
+  - bin
+
+source:
+  fetch:
+    http:
+      url: 'https://github.com/libusb/libusb/releases/download/v{{.Version}}/libusb-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "1.0.30"
+    source:
+      verify:
+        checksum: fea36f34f9156400209595e300840767ab1a385ede1dc7ee893015aea9c6dbaf
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  # Pin every shipped file to one fixed mtime so make never thinks the generated
+  # autotools files are stale and tries to regenerate them (libusb has no
+  # maintainer-mode switch, and the build sandbox has no autoconf/automake). A
+  # fixed timestamp is deterministic; touching to "now" races configure.
+  - run:
+      cwd: "{{.Var.src}}"
+      script: |
+        find . -exec touch -t 200001010000 {} +
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # --disable-udev avoids a libudev build dependency; the library still builds and
+  # links, which is all the consumer (gnupg's CCID driver) needs.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR" --disable-udev
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+  # libusb installs no binary; nem exposes a dependency only via its bin dir on
+  # PATH, so drop a prefix printer there for consumers to locate this install.
+  - run:
+      cwd: "{{.StagingDir}}"
+      script: |
+        d="$NEM_STAGING_DIR$NEM_INSTALL_DIR/bin"
+        mkdir -p "$d"
+        printf '#!/bin/sh\necho %s\n' "$NEM_INSTALL_DIR" > "$d/libusb-prefix"
+        chmod +x "$d/libusb-prefix"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/libusb-prefix"]

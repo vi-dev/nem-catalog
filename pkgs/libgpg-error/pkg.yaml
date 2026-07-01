@@ -1,0 +1,38 @@
+schemaVersion: 1
+name: libgpg-error
+description: Common error values for all GnuPG components
+homepage: https://www.gnupg.org/software/libgpg-error/index.html
+license: LGPL-2.1-or-later
+
+buildFromSource: true
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "1.61"
+    source:
+      verify:
+        checksum: 7a85413f2bc354f4f8aa832b718af122e48965e9e0eb9012ee659c13c6385c93
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR" --disable-nls --disable-doc
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gpgrt-config", "--version"]

@@ -1,0 +1,48 @@
+schemaVersion: 1
+name: pinentry
+description: Passphrase entry dialogs used by GnuPG (tty frontend)
+homepage: https://www.gnupg.org/software/pinentry/index.html
+license: GPL-2.0-or-later
+
+buildFromSource: true
+dependsOn:
+  - libgpg-error
+  - libassuan
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/pinentry/pinentry-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "1.3.2"
+    source:
+      verify:
+        checksum: 8e986ed88561b4da6e9efe0c54fa4ca8923035c99264df0b0464497c5fb94e9e
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # tty frontend only; the explicit =no flags keep the build deterministic and
+  # UI-library-free even on hosts that have curses/Qt/GTK installed.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc --enable-pinentry-tty \
+          --enable-pinentry-curses=no --enable-pinentry-gtk2=no \
+          --enable-pinentry-gnome3=no --enable-pinentry-qt=no \
+          --enable-pinentry-qt5=no --enable-pinentry-fltk=no \
+          --enable-pinentry-tqt=no --enable-pinentry-efl=no
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pinentry", "--version"]

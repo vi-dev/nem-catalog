@@ -1,0 +1,38 @@
+schemaVersion: 1
+name: pkgconf
+description: Compiler/linker metadata toolkit and pkg-config replacement
+homepage: https://github.com/pkgconf/pkgconf
+license: ISC
+
+buildFromSource: true
+
+source:
+  fetch:
+    http:
+      url: 'https://distfiles.ariadne.space/pkgconf/pkgconf-{{.Version}}.tar.xz'
+
+versions:
+  - version: "2.5.1"
+    source:
+      verify:
+        checksum: cd05c9589b9f86ecf044c10a2269822bc9eb001eced2582cfffd658b0a50c243
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./configure --prefix="$NEM_INSTALL_DIR"
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pkgconf", "--version"]

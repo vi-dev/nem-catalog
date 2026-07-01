@@ -1,0 +1,46 @@
+schemaVersion: 1
+name: libgcrypt
+description: General purpose cryptographic library based on the code from GnuPG
+homepage: https://www.gnupg.org/software/libgcrypt/index.html
+license: LGPL-2.1-or-later
+
+buildFromSource: true
+dependsOn:
+  - libgpg-error
+
+source:
+  fetch:
+    http:
+      url: 'https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-{{.Version}}.tar.bz2'
+
+versions:
+  - version: "1.12.2"
+    source:
+      verify:
+        checksum: 7ce33c2492221a0436f96a8500215e9f3e3dcb5fd26a757cd415e7a843babd5e
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      # Pass --with-libgpg-error-prefix (discovered via gpgrt-config on PATH) so
+      # libgcrypt installs its libgcrypt-config script on Linux too; without it the
+      # script is omitted there, breaking the test and consumers' discovery.
+      script: |
+        ge=$(dirname "$(dirname "$(command -v gpgrt-config)")")
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --disable-nls --disable-doc \
+          --with-libgpg-error-prefix="$ge"
+        make
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/libgcrypt-config", "--version"]

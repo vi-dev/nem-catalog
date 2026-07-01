@@ -1,0 +1,56 @@
+schemaVersion: 1
+name: readline
+description: GNU library for command-line editing and history
+homepage: https://tiswww.case.edu/php/chet/readline/rltop.html
+license: GPL-3.0-or-later
+
+buildFromSource: true
+dependsOn:
+  - ncurses
+
+source:
+  fetch:
+    http:
+      url: 'https://ftp.gnu.org/gnu/readline/readline-{{.Version}}.tar.gz'
+
+versions:
+  - version: "8.3"
+    source:
+      verify:
+        checksum: fe5383204467828cd495ee8d1d3c037a7eba1389c22bc6a041f627976f9061cc
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # readline needs a termcap provider; discover ncurses via ncursesw6-config on
+  # PATH (nem exposes each dep's bin dir) and feed its cflags/libs to configure.
+  # SHLIB_LIBS links libncursesw into libreadline.so so it carries its own termcap
+  # dependency — otherwise tgetent is left undefined and some consumers (e.g.
+  # gnupg) only try -lncurses, not the wide -lncursesw built here.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        export CPPFLAGS="$(ncursesw6-config --cflags)"
+        export LDFLAGS="$(ncursesw6-config --libs)"
+        ./configure --prefix="$NEM_INSTALL_DIR" --with-curses --disable-static
+        make SHLIB_LIBS="$(ncursesw6-config --libs)"
+        make install DESTDIR="$NEM_STAGING_DIR"
+  # readline installs no binary; expose a prefix printer so consumers can locate
+  # this install via its bin dir on PATH.
+  - run:
+      cwd: "{{.StagingDir}}"
+      script: |
+        d="$NEM_STAGING_DIR$NEM_INSTALL_DIR/bin"
+        mkdir -p "$d"
+        printf '#!/bin/sh\necho %s\n' "$NEM_INSTALL_DIR" > "$d/readline-prefix"
+        chmod +x "$d/readline-prefix"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/readline-prefix"]
