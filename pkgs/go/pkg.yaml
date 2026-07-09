@@ -15,6 +15,7 @@ archive:
     sha256URL: 'https://dl.google.com/go/go{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz.sha256'
 
 versions:
+  - version: v1.26.5
   - version: v1.26.4
   - version: v1.25.11
 
