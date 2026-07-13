@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: bazelisk
+description: User-friendly launcher that downloads and runs the right version of Bazel
+homepage: https://github.com/bazelbuild/bazelisk
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: bazelbuild/bazelisk
+      # Raw per-platform binaries; the arch is encoded in the name so an
+      # unsupported platform 404s instead of serving a wrong-arch binary.
+      assetName: 'bazelisk-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # Each binary ships a single-line <asset>.sha256 sidecar (a bare SHA-256).
+  verify:
+    checksumGitHubAsset: 'bazelisk-{{.OS}}-{{.Arch}}.sha256'
+
+install:
+  # The asset is the executable itself; copy it straight into bin/.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/bazelisk"
+
+test:
+  # `bazeliskVersion` prints bazelisk's own embedded version and returns before
+  # any Bazel download, so the smoke test runs fully offline.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/bazelisk", "bazeliskVersion"]
