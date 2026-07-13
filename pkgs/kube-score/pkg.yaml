@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: kube-score
+description: Static code analysis of Kubernetes object definitions
+homepage: https://kube-score.com
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: zegl/kube-score
+      assetName: 'kube-score_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kube-score"
+      to: "{{.InstallDir}}/bin/kube-score"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kube-score", "version"]
