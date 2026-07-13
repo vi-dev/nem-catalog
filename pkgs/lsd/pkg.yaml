@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: lsd
+description: Next-gen ls command with icons, colors and tree view
+homepage: https://github.com/lsd-rs/lsd
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: lsd-rs/lsd
+      assetName: 'lsd-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # lsd publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/lsd"
+      to: "{{.InstallDir}}/bin/lsd"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/lsd", "--version"]
