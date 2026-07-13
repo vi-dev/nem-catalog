@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: devbox
+description: Instant, easy, and predictable development environments
+homepage: https://www.jetify.com/devbox/
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: jetify-com/devbox
+      # Tags are bare semver (0.17.5, no leading v); assets use the default
+      # linux/darwin + amd64/arm64 tokens, so no templateOverrides are needed.
+      assetName: 'devbox_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The tarball holds just the `devbox` binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/devbox"
+      to: "{{.InstallDir}}/bin/devbox"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/devbox", "version"]
