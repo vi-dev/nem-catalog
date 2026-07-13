@@ -1,0 +1,40 @@
+schemaVersion: 1
+name: mods
+description: AI for the command line, built for pipelines
+homepage: https://github.com/charmbracelet/mods
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: charmbracelet/mods
+      assetName: 'mods_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/mods"
+      to: "{{.InstallDir}}/bin/mods"
+
+test:
+  # mods resolves its config dir from XDG_CONFIG_HOME before HOME; a CI runner
+  # sets XDG_CONFIG_HOME to a read-only ~/.config, so a HOME-only redirect is
+  # ignored. Point HOME and the XDG dirs at writable dirs under the scratch cwd
+  # and pre-create them.
+  - run:
+      script: |
+        export HOME="$PWD/nem-mods-home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        export XDG_CACHE_HOME="$HOME/.cache"
+        mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+        "$NEM_INSTALL_DIR/bin/mods" --version
