@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: git-lfs
+description: Git extension for versioning large files
+homepage: https://git-lfs.com
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: git-lfs/git-lfs
+      # OS/arch match nem defaults; only the extension differs (.zip on macOS).
+      assetName: 'git-lfs-{{.OS}}-{{.Arch}}-{{.Version}}{{if eq .OS "darwin"}}.zip{{else}}.tar.gz{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # sha256sums.asc is a PGP-clearsigned checksum file; nem matches the asset's
+  # line by filename and ignores the surrounding armor.
+  verify:
+    checksumGitHubAsset: sha256sums.asc
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/git-lfs"
+      to: "{{.InstallDir}}/bin/git-lfs"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/git-lfs", "version"]
