@@ -94,8 +94,13 @@ jobs:
             exit 0
           fi
           echo "Install-linting: ${changed[*]}"
+          # Stage only the changed packages so one `nem author lint --install`
+          # run probes them all in parallel (bounded by its --jobs default).
+          # Dependencies outside the changed set resolve from the published
+          # official catalog, exactly as they would for a real install.
+          staging="$(mktemp -d)"
+          mkdir -p "${staging}/pkgs"
           for p in "${changed[@]}"; do
-            echo "::group::nem author lint pkgs/${p} --install"
-            nem author lint "pkgs/${p}" --install
-            echo "::endgroup::"
+            cp -R "pkgs/${p}" "${staging}/pkgs/${p}"
           done
+          nem author lint "${staging}" --install
