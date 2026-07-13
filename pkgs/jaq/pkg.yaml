@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: jaq
+description: A jq clone focussed on correctness, speed, and simplicity
+homepage: https://github.com/01mf02/jaq
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: 01mf02/jaq
+      # Raw per-platform binaries named by Rust target triple; libc is gnu for
+      # both linux arches, so simple overrides suffice (no per-arch branching).
+      assetName: 'jaq-{{.Arch}}-{{.OS}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+  # jaq publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the raw executable; copy it straight to bin (no archive).
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/jaq"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/jaq", "--version"]
