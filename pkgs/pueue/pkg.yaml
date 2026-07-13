@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: pueue
+description: Command-line task management tool for sequential and parallel execution of long-running tasks
+homepage: https://github.com/Nukesor/pueue
+license: MIT OR Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: Nukesor/pueue
+      # Raw per-target binaries named with the Rust target triple; macOS is
+      # apple-darwin, Linux is the musl static build.
+      assetName: 'pueue-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # pueue publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+# The asset is the executable itself, so copy it straight into bin/.
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/pueue"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pueue", "--version"]
