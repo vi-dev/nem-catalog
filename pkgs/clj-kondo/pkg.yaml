@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: clj-kondo
+description: Static analyzer and linter for Clojure code that sparks joy
+homepage: https://github.com/clj-kondo/clj-kondo
+license: EPL-1.0
+
+archive:
+  fetch:
+    github_release:
+      repo: clj-kondo/clj-kondo
+      assetName: 'clj-kondo-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        arm64: aarch64
+  # Each asset ships a single-line <asset>.zip.sha256 sidecar holding just the
+  # bare digest; nem reads its first field, so no filename in it is needed.
+  verify:
+    checksumGitHubAsset: 'clj-kondo-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.zip.sha256'
+
+install:
+  # The zip holds a single `clj-kondo` binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/clj-kondo"
+      to: "{{.InstallDir}}/bin/clj-kondo"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/clj-kondo", "--version"]
