@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: lazysql
+description: Cross-platform TUI database management tool
+homepage: https://github.com/jorgerojas26/lazysql
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: jorgerojas26/lazysql
+      assetName: 'lazysql_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'lazysql_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The binary sits at the archive root alongside LICENSE.txt/README.md.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/lazysql"
+      to: "{{.InstallDir}}/bin/lazysql"
+
+test:
+  # lazysql derives its default config path from $HOME before handling --version,
+  # so point HOME at the writable scratch cwd (relative) since the sandbox unsets it.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/lazysql", "--version"]
+      env:
+        HOME: nem-lazysql-home
