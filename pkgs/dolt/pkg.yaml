@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: dolt
+description: Git-style versioned SQL database
+homepage: https://github.com/dolthub/dolt
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: dolthub/dolt
+      assetName: 'dolt-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # dolt publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/dolt"
+      to: "{{.InstallDir}}/bin/dolt"
+
+test:
+  - run:
+      # `dolt version` creates ~/.dolt for its global config on startup; HOME is
+      # read-only in the write-confined smoke-test sandbox, so point it at a
+      # writable dir under the scratch cwd.
+      script: |
+        export HOME="$PWD/nem-dolt-home"
+        mkdir -p "$HOME"
+        "$NEM_INSTALL_DIR/bin/dolt" version
