@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: ov
+description: Feature-rich terminal pager
+homepage: https://github.com/noborus/ov
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: noborus/ov
+      assetName: 'ov_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'ov_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip roots the binary alongside LICENSE/README/config; no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/ov"
+      to: "{{.InstallDir}}/bin/ov"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ov", "--version"]
