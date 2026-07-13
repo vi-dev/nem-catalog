@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: crystal
+description: The Crystal programming language compiler
+homepage: https://crystal-lang.org
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: crystal-lang/crystal
+      # macOS ships one universal (x86_64+arm64) tarball that serves both darwin
+      # arches; Linux ships per-arch bundled tarballs whose compiler is statically
+      # linked, so neither platform needs pcre/gc/libevent installed at runtime.
+      assetName: 'crystal-{{.Version}}-1-{{if eq .OS "darwin"}}darwin-universal{{else}}linux-{{.Arch}}-bundled{{end}}.tar.gz'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # Crystal publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # bin/crystal locates its stdlib and bundled libs relative to the install root,
+  # so copy the whole tree (bin/, src|share, embedded|lib) intact.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/crystal", "--version"]
