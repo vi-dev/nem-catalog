@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: nomad
+description: A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications
+homepage: https://www.nomadproject.io
+license: BUSL-1.1
+
+archive:
+  fetch:
+    http:
+      url: 'https://releases.hashicorp.com/nomad/{{.Version | trimPrefix "v"}}/nomad_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      versionsFrom:
+        github_release:
+          repo: hashicorp/nomad
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256URL: 'https://releases.hashicorp.com/nomad/{{.Version | trimPrefix "v"}}/nomad_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/nomad"
+      to: "{{.InstallDir}}/bin/nomad"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/nomad", "version"]
