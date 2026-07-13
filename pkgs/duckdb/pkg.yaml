@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: duckdb
+description: In-process analytical SQL database management system
+homepage: https://duckdb.org
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: duckdb/duckdb
+      # CLI assets are duckdb_cli-<os>-<arch>.zip; macOS uses "osx".
+      assetName: 'duckdb_cli-{{.OS}}-{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: osx
+  # DuckDB publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The zip holds a single duckdb binary at its root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/duckdb"
+      to: "{{.InstallDir}}/bin/duckdb"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/duckdb", "--version"]
