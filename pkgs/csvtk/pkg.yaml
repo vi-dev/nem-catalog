@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: csvtk
+description: Cross-platform command-line CSV and TSV toolkit
+homepage: https://github.com/shenwei356/csvtk
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: shenwei356/csvtk
+      assetName: 'csvtk_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # csvtk ships only .md5.txt sidecars (MD5, outside nem's SHA-2 family), so
+  # verify against GitHub's per-asset SHA-256 digest instead.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/csvtk"
+      to: "{{.InstallDir}}/bin/csvtk"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/csvtk", "version"]
