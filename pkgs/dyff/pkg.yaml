@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: dyff
+description: Diff tool for YAML and JSON files
+homepage: https://github.com/homeport/dyff
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: homeport/dyff
+      assetName: 'dyff_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Archive roots at LICENSE, README.md, and the `dyff` binary (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/dyff"
+      to: "{{.InstallDir}}/bin/dyff"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dyff", "version"]
