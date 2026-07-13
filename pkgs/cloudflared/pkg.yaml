@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: cloudflared
+description: Client for Cloudflare Tunnel
+homepage: https://github.com/cloudflare/cloudflared
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: cloudflare/cloudflared
+      # darwin ships a .tgz holding the binary; linux ships the raw ELF.
+      assetName: 'cloudflared-{{.OS}}-{{.Arch}}{{if eq .OS "darwin"}}.tgz{{end}}'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+  # Cloudflare publishes no checksum file; verify against GitHub's digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The two asset shapes need different actions, so each step is
+  # platform-gated: extract+copy on darwin, a direct copy on linux.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+    platforms: ["darwin"]
+  - copy:
+      from: "{{.Var.src}}/cloudflared"
+      to: "{{.InstallDir}}/bin/cloudflared"
+    platforms: ["darwin"]
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/cloudflared"
+    platforms: ["linux"]
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cloudflared", "--version"]
