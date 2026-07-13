@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: stripe
+description: Command-line tool for building, testing, and managing Stripe integrations
+homepage: https://docs.stripe.com/stripe-cli
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: stripe/stripe-cli
+      # The OS token differs between the tarball (mac-os) and the checksum asset
+      # (mac), so branch on .OS instead of overriding it; only amd64 -> x86_64,
+      # arm64 keeps its default name.
+      assetName: 'stripe_{{.Version | trimPrefix "v"}}_{{if eq .OS "darwin"}}mac-os{{else}}linux{{end}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'stripe-{{if eq .OS "darwin"}}mac{{else}}linux{{end}}-checksums.txt'
+
+install:
+  # The archive is the raw `stripe` binary at the root — no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/stripe"
+      to: "{{.InstallDir}}/bin/stripe"
+
+test:
+  # `stripe version` phones home ("Checking for new versions...") and fails in the
+  # no-network sandbox; `--version` prints the version, writes nothing, exits 0.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/stripe", "--version"]
