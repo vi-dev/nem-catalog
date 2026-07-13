@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: jsonnet
+description: Command-line interpreter for the Jsonnet data templating language
+homepage: https://github.com/google/go-jsonnet
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: google/go-jsonnet
+      assetName: 'go-jsonnet_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  # Binaries sit at the archive root, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/jsonnet"
+      to: "{{.InstallDir}}/bin/jsonnet"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/jsonnet", "--version"]
