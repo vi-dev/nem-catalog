@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: croc
+description: Securely send files and folders from one computer to another
+homepage: https://github.com/schollz/croc
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: schollz/croc
+      # Assets keep the leading v (croc_v10.4.12_macOS-ARM64.tar.gz); OS/arch
+      # tokens differ from nem's defaults, so remap them via templateOverrides.
+      assetName: 'croc_{{.Version}}_{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        linux: Linux
+        darwin: macOS
+        amd64: 64bit
+        arm64: ARM64
+  verify:
+    checksumGitHubAsset: 'croc_{{.Version}}_checksums.txt'
+
+install:
+  # Archive roots at croc + LICENSE (no leading dir), so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/croc"
+      to: "{{.InstallDir}}/bin/croc"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/croc", "--version"]
