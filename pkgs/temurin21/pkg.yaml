@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: temurin21
+description: Eclipse Temurin OpenJDK 21 (LTS) development kit
+homepage: https://adoptium.net
+license: GPL-2.0-with-classpath-exception
+
+archive:
+  fetch:
+    github_release:
+      repo: adoptium/temurin21-binaries
+      # Tag is jdk-<ver>+<build>; the asset embeds the version with '+' -> '_'.
+      assetName: 'OpenJDK21U-jdk_{{.Arch}}_{{.OS}}_hotspot_{{.Version | replace "+" "_"}}.tar.gz'
+      releaseFilter: '^jdk-(\d+\.\d+\.\d+\+\d+)$'
+      releaseTemplate: 'jdk-{{.Version}}'
+      templateOverrides:
+        darwin: mac
+        amd64: x64
+        arm64: aarch64
+  # Adoptium publishes no aggregate checksum file; verify against GitHub's digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball has a single top-level jdk-<ver> dir; on macOS the JDK home is
+  # nested under Contents/Home, on Linux it is the dir root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: '{{.Var.src}}{{if eq .OS "darwin"}}/Contents/Home{{end}}'
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/java", "-version"]
