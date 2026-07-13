@@ -1,0 +1,38 @@
+schemaVersion: 1
+name: tlsx
+description: Fast and configurable TLS grabber for TLS-based data collection
+homepage: https://github.com/projectdiscovery/tlsx
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/tlsx
+      assetName: 'tlsx_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'tlsx_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # Zip is flat: LICENSE, README.md, and the `tlsx` binary at the root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tlsx"
+      to: "{{.InstallDir}}/bin/tlsx"
+
+test:
+  - run:
+      # tlsx resolves its config dir from XDG_CONFIG_HOME before HOME; a CI runner
+      # sets XDG_CONFIG_HOME to a read-only ~/.config, so a HOME-only redirect is
+      # ignored. Point HOME and the XDG dirs at writable dirs under the scratch
+      # cwd and pre-create them.
+      script: |
+        export HOME="$PWD/nem-tlsx-home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        export XDG_CACHE_HOME="$HOME/.cache"
+        mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+        "$NEM_INSTALL_DIR/bin/tlsx" -version
