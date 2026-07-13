@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: uncover
+description: Quickly discover exposed hosts on the internet using multiple search engines
+homepage: https://github.com/projectdiscovery/uncover
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/uncover
+      assetName: 'uncover_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'uncover_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip roots the `uncover` binary alongside LICENSE.md/README.md, so no
+  # stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/uncover"
+      to: "{{.InstallDir}}/bin/uncover"
+
+test:
+  - run:
+      # With HOME unset uncover defaults its ConfigDir to a relative
+      # .uncover-config under the cwd, so writes stay in the sandbox scratch dir.
+      cmd: ["{{.InstallDir}}/bin/uncover", "-version"]
