@@ -1,0 +1,43 @@
+schemaVersion: 1
+name: hx
+description: Post-modern modal text editor
+homepage: https://helix-editor.com
+license: MPL-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: helix-editor/helix
+      # Assets are helix-<ver>-<arch>-<os>.tar.xz with Rust-style arch tokens.
+      assetName: 'helix-{{.Version}}-{{.Arch}}-{{.OS}}.tar.xz'
+      # CalVer tags; three-part filter pins stable patch releases (e.g. 25.07.1)
+      # and skips bare YY.MM tags, pre-releases, and the old v0.x line.
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+        arm64: aarch64
+  # helix publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+# hx locates its runtime/ dir next to the executable, so keep the binary and
+# runtime as siblings under libexec/ and put that dir on PATH via binPaths.
+binPaths:
+  - libexec
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/hx"
+      to: "{{.InstallDir}}/libexec/hx"
+  - copy:
+      from: "{{.Var.src}}/runtime"
+      to: "{{.InstallDir}}/libexec/runtime"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/libexec/hx", "--version"]
