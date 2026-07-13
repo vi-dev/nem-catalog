@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: broot
+description: Interactive tree view and fuzzy file navigator
+homepage: https://dystroy.org/broot
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: Canop/broot
+      # One zip carries every target as a per-triple subdir; the OS/arch is in
+      # the extracted path, not the asset name — so fetch is platform-agnostic.
+      assetName: 'broot_{{.Version | trimPrefix "v"}}.zip'
+      # Pinned to 1.57.x: the v1.58.0 aarch64-apple-darwin binary links
+      # libiconv.2.dylib twice and modern macOS dyld aborts on it. Widen the
+      # filter again once an upstream release ships a fixed macOS binary.
+      releaseFilter: '^(v1\.57\.\d+)$'
+  # No checksum file is published; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  # Pick this platform's binary from its target-triple subdir. Linux uses the
+  # fully static musl build; macOS ships only aarch64-apple-darwin, so darwin
+  # amd64 renders a path absent from the zip and the copy fails loudly.
+  - copy:
+      from: '{{.Var.src}}/{{if eq .Arch "arm64"}}aarch64{{else}}x86_64{{end}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}/broot'
+      to: "{{.InstallDir}}/bin/broot"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/broot", "--version"]
