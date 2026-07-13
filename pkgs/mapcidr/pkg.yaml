@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: mapcidr
+description: Utility for performing multiple operations on CIDR ranges
+homepage: https://github.com/projectdiscovery/mapcidr
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/mapcidr
+      # darwin assets use the macOS token; linux/amd64/arm64 match the defaults.
+      assetName: 'mapcidr_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'mapcidr_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip roots the binary alongside LICENSE.MD/README.md, no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/mapcidr"
+      to: "{{.InstallDir}}/bin/mapcidr"
+
+test:
+  - run:
+      # mapcidr resolves its config dir from XDG_CONFIG_HOME before HOME; a CI
+      # runner sets XDG_CONFIG_HOME to a read-only ~/.config, so a HOME-only
+      # redirect is ignored. Point HOME and the XDG dirs at writable dirs under
+      # the scratch cwd and pre-create them.
+      script: |
+        export HOME="$PWD/nem-mapcidr-home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        export XDG_CACHE_HOME="$HOME/.cache"
+        mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+        "$NEM_INSTALL_DIR/bin/mapcidr" -version
