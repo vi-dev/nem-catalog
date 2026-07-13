@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: asnmap
+description: Map organization network ranges from ASN, IP, or domain
+homepage: https://github.com/projectdiscovery/asnmap
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/asnmap
+      assetName: 'asnmap_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'asnmap_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip holds asnmap, LICENSE, and README.md at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/asnmap"
+      to: "{{.InstallDir}}/bin/asnmap"
+
+test:
+  - run:
+      # asnmap creates its config dir on startup and aborts if it can't. It
+      # resolves that dir from XDG_CONFIG_HOME first (a CI runner sets it to
+      # ~/.config, which is read-only in the sandbox) and only then from HOME, so
+      # a HOME-only redirect is ignored. Point HOME and the XDG dirs at writable
+      # dirs under the scratch cwd and pre-create them.
+      script: |
+        export HOME="$PWD/nem-asnmap-home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        export XDG_CACHE_HOME="$HOME/.cache"
+        mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+        "$NEM_INSTALL_DIR/bin/asnmap" -version
