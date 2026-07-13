@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: traefik
+description: Cloud-native reverse proxy and load balancer
+homepage: https://traefik.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: traefik/traefik
+      assetName: 'traefik_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'traefik_{{.Version}}_checksums.txt'
+
+install:
+  # The tarball roots at CHANGELOG.md, LICENSE.md, and the traefik binary (no
+  # leading dir), so extract without stripComponents and copy the binary.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/traefik"
+      to: "{{.InstallDir}}/bin/traefik"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/traefik", "version"]
