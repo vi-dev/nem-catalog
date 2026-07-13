@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: fastfetch
+description: Fast system information tool with a customizable display
+homepage: https://github.com/fastfetch-cli/fastfetch
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: fastfetch-cli/fastfetch
+      assetName: 'fastfetch-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        arm64: aarch64
+  # fastfetch publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball has a single top-level fastfetch-<os>-<arch> dir; the binary
+  # sits under usr/bin after stripping it.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/usr/bin/fastfetch"
+      to: "{{.InstallDir}}/bin/fastfetch"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/fastfetch", "--version"]
