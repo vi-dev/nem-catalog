@@ -1,0 +1,38 @@
+schemaVersion: 1
+name: conftest
+description: Test your configuration files against Open Policy Agent policies
+homepage: https://www.conftest.dev
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: open-policy-agent/conftest
+      # Assets are conftest_<ver>_<OS>_<arch>.tar.gz with a capitalized OS token
+      # (Darwin/Linux) and x86_64 for amd64; arm64 is spelled as-is.
+      assetName: 'conftest_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Tarball is flat: LICENSE, README.md, and the conftest binary at the root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/conftest"
+      to: "{{.InstallDir}}/bin/conftest"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/conftest", "--version"]
+      # conftest scans a plugin cache under XDG_DATA_HOME at startup and its xdg
+      # library panics unless that path is absolute; HOME is unset in the sandbox,
+      # so point it at an absolute (read-only, unused) path under the install dir.
+      env:
+        XDG_DATA_HOME: "{{.InstallDir}}/nem-xdg-data"
