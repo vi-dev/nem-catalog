@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: consul
+description: Service networking platform for service discovery, mesh, and configuration
+homepage: https://www.consul.io
+license: BUSL-1.1
+
+archive:
+  fetch:
+    http:
+      url: 'https://releases.hashicorp.com/consul/{{.Version | trimPrefix "v"}}/consul_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      versionsFrom:
+        github_release:
+          repo: hashicorp/consul
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumURL: 'https://releases.hashicorp.com/consul/{{.Version | trimPrefix "v"}}/consul_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/consul"
+      to: "{{.InstallDir}}/bin/consul"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/consul", "version"]
