@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: k3sup
+description: Bootstrap K3s over SSH in under a minute
+homepage: https://github.com/alexellis/k3sup
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: alexellis/k3sup
+      # Raw per-platform binaries: linux/amd64 is the bare "k3sup"; darwin adds
+      # "-darwin" and arm64 adds "-arm64", so amd64 is the absence of that suffix.
+      assetName: 'k3sup{{if eq .OS "darwin"}}-darwin{{end}}{{if eq .Arch "arm64"}}-arm64{{end}}'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  # Each binary ships a single-line "<asset>.sha256" sidecar (nem takes its first
+  # field as the digest, so the sidecar's "bin/" path prefix is harmless).
+  verify:
+    checksumGitHubAsset: 'k3sup{{if eq .OS "darwin"}}-darwin{{end}}{{if eq .Arch "arm64"}}-arm64{{end}}.sha256'
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/k3sup"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/k3sup", "version"]
