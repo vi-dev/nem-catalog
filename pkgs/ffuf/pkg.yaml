@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: ffuf
+description: Fast web fuzzer written in Go
+homepage: https://github.com/ffuf/ffuf
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ffuf/ffuf
+      assetName: 'ffuf_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'ffuf_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # Archive roots at the binary plus docs (CHANGELOG/LICENSE/README), no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/ffuf"
+      to: "{{.InstallDir}}/bin/ffuf"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ffuf", "-V"]
