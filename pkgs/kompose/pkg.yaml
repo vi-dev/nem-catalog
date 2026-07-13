@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: kompose
+description: Convert Docker Compose files to Kubernetes resources
+homepage: https://kompose.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: kubernetes/kompose
+      # The asset is the raw executable itself (no archive); os/arch encoded in
+      # the name so a missing platform 404s.
+      assetName: 'kompose-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    # Aggregate sha256sum-format file listing each asset's exact filename.
+    checksumGitHubAsset: SHA256_SUM
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kompose"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kompose", "version"]
