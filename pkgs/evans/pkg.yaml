@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: evans
+description: Expressive universal gRPC client with a REPL
+homepage: https://github.com/ktr0731/evans
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ktr0731/evans
+      assetName: 'evans_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/evans"
+      to: "{{.InstallDir}}/bin/evans"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/evans", "--version"]
