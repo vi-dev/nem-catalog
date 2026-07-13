@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: kdash
+description: Simple and fast terminal dashboard for Kubernetes
+homepage: https://kdash-rs.github.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: kdash-rs/kdash
+      # Asset naming is irregular: macOS uses macos/macos-arm64, Linux uses a bare
+      # "linux" (x86_64-gnu) but "aarch64-gnu" for arm64. Encode the arch in every
+      # rendered name so an unbuilt platform 404s instead of grabbing a wrong binary.
+      assetName: 'kdash-{{if eq .OS "darwin"}}macos{{if eq .Arch "arm64"}}-arm64{{end}}{{else}}{{if eq .Arch "arm64"}}aarch64-gnu{{else}}linux{{end}}{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'kdash-{{if eq .OS "darwin"}}macos{{if eq .Arch "arm64"}}-arm64{{end}}{{else}}{{if eq .Arch "arm64"}}aarch64-gnu{{else}}linux{{end}}{{end}}.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kdash"
+      to: "{{.InstallDir}}/bin/kdash"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kdash", "--version"]
