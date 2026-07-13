@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: qdrant
+description: High-performance vector similarity search engine and database
+homepage: https://qdrant.tech
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: qdrant/qdrant
+      # Rust target triples: darwin=apple-darwin, linux=unknown-linux-musl
+      # (arm64 linux ships musl only; amd64 linux ships musl too).
+      assetName: 'qdrant-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+  # No checksum file is published; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # Archive holds a single `qdrant` binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/qdrant"
+      to: "{{.InstallDir}}/bin/qdrant"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/qdrant", "--version"]
