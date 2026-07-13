@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: pastel
+description: Generate, analyze, convert and manipulate colors
+homepage: https://github.com/sharkdp/pastel
+license: Apache-2.0 OR MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sharkdp/pastel
+      assetName: 'pastel-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # pastel publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/pastel"
+      to: "{{.InstallDir}}/bin/pastel"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pastel", "--version"]
