@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: kluctl
+description: Declarative, template-based Kubernetes deployment tool
+homepage: https://kluctl.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: kluctl/kluctl
+      # Assets keep the leading v (kluctl_v2.28.2_<os>_<arch>.tar.gz), so use
+      # {{.Version}} rather than trimPrefix; OS/Arch match nem's defaults.
+      assetName: 'kluctl_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'kluctl_{{.Version}}_checksums.txt'
+
+install:
+  # The tarball holds the bare kluctl binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kluctl"
+      to: "{{.InstallDir}}/bin/kluctl"
+
+test:
+  # `version` triggers an online update check; `--version` prints offline.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kluctl", "--version"]
