@@ -1,0 +1,38 @@
+schemaVersion: 1
+name: sbt
+description: Interactive build tool for Scala and Java projects
+homepage: https://scala-sbt.org
+license: Apache-2.0
+
+dependsOn:
+  - temurin21
+
+# sbt ships one platform-independent tgz (the launcher script plus native sbtn
+# clients for every OS bundled inside), so the asset isn't OS/arch-tokenized.
+archive:
+  fetch:
+    github_release:
+      repo: sbt/sbt
+      assetName: 'sbt-{{.Version | trimPrefix "v"}}.tgz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'sbt-{{.Version | trimPrefix "v"}}.tgz.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      # `sbt --version` prints the runner version offline (it does not resolve the
+      # sbt build via Coursier). It shells out to `java` (found on PATH via the
+      # temurin21 dependsOn) and writes under user.home/.sbt; point user.home at a
+      # dir under the writable test cwd so the smoke test works where HOME is unset.
+      cmd: ["{{.InstallDir}}/bin/sbt", "--version"]
+      env:
+        SBT_OPTS: -Duser.home=nem-sbt-home
