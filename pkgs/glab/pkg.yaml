@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: glab
+description: GitLab's official command-line tool
+homepage: https://gitlab.com/gitlab-org/cli
+license: MIT
+
+# glab is developed on GitLab, not GitHub, so its releases are fetched over http
+# and the version is pinned explicitly (no GitHub source to discover versions).
+archive:
+  fetch:
+    http:
+      url: 'https://gitlab.com/gitlab-org/cli/-/releases/{{.Version}}/downloads/glab_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+  verify:
+    checksumURL: 'https://gitlab.com/gitlab-org/cli/-/releases/{{.Version}}/downloads/checksums.txt'
+
+versions:
+  - version: v1.107.0
+
+install:
+  # The tarball has no leading version dir; the binary sits at bin/glab.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/bin/glab"
+      to: "{{.InstallDir}}/bin/glab"
+
+test:
+  # glab creates a config dir on startup; redirect it to a writable path under
+  # the sandbox scratch cwd (HOME is unset there).
+  - run:
+      cmd: ["{{.InstallDir}}/bin/glab", "version"]
+      env:
+        GLAB_CONFIG_DIR: nem-glab-home
