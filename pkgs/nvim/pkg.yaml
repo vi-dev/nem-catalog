@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: nvim
+description: Vim-fork focused on extensibility and usability
+homepage: https://neovim.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: neovim/neovim
+      assetName: 'nvim-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+  # Neovim publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball has a single top-level nvim-<os>-<arch> dir holding bin/, lib/,
+  # and share/; nvim locates its runtime relative to the binary, so install the
+  # whole tree (bin/nvim then sits at {{.InstallDir}}/bin/nvim).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/nvim", "--version"]
