@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: zoxide
+description: Smarter cd command that remembers your most-used directories
+homepage: https://github.com/ajeetdsouza/zoxide
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ajeetdsouza/zoxide
+      # Rust target triples; linux ships musl for every arch, darwin is apple-darwin.
+      assetName: 'zoxide-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+  # zoxide publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/zoxide"
+      to: "{{.InstallDir}}/bin/zoxide"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/zoxide", "--version"]
