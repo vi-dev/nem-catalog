@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: gping
+description: Ping, but with a graph
+homepage: https://github.com/orf/gping
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: orf/gping
+      # macOS assets are gping-macOS-<arch>; Linux assets ship the gnu libc as
+      # gping-Linux-gnu-<arch>. Arch is x86_64/arm64 (arm64 needs no override).
+      assetName: 'gping-{{if eq .OS "darwin"}}macOS{{else}}Linux-gnu{{end}}-{{.Arch}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+      # Tags are gping-vX.Y.Z: capture the semver as the version, then rebuild
+      # the tag to fetch the release.
+      releaseFilter: '^gping-v(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      releaseTemplate: 'gping-v{{.Version}}'
+  # gping publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/gping"
+      to: "{{.InstallDir}}/bin/gping"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gping", "--version"]
