@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: aliyun
+description: Alibaba Cloud CLI
+homepage: https://github.com/aliyun/aliyun-cli
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: aliyun/aliyun-cli
+      # Assets are aliyun-cli-<os>-<ver>-<arch>.tgz; macOS is named 'macosx'.
+      assetName: 'aliyun-cli-{{.OS}}-{{.Version | trimPrefix "v"}}-{{.Arch}}.tgz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macosx
+  verify:
+    checksumGitHubAsset: 'SHASUMS256.txt'
+
+install:
+  # The .tgz holds a single bare 'aliyun' binary at the archive root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/aliyun"
+      to: "{{.InstallDir}}/bin/aliyun"
+
+test:
+  # aliyun writes config under $HOME/.aliyun on startup; point HOME at a
+  # relative dir so the write lands in the sandbox cwd (HOME is unset there).
+  - run:
+      cmd: ["{{.InstallDir}}/bin/aliyun", "version"]
+      env:
+        HOME: nem-aliyun-home
