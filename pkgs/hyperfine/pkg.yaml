@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: hyperfine
+description: Command-line benchmarking tool
+homepage: https://github.com/sharkdp/hyperfine
+license: Apache-2.0 OR MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sharkdp/hyperfine
+      assetName: 'hyperfine-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # hyperfine publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/hyperfine"
+      to: "{{.InstallDir}}/bin/hyperfine"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/hyperfine", "--version"]
