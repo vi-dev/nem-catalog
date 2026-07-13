@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: telegraf
+description: Plugin-driven server agent for collecting and reporting metrics
+homepage: https://www.influxdata.com/time-series-platform/telegraf
+license: MIT
+
+archive:
+  fetch:
+    http:
+      # Telegraf is distributed off-GitHub at dl.influxdata.com; the GitHub
+      # release carries no assets, so discover versions from its tags.
+      url: 'https://dl.influxdata.com/telegraf/releases/telegraf-{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      versionsFrom:
+        github_release:
+          repo: influxdata/telegraf
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    # Each tarball has a per-file .DIGESTS sidecar in sha256sum format naming
+    # the exact asset; nem matches it by the downloaded basename.
+    checksumURL: 'https://dl.influxdata.com/telegraf/releases/telegraf-{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz.DIGESTS'
+
+install:
+  # The tarball roots at telegraf-<ver>/ with the binary nested under usr/bin.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/usr/bin/telegraf"
+      to: "{{.InstallDir}}/bin/telegraf"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/telegraf", "--version"]
