@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: csvlens
+description: Command-line CSV file viewer
+homepage: https://github.com/YS-L/csvlens
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: YS-L/csvlens
+      assetName: 'csvlens-{{.Arch}}-{{.OS}}.tar.xz'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'csvlens-{{.Arch}}-{{.OS}}.tar.xz.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/csvlens"
+      to: "{{.InstallDir}}/bin/csvlens"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/csvlens", "--version"]
