@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: tbls
+description: CI-friendly tool for documenting a database schema
+homepage: https://github.com/k1LoW/tbls
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: k1LoW/tbls
+      # macOS ships .zip, Linux ships .tar.gz; keep os+arch in the name so an
+      # unsupported platform 404s. Assets keep the leading v (tbls_v1.2.3_os_arch).
+      assetName: 'tbls_{{.Version}}_{{.OS}}_{{.Arch}}{{if eq .OS "darwin"}}.zip{{else}}.tar.gz{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    # Per-OS sha256sum-format file listing each asset's exact filename.
+    checksumGitHubAsset: 'checksums-{{.OS}}.txt'
+
+install:
+  # Both archives place the tbls binary at the root, with no leading directory.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tbls"
+      to: "{{.InstallDir}}/bin/tbls"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tbls", "version"]
