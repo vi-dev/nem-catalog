@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: revive
+description: Fast, configurable, extensible drop-in replacement for golint
+homepage: https://revive.run
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: mgechev/revive
+      assetName: 'revive_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The tarball roots the `revive` binary alongside LICENSE/README (no leading
+  # dir), so extract without stripComponents and copy the binary out.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/revive"
+      to: "{{.InstallDir}}/bin/revive"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/revive", "--version"]
