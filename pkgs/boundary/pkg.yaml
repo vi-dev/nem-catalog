@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: boundary
+description: Identity-aware proxy for secure remote access to dynamic infrastructure
+homepage: https://www.boundaryproject.io
+license: BUSL-1.1
+
+archive:
+  fetch:
+    http:
+      url: 'https://releases.hashicorp.com/boundary/{{.Version | trimPrefix "v"}}/boundary_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      versionsFrom:
+        github_release:
+          repo: hashicorp/boundary
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256URL: 'https://releases.hashicorp.com/boundary/{{.Version | trimPrefix "v"}}/boundary_{{.Version | trimPrefix "v"}}_SHA256SUMS'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/boundary"
+      to: "{{.InstallDir}}/bin/boundary"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/boundary", "version"]
