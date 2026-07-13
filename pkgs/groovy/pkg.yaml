@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: groovy
+description: Apache Groovy multi-faceted programming language for the JVM
+homepage: https://groovy.apache.org
+license: Apache-2.0
+
+dependsOn:
+  - temurin21
+
+# Groovy has no GitHub release assets (apache/groovy publishes only tags); the
+# platform-independent binary zip and its .sha256 sidecar come from the Apache
+# archive, so pin the version explicitly (the maven/gradle pattern).
+archive:
+  fetch:
+    http:
+      url: 'https://archive.apache.org/dist/groovy/{{.Version}}/distribution/apache-groovy-binary-{{.Version}}.zip'
+  verify:
+    checksumURL: 'https://archive.apache.org/dist/groovy/{{.Version}}/distribution/apache-groovy-binary-{{.Version}}.zip.sha256'
+
+versions:
+  - version: "5.0.7"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/groovy", "--version"]
