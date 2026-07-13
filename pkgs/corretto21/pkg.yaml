@@ -1,0 +1,40 @@
+schemaVersion: 1
+name: corretto21
+description: Amazon Corretto 21 (LTS) OpenJDK distribution
+homepage: https://aws.amazon.com/corretto/
+license: GPL-2.0-with-classpath-exception
+
+archive:
+  fetch:
+    http:
+      url: 'https://corretto.aws/downloads/resources/{{.Version}}/amazon-corretto-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      templateOverrides:
+        darwin: macosx
+        amd64: x64
+        arm64: aarch64
+
+# Corretto is distributed off-GitHub with no checksum sidecar, so the per-platform
+# SHA-256s published in the release notes are embedded here (matched by asset
+# filename). Bump the version and all four hashes together on a new release.
+versions:
+  - version: "21.0.11.10.1"
+    archive:
+      verify:
+        checksum: |
+          5b4dc8817df13f88f9bfc434e5d018adb535889ff2fe0ccf758bcebcc216f394  amazon-corretto-21.0.11.10.1-linux-x64.tar.gz
+          bc419602d71d819bce147239fbdc48bfbc900fa1d60693537fb9a22bd6b86475  amazon-corretto-21.0.11.10.1-linux-aarch64.tar.gz
+          c6c9ba09ef0ae741aa04cfbd5ef8a6b75dd2d26034a1de0808ee7976a04446ea  amazon-corretto-21.0.11.10.1-macosx-aarch64.tar.gz
+          fb08b09af67ca930d6868405263259d5e43faab89216f6886780e544fd700f00  amazon-corretto-21.0.11.10.1-macosx-x64.tar.gz
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: '{{.Var.src}}{{if eq .OS "darwin"}}/Contents/Home{{end}}'
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/java", "-version"]
