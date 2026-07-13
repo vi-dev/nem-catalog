@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: hurl
+description: Command-line tool that runs HTTP requests defined in a plain-text format
+homepage: https://hurl.dev
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: Orange-OpenSource/hurl
+      assetName: 'hurl-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+      # Tags are bare semver (8.0.1); capture it as the version.
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+  # Each asset ships a per-asset .sha256 sidecar (a single bare digest).
+  verify:
+    checksumGitHubAsset: 'hurl-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz.sha256'
+
+install:
+  # The tarball has a single top-level hurl-<ver>-<triple> dir; hurl sits in bin/.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/hurl"
+      to: "{{.InstallDir}}/bin/hurl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/hurl", "--version"]
