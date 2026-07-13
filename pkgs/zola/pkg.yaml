@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: zola
+description: Fast static site generator in a single binary
+homepage: https://www.getzola.org
+license: EUPL-1.2
+
+archive:
+  fetch:
+    github_release:
+      repo: getzola/zola
+      assetName: 'zola-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # zola publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball holds the zola binary at the root alongside artifacts/ and LICENSE.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/zola"
+      to: "{{.InstallDir}}/bin/zola"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/zola", "--version"]
