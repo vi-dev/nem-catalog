@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: onefetch
+description: Command-line Git repository information tool
+homepage: https://onefetch.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: o2sh/onefetch
+      # onefetch ships one arch-less binary per OS: the linux tarball is x86-64
+      # only, the mac tarball is arm64 only. Only linux/amd64 and darwin/arm64 are
+      # covered; the other two render a non-existent name so they fail loudly with
+      # a fetch 404 rather than silently installing a wrong-architecture binary.
+      assetName: 'onefetch-{{if eq .OS "darwin"}}mac{{if ne .Arch "arm64"}}-unsupported-{{.Arch}}{{end}}{{else}}linux{{if ne .Arch "amd64"}}-unsupported-{{.Arch}}{{end}}{{end}}.tar.gz'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  # onefetch publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/onefetch"
+      to: "{{.InstallDir}}/bin/onefetch"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/onefetch", "--version"]
