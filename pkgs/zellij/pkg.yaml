@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: zellij
+description: Terminal multiplexer and workspace with layouts, panes, and tabs
+homepage: https://zellij.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: zellij-org/zellij
+      # Rust target triple; linux is musl for both arches (unlike ripgrep).
+      assetName: 'zellij-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # The published .sha256sum lists a path-prefixed name and hashes the inner
+  # binary rather than the tarball, so it is unusable; verify against GitHub's
+  # per-asset digest instead.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/zellij"
+      to: "{{.InstallDir}}/bin/zellij"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/zellij", "--version"]
