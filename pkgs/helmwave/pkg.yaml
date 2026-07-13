@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: helmwave
+description: GitOps-style tool for managing Helm releases as a declarative plan
+homepage: https://docs.helmwave.app
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: helmwave/helmwave
+      assetName: 'helmwave_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The tarball roots at the binary alongside README/LICENSE, no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/helmwave"
+      to: "{{.InstallDir}}/bin/helmwave"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/helmwave", "version"]
