@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: oha
+description: HTTP load generator with a TUI, inspired by rakyll/hey
+homepage: https://github.com/hatoo/oha
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: hatoo/oha
+      # Raw per-platform binaries; arch is encoded so a missing platform 404s.
+      assetName: 'oha-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+  # oha publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/oha"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/oha", "--version"]
