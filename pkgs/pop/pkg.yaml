@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: pop
+description: Send emails from your terminal
+homepage: https://github.com/charmbracelet/pop
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: charmbracelet/pop
+      assetName: 'pop_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/pop"
+      to: "{{.InstallDir}}/bin/pop"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pop", "--version"]
