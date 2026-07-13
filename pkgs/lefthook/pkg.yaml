@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: lefthook
+description: Fast and powerful Git hooks manager for polyglot projects
+homepage: https://github.com/evilmartians/lefthook
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: evilmartians/lefthook
+      # Assets ship as raw, uncompressed binaries named by OS/arch, e.g.
+      # lefthook_2.1.10_Linux_x86_64 / lefthook_2.1.10_MacOS_arm64.
+      assetName: 'lefthook_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: MacOS
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'lefthook_checksums.txt'
+
+# The asset is the executable itself, so copy it straight into bin/.
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/lefthook"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/lefthook", "version"]
