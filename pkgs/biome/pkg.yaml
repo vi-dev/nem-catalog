@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: biome
+description: Fast formatter and linter for JavaScript, TypeScript, JSON, and CSS
+homepage: https://biomejs.dev
+license: MIT OR Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: biomejs/biome
+      # Releases are tagged '@biomejs/biome@<ver>'; capture the bare semver as the
+      # version, then rebuild the tag for the release lookup.
+      releaseFilter: '^@biomejs/biome@(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      releaseTemplate: "@biomejs/biome@{{.Version}}"
+      # Assets are raw per-platform binaries: biome-<os>-<arch> (glibc on Linux).
+      assetName: "biome-{{.OS}}-{{.Arch}}"
+      templateOverrides:
+        amd64: x64
+  # Biome publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/biome"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/biome", "--version"]
