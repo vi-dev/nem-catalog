@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: pgweb
+description: Web-based PostgreSQL database browser
+homepage: https://github.com/sosedoff/pgweb
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sosedoff/pgweb
+      assetName: 'pgweb_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # pgweb publishes no checksum file asset (only a checksums block in the release
+  # notes); verify against GitHub's per-asset SHA-256 digest instead.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The zip holds a single binary named pgweb_<os>_<arch> at its root (no leading
+  # dir), so no stripComponents; copy it to the plain `pgweb` command name.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/pgweb_{{.OS}}_{{.Arch}}"
+      to: "{{.InstallDir}}/bin/pgweb"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pgweb", "--version"]
