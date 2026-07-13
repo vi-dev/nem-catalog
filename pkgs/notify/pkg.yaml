@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: notify
+description: Stream command output to Slack, Discord, Telegram and other providers
+homepage: https://github.com/projectdiscovery/notify
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/notify
+      assetName: 'notify_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'notify_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip roots the `notify` binary alongside LICENSE.md/README.md, so extract
+  # without stripComponents and copy the binary out.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/notify"
+      to: "{{.InstallDir}}/bin/notify"
+
+test:
+  - run:
+      # `-version` prints the version and exits; with HOME unset notify creates a
+      # config dir, so point HOME at a relative path under the writable cwd.
+      cmd: ["{{.InstallDir}}/bin/notify", "-version"]
+      env:
+        HOME: nem-notify-home
