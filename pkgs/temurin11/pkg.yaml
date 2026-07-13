@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: temurin11
+description: Eclipse Temurin OpenJDK 11 (LTS) development kit
+homepage: https://adoptium.net
+license: GPL-2.0-with-classpath-exception
+
+archive:
+  fetch:
+    github_release:
+      repo: adoptium/temurin11-binaries
+      assetName: 'OpenJDK11U-jdk_{{.Arch}}_{{.OS}}_hotspot_{{.Version | replace "+" "_"}}.tar.gz'
+      releaseFilter: '^jdk-(\d+\.\d+\.\d+\+\d+(?:\.\d+)?)$'
+      releaseTemplate: 'jdk-{{.Version}}'
+      templateOverrides:
+        darwin: mac
+        amd64: x64
+        arm64: aarch64
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: '{{.Var.src}}{{if eq .OS "darwin"}}/Contents/Home{{end}}'
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/java", "-version"]
