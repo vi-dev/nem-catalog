@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: kubecolor
+description: Colorize kubectl output
+homepage: https://kubecolor.github.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: kubecolor/kubecolor
+      assetName: 'kubecolor_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  # The binary sits at the archive root (no leading version dir), so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubecolor"
+      to: "{{.InstallDir}}/bin/kubecolor"
+
+test:
+  # --kubecolor-version is kubecolor's own flag; unlike `version` it never shells out to kubectl.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubecolor", "--kubecolor-version"]
