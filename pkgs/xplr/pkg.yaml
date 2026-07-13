@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: xplr
+description: Hackable, minimal, fast TUI file explorer
+homepage: https://xplr.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sayanarijit/xplr
+      # The x86_64 assets carry no arch token (xplr-linux / xplr-macos); the
+      # arm64 assets add an -aarch64 suffix. Keep the arch encoded so an arm64
+      # host never fetches the x86_64-only unsuffixed asset (wrong-arch trap).
+      assetName: 'xplr-{{if eq .OS "darwin"}}macos{{else}}linux{{end}}{{if eq .Arch "arm64"}}-aarch64{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # Each asset ships a single-line <asset>.sha256 sidecar naming the exact tarball.
+  verify:
+    checksumGitHubAsset: 'xplr-{{if eq .OS "darwin"}}macos{{else}}linux{{end}}{{if eq .Arch "arm64"}}-aarch64{{end}}.sha256'
+
+install:
+  # The tarball roots at the bare `xplr` binary (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/xplr"
+      to: "{{.InstallDir}}/bin/xplr"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/xplr", "--version"]
