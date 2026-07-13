@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: vultr-cli
+description: Official command line tool for Vultr services
+homepage: https://github.com/vultr/vultr-cli
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: vultr/vultr-cli
+      # macOS assets are spelled `macOs`; linux/amd64/arm64 use the defaults.
+      assetName: 'vultr-cli_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOs
+  verify:
+    checksumGitHubAsset: 'vultr-cli_{{.Version}}_checksums.txt'
+
+install:
+  # The tarball holds the bare `vultr-cli` binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/vultr-cli"
+      to: "{{.InstallDir}}/bin/vultr-cli"
+
+test:
+  - run:
+      # `version` reads $HOME/.vultr-cli.yaml (warns, non-fatal, when absent) but
+      # aborts if HOME is unset, so point it at a relative dir under the test cwd.
+      cmd: ["{{.InstallDir}}/bin/vultr-cli", "version"]
+      env:
+        HOME: nem-vultr-home
