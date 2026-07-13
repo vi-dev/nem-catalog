@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: tldr
+description: Fast tldr client for simplified, community-driven man pages
+homepage: https://github.com/tealdeer-rs/tealdeer
+license: MIT OR Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: tealdeer-rs/tealdeer
+      # Assets are raw binaries; linux builds carry a -musl libc suffix that
+      # macOS builds don't, so branch on the post-override OS token.
+      assetName: 'tealdeer-{{.OS}}-{{.Arch}}{{if eq .OS "linux"}}-musl{{end}}'
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    sha256GitHubAsset: 'tealdeer-{{.OS}}-{{.Arch}}{{if eq .OS "linux"}}-musl{{end}}.sha256'
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/tldr"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tldr", "--version"]
