@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: mockery
+description: Mock code generator for Go interfaces
+homepage: https://github.com/vektra/mockery
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: vektra/mockery
+      assetName: 'mockery_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: checksum.txt
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/mockery"
+      to: "{{.InstallDir}}/bin/mockery"
+
+test:
+  - run:
+      # mockery rejects --version; the version subcommand prints the version.
+      cmd: ["{{.InstallDir}}/bin/mockery", "version"]
