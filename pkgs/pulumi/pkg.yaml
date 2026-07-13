@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: pulumi
+description: Infrastructure as code tool for provisioning cloud resources in general-purpose languages
+homepage: https://www.pulumi.com
+license: Apache-2.0
+
+# The pulumi CLI locates its bundled language hosts and resource plugins
+# (pulumi-language-*, pulumi-resource-*) as siblings of the pulumi binary, so
+# the whole pulumi/ tree is installed together and advertised as the bin dir.
+binPaths:
+  - pulumi
+
+archive:
+  fetch:
+    github_release:
+      repo: pulumi/pulumi
+      assetName: 'pulumi-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x64
+  verify:
+    checksumGitHubAsset: 'pulumi-{{.Version | trimPrefix "v"}}-checksums.txt'
+
+install:
+  # The tarball roots at pulumi/ holding the pulumi binary next to its language
+  # and resource plugins; copy that whole tree so the CLI finds its siblings.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/pulumi"
+      to: "{{.InstallDir}}/pulumi"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/pulumi/pulumi", "version"]
