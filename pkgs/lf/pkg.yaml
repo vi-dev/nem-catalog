@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: lf
+description: Terminal file manager written in Go
+homepage: https://github.com/gokcehan/lf
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: gokcehan/lf
+      # Assets carry no version token: lf-<os>-<arch>.tar.gz.
+      assetName: 'lf-{{.OS}}-{{.Arch}}.tar.gz'
+      # lf versions releases as a monotonic counter rNN (r41, r40, ...). Capture
+      # the number and expose it as semver so nem orders releases numerically:
+      # string-sorting the raw rNN tags wrongly ranks r9 above r41. releaseTemplate
+      # maps the semver back to the real rNN tag for the fetch.
+      releaseFilter: '^r(\d+)$'
+      versionTemplate: "{{.Capture}}.0.0"
+      releaseTemplate: 'r{{.Version | trimSuffix ".0.0"}}'
+  # lf publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball holds the lf binary at its root, no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/lf"
+      to: "{{.InstallDir}}/bin/lf"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/lf", "--version"]
