@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: cmake
+description: Cross-platform build system generator
+homepage: https://cmake.org
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: Kitware/CMake
+      # Linux ships per-arch tarballs; macOS ships one universal (x86_64+arm64)
+      # tarball that runs on both darwin arches, so it isn't arch-tokenized.
+      assetName: 'cmake-{{.Version | trimPrefix "v"}}-{{if eq .OS "darwin"}}macos-universal{{else}}linux-{{.Arch}}{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    checksumGitHubAsset: 'cmake-{{.Version | trimPrefix "v"}}-SHA-256.txt'
+
+install:
+  # Linux tarball roots at bin/ + share/; macOS nests the same tree under
+  # CMake.app/Contents. Copy the whole tree so cmake finds its share/cmake-* modules.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: '{{.Var.src}}{{if eq .OS "darwin"}}/CMake.app/Contents{{end}}'
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cmake", "--version"]
