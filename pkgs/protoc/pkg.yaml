@@ -1,0 +1,37 @@
+schemaVersion: 1
+name: protoc
+description: Protocol Buffers compiler
+homepage: https://protobuf.dev
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: protocolbuffers/protobuf
+      # Tags are two-component vMAJOR.MINOR (e.g. v35.1); assets encode arch as
+      # x86_64/aarch_64 and macOS as osx (per-arch, not universal, so the arch is
+      # always pinned and a missing platform 404s).
+      assetName: 'protoc-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+)$'
+      templateOverrides:
+        darwin: osx
+        amd64: x86_64
+        arm64: aarch_64
+  # protobuf publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The zip roots at bin/protoc + include/ (the well-known .proto types) with no
+  # leading dir, so copy the whole tree — protoc resolves its bundled imports
+  # relative to the binary at ../include.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/protoc", "--version"]
