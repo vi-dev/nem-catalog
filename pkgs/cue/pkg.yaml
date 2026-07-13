@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: cue
+description: Validate and define text-based and dynamic configuration with the CUE language
+homepage: https://cuelang.org
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: cue-lang/cue
+      assetName: 'cue_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # cue publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball holds the binary at its root alongside docs, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/cue"
+      to: "{{.InstallDir}}/bin/cue"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cue", "version"]
