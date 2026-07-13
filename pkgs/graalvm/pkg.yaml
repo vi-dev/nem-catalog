@@ -1,0 +1,37 @@
+schemaVersion: 1
+name: graalvm
+description: GraalVM Community Edition OpenJDK 21 (LTS) development kit
+homepage: https://www.graalvm.org
+license: GPL-2.0-with-classpath-exception
+
+archive:
+  fetch:
+    github_release:
+      repo: graalvm/graalvm-ce-builds
+      # Tag is jdk-<ver>; the asset embeds the bare version. macOS is 'macos',
+      # amd64 is 'x64', arm64 is 'aarch64'. Pinned to the JDK 21 LTS line.
+      assetName: 'graalvm-community-jdk-{{.Version}}_{{.OS}}-{{.Arch}}_bin.tar.gz'
+      releaseFilter: '^jdk-(21\.\d+\.\d+)$'
+      releaseTemplate: 'jdk-{{.Version}}'
+      templateOverrides:
+        darwin: macos
+        amd64: x64
+        arm64: aarch64
+  # These assets predate GitHub's per-asset digest; each ships a .sha256 sidecar.
+  verify:
+    checksumGitHubAsset: 'graalvm-community-jdk-{{.Version}}_{{.OS}}-{{.Arch}}_bin.tar.gz.sha256'
+
+install:
+  # Single top-level dir; on macOS the JDK home nests under Contents/Home
+  # (like Temurin), on Linux it is the dir root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: '{{.Var.src}}{{if eq .OS "darwin"}}/Contents/Home{{end}}'
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/java", "-version"]
