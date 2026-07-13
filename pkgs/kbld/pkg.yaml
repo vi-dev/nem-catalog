@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: kbld
+description: Build and deploy Kubernetes configuration with immutable image references
+homepage: https://carvel.dev/kbld
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: carvel-dev/kbld
+      # Assets are raw per-platform binaries named kbld-<os>-<arch>.
+      assetName: 'kbld-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The asset is the executable itself; copy it straight to bin/kbld.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kbld"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kbld", "version"]
