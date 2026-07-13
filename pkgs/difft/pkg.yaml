@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: difft
+description: Structural diff tool that understands syntax
+homepage: https://difftastic.wilfred.me.uk
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: Wilfred/difftastic
+      # Rust target triples; all Linux builds are unknown-linux-gnu.
+      assetName: 'difft-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  # difftastic publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball holds difft at the root (no leading dir), so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/difft"
+      to: "{{.InstallDir}}/bin/difft"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/difft", "--version"]
