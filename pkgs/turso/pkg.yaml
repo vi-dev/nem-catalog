@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: turso
+description: Command line interface to the Turso Cloud
+homepage: https://turso.tech
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: tursodatabase/turso-cli
+      assetName: 'turso-cli_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The binary sits at the archive root (alongside a completions/ dir), so no
+  # stripComponents; copy just the executable.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/turso"
+      to: "{{.InstallDir}}/bin/turso"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/turso", "--version"]
