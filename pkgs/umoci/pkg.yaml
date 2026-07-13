@@ -1,0 +1,55 @@
+schemaVersion: 1
+name: umoci
+description: Modify Open Container images
+homepage: https://github.com/opencontainers/umoci
+license: Apache-2.0
+
+# Upstream ships only linux binaries (umoci.linux.<arch>) — no darwin build — so
+# there is no prebuilt asset to install-gate on macOS. umoci is pure Go, though,
+# and builds static with CGO off (upstream's own `umoci.static` target), so build
+# it from the pinned tag's vendored source instead.
+dependsOn:
+  - go
+
+buildFromSource: true
+
+source:
+  fetch:
+    github_tag:
+      repo: opencontainers/umoci
+      tagFilter: '^(v\d+\.\d+\.\d+)$'
+
+versions:
+  - version: v0.6.0
+    source:
+      verify:
+        checksum: 400a26c5f7ac06e40af907255e0e23407237d950e78e8d7c9043a1ad46da9ae5
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}{{.InstallDir}}/bin"
+  - mkdir:
+      path: "{{.StagingDir}}/.gotmp"
+  # Pure-Go static build: no cgo, no system libs. The version is //go:embed VERSION
+  # in the tree, so a plain build bakes it without ldflags. Vendored deps keep the
+  # sandboxed build offline; caches/tmp live under staging and are discarded.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        GOCACHE: "{{.StagingDir}}/.gocache"
+        GOTMPDIR: "{{.StagingDir}}/.gotmp"
+        GOPATH: "{{.StagingDir}}/.gopath"
+        TMPDIR: "{{.StagingDir}}/.gotmp"
+        CGO_ENABLED: "0"
+        GOTOOLCHAIN: local
+        GOFLAGS: -mod=vendor
+      script: |
+        go build -o "$NEM_STAGING_DIR$NEM_INSTALL_DIR/bin/umoci" ./cmd/umoci
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/umoci", "--version"]
