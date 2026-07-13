@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: chezmoi
+description: Manage your dotfiles across multiple machines securely
+homepage: https://www.chezmoi.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: twpayne/chezmoi
+      assetName: 'chezmoi_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'chezmoi_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The binary sits at the archive root alongside LICENSE/README/completions.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/chezmoi"
+      to: "{{.InstallDir}}/bin/chezmoi"
+
+test:
+  # chezmoi aborts if $HOME is undefined, so point it at a writable relative dir
+  # under the sandbox scratch cwd.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/chezmoi", "--version"]
+      env:
+        HOME: nem-chezmoi-home
