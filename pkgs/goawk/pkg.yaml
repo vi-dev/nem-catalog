@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: goawk
+description: POSIX-compliant AWK interpreter written in Go, with CSV support
+homepage: https://github.com/benhoyt/goawk
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: benhoyt/goawk
+      # Version keeps its leading v (asset is goawk_v1.31.0_<os>_<arch>.tar.gz).
+      assetName: 'goawk_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # goawk publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # Archive roots at the binary plus README/LICENSE/docs (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/goawk"
+      to: "{{.InstallDir}}/bin/goawk"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/goawk", "-version"]
