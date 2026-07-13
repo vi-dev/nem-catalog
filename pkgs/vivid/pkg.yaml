@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: vivid
+description: Generator for LS_COLORS with support for multiple color themes
+homepage: https://github.com/sharkdp/vivid
+license: Apache-2.0 OR MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sharkdp/vivid
+      assetName: 'vivid-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # vivid publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/vivid"
+      to: "{{.InstallDir}}/bin/vivid"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/vivid", "--version"]
