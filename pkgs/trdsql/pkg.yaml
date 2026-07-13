@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: trdsql
+description: CLI tool that runs SQL queries against CSV, LTSV, JSON, and TBLN files
+homepage: https://github.com/noborus/trdsql
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: noborus/trdsql
+      # Go-style os/arch tokens match nem's defaults; the version keeps its v.
+      assetName: 'trdsql_{{.Version}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # trdsql publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # Archive roots at trdsql_<version>_<os>_<arch>/ holding the binary + docs.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/trdsql"
+      to: "{{.InstallDir}}/bin/trdsql"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/trdsql", "--version"]
