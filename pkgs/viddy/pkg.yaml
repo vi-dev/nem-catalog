@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: viddy
+description: Modern watch command with time machine and pager
+homepage: https://github.com/sachaos/viddy
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sachaos/viddy
+      assetName: 'viddy-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+  # Each asset ships a single-line <asset>.sha256 sidecar naming the exact tarball.
+  verify:
+    checksumGitHubAsset: 'viddy-{{.Version}}-{{.OS}}-{{.Arch}}.sha256'
+
+install:
+  # The tarball contains the bare `viddy` binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/viddy"
+      to: "{{.InstallDir}}/bin/viddy"
+
+test:
+  # viddy creates its config/data dir under $HOME on startup; the sandbox unsets
+  # HOME, so point it at a writable path relative to the scratch cwd.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/viddy", "--version"]
+      env:
+        HOME: nem-viddy-home
