@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: checkmake
+description: Experimental linter and analyzer for Makefiles
+homepage: https://github.com/checkmake/checkmake
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      # mrtazz/checkmake redirects to the checkmake org; use the canonical repo.
+      repo: checkmake/checkmake
+      # Assets are raw per-platform binaries named with the v-prefixed version.
+      assetName: 'checkmake-{{.Version}}.{{.OS}}.{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # checksums.txt lists path-prefixed names (.release_artifacts/…) that won't
+  # match the bare asset name, so verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself; copy it straight to bin/checkmake.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/checkmake"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/checkmake", "--version"]
