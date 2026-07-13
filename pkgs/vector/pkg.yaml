@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: vector
+description: High-performance observability data pipeline for logs, metrics, and traces
+homepage: https://vector.dev
+license: MPL-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: vectordotdev/vector
+      # The repo also tags a separate `vdev` tool (vdev-vX.Y.Z); this filter
+      # captures only Vector's own vX.Y.Z tags and excludes pre-releases.
+      # macOS ships arm64 only (no x86_64-apple-darwin), so darwin/amd64 renders
+      # a name that 404s rather than installing a wrong-arch binary. Linux names
+      # arm64 as aarch64 while macOS names it arm64, so the arch is branched on.
+      assetName: 'vector-{{.Version | trimPrefix "v"}}-{{if eq .OS "darwin"}}{{.Arch}}-apple-darwin{{else}}{{if eq .Arch "arm64"}}aarch64{{else}}{{.Arch}}{{end}}-unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'vector-{{.Version | trimPrefix "v"}}-SHA256SUMS'
+
+# The tarball nests everything under vector-<target>/; strip that leading dir and
+# the binary sits at bin/vector.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/vector"
+      to: "{{.InstallDir}}/bin/vector"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/vector", "--version"]
