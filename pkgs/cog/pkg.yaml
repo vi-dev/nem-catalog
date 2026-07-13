@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: cog
+description: Conventional commits toolbox for changelogs, versioning, and commit checks
+homepage: https://github.com/cocogitto/cocogitto
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: cocogitto/cocogitto
+      # Rust target triples: macOS is apple-darwin; on linux the libc varies by
+      # arch — x86_64 ships musl, aarch64 ships gnu (Rule 3b).
+      assetName: 'cocogitto-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}{{if eq .Arch "x86_64"}}unknown-linux-musl{{else}}unknown-linux-gnu{{end}}{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  # cocogitto publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/cog"
+      to: "{{.InstallDir}}/bin/cog"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cog", "--version"]
