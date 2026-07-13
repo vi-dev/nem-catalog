@@ -1,0 +1,41 @@
+schemaVersion: 1
+name: podman
+description: Tool for managing OCI containers and pods
+homepage: https://podman.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: containers/podman
+      # macOS ships the remote client as a release zip; Linux ships a static
+      # remote-client tarball. No darwin/amd64 build is published (arm64 only),
+      # so that name simply won't resolve there.
+      assetName: 'podman-remote-{{if eq .OS "darwin"}}release-darwin_{{.Arch}}.zip{{else}}static-linux_{{.Arch}}.tar.gz{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # podman publishes no aggregate checksum file; verify against GitHub's digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The two archives have different internal layouts: the macOS zip nests the
+  # binary under podman-<ver>/usr/bin/podman; the Linux tarball puts a
+  # platform-named binary at bin/.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: '{{.Var.src}}/{{if eq .OS "darwin"}}podman-{{.Version | trimPrefix "v"}}/usr/bin/podman{{else}}bin/podman-remote-static-linux_{{.Arch}}{{end}}'
+      to: "{{.InstallDir}}/bin/podman"
+
+test:
+  - run:
+      # Even `podman --version` eagerly resolves the rootless runtime dir. With no
+      # usable XDG_RUNTIME_DIR it falls back to /run/user/$UID and tries to mkdir a
+      # subdir there — which fails in the write-confined smoke-test sandbox, where
+      # that host path is mounted read-only. Point it at a private 0700 dir under
+      # the writable cwd so podman writes there instead.
+      script: |
+        export XDG_RUNTIME_DIR="$PWD/nem-podman-run"
+        mkdir -p "$XDG_RUNTIME_DIR" && chmod 700 "$XDG_RUNTIME_DIR"
+        "$NEM_INSTALL_DIR/bin/podman" --version
