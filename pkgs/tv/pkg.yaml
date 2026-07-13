@@ -1,0 +1,42 @@
+schemaVersion: 1
+name: tv
+description: Cross-shell fuzzy finder for files, text, and custom data sources
+homepage: https://github.com/alexpasmantier/television
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: alexpasmantier/television
+      # Rust target-triple assets: arch + OS suffix map cleanly to overrides.
+      assetName: 'tv-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+      # Tags are bare semver (0.15.9); older v0.4.x tags are excluded by requiring no leading v.
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+  # Each tarball ships a single-line <asset>.sha256 sidecar (SHA-256).
+  verify:
+    checksumGitHubAsset: 'tv-{{.Version}}-{{.Arch}}-{{.OS}}.sha256'
+
+install:
+  # Tarball roots at tv-<ver>-<triple>/ holding the tv binary alongside docs.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/tv"
+      to: "{{.InstallDir}}/bin/tv"
+
+test:
+  - run:
+      # tv writes a television.log into its data dir on every startup; with HOME
+      # unset that resolves outside the write-confined sandbox. Point HOME at a
+      # relative dir so the data dir lands under the scratch cwd.
+      cmd: ["{{.InstallDir}}/bin/tv", "--version"]
+      env:
+        HOME: nem-home
