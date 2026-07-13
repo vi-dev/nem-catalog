@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: railway
+description: Railway CLI for deploying and managing apps on Railway
+homepage: https://railway.com
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: railwayapp/cli
+      # Rust target-triple assets; linux ships musl for both arches, macOS ships
+      # per-arch apple-darwin tarballs.
+      assetName: 'railway-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+        amd64: x86_64
+        arm64: aarch64
+  # railway publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball contains just the raw railway binary at its root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/railway"
+      to: "{{.InstallDir}}/bin/railway"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/railway", "--version"]
