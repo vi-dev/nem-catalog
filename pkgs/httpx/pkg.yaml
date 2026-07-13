@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: httpx
+description: Fast and multi-purpose HTTP toolkit for probing web servers
+homepage: https://github.com/projectdiscovery/httpx
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/httpx
+      assetName: 'httpx_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'httpx_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip holds the raw binary alongside LICENSE.md/README.md at its root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/httpx"
+      to: "{{.InstallDir}}/bin/httpx"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/httpx", "-version"]
