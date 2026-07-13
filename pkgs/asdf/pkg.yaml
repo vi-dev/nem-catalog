@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: asdf
+description: Multiple runtime version manager
+homepage: https://asdf-vm.com
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: asdf-vm/asdf
+      assetName: 'asdf-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # asdf ships only .md5 sidecars (outside nem's SHA-2 family); verify against
+  # GitHub's per-asset SHA-256 digest instead.
+  verify:
+    githubAssetDigest: true
+
+# The tarball holds a single `asdf` binary at its root (no leading dir).
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/asdf"
+      to: "{{.InstallDir}}/bin/asdf"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/asdf", "version"]
