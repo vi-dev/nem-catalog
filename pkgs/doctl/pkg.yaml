@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: doctl
+description: Official command-line interface for the DigitalOcean API
+homepage: https://github.com/digitalocean/doctl
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: digitalocean/doctl
+      assetName: 'doctl-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'doctl-{{.Version | trimPrefix "v"}}-checksums.sha256'
+
+install:
+  # The tarball contains just the `doctl` binary at its root — no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/doctl"
+      to: "{{.InstallDir}}/bin/doctl"
+
+test:
+  - run:
+      # `doctl version` aborts with "$HOME is not defined" when HOME is unset;
+      # point it at a relative dir under the sandbox cwd.
+      cmd: ["{{.InstallDir}}/bin/doctl", "version"]
+      env:
+        HOME: doctl-home
