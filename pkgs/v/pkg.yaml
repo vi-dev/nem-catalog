@@ -1,0 +1,44 @@
+schemaVersion: 1
+name: v
+description: V programming language compiler and toolchain
+homepage: https://vlang.io
+license: MIT
+
+# The `v` binary lives inside the extracted tree beside vlib/, which V locates as
+# a sibling of its own (symlink-resolved) executable. Advertise that dir on PATH
+# instead of a bare bin/, so `v` resolves its standard library when invoked.
+binPaths:
+  - v
+
+archive:
+  fetch:
+    github_release:
+      repo: vlang/v
+      # macOS ships both arches as v_macos_<arch>.zip; on Linux amd64 is the
+      # arch-less v_linux.zip while arm64 is v_linux_arm64.zip. The arch stays in
+      # every rendered name, so any platform without a build 404s rather than
+      # silently installing a mismatched-arch binary.
+      assetName: 'v_{{if eq .OS "darwin"}}macos_{{if eq .Arch "arm64"}}arm64{{else}}x86_64{{end}}{{else}}linux{{if eq .Arch "arm64"}}_arm64{{end}}{{end}}.zip'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+  # V publishes no checksum file; verify against GitHub's per-asset SHA-256 digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The zip roots at v/ holding the prebuilt `v` binary next to vlib/, thirdparty/
+  # and cmd/. Install the whole tree so V finds its standard library, keeping the
+  # binary and vlib/ as siblings under the one dir binPaths puts on PATH.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}/v"
+
+test:
+  - run:
+      # V creates $HOME/.vmodules on startup; redirect HOME under the writable cwd.
+      cmd: ["{{.InstallDir}}/v/v", "version"]
+      env:
+        HOME: nem-v-home
