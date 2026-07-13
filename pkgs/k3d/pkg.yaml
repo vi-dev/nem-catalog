@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: k3d
+description: Little helper to run k3s (lightweight Kubernetes) in Docker
+homepage: https://k3d.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: k3d-io/k3d
+      # Assets are raw per-platform binaries named k3d-<os>-<arch>, matching the
+      # default .OS/.Arch tokens (darwin/linux, amd64/arm64) with no overrides.
+      assetName: 'k3d-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # checksums.txt lists path-prefixed names (_dist/k3d-<os>-<arch>) that won't
+  # match the bare asset, so verify against GitHub's per-asset digest instead.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself; copy it straight in (nem sets +x).
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/k3d"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/k3d", "version"]
