@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: gost
+description: GO Simple Tunnel - a simple tunnel written in golang
+homepage: https://gost.run
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: go-gost/gost
+      assetName: 'gost_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  # The tarball is flat (LICENSE, README*, gost at the root) — no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/gost"
+      to: "{{.InstallDir}}/bin/gost"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gost", "-V"]
