@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: prometheus
+description: Monitoring system and time series database
+homepage: https://prometheus.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: prometheus/prometheus
+      # Assets separate the version from the platform with a dot: prometheus-<ver>.<os>-<arch>.tar.gz
+      assetName: 'prometheus-{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'sha256sums.txt'
+
+install:
+  # Tarball roots at prometheus-<ver>.<os>-<arch>/ holding prometheus + promtool.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/prometheus"
+      to: "{{.InstallDir}}/bin/prometheus"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/prometheus", "--version"]
