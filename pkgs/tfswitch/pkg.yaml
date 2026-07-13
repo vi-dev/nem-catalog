@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: tfswitch
+description: Command line tool to switch between different versions of Terraform
+homepage: https://tfswitch.warrensbox.com
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: warrensbox/terraform-switcher
+      # Assets are named terraform-switcher_<vVer>_<os>_<arch>.tar.gz with the
+      # leading v kept, so template {{.Version}} directly (no trimPrefix).
+      assetName: 'terraform-switcher_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'terraform-switcher_{{.Version}}_checksums.txt'
+
+install:
+  # tfswitch sits at the archive root alongside docs and shell completions.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tfswitch"
+      to: "{{.InstallDir}}/bin/tfswitch"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tfswitch", "--version"]
