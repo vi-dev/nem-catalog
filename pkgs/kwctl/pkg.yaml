@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: kwctl
+description: CLI for managing Kubewarden policies
+homepage: https://github.com/kubewarden/kwctl
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: kubewarden/kwctl
+      assetName: 'kwctl-{{.OS}}-{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # No checksum file is published; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The zip roots at the per-platform binary kwctl-<os>-<arch> plus a sigstore
+  # bundle; copy the binary to the plain bin/kwctl users invoke.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      # templateOverrides don't reach install steps, so remap the arch inline to
+      # match the asset's aarch64/x86_64 naming.
+      from: '{{.Var.src}}/kwctl-{{.OS}}-{{.Arch | replace "amd64" "x86_64" | replace "arm64" "aarch64"}}'
+      to: "{{.InstallDir}}/bin/kwctl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kwctl", "--version"]
