@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: xh
+description: Friendly and fast tool for sending HTTP requests
+homepage: https://github.com/ducaale/xh
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ducaale/xh
+      # macOS ships apple-darwin; Linux ships musl for both arches.
+      assetName: 'xh-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # xh publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/xh"
+      to: "{{.InstallDir}}/bin/xh"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/xh", "--version"]
