@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: migrate
+description: Database migrations CLI written in Go
+homepage: https://github.com/golang-migrate/migrate
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: golang-migrate/migrate
+      assetName: 'migrate.{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'sha256sum.txt'
+
+install:
+  # The tarball holds migrate, LICENSE, and README.md at the root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/migrate"
+      to: "{{.InstallDir}}/bin/migrate"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/migrate", "-version"]
