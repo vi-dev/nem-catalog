@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: mdbook
+description: Create books from Markdown files, like Gitbook but in Rust
+homepage: https://rust-lang.github.io/mdBook/
+license: MPL-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: rust-lang/mdBook
+      # Linux ships only musl (arm64 has no gnu build); macOS is apple-darwin.
+      assetName: 'mdbook-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # mdBook publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The tarball is just the raw mdbook binary at its root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/mdbook"
+      to: "{{.InstallDir}}/bin/mdbook"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/mdbook", "--version"]
