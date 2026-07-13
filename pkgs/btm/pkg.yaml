@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: btm
+description: Cross-platform graphical process/system monitor
+homepage: https://github.com/ClementTsang/bottom
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ClementTsang/bottom
+      # Assets carry no version and use Rust target triples: override the arch,
+      # branch the OS (darwin -> apple-darwin, linux -> unknown-linux-gnu).
+      assetName: 'bottom_{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      # Tags are non-v semver (0.14.3); nightlies (nightly-*) are excluded.
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  # bottom publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # btm sits at the archive root (alongside completion/); no leading dir to strip.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/btm"
+      to: "{{.InstallDir}}/bin/btm"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/btm", "--version"]
