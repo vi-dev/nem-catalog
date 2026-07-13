@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: buf
+description: Protobuf toolchain for linting, breaking-change detection, and codegen
+homepage: https://buf.build
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: bufbuild/buf
+      # The asset is the raw binary. Both OS and arch tokens are non-default and
+      # the arm64 spelling differs by OS (Darwin: arm64, Linux: aarch64), so
+      # branch on .OS/.Arch rather than using templateOverrides.
+      assetName: 'buf-{{if eq .OS "darwin"}}Darwin{{else}}Linux{{end}}-{{if eq .Arch "amd64"}}x86_64{{else}}{{if eq .OS "darwin"}}arm64{{else}}aarch64{{end}}{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: sha256.txt
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/buf"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/buf", "--version"]
