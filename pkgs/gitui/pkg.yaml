@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: gitui
+description: Blazing fast terminal UI for git
+homepage: https://github.com/gitui-org/gitui
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: gitui-org/gitui
+      # Mac assets have no clean arch token: arm64 is gitui-mac.tar.gz, Intel is
+      # gitui-mac-x86.tar.gz; Linux uses raw Rust arch names. Branch on OS/Arch.
+      assetName: 'gitui-{{if eq .OS "darwin"}}mac{{if eq .Arch "amd64"}}-x86{{end}}{{else}}linux-{{if eq .Arch "amd64"}}x86_64{{else}}aarch64{{end}}{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # gitui publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/gitui"
+      to: "{{.InstallDir}}/bin/gitui"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gitui", "--version"]
