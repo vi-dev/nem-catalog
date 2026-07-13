@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: exo
+description: Command-line interface for the Exoscale cloud platform
+homepage: https://github.com/exoscale/cli
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: exoscale/cli
+      # Linux ships per-arch tarballs; macOS ships one universal (amd64+arm64)
+      # "darwin_all" tarball that runs on both darwin arches.
+      assetName: 'exoscale-cli_{{.Version | trimPrefix "v"}}_{{if eq .OS "darwin"}}darwin_all{{else}}{{.OS}}_{{.Arch}}{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'exoscale-cli_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The tarball roots the binary as ./exo alongside LICENSE, contrib/, manpage/.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/exo"
+      to: "{{.InstallDir}}/bin/exo"
+
+test:
+  # exo refuses to run without HOME (it resolves its config dir from it), so
+  # point HOME at a writable path under the sandbox cwd for the smoke test.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/exo", "version"]
+      env:
+        HOME: exo-home
