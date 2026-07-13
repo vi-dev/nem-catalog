@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: jj
+description: Git-compatible VCS that is both simple and powerful
+homepage: https://jj-vcs.dev
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: jj-vcs/jj
+      # Rust target triples: both Linux arches ship musl, both macOS arches apple-darwin.
+      assetName: 'jj-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # jj publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The binary sits at the archive root alongside LICENSE/README, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/jj"
+      to: "{{.InstallDir}}/bin/jj"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/jj", "--version"]
