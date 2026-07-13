@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: kor
+description: Kubernetes Orphaned Resources finder that discovers unused cluster resources
+homepage: https://github.com/yonahd/kor
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: yonahd/kor
+      assetName: 'kor_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'kor_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The tarball roots at LICENSE + README.md + the `kor` binary (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kor"
+      to: "{{.InstallDir}}/bin/kor"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kor", "version"]
