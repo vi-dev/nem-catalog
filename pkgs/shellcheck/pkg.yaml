@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: shellcheck
+description: Static analysis tool for shell scripts
+homepage: https://www.shellcheck.net
+license: GPL-3.0-or-later
+
+archive:
+  fetch:
+    github_release:
+      repo: koalaman/shellcheck
+      assetName: 'shellcheck-{{.Version}}.{{.OS}}.{{.Arch}}.tar.xz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # shellcheck publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/shellcheck"
+      to: "{{.InstallDir}}/bin/shellcheck"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/shellcheck", "--version"]
