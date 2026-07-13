@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: curlie
+description: Frontend to curl with the ease of use of httpie
+homepage: https://rs.github.io/curlie
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: rs/curlie
+      assetName: 'curlie_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'curlie_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The tarball roots at the binary itself (LICENSE, README.md, curlie), so no
+  # stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/curlie"
+      to: "{{.InstallDir}}/bin/curlie"
+
+test:
+  # curlie delegates to the system curl (a base tool on PATH); --version prints
+  # the underlying curl version and exits 0.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/curlie", "--version"]
