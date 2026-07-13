@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: kubie
+description: A more powerful alternative to kubectx and kubens
+homepage: https://github.com/kubie-org/kubie
+license: Zlib
+
+archive:
+  fetch:
+    github_release:
+      repo: sbstp/kubie
+      # Assets are raw per-platform binaries named kubie-<os>-<arch>; the default
+      # linux/darwin + amd64/arm64 tokens match all four builds with no overrides.
+      assetName: 'kubie-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # kubie publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself; copy it straight to bin/kubie.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kubie"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubie", "--version"]
