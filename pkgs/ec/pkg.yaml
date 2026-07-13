@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: ec
+description: Tool to verify that files respect .editorconfig rules
+homepage: https://github.com/editorconfig-checker/editorconfig-checker
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: editorconfig-checker/editorconfig-checker
+      assetName: 'ec-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Archive roots at bin/ + docs; the binary is named per-platform (ec-<os>-<arch>),
+  # so copy it to the plain `ec` users invoke.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/bin/ec-{{.OS}}-{{.Arch}}"
+      to: "{{.InstallDir}}/bin/ec"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/ec", "--version"]
