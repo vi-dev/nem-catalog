@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: oh-my-posh
+description: Cross-platform, customisable prompt renderer for any shell
+homepage: https://ohmyposh.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: jandedobbeleer/oh-my-posh
+      # Raw per-platform binaries named posh-<os>-<arch>; .OS/.Arch match as-is.
+      assetName: 'posh-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  # The asset is the executable itself; copy it straight into bin/.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/oh-my-posh"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/oh-my-posh", "--version"]
