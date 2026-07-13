@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: sk
+description: Fuzzy finder for the command line
+homepage: https://github.com/skim-rs/skim
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: skim-rs/skim
+      assetName: 'skim-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.xz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    checksumGitHubAsset: 'sha256.sum'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/sk"
+      to: "{{.InstallDir}}/bin/sk"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/sk", "--version"]
