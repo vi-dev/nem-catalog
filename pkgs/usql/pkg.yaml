@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: usql
+description: Universal command-line interface for SQL databases
+homepage: https://github.com/xo/usql
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: xo/usql
+      # Assets are bzip2-compressed tarballs (usql-<ver>-<os>-<arch>.tar.bz2);
+      # the arch is encoded so an unsupported platform 404s rather than
+      # fetching a mismatched binary.
+      assetName: 'usql-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.bz2'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # usql publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # Archive roots at usql + LICENSE with no leading dir, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/usql"
+      to: "{{.InstallDir}}/bin/usql"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/usql", "--version"]
