@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: talosctl
+description: CLI for managing Talos Linux clusters
+homepage: https://www.talos.dev
+license: MPL-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: siderolabs/talos
+      # Raw per-platform binaries; the default .OS/.Arch tokens already match the
+      # asset names (talosctl-linux-amd64, talosctl-darwin-arm64, ...).
+      assetName: 'talosctl-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: sha256sum.txt
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/talosctl"
+
+test:
+  # `version` alone dials the cluster API; --client prints only the client build.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/talosctl", "version", "--client"]
