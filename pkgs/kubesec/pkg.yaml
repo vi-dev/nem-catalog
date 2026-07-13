@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: kubesec
+description: Security risk analysis for Kubernetes resources
+homepage: https://kubesec.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: controlplaneio/kubesec
+      assetName: 'kubesec_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # Aggregate SHA256SUMS-format file listing each asset by its exact bare name.
+  verify:
+    checksumGitHubAsset: 'kubesec_checksums.txt'
+
+install:
+  # Archive roots at the binary alongside LICENSE/README, no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kubesec"
+      to: "{{.InstallDir}}/bin/kubesec"
+
+test:
+  # kubesec rejects --version; `version` is the exit-0 subcommand.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kubesec", "version"]
