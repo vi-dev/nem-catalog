@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: mask
+description: CLI task runner defined by a simple markdown file
+homepage: https://github.com/jacobdeichert/mask
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: jacobdeichert/mask
+      # Rust target triples: macOS is apple-darwin (both arches ship); Linux
+      # ships x86_64-unknown-linux-gnu only, so linux/arm64 renders a name that
+      # 404s (no aarch64 Linux build) rather than serving a wrong-arch binary.
+      assetName: 'mask-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.zip'
+      # Newest releases tag as `mask/<semver>` (older `v…` tags and the separate
+      # `mask-parser/…` component are excluded); capture the bare semver as the
+      # version and rebuild the real tag for the release lookup.
+      releaseFilter: '^mask/(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      releaseTemplate: 'mask/{{.Version}}'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    # Each asset ships a per-asset `<asset>.sha256` sidecar (SHA-256).
+    checksumGitHubAsset: 'mask-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.zip.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/mask"
+      to: "{{.InstallDir}}/bin/mask"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/mask", "--version"]
