@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: frpc
+description: Fast reverse proxy client to expose local servers behind NAT or a firewall
+homepage: https://github.com/fatedier/frp
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: fatedier/frp
+      # One tarball per OS/arch bundles frpc + frps; we install only frpc.
+      assetName: 'frp_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'frp_sha256_checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/frpc"
+      to: "{{.InstallDir}}/bin/frpc"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/frpc", "--version"]
