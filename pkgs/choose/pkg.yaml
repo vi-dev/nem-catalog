@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: choose
+description: Human-friendly and fast alternative to cut and awk
+homepage: https://github.com/theryangeary/choose
+license: GPL-3.0
+
+archive:
+  fetch:
+    github_release:
+      repo: theryangeary/choose
+      # Raw per-target binaries (no archive). No x86_64-apple-darwin build ships,
+      # so darwin/amd64 renders a non-existent name and fails with a fetch 404
+      # rather than a wrong-arch binary; the other three platforms are covered.
+      assetName: 'choose-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # choose publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/choose"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/choose", "--version"]
