@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: staticcheck
+description: State-of-the-art linter for the Go programming language
+homepage: https://staticcheck.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: dominikh/go-tools
+      # Assets carry no version token; .OS/.Arch map directly to the release
+      # naming (darwin/linux, amd64/arm64), so no templateOverrides are needed.
+      assetName: 'staticcheck_{{.OS}}_{{.Arch}}.tar.gz'
+      # Tags are CalVer (YYYY.N or YYYY.N.M); this pins stable releases while
+      # excluding the rcN pre-releases and the lone vX.Y.Z-tagged outlier.
+      releaseFilter: '^(\d{4}\.\d+(?:\.\d+)?)$'
+  # Each asset ships a single-line <asset>.sha256 sidecar (standard sha256sum
+  # format naming the exact asset).
+  verify:
+    checksumGitHubAsset: 'staticcheck_{{.OS}}_{{.Arch}}.tar.gz.sha256'
+
+install:
+  # Archive roots at staticcheck/ with the binary alongside its LICENSE files.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/staticcheck"
+      to: "{{.InstallDir}}/bin/staticcheck"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/staticcheck", "--version"]
