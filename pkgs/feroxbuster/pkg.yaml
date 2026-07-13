@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: feroxbuster
+description: Fast, simple, recursive content discovery tool
+homepage: https://github.com/epi052/feroxbuster
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: epi052/feroxbuster
+      # Assets are named <arch>-<os>-feroxbuster.<ext>; every platform ships a
+      # tar.gz except linux/arm64, which is published only as a zip.
+      assetName: '{{.Arch}}-{{.OS}}-feroxbuster{{if and (eq .OS "linux") (eq .Arch "aarch64")}}.zip{{else}}.tar.gz{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+        arm64: aarch64
+  # feroxbuster publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/feroxbuster"
+      to: "{{.InstallDir}}/bin/feroxbuster"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/feroxbuster", "--version"]
