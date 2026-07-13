@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: dbmate
+description: Lightweight, framework-independent database migration tool
+homepage: https://github.com/amacneil/dbmate
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: amacneil/dbmate
+      # Assets are raw, uncompressed binaries named dbmate-<os>-<arch>.
+      assetName: 'dbmate-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+  # dbmate publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/dbmate"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dbmate", "--version"]
