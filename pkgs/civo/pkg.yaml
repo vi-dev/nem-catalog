@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: civo
+description: Command-line client for the Civo cloud platform
+homepage: https://github.com/civo/cli
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: civo/cli
+      assetName: 'civo-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'civo-{{.Version | trimPrefix "v"}}-checksums.sha256'
+
+# The tarball roots at the `civo` binary alongside LICENSE and README.md, so no
+# stripComponents.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/civo"
+      to: "{{.InstallDir}}/bin/civo"
+
+test:
+  - run:
+      # civo reads/writes ~/.civo.json on startup and aborts if HOME is unset;
+      # point HOME at the writable sandbox cwd so the config lands there.
+      cmd: ["{{.InstallDir}}/bin/civo", "version"]
+      env:
+        HOME: .
