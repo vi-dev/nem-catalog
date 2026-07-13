@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: age
+description: Simple, modern and secure file encryption tool
+homepage: https://age-encryption.org
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: FiloSottile/age
+      assetName: 'age-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # age publishes no checksum file (only Sigsum .proof sidecars); verify against
+  # GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/age"
+      to: "{{.InstallDir}}/bin/age"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/age", "--version"]
