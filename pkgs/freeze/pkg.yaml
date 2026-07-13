@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: freeze
+description: Generate images of code and terminal output
+homepage: https://github.com/charmbracelet/freeze
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: charmbracelet/freeze
+      assetName: 'freeze_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/freeze"
+      to: "{{.InstallDir}}/bin/freeze"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/freeze", "--version"]
