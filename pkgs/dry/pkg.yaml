@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: dry
+description: Docker manager and monitor for the terminal
+homepage: http://moncho.github.io/dry
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: moncho/dry
+      # Assets are raw per-platform binaries; .OS/.Arch already match the naming
+      # (darwin/linux, amd64/arm64), so a missing platform 404s on fetch.
+      assetName: 'dry-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'dry_checksums.txt'
+
+install:
+  # The asset is the executable itself, named per-platform; copy it to bin/dry.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/dry"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dry", "--version"]
