@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: koyeb
+description: Command-line interface for the Koyeb serverless platform
+homepage: https://www.koyeb.com
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: koyeb/koyeb-cli
+      assetName: 'koyeb-cli_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Archive roots at the bare `koyeb` binary (no leading dir), so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/koyeb"
+      to: "{{.InstallDir}}/bin/koyeb"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/koyeb", "version"]
