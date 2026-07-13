@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: earthly
+description: Build automation tool combining Dockerfile and Makefile syntax for repeatable builds
+homepage: https://earthly.dev
+license: MPL-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: earthly/earthly
+      # The release assets are raw platform binaries named earthly-<os>-<arch>
+      # using nem's default OS/arch tokens, so no templateOverrides are needed.
+      assetName: 'earthly-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # checksum.asc is a PGP-clearsigned SHA-256 sums file; nem ignores the armor
+  # lines and matches the entry whose filename equals the fetched asset.
+  verify:
+    checksumGitHubAsset: 'checksum.asc'
+
+install:
+  # The asset is the executable itself, so copy it straight into bin/.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/earthly"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/earthly", "--version"]
