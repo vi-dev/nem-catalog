@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: dasel
+description: Query and modify JSON, TOML, YAML, XML and other data structures from the command line
+homepage: https://daseldocs.tomwright.me
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: TomWright/dasel
+      # Raw per-platform binaries; os/arch map directly to nem's defaults.
+      assetName: 'dasel_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # dasel publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself, so copy it straight to bin.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/dasel"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dasel", "version"]
