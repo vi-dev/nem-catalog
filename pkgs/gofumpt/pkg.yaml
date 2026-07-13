@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: gofumpt
+description: Stricter gofmt for formatting Go source code
+homepage: https://github.com/mvdan/gofumpt
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: mvdan/gofumpt
+      # Each asset is the raw executable named by OS/arch; darwin & linux and
+      # amd64 & arm64 all match nem's defaults directly.
+      assetName: 'gofumpt_{{.Version}}_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # No checksum file is published; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself; copy it straight in (nem sets +x).
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/gofumpt"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gofumpt", "--version"]
