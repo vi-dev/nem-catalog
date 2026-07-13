@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: atlas
+description: Manage database schemas as code
+homepage: https://atlasgo.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    http:
+      # Atlas binaries are hosted off-GitHub. The community build is the one
+      # released under Apache-2.0 (the default build ships under a proprietary
+      # EULA), so it matches the repo LICENSE. Versions come from GitHub tags.
+      url: 'https://release.ariga.io/atlas/atlas-community-{{.OS}}-{{.Arch}}-{{.Version}}'
+      versionsFrom:
+        github_release:
+          repo: ariga/atlas
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # Each binary has a sibling .sha256 holding its bare SHA-256 digest.
+  verify:
+    checksumURL: 'https://release.ariga.io/atlas/atlas-community-{{.OS}}-{{.Arch}}-{{.Version}}.sha256'
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/atlas"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/atlas", "version"]
