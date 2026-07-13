@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: goose
+description: Database migration tool driven by SQL migrations or Go functions
+homepage: https://github.com/pressly/goose
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: pressly/goose
+      # Assets are raw per-platform binaries; arm64 keeps its name, amd64 -> x86_64.
+      assetName: 'goose_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/goose"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/goose", "--version"]
