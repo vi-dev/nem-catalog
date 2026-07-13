@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: scala-cli
+description: Command-line tool to compile, run, test, and package Scala code
+homepage: https://scala-cli.virtuslab.org
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: VirtusLab/scala-cli
+      # The per-target scala-cli-<target>.gz assets are single-file gzip streams
+      # nem can't extract; the -sdk.zip assets wrap the same native binary at
+      # bin/scala-cli. Linux uses the fully-static build, macOS the plain one.
+      assetName: 'scala-cli-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin-sdk{{else}}pc-linux-static-sdk{{end}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # scala-cli publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/scala-cli"
+      to: "{{.InstallDir}}/bin/scala-cli"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/scala-cli", "version"]
