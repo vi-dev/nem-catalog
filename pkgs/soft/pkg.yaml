@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: soft
+description: Self-hostable Git server for the command line
+homepage: https://github.com/charmbracelet/soft-serve
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: charmbracelet/soft-serve
+      assetName: 'soft-serve_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: checksums.txt
+
+install:
+  # The tarball roots at soft-serve_<ver>_<os>_<arch>/ and ships the binary as
+  # `soft`; install it under the executable name users invoke, soft-serve.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/soft"
+      to: "{{.InstallDir}}/bin/soft"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/soft", "--version"]
