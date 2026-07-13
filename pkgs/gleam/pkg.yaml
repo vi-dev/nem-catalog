@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: gleam
+description: A friendly language for building type-safe, scalable systems
+homepage: https://gleam.run
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: gleam-lang/gleam
+      assetName: 'gleam-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    checksumGitHubAsset: 'gleam-{{.Version}}-{{.Arch}}-{{.OS}}.tar.gz.sha256'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/gleam"
+      to: "{{.InstallDir}}/bin/gleam"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gleam", "--version"]
