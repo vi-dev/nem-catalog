@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: websocat
+description: Netcat-like CLI for WebSockets
+homepage: https://github.com/vi/websocat
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: vi/websocat
+      # Raw per-platform binaries named by Rust target triple, no archive.
+      assetName: 'websocat.{{.Arch}}-{{.OS}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+        amd64: x86_64
+        arm64: aarch64
+  # websocat publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself; copy it straight to bin.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/websocat"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/websocat", "--version"]
