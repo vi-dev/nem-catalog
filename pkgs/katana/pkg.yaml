@@ -1,0 +1,37 @@
+schemaVersion: 1
+name: katana
+description: Fast crawling and web spidering framework
+homepage: https://github.com/projectdiscovery/katana
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/katana
+      assetName: 'katana_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'katana-{{.Version | trimPrefix "v"}}-checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/katana"
+      to: "{{.InstallDir}}/bin/katana"
+
+test:
+  - run:
+      # katana resolves its config dir from XDG_CONFIG_HOME before HOME; a CI
+      # runner sets XDG_CONFIG_HOME to a read-only ~/.config, so a HOME-only
+      # redirect is ignored. Point HOME and the XDG dirs at writable dirs under
+      # the scratch cwd and pre-create them.
+      script: |
+        export HOME="$PWD/nem-katana-home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        export XDG_CACHE_HOME="$HOME/.cache"
+        mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+        "$NEM_INSTALL_DIR/bin/katana" -version
