@@ -1,0 +1,25 @@
+schemaVersion: 1
+name: imgpkg
+description: Store and distribute sets of files as OCI images
+homepage: https://carvel.dev/imgpkg
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: carvel-dev/imgpkg
+      # Release ships raw per-platform binaries named imgpkg-<os>-<arch>.
+      assetName: 'imgpkg-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The asset is the executable itself; copy it straight to bin/imgpkg.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/imgpkg"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/imgpkg", "version"]
