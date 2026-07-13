@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: procs
+description: Modern replacement for ps written in Rust
+homepage: https://github.com/dalance/procs
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: dalance/procs
+      # Assets are named procs-v<version>-<arch>-<os>.zip; OS token is mac/linux.
+      assetName: 'procs-{{.Version}}-{{.Arch}}-{{.OS}}.zip'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+        darwin: mac
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # procs publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/procs"
+      to: "{{.InstallDir}}/bin/procs"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/procs", "--version"]
