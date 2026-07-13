@@ -1,0 +1,34 @@
+schemaVersion: 1
+name: yazi
+description: Blazing fast terminal file manager written in Rust
+homepage: https://github.com/sxyazi/yazi
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sxyazi/yazi
+      assetName: 'yazi-{{.Arch}}-{{.OS}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+  # yazi publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+# The zip ships both yazi and ya under a leading platform-named dir; install only yazi.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/yazi"
+      to: "{{.InstallDir}}/bin/yazi"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/yazi", "--version"]
