@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: tea
+description: Command line tool to interact with Gitea servers
+homepage: https://gitea.com/gitea/tea
+license: MIT
+
+# The GitHub repo go-gitea/tea is archived (0 releases, 0 tags); tea moved to
+# gitea.com and ships raw per-platform binaries with .sha256 sidecars on
+# dl.gitea.com. Fetch over http and pin versions explicitly since nem cannot
+# discover versions from a Gitea instance.
+archive:
+  fetch:
+    http:
+      url: 'https://dl.gitea.com/tea/{{.Version}}/tea-{{.Version}}-{{.OS}}-{{.Arch}}'
+  verify:
+    checksumURL: 'https://dl.gitea.com/tea/{{.Version}}/tea-{{.Version}}-{{.OS}}-{{.Arch}}.sha256'
+
+versions:
+  - version: "0.14.2"
+
+install:
+  # The asset is the raw executable; copy it straight to bin/tea.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/tea"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tea", "--version"]
