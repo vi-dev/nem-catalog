@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: sd
+description: Intuitive find and replace CLI, a sed alternative
+homepage: https://github.com/chmln/sd
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: chmln/sd
+      # macOS is apple-darwin; on linux only musl ships for arm64, and it also
+      # exists for amd64, so use musl for both linux arches.
+      assetName: 'sd-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # sd publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/sd"
+      to: "{{.InstallDir}}/bin/sd"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/sd", "--version"]
