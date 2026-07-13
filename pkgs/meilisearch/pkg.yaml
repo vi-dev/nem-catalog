@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: meilisearch
+description: Lightning-fast, open-source search engine API
+homepage: https://www.meilisearch.com
+license: MIT AND BUSL-1.1
+
+archive:
+  fetch:
+    github_release:
+      repo: meilisearch/meilisearch
+      # Raw per-platform binaries. The arch token depends on the OS: linux uses
+      # amd64/aarch64, macOS uses amd64/apple-silicon — so branch on the combo
+      # (Rule 3b) and override only the OS (darwin -> macos).
+      assetName: 'meilisearch-{{.OS}}-{{if eq .Arch "arm64"}}{{if eq .OS "macos"}}apple-silicon{{else}}aarch64{{end}}{{else}}amd64{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+  # No checksum file is published; verify against GitHub's per-asset SHA-256 digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself; copy it straight to bin/meilisearch.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/meilisearch"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/meilisearch", "--version"]
