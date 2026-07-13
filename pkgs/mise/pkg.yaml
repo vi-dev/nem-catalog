@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: mise
+description: Polyglot dev tool version manager and task runner
+homepage: https://mise.jdx.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: jdx/mise
+      assetName: 'mise-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: x64
+  # mise's SHASUMS files list ./-prefixed names that nem's matcher can't match,
+  # so verify against GitHub's per-asset digest instead.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/mise"
+      to: "{{.InstallDir}}/bin/mise"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/mise", "--version"]
