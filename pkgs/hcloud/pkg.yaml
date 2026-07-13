@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: hcloud
+description: Command-line interface for the Hetzner Cloud
+homepage: https://github.com/hetznercloud/cli
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: hetznercloud/cli
+      assetName: 'hcloud-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The tarball roots the hcloud binary alongside LICENSE/README/docs (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/hcloud"
+      to: "{{.InstallDir}}/bin/hcloud"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/hcloud", "version"]
