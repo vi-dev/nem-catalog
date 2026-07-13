@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: kotlin
+description: Kotlin programming language compiler and command-line tools
+homepage: https://kotlinlang.org
+license: Apache-2.0
+
+binPaths:
+  - bin
+
+dependsOn:
+  - temurin21
+
+archive:
+  fetch:
+    github_release:
+      repo: JetBrains/kotlin
+      # One platform-independent JVM distribution (no os/arch token); the JDK it
+      # runs on is supplied by the temurin21 dependency, not this asset.
+      assetName: 'kotlin-compiler-{{.Version | trimPrefix "v"}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'kotlin-compiler-{{.Version | trimPrefix "v"}}.zip.sha256'
+
+install:
+  # Archive roots at kotlinc/; strip it so bin/, lib/, license/ land at the
+  # install root, then copy the whole tree so the scripts find their lib/ jars.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  # kotlinc -version prints to stderr and exits 0; it shells out to java, found
+  # on PATH via the temurin21 dependency.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kotlinc", "-version"]
