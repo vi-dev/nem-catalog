@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: fq
+description: jq for binary formats — tool, language and decoders for working with binary and text formats
+homepage: https://github.com/wader/fq
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: wader/fq
+      # Linux ships .tar.gz; macOS ships .zip and names the OS "macos".
+      assetName: 'fq_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}{{if eq .OS "macos"}}.zip{{else}}.tar.gz{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Both archives contain a single fq binary at the root, no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/fq"
+      to: "{{.InstallDir}}/bin/fq"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/fq", "--version"]
