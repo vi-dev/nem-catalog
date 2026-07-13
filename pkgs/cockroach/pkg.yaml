@@ -1,0 +1,37 @@
+schemaVersion: 1
+name: cockroach
+description: Distributed SQL database for cloud-native applications
+homepage: https://www.cockroachlabs.com
+license: LicenseRef-CockroachDB-Software-License
+
+# CockroachDB is distributed off-GitHub from binaries.cockroachdb.com (the repo
+# publishes no GitHub release assets), so fetch over http and discover versions
+# from the repo's stable tags. The darwin asset name carries a per-arch minimum
+# macOS version (10.9 for amd64, 11.0 for arm64); linux is plain linux-<arch>.
+archive:
+  fetch:
+    http:
+      url: 'https://binaries.cockroachdb.com/cockroach-{{.Version}}.{{if eq .OS "darwin"}}{{if eq .Arch "arm64"}}darwin-11.0-arm64{{else}}darwin-10.9-amd64{{end}}{{else}}linux-{{.Arch}}{{end}}.tgz'
+      versionsFrom:
+        github_tag:
+          repo: cockroachdb/cockroach
+          tagFilter: '^(v\d+\.\d+\.\d+)$'
+  # Each asset has a per-platform <asset>.tgz.sha256sum sidecar in standard
+  # `<hash>  <name>` form, matched by the downloaded asset's basename.
+  verify:
+    checksumURL: 'https://binaries.cockroachdb.com/cockroach-{{.Version}}.{{if eq .OS "darwin"}}{{if eq .Arch "arm64"}}darwin-11.0-arm64{{else}}darwin-10.9-amd64{{end}}{{else}}linux-{{.Arch}}{{end}}.tgz.sha256sum'
+
+# The tarball roots at cockroach-<ver>.<platform>/ holding the cockroach binary
+# beside LICENSE and THIRD-PARTY-NOTICES.txt; strip that leading dir.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/cockroach"
+      to: "{{.InstallDir}}/bin/cockroach"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cockroach", "version"]
