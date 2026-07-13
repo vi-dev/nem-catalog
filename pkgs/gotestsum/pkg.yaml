@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: gotestsum
+description: Human-friendly `go test` runner producing rich output and JUnit XML
+homepage: https://github.com/gotestyourself/gotestsum
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: gotestyourself/gotestsum
+      assetName: 'gotestsum_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'gotestsum-{{.Version | trimPrefix "v"}}-checksums.txt'
+
+install:
+  # The binary sits at the archive root alongside LICENSE/README, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/gotestsum"
+      to: "{{.InstallDir}}/bin/gotestsum"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gotestsum", "--version"]
