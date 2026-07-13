@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: bb
+description: Native, fast-starting Clojure interpreter for scripting
+homepage: https://babashka.org
+license: EPL-1.0
+
+archive:
+  fetch:
+    github_release:
+      repo: babashka/babashka
+      # Linux ships only a fully-static build for aarch64, so use the -static
+      # variant for both Linux arches (it exists for amd64 too); macOS ships a
+      # dynamic build per arch. arm64 -> aarch64; amd64 keeps its name.
+      assetName: 'babashka-{{.Version | trimPrefix "v"}}-{{if eq .OS "darwin"}}macos-{{.Arch}}{{else}}linux-{{.Arch}}-static{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        arm64: aarch64
+  # Each asset has a single-line .sha256 sidecar carrying just the digest.
+  verify:
+    checksumGitHubAsset: 'babashka-{{.Version | trimPrefix "v"}}-{{if eq .OS "darwin"}}macos-{{.Arch}}{{else}}linux-{{.Arch}}-static{{end}}.tar.gz.sha256'
+
+install:
+  # The tarball is a single raw `bb` binary at its root; install it as `babashka`.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/bb"
+      to: "{{.InstallDir}}/bin/bb"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/bb", "--version"]
