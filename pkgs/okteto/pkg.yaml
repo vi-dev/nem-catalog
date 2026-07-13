@@ -1,0 +1,37 @@
+schemaVersion: 1
+name: okteto
+description: Remote development platform CLI for Kubernetes
+homepage: https://www.okteto.com
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: okteto/okteto
+      # Assets are raw per-platform binaries with no version in the name; the
+      # OS token is capitalized (Darwin/Linux) and amd64 is x86_64.
+      assetName: 'okteto-{{.OS}}-{{.Arch}}'
+      # Tags are bare semver (no leading v); this also excludes -beta prereleases.
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    # Per-asset single-line SHA-256 sidecar (<hash>  bin/okteto-<os>-<arch>).
+    checksumGitHubAsset: 'okteto-{{.OS}}-{{.Arch}}.sha256'
+
+install:
+  # The asset is the executable itself; copy it straight in.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/okteto"
+
+test:
+  - run:
+      # okteto creates $HOME/.okteto on startup; point HOME at a dir under the
+      # writable test cwd so the smoke test works where HOME is read-only.
+      cmd: ["{{.InstallDir}}/bin/okteto", "version"]
+      env:
+        HOME: nem-okteto-home
