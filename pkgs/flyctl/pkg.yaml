@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: flyctl
+description: Command-line interface for deploying and managing apps on Fly.io
+homepage: https://fly.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: superfly/flyctl
+      assetName: 'flyctl_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'flyctl_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+# The tarball holds a single `flyctl` binary at its root (no leading dir).
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/flyctl"
+      to: "{{.InstallDir}}/bin/flyctl"
+
+test:
+  - run:
+      # flyctl reads $HOME on startup (config/cache under ~/.fly); the sandbox
+      # unsets HOME, so point it at a relative dir under the writable cwd.
+      cmd: ["{{.InstallDir}}/bin/flyctl", "version"]
+      env:
+        HOME: fly-home
