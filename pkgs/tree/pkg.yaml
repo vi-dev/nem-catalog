@@ -1,0 +1,41 @@
+schemaVersion: 1
+name: tree
+description: Recursive directory listing as an indented tree
+homepage: https://github.com/Old-Man-Programmer/tree
+license: GPL-2.0-or-later
+
+buildFromSource: true
+
+source:
+  fetch:
+    github_tag:
+      repo: Old-Man-Programmer/tree
+      tagFilter: '^(\d+\.\d+\.\d+)$'
+
+# tree ships no checksum for its source tarball, so pin the tag tarball's SHA-256.
+versions:
+  - version: "2.3.2"
+    source:
+      verify:
+        checksum: 22cf32e84e3eb508d97a9e991c2c3cc006b9dcf4afed201d96311c5c57d08fcf
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}{{.InstallDir}}/bin"
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        make CC=cc
+        cp tree "$NEM_STAGING_DIR$NEM_INSTALL_DIR/bin/tree"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/tree", "--version"]
