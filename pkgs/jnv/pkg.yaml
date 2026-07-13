@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: jnv
+description: Interactive JSON filter using jq
+homepage: https://github.com/ynqa/jnv
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ynqa/jnv
+      assetName: 'jnv-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.xz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # Each asset ships a single-line <asset>.sha256 sidecar naming that exact file.
+  verify:
+    checksumGitHubAsset: 'jnv-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.xz.sha256'
+
+install:
+  # Archive nests everything under a single jnv-<target> dir; strip it and take the binary.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/jnv"
+      to: "{{.InstallDir}}/bin/jnv"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/jnv", "--version"]
