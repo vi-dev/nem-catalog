@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: fnm
+description: Fast and simple Node.js version manager, built in Rust
+homepage: https://github.com/Schniz/fnm
+license: GPL-3.0-only
+
+archive:
+  fetch:
+    github_release:
+      repo: Schniz/fnm
+      # Linux ships per-arch zips (fnm-linux.zip = x86_64, fnm-arm64.zip =
+      # aarch64); macOS ships one universal (x86_64+arm64) zip serving both
+      # darwin arches, so it isn't arch-tokenized.
+      assetName: 'fnm-{{if eq .OS "darwin"}}macos{{else}}{{if eq .Arch "arm64"}}arm64{{else}}linux{{end}}{{end}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # fnm publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # Archive holds the bare `fnm` binary at its root — no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/fnm"
+      to: "{{.InstallDir}}/bin/fnm"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/fnm", "--version"]
