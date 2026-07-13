@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: gdu
+description: Fast disk usage analyzer with console interface
+homepage: https://github.com/dundee/gdu
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: dundee/gdu
+      assetName: 'gdu_{{.OS}}_{{.Arch}}.tgz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: sha256sums.txt
+
+install:
+  # The tarball holds a single per-platform binary (gdu_<os>_<arch>), no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/gdu_{{.OS}}_{{.Arch}}"
+      to: "{{.InstallDir}}/bin/gdu"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gdu", "--version"]
