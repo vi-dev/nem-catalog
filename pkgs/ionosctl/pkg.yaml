@@ -1,0 +1,40 @@
+schemaVersion: 1
+name: ionosctl
+description: IONOS Cloud CLI for managing cloud infrastructure and services
+homepage: https://github.com/ionos-cloud/ionosctl
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: ionos-cloud/ionosctl
+      # Asset names embed the version without the leading v and use nem's default
+      # os/arch tokens verbatim (darwin/linux, amd64/arm64) — no overrides needed.
+      assetName: 'ionosctl-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.tar.gz'
+  verify:
+    checksumGitHubAsset: 'ionosctl-{{.Version | trimPrefix "v"}}-SHA256SUMS'
+
+# Pin the version: the latest tag (v6.10.2) ships no release assets, so nem's
+# resolver would select it and 404. v6.10.1 is the newest release that publishes
+# binaries plus a SHA256SUMS file for every platform.
+versions:
+  - version: v6.10.1
+
+install:
+  # The tarball roots the ionosctl binary alongside docs/LICENSE (no leading
+  # dir), so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/ionosctl"
+      to: "{{.InstallDir}}/bin/ionosctl"
+
+test:
+  - run:
+      # `version` prints the CLI version and exits 0. ionosctl resolves its config
+      # dir from $HOME on startup and errors when it is unset, so point HOME at a
+      # relative path under the writable sandbox cwd.
+      cmd: ["{{.InstallDir}}/bin/ionosctl", "version"]
+      env:
+        HOME: nem-ionosctl-home
