@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: jira
+description: Interactive Jira command line
+homepage: https://github.com/ankitpokhrel/jira-cli
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: ankitpokhrel/jira-cli
+      assetName: 'jira_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Archive roots at jira_<ver>_<os>_<arch>/ holding LICENSE and bin/jira.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/bin/jira"
+      to: "{{.InstallDir}}/bin/jira"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/jira", "version"]
