@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: kapp
+description: Kubernetes deployment tool that manages resources via a diff-and-apply set
+homepage: https://carvel.dev/kapp
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: carvel-dev/kapp
+      # Raw per-platform binaries named kapp-<os>-<arch>; the arch is encoded so a
+      # missing platform 404s rather than serving the wrong-arch binary.
+      assetName: 'kapp-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The asset is the executable itself; copy it straight to bin/kapp.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/kapp"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kapp", "version"]
