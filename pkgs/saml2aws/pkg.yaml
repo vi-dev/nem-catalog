@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: saml2aws
+description: Authenticate to AWS from the command line using a SAML identity provider
+homepage: https://github.com/Versent/saml2aws
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: Versent/saml2aws
+      assetName: 'saml2aws_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # Darwin assets are checksummed in a separate darwin_checksums.txt; every other
+  # platform is listed in the main checksums.txt. Both are standard sha256sum files.
+  verify:
+    checksumGitHubAsset: '{{if eq .OS "darwin"}}saml2aws_{{.Version | trimPrefix "v"}}_darwin_checksums.txt{{else}}saml2aws_{{.Version | trimPrefix "v"}}_checksums.txt{{end}}'
+
+install:
+  # Archive roots at the binary itself (plus LICENSE.md/README.md), no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/saml2aws"
+      to: "{{.InstallDir}}/bin/saml2aws"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/saml2aws", "--version"]
