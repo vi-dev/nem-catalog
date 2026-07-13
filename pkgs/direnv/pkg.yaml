@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: direnv
+description: Load and unload environment variables based on the current directory
+homepage: https://direnv.net
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: direnv/direnv
+      # Assets are raw per-platform binaries named direnv.<os>-<arch>; .OS and
+      # .Arch already render to the exact tokens (darwin/linux, amd64/arm64).
+      assetName: 'direnv.{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # direnv publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself — copy it straight in, no extract.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/direnv"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/direnv", "version"]
