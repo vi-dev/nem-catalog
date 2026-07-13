@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: yq
+description: Portable command-line YAML, JSON, and XML processor
+homepage: https://github.com/mikefarah/yq
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: mikefarah/yq
+      # The raw per-platform binary is the executable; os/arch match nem's defaults.
+      assetName: 'yq_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # yq's checksums file is not standard sha256sum format; verify against
+  # GitHub's per-asset digest instead.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/yq"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/yq", "--version"]
