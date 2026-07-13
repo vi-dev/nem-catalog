@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: maven
+description: Apache Maven build and dependency-management tool for Java
+homepage: https://maven.apache.org
+license: Apache-2.0
+
+dependsOn:
+  - temurin21
+
+archive:
+  fetch:
+    http:
+      url: 'https://archive.apache.org/dist/maven/maven-3/{{.Version}}/binaries/apache-maven-{{.Version}}-bin.tar.gz'
+  verify:
+    checksumURL: 'https://archive.apache.org/dist/maven/maven-3/{{.Version}}/binaries/apache-maven-{{.Version}}-bin.tar.gz.sha512'
+    algorithm: sha512
+
+versions:
+  - version: 3.9.16
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/mvn", "--version"]
