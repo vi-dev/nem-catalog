@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: fx
+description: Terminal JSON viewer and processor
+homepage: https://github.com/antonmedv/fx
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: antonmedv/fx
+      # Assets are raw per-platform binaries named with nem's native OS/arch
+      # tokens (linux/darwin, amd64/arm64), so no templateOverrides are needed.
+      assetName: 'fx_{{.OS}}_{{.Arch}}'
+      # Tags are bare semver (39.2.0, no leading v); capture drops pre-releases.
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+  # fx publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The asset is the executable itself — copy it straight into bin/.
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/fx"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/fx", "--version"]
