@@ -1,0 +1,29 @@
+schemaVersion: 1
+name: clusterctl
+description: Command-line tool for managing Cluster API clusters
+homepage: https://cluster-api.sigs.k8s.io
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: kubernetes-sigs/cluster-api
+      # Raw per-platform binaries whose os/arch tokens match nem's defaults.
+      assetName: 'clusterctl-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # cluster-api publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/clusterctl"
+
+test:
+  - run:
+      # clusterctl writes a version-check state file under $HOME; the sandbox
+      # unsets HOME, so point it at a writable relative dir under the scratch cwd.
+      cmd: ["{{.InstallDir}}/bin/clusterctl", "version"]
+      env:
+        HOME: nem-cctl-home
