@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: micro
+description: Modern and intuitive terminal-based text editor
+homepage: https://micro-editor.github.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: zyedidia/micro
+      # Platform tokens are irregular: linux amd64 is 'linux64', darwin amd64 is
+      # 'osx' (Intel-only), and the arm64 builds spell the OS out differently.
+      assetName: 'micro-{{.Version | trimPrefix "v"}}-{{if eq .OS "darwin"}}{{if eq .Arch "arm64"}}macos-arm64{{else}}osx{{end}}{{else}}{{if eq .Arch "arm64"}}linux-arm64{{else}}linux64{{end}}{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # Each asset ships a per-asset sha256sum sidecar named '<asset>.sha'.
+  verify:
+    checksumGitHubAsset: 'micro-{{.Version | trimPrefix "v"}}-{{if eq .OS "darwin"}}{{if eq .Arch "arm64"}}macos-arm64{{else}}osx{{end}}{{else}}{{if eq .Arch "arm64"}}linux-arm64{{else}}linux64{{end}}{{end}}.tar.gz.sha'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/micro"
+      to: "{{.InstallDir}}/bin/micro"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/micro", "-version"]
