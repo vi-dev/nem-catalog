@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: nuclei
+description: Fast, template-based vulnerability scanner
+homepage: https://github.com/projectdiscovery/nuclei
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/nuclei
+      assetName: 'nuclei_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'nuclei_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip holds the nuclei binary plus READMEs at the root, no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/nuclei"
+      to: "{{.InstallDir}}/bin/nuclei"
+
+test:
+  # nuclei resolves config/cache/PDCP dirs under $HOME; point it at the writable
+  # scratch dir so -version doesn't touch the read-only real home.
+  - run:
+      cmd: ["{{.InstallDir}}/bin/nuclei", "-version"]
+      env:
+        HOME: nem-nuclei-home
