@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: skate
+description: Personal key-value store for the command line
+homepage: https://github.com/charmbracelet/skate
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: charmbracelet/skate
+      assetName: 'skate_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/skate"
+      to: "{{.InstallDir}}/bin/skate"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/skate", "--version"]
