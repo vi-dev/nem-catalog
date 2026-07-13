@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: fd
+description: Simple, fast and user-friendly alternative to find
+homepage: https://github.com/sharkdp/fd
+license: MIT OR Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: sharkdp/fd
+      assetName: 'fd-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # fd publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/fd"
+      to: "{{.InstallDir}}/bin/fd"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/fd", "--version"]
