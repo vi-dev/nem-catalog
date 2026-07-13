@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: typos
+description: Source code spell checker
+homepage: https://github.com/crate-ci/typos
+license: MIT OR Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: crate-ci/typos
+      # Linux ships musl builds for both arches; macOS ships apple-darwin.
+      assetName: 'typos-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-musl{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # typos publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The binary sits at the archive root alongside docs, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/typos"
+      to: "{{.InstallDir}}/bin/typos"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/typos", "--version"]
