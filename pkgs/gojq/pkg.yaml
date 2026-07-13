@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: gojq
+description: Pure Go implementation of jq
+homepage: https://github.com/itchyny/gojq
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: itchyny/gojq
+      # macOS ships .zip, Linux ships .tar.gz; OS/arch tokens match nem's defaults.
+      assetName: 'gojq_{{.Version}}_{{.OS}}_{{.Arch}}{{if eq .OS "darwin"}}.zip{{else}}.tar.gz{{end}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # gojq publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # Archive has a single top-level gojq_<ver>_<os>_<arch>/ dir holding the binary.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/gojq"
+      to: "{{.InstallDir}}/bin/gojq"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/gojq", "--version"]
