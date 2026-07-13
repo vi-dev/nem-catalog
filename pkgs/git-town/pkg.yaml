@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: git-town
+description: High-level command-line interface for Git
+homepage: https://www.git-town.com
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: git-town/git-town
+      assetName: 'git-town_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: intel_64
+        arm64: arm_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Binary sits at the archive root alongside LICENSE/README, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/git-town"
+      to: "{{.InstallDir}}/bin/git-town"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/git-town", "--version"]
