@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: stylua
+description: Opinionated Lua code formatter
+homepage: https://github.com/JohnnyMorganz/StyLua
+license: MPL-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: JohnnyMorganz/StyLua
+      # Assets are stylua-<os>-<arch>.zip (glibc build); the -musl variants are ignored.
+      assetName: 'stylua-{{.OS}}-{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macos
+        amd64: x86_64
+        arm64: aarch64
+  # StyLua publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The zip holds a single stylua binary at its root (no leading dir).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/stylua"
+      to: "{{.InstallDir}}/bin/stylua"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/stylua", "--version"]
