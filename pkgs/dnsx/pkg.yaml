@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: dnsx
+description: Fast and multi-purpose DNS toolkit for running many DNS queries
+homepage: https://github.com/projectdiscovery/dnsx
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: projectdiscovery/dnsx
+      # Assets use macOS for the darwin builds; arch tokens match the defaults.
+      assetName: 'dnsx_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: macOS
+  verify:
+    checksumGitHubAsset: 'dnsx_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The zip holds dnsx, LICENSE.md, and README.md at the root — no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/dnsx"
+      to: "{{.InstallDir}}/bin/dnsx"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/dnsx", "-version"]
