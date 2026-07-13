@@ -1,0 +1,38 @@
+schemaVersion: 1
+name: dprint
+description: Pluggable and configurable code formatting platform
+homepage: https://dprint.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: dprint/dprint
+      # Rust target-triple assets; no version in the asset name.
+      assetName: 'dprint-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.zip'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      versionTemplate: "{{.Capture}}"
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    checksumGitHubAsset: SHASUMS256.txt
+
+install:
+  # The zip holds a single raw `dprint` binary at its root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/dprint"
+      to: "{{.InstallDir}}/bin/dprint"
+
+test:
+  - run:
+      # dprint creates its cache directory on startup; the default cache path is
+      # read-only in the write-confined smoke-test sandbox, so redirect it with
+      # DPRINT_CACHE_DIR to a writable dir under the scratch cwd.
+      script: |
+        export DPRINT_CACHE_DIR="$PWD/nem-dprint-cache"
+        mkdir -p "$DPRINT_CACHE_DIR"
+        "$NEM_INSTALL_DIR/bin/dprint" --version
