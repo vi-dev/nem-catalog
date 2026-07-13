@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: pixi
+description: Cross-platform package manager built on the Conda ecosystem
+homepage: https://pixi.sh
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: prefix-dev/pixi
+      # Rust target-triple asset names; the OS override carries the whole
+      # …-apple-darwin / …-unknown-linux-musl suffix (Linux ships musl builds).
+      assetName: 'pixi-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-musl
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    # Each asset ships a single-line `<hash>  <asset>` .sha256 sidecar.
+    checksumGitHubAsset: 'pixi-{{.Arch}}-{{.OS}}.tar.gz.sha256'
+
+# The tarball is a single `pixi` binary at the archive root (no leading dir).
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/pixi"
+      to: "{{.InstallDir}}/bin/pixi"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/pixi", "--version"]
