@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: sqlc
+description: Generate type-safe code from SQL
+homepage: https://sqlc.dev
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sqlc-dev/sqlc
+      assetName: 'sqlc_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # sqlc publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The archive is just the bare sqlc binary at the root, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/sqlc"
+      to: "{{.InstallDir}}/bin/sqlc"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/sqlc", "version"]
