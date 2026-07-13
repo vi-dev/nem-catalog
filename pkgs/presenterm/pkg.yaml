@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: presenterm
+description: Terminal-based markdown presentation tool
+homepage: https://github.com/mfontanini/presenterm
+license: BSD-2-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: mfontanini/presenterm
+      # Rust target-triple assets: <arch>-apple-darwin / <arch>-unknown-linux-gnu.
+      assetName: 'presenterm-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+  # Each asset ships a single-line <asset>.tar.gz.sha512 sidecar naming the exact asset.
+  verify:
+    checksumGitHubAsset: 'presenterm-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.gz.sha512'
+    algorithm: sha512
+
+install:
+  # Archive roots at presenterm-<ver>/ holding the binary, LICENSE, and README.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/presenterm"
+      to: "{{.InstallDir}}/bin/presenterm"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/presenterm", "--version"]
