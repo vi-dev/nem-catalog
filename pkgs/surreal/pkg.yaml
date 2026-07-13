@@ -1,0 +1,30 @@
+schemaVersion: 1
+name: surreal
+description: Command-line interface and server for the SurrealDB database
+homepage: https://surrealdb.com
+license: BUSL-1.1
+
+archive:
+  fetch:
+    github_release:
+      repo: surrealdb/surrealdb
+      # Assets are surreal-v<ver>.<os>-<arch>.tgz with default os/arch tokens
+      # (darwin/linux, amd64/arm64) — all four platforms are published.
+      assetName: 'surreal-{{.Version}}.{{.OS}}-{{.Arch}}.tgz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # SurrealDB publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  # The .tgz holds a single `surreal` binary at the archive root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/surreal"
+      to: "{{.InstallDir}}/bin/surreal"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/surreal", "--version"]
