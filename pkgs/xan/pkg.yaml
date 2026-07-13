@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: xan
+description: The CSV magician - a command-line tool to process CSV files
+homepage: https://github.com/medialab/xan
+license: Unlicense
+
+archive:
+  fetch:
+    github_release:
+      repo: medialab/xan
+      # Assets are named by Rust target triple; no version token in the name.
+      # linux uses the gnu variant (the only one built for aarch64).
+      assetName: 'xan-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    # Per-asset single-line sha256 sidecar naming the exact tarball.
+    checksumGitHubAsset: 'xan-{{.Arch}}-{{.OS}}.sha256'
+
+install:
+  # Archive holds a single `xan` binary at its root — no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/xan"
+      to: "{{.InstallDir}}/bin/xan"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/xan", "--version"]
