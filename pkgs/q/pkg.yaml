@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: q
+description: Tiny command-line DNS client with support for UDP, TCP, DoT, DoH, DoQ, and ODoH
+homepage: https://github.com/natesales/q
+license: GPL-3.0-only
+
+archive:
+  fetch:
+    github_release:
+      repo: natesales/q
+      assetName: 'q_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'q_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+# The tarball roots the `q` binary alongside LICENSE and README.md (no leading
+# dir), so extract without stripComponents and copy the binary directly.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/q"
+      to: "{{.InstallDir}}/bin/q"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/q", "--version"]
