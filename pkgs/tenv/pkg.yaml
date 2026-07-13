@@ -1,0 +1,36 @@
+schemaVersion: 1
+name: tenv
+description: OpenTofu, Terraform, Terragrunt, Terramate and Atmos version manager
+homepage: https://tofuutils.github.io/tenv
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: tofuutils/tenv
+      assetName: 'tenv_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'tenv_{{.Version}}_checksums.txt'
+
+# The tarball roots the binaries directly (tenv plus its tofu/terraform/... shims);
+# only the tenv entrypoint is installed.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/tenv"
+      to: "{{.InstallDir}}/bin/tenv"
+
+test:
+  - run:
+      # tenv aborts with "$HOME is not defined" when HOME is unset; point it at a
+      # relative dir under the writable sandbox cwd.
+      cmd: ["{{.InstallDir}}/bin/tenv", "--version"]
+      env:
+        HOME: nem-tenv-home
