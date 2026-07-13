@@ -1,0 +1,32 @@
+schemaVersion: 1
+name: temurin17
+description: Eclipse Temurin OpenJDK 17 (LTS) development kit
+homepage: https://adoptium.net
+license: GPL-2.0-with-classpath-exception
+
+archive:
+  fetch:
+    github_release:
+      repo: adoptium/temurin17-binaries
+      assetName: 'OpenJDK17U-jdk_{{.Arch}}_{{.OS}}_hotspot_{{.Version | replace "+" "_"}}.tar.gz'
+      releaseFilter: '^jdk-(\d+\.\d+\.\d+\+\d+(?:\.\d+)?)$'
+      releaseTemplate: 'jdk-{{.Version}}'
+      templateOverrides:
+        darwin: mac
+        amd64: x64
+        arm64: aarch64
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: '{{.Var.src}}{{if eq .OS "darwin"}}/Contents/Home{{end}}'
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/java", "-version"]
