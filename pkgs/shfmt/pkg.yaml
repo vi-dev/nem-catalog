@@ -1,0 +1,26 @@
+schemaVersion: 1
+name: shfmt
+description: Shell script formatter for POSIX sh, Bash, and mksh
+homepage: https://github.com/mvdan/sh
+license: BSD-3-Clause
+
+archive:
+  fetch:
+    github_release:
+      repo: mvdan/sh
+      # Assets are raw binaries named with the v-prefixed version and nem's
+      # default os/arch tokens (darwin|linux, amd64|arm64) — no overrides needed.
+      assetName: 'shfmt_{{.Version}}_{{.OS}}_{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  # shfmt ships no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/shfmt"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/shfmt", "--version"]
