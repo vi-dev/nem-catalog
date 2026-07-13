@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: rekor-cli
+description: CLI for the Rekor transparency log for software supply-chain metadata
+homepage: https://github.com/sigstore/rekor
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: sigstore/rekor
+      # The asset IS the raw binary; os/arch match nem's defaults directly.
+      assetName: 'rekor-cli-{{.OS}}-{{.Arch}}'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'rekor_checksums.txt'
+
+install:
+  - copy:
+      from: "{{.Archive}}"
+      to: "{{.InstallDir}}/bin/rekor-cli"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/rekor-cli", "version"]
+      # rekor-cli aborts unless $HOME is defined; the sandbox unsets it, so point
+      # it at a writable relative dir under the test scratch cwd.
+      env:
+        HOME: rekor-home
