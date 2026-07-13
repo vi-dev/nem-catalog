@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: protolint
+description: Pluggable linter and fixer to enforce Protocol Buffer style and conventions
+homepage: https://github.com/yoheimuta/protolint
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: yoheimuta/protolint
+      assetName: 'protolint_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # The tarball roots the `protolint` binary (and the protoc-gen-protolint
+  # plugin, unused here) directly, so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/protolint"
+      to: "{{.InstallDir}}/bin/protolint"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/protolint", "version"]
