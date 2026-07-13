@@ -1,0 +1,43 @@
+schemaVersion: 1
+name: trip
+description: Network diagnostic tool that combines the functionality of traceroute and ping
+homepage: https://trippy.rs
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: fujiapple852/trippy
+      # Rust target triples: <arch>-apple-darwin on macOS, <arch>-unknown-linux-gnu on Linux.
+      assetName: 'trippy-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+
+# trippy publishes no checksum file and GitHub records no per-asset digest for
+# these assets, so pin the version and verify each platform's archive against a
+# SHA-256 computed here (matched by asset filename). Bump the version and all
+# four hashes together on a new release.
+versions:
+  - version: "0.13.0"
+    archive:
+      verify:
+        checksum: |
+          c4245db59d3251df3c3045752d931afbed00b97896adeb93be62bf0bf3933f09  trippy-0.13.0-x86_64-unknown-linux-gnu.tar.gz
+          0afa3fc574066ff0d91d9e81ec0da012822c83bb39f691f52b562f9b6bbdaae3  trippy-0.13.0-aarch64-unknown-linux-gnu.tar.gz
+          26e7000df77a52fd8462040ebee1ebde9ada2e8d853b97838321b484928d9ea3  trippy-0.13.0-x86_64-apple-darwin.tar.gz
+          5bb2c22822a8d301bd462dc35bec865b9eae1737e9180406b6eacdd46d44adf2  trippy-0.13.0-aarch64-apple-darwin.tar.gz
+
+# The tarball roots at trippy-<ver>-<target>/ holding the `trip` binary.
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/trip"
+      to: "{{.InstallDir}}/bin/trip"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/trip", "--version"]
