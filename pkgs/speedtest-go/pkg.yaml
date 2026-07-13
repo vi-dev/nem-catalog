@@ -1,0 +1,33 @@
+schemaVersion: 1
+name: speedtest-go
+description: Command-line internet speed test using speedtest.net
+homepage: https://github.com/showwin/speedtest-go
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: showwin/speedtest-go
+      # OS is capitalized (Darwin/Linux) and amd64 is published as x86_64;
+      # arm64 keeps its default name.
+      assetName: 'speedtest-go_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Archive roots at the binary (plus LICENSE/README), no leading dir.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/speedtest-go"
+      to: "{{.InstallDir}}/bin/speedtest-go"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/speedtest-go", "--version"]
