@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: pnpm
+description: Fast, disk-space-efficient package manager for Node.js
+homepage: https://pnpm.io
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: pnpm/pnpm
+      # glibc linux tarballs + a darwin arm64 tarball; the arch is in the asset
+      # name, so an unsupported platform (e.g. darwin/amd64) 404s loudly.
+      assetName: 'pnpm-{{.OS}}-{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x64
+  # pnpm publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+# The pnpm launcher loads dist/pnpm.mjs relative to its own directory, so keep
+# the executable and dist/ as siblings under libexec/ and put that dir on PATH.
+binPaths:
+  - libexec
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/pnpm"
+      to: "{{.InstallDir}}/libexec/pnpm"
+  - copy:
+      from: "{{.Var.src}}/dist"
+      to: "{{.InstallDir}}/libexec/dist"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/libexec/pnpm", "--version"]
