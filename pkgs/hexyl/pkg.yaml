@@ -1,0 +1,31 @@
+schemaVersion: 1
+name: hexyl
+description: Command-line hex viewer with colored output
+homepage: https://github.com/sharkdp/hexyl
+license: Apache-2.0 OR MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: sharkdp/hexyl
+      assetName: 'hexyl-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+  # hexyl publishes no checksum file; verify against GitHub's per-asset digest.
+  verify:
+    githubAssetDigest: true
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/hexyl"
+      to: "{{.InstallDir}}/bin/hexyl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/hexyl", "--version"]
