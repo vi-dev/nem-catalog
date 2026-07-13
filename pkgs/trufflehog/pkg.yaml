@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: trufflehog
+description: Find, verify, and analyze leaked credentials
+homepage: https://github.com/trufflesecurity/trufflehog
+license: AGPL-3.0-only
+
+archive:
+  fetch:
+    github_release:
+      repo: trufflesecurity/trufflehog
+      assetName: 'trufflehog_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'trufflehog_{{.Version | trimPrefix "v"}}_checksums.txt'
+
+install:
+  # The tarball has the binary at its root (no leading dir), so no stripComponents.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/trufflehog"
+      to: "{{.InstallDir}}/bin/trufflehog"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/trufflehog", "--version"]
