@@ -134,9 +134,13 @@ fi
 
 run_linux() {
   local pkg="$1" arch="$2"
-  local auth=()
+  local auth=() pull=()
   [ -n "${AUTH_CONFIG}" ] && auth=(-v "${AUTH_CONFIG}:/nem/config.yaml:ro" -e GITHUB_TOKEN)
+  # unstable is a mutable tag; docker run never re-pulls a cached tag, so force
+  # the check or a weeks-old local image silently tests an outdated nem.
+  [ "${NEM_VERSION}" = "unstable" ] && pull=(--pull always)
   docker run --rm --privileged \
+    ${pull[@]+"${pull[@]}"} \
     --label "${RUN_LABEL}" \
     --platform "linux/${arch}" \
     -v "${REPO_ROOT}:/catalog:ro" \
