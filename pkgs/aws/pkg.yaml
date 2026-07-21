@@ -1,0 +1,64 @@
+schemaVersion: 1
+name: aws
+description: Unified command line interface for Amazon Web Services
+homepage: https://aws.amazon.com/cli/
+license: Apache-2.0
+
+archive:
+  fetch:
+    http:
+      url: 'https://awscli.amazonaws.com/{{if eq .OS "darwin"}}AWSCLIV2-{{.Version}}.pkg{{else}}awscli-exe-linux-{{.Arch}}-{{.Version}}.zip{{end}}'
+      templateOverrides:
+        amd64: x86_64
+        arm64: aarch64
+
+# AWS distributes the CLI off-GitHub with only PGP signatures, so SHA-256s
+# computed from the downloaded assets are embedded here (matched by asset
+# filename; the macOS .pkg is a universal binary shared by both architectures).
+# Bump the version and all three hashes together on a new release.
+versions:
+  - version: "2.36.4"
+    archive:
+      verify:
+        checksum: |
+          86c1820b04c6a95350d6e9101fc727c5b12c87bbf8964fdddf6e2e162f36942b  awscli-exe-linux-x86_64-2.36.4.zip
+          e6880c6af36347440e3f9597b97c45fa6c143bbdb574bb29497e3ab3a7589a95  awscli-exe-linux-aarch64-2.36.4.zip
+          dcd2f9f9fb92917e0b1c88c329f2aaf9125698daa508f2358cd4af26fa46c365  AWSCLIV2-2.36.4.pkg
+
+# Both distributions are a self-contained onedir bundle whose aws binary must
+# stay beside its libraries, so bin/ holds symlinks into it — the same layout
+# the official installers produce.
+build:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+    platforms: ["linux"]
+  - copy:
+      from: "{{.Var.src}}/dist"
+      to: "{{.InstallDir}}/dist"
+    platforms: ["linux"]
+  # nem's extract cannot read a .pkg, so unpack the xar container and its
+  # gzipped-cpio Payload by hand. The cp is load-bearing: nem flock-holds the
+  # fetched file exclusively while build steps run, and libxar (xar, pkgutil)
+  # opens archives with O_SHLOCK, which would block on the held original forever.
+  - run:
+      script: |
+        mkdir -p "$NEM_STAGING_DIR/.pkg-expand"
+        cd "$NEM_STAGING_DIR/.pkg-expand"
+        cp "$NEM_PKG_ARCHIVE" pkg.xar
+        xar -xf pkg.xar
+        tar -xf aws-cli.pkg/Payload
+        mv aws-cli "$NEM_INSTALL_DIR/dist"
+        cd "$NEM_STAGING_DIR"
+        rm -rf "$NEM_STAGING_DIR/.pkg-expand"
+    platforms: ["darwin"]
+  - run:
+      script: |
+        mkdir -p "$NEM_INSTALL_DIR/bin"
+        ln -s ../dist/aws "$NEM_INSTALL_DIR/bin/aws"
+        ln -s ../dist/aws_completer "$NEM_INSTALL_DIR/bin/aws_completer"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/aws", "--version"]
