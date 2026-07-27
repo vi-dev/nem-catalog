@@ -1,0 +1,65 @@
+schemaVersion: 1
+name: swift
+description: The Swift programming language toolchain
+homepage: https://www.swift.org
+license: Apache-2.0 WITH Swift-exception
+
+# Linux uses the ubuntu22.04 build — the widest-glibc toolchain swift.org
+# ships for both arches; darwin is one universal .pkg shared by both arches.
+archive:
+  fetch:
+    http:
+      url: 'https://download.swift.org/swift-{{.Version}}-release/{{if eq .OS "darwin"}}xcode/swift-{{.Version}}-RELEASE/swift-{{.Version}}-RELEASE-osx.pkg{{else}}ubuntu2204{{if eq .Arch "arm64"}}-aarch64{{end}}/swift-{{.Version}}-RELEASE/swift-{{.Version}}-RELEASE-ubuntu22.04{{if eq .Arch "arm64"}}-aarch64{{end}}.tar.gz{{end}}'
+
+# swift.org publishes no SHA-256 (Linux: detached PGP signature only; macOS:
+# nothing), so hashes computed from the assets are embedded here; the Linux
+# hashes were cross-checked against their PGP signatures. Bump the version and
+# all three hashes together.
+versions:
+  - version: "6.3.3"
+    archive:
+      verify:
+        checksum: |
+          2c3ad7ad74ab7249d42f172ee3b40bc8a729893010b4a3384ba26f3c61e35008  swift-6.3.3-RELEASE-ubuntu22.04.tar.gz
+          3aa77d8e06cf236a2352f743648bacca7e6c3f05b0cb8b025786dc469202bea2  swift-6.3.3-RELEASE-ubuntu22.04-aarch64.tar.gz
+          ee82e57774d6650f94aa06302435d6f44a055b9411698db8ecb85d9a3bcc91d0  swift-6.3.3-RELEASE-osx.pkg
+
+build:
+  # The Linux toolchain sits entirely under usr/ inside the tarball.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+    platforms: ["linux"]
+  - copy:
+      from: "{{.Var.src}}/usr"
+      to: "{{.InstallDir}}/usr"
+    platforms: ["linux"]
+  # nem's extract cannot read a .pkg, so unpack the xar and its cpio Payload
+  # by hand. The cp dodges libxar's O_SHLOCK deadlock on nem's flock-held
+  # download; keep the whole Payload (lldb and XCTest live outside usr/); the
+  # final rm keeps scratch out of the shipped tree.
+  - run:
+      script: |
+        d="$NEM_STAGING_DIR/.pkg-expand"
+        mkdir -p "$d"
+        cp "$NEM_PKG_ARCHIVE" "$d/pkg.xar"
+        xar -C "$d" -xf "$d/pkg.xar" "swift-$NEM_PKG_VERSION-RELEASE-osx-package.pkg/Payload"
+        tar -C "$NEM_INSTALL_DIR" -xf "$d/swift-$NEM_PKG_VERSION-RELEASE-osx-package.pkg/Payload"
+        rm -rf "$d"
+    platforms: ["darwin"]
+  # Link only the swift entry points into bin/ so the bundled clang/lld/lldb
+  # don't shadow system toolchains; swift resolves subtools via its real path,
+  # so relative symlinks suffice.
+  - run:
+      script: |
+        mkdir -p "$NEM_INSTALL_DIR/bin"
+        for f in "$NEM_INSTALL_DIR"/usr/bin/swift* "$NEM_INSTALL_DIR"/usr/bin/sourcekit-lsp; do
+          [ -x "$f" ] || continue
+          b="${f##*/}"
+          ln -s "../usr/bin/$b" "$NEM_INSTALL_DIR/bin/$b"
+        done
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/swift", "--version"]
