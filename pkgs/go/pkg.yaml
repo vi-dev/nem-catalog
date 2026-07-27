@@ -7,6 +7,12 @@ license: BSD-3-Clause
 binPaths:
   - go/bin
 
+env:
+  # go self-locates GOROOT from its own binary; exported here for external
+  # tooling (gopls, editors) that reads GOROOT to find this toolchain.
+  - name: GOROOT
+    value: "{{.InstallDir}}/go"
+
 archive:
   fetch:
     http:

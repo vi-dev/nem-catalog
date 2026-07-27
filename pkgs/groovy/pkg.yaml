@@ -4,6 +4,12 @@ description: Apache Groovy multi-faceted programming language for the JVM
 homepage: https://groovy.apache.org
 license: Apache-2.0
 
+env:
+  # The groovy launcher self-locates its home; GROOVY_HOME is exported for
+  # tooling that reads it to discover the Groovy installation.
+  - name: GROOVY_HOME
+    value: "{{.InstallDir}}"
+
 dependsOn:
   - temurin21
 

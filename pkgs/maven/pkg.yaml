@@ -4,6 +4,12 @@ description: Apache Maven build and dependency-management tool for Java
 homepage: https://maven.apache.org
 license: Apache-2.0
 
+env:
+  # mvn self-locates its home; MAVEN_HOME is exported for IDEs and tooling
+  # that read it to discover the Maven installation.
+  - name: MAVEN_HOME
+    value: "{{.InstallDir}}"
+
 dependsOn:
   - temurin21
 

@@ -4,6 +4,10 @@ description: Amazon Corretto 21 (LTS) OpenJDK distribution
 homepage: https://aws.amazon.com/corretto/
 license: GPL-2.0-with-classpath-exception
 
+env:
+  - name: JAVA_HOME
+    value: "{{.InstallDir}}"
+
 archive:
   fetch:
     http:
