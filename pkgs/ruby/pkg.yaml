@@ -1,0 +1,42 @@
+schemaVersion: 1
+name: ruby
+description: The Ruby programming language (prebuilt relocatable Ruby from rv-ruby)
+homepage: https://www.ruby-lang.org
+license: Ruby OR BSD-2-Clause
+
+# rv-ruby tags releases by date and puts the Ruby version in the asset name,
+# so versions are pinned against one hard-coded release date — bump the date
+# in both URLs and the pinned versions together. The macOS bottle tag encodes
+# the arch: arm64_sonoma is arm64, ventura is x86_64.
+#
+# The Linux builds need glibc >= 2.38 on x86_64 / 2.39 on arm64 (Ubuntu
+# 24.04+, Debian 13+): older distros install green, then ruby fails at dynamic
+# link. The musl variants need the musl loader, so they are no substitute.
+archive:
+  fetch:
+    http:
+      url: 'https://github.com/spinel-coop/rv-ruby/releases/download/20260723/ruby-{{.Version}}.{{if eq .OS "darwin"}}{{if eq .Arch "arm64"}}arm64_sonoma{{else}}ventura{{end}}{{else}}{{.Arch}}_linux{{end}}.tar.gz'
+      templateOverrides:
+        amd64: x86_64
+  verify:
+    checksumURL: 'https://github.com/spinel-coop/rv-ruby/releases/download/20260723/SHA256SUMS'
+
+versions:
+  - version: "4.0.6"
+  - version: "3.4.10"
+  - version: "3.3.12"
+
+install:
+  # The payload nests two levels deep: rv-ruby@<ver>/<ver>/.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 2
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      # exercises interpreter startup plus the statically bundled OpenSSL and libyaml
+      cmd: ["{{.InstallDir}}/bin/ruby", "-ropenssl", "-ryaml", "-e", "puts RUBY_VERSION"]
