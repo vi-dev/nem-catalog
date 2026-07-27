@@ -1,0 +1,82 @@
+schemaVersion: 1
+name: erlang
+description: Erlang/OTP runtime and development environment
+homepage: https://www.erlang.org
+license: Apache-2.0
+
+buildFromSource: true
+
+# openssl is linked statically into the crypto NIF; ncurses provides termcap
+# for the erts terminal driver on Linux (macOS links the SDK's curses).
+dependsOn:
+  - openssl
+  - ncurses
+
+# Prebuilt OTP (erlef/otp_builds) exists only for macOS, so build the official
+# source tarball — one platform-independent asset. Docs are separate make
+# targets this recipe never invokes.
+source:
+  fetch:
+    github_release:
+      repo: erlang/otp
+      assetName: 'otp_src_{{.Version}}.tar.gz'
+      # Excludes 4-part maint versions: not semver, they'd order lexicographically.
+      releaseFilter: '^OTP-(\d+\.\d+(?:\.\d+)?)$'
+      releaseTemplate: 'OTP-{{.Version}}'
+  # GitHub's asset digests are null on OTP-28.0 and older, so verify against
+  # the release's SHA256.txt.
+  verify:
+    checksumGitHubAsset: SHA256.txt
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # The mtime pin keeps make from rebuilding the shipped prebuilt .beams
+  # (extract drops tar mtimes). An explicit --with-ssl hard-fails rather than
+  # silently dropping crypto/ssl; --disable-dynamic-ssl-lib links libcrypto
+  # statically, so the install has no runtime OpenSSL coupling. erts probes
+  # -ltinfo/-lncurses but never -lncursesw — the only lib the ncurses package
+  # ships — so a scratch shim exposes it under the probed names on Linux.
+  # --enable-builtin-zlib avoids a host zlib dependency; wx, odbc and javac
+  # stay off (GUI/DB/Java bridges beyond the catalog).
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        find . -exec touch -t 200001010000 {} +
+        ssl=$(dirname "$(dirname "$(command -v openssl)")")
+        if [ "$NEM_OS" = linux ]; then
+          ncl=$(ncursesw6-config --libdir)
+          lib="$ncl/libncursesw.so"
+          [ -e "$lib" ] || lib=$(ls "$ncl"/libncursesw.so.* | head -n 1)
+          shim="$NEM_STAGING_DIR/.libshim"
+          mkdir -p "$shim"
+          ln -s "$lib" "$shim/libncurses.so"
+          ln -s "$lib" "$shim/libtinfo.so"
+          export CPPFLAGS="$(ncursesw6-config --cflags)"
+          export LDFLAGS="-L$shim -L$ncl"
+        fi
+        ./configure --prefix="$NEM_INSTALL_DIR" \
+          --with-ssl="$ssl" --disable-dynamic-ssl-lib \
+          --enable-builtin-zlib \
+          --without-wx --without-odbc --without-javac
+        # fail loudly if configure silently dropped a TLS-critical app
+        for a in crypto ssl ssh; do
+          test ! -f "lib/$a/SKIP" || { echo "app skipped: $a"; cat "lib/$a/SKIP"; exit 1; }
+        done
+        make -j4
+        make install DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  # Boot the VM and guard crypto/ssl; erl -version alone would boot nothing.
+  - run:
+      cmd:
+        - "{{.InstallDir}}/bin/erl"
+        - "-noshell"
+        - "-eval"
+        - '{ok,_} = application:ensure_all_started(crypto), 32 = byte_size(crypto:hash(sha256, <<"nem">>)), {ok,_} = application:ensure_all_started(ssl), io:format("~s~n", [erlang:system_info(otp_release)]), halt().'
