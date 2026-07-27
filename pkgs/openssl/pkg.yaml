@@ -1,0 +1,50 @@
+schemaVersion: 1
+name: openssl
+description: TLS/SSL and general-purpose cryptography toolkit and libraries
+homepage: https://www.openssl.org/
+license: Apache-2.0
+
+buildFromSource: true
+
+source:
+  fetch:
+    github_release:
+      repo: openssl/openssl
+      assetName: 'openssl-{{.Version}}.tar.gz'
+      # Stable 3.x only — 4.x removes APIs consumers still use. The anchor
+      # also excludes -alpha/-beta tags.
+      releaseFilter: '^openssl-(3\.\d+\.\d+)$'
+      releaseTemplate: 'openssl-{{.Version}}'
+  # Upstream publishes a single-line per-asset sidecar (`<hash> *<asset>`).
+  verify:
+    checksumGitHubAsset: 'openssl-{{.Version}}.tar.gz.sha256'
+
+build:
+  - extract:
+      from: "{{.Source}}"
+      as: src
+      stripComponents: 1
+  - mkdir:
+      path: "{{.StagingDir}}/.tmp"
+  # --libdir=lib avoids lib64 on Linux; --openssldir stays inside the prefix.
+  # build_sw/install_sw skip the docs (3.0/3.1 Configure rejects no-docs);
+  # install_ssldirs adds the openssl.cnf and certs dirs. Both static and
+  # shared libs ship so consumers can link either way.
+  - run:
+      cwd: "{{.Var.src}}"
+      env:
+        TMPDIR: "{{.StagingDir}}/.tmp"
+      script: |
+        ./Configure --prefix="$NEM_INSTALL_DIR" --openssldir="$NEM_INSTALL_DIR/ssl" \
+          --libdir=lib no-tests
+        make -j4 build_sw
+        make install_sw install_ssldirs DESTDIR="$NEM_STAGING_DIR"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/openssl", "version"]
+  # A known digest proves libcrypto works, not just that the binary starts.
+  - run:
+      script: |
+        [ "$(printf 'nem' | "$NEM_INSTALL_DIR/bin/openssl" dgst -sha256 -r | cut -d' ' -f1)" = \
+          "18ce15cc9d3bab28791ce25fcc1cc8fff7550ee4ef4a08b1d41303986a304417" ]
