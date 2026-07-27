@@ -1,0 +1,39 @@
+schemaVersion: 1
+name: python
+description: The Python programming language (prebuilt CPython from python-build-standalone)
+homepage: https://www.python.org
+license: PSF-2.0
+
+# Upstream tags releases by date and puts the CPython version in the asset
+# name, so versions are pinned against one hard-coded release date — bump the
+# date in both URLs and the pinned versions together.
+archive:
+  fetch:
+    http:
+      url: 'https://github.com/astral-sh/python-build-standalone/releases/download/20260718/cpython-{{.Version}}+20260718-{{.Arch}}-{{.OS}}-install_only_stripped.tar.gz'
+      templateOverrides:
+        linux: unknown-linux-gnu
+        darwin: apple-darwin
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    checksumURL: 'https://github.com/astral-sh/python-build-standalone/releases/download/20260718/SHA256SUMS'
+
+versions:
+  - version: "3.14.6"
+  - version: "3.13.14"
+  - version: "3.12.13"
+
+install:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  - run:
+      # exercises interpreter startup plus the bundled OpenSSL and SQLite
+      cmd: ["{{.InstallDir}}/bin/python", "-c", "import ssl, sqlite3; print(ssl.OPENSSL_VERSION)"]
