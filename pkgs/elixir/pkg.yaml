@@ -1,0 +1,41 @@
+schemaVersion: 1
+name: elixir
+description: Dynamic, functional language for building scalable and maintainable applications
+homepage: https://elixir-lang.org
+license: Apache-2.0
+
+# The launchers exec a bare erl from PATH; dependsOn provides it.
+dependsOn:
+  - erlang
+
+archive:
+  fetch:
+    github_release:
+      repo: elixir-lang/elixir
+      # One platform-independent BEAM bytecode asset. Bytecode loads on its
+      # build OTP and newer, so keep the otp-NN suffix <= the erlang package's
+      # OTP major; when a release drops this asset the fetch 404s — bump then.
+      assetName: elixir-otp-28.zip
+      # Excludes -rc.N prereleases and the floating v1.NN-latest/main-latest tags.
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: elixir-otp-28.zip.sha256sum
+
+install:
+  # No wrapper dir in the zip; the launchers self-locate via bin/../lib, so
+  # install the tree wholesale.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}"
+      to: "{{.InstallDir}}"
+
+test:
+  # --version boots the VM through the erlang dependency; --short-version
+  # never runs erl.
+  - run:
+      script: |
+        export HOME="$PWD/nem-elixir-home"
+        mkdir -p "$HOME"
+        "$NEM_INSTALL_DIR/bin/elixir" --version
