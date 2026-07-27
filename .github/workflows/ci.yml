@@ -44,7 +44,7 @@ jobs:
 
   install-lint:
     if: github.event_name == 'pull_request'
-    timeout-minutes: 30
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -81,6 +81,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASE_REF: ${{ github.base_ref }}
+          NEM_BUILD_TIMEOUT: 20m
         run: |
           set -euo pipefail
           diff_out="$(git diff --name-only "origin/${BASE_REF}...HEAD" -- pkgs/ \
