@@ -1,0 +1,42 @@
+schemaVersion: 1
+name: rust
+description: The Rust programming language toolchain
+homepage: https://www.rust-lang.org
+license: Apache-2.0 OR MIT
+
+archive:
+  fetch:
+    http:
+      url: 'https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.xz'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+      versionsFrom:
+        github_release:
+          repo: rust-lang/rust
+          # Tags are bare semver (1.97.1).
+          releaseFilter: '^(\d+\.\d+\.\d+)$'
+          versionTemplate: "{{.Capture}}"
+  verify:
+    checksumURL: 'https://static.rust-lang.org/dist/rust-{{.Version}}-{{.Arch}}-{{.OS}}.tar.xz.sha256'
+
+# The archive is per-component trees that install.sh (bash, hence the explicit
+# interpreter) merges into one prefix — run it rather than copy. --without
+# drops the offline docs; --disable-ldconfig skips the Linux ld-cache write.
+build:
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - run:
+      cwd: "{{.Var.src}}"
+      script: |
+        bash install.sh --prefix="$NEM_INSTALL_DIR" --disable-ldconfig --without=rust-docs,rust-docs-json-preview
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/rustc", "--version"]
+  - run:
+      cmd: ["{{.InstallDir}}/bin/cargo", "--version"]
