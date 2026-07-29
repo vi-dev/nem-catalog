@@ -37,7 +37,7 @@ build:
       script: |
         ./Configure --prefix="$NEM_INSTALL_DIR" --openssldir="$NEM_INSTALL_DIR/ssl" \
           --libdir=lib no-tests
-        make -j4 build_sw
+        make -j"${NEM_CPU_COUNT:-4}" build_sw
         make install_sw install_ssldirs DESTDIR="$NEM_STAGING_DIR"
 
 test:

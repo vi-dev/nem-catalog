@@ -39,7 +39,7 @@ build:
         export CPPFLAGS="$(ncursesw6-config --cflags)"
         export LDFLAGS="$(ncursesw6-config --libs)"
         ./configure --prefix="$NEM_INSTALL_DIR" --with-curses --disable-static
-        make SHLIB_LIBS="$(ncursesw6-config --libs)"
+        make -j"${NEM_CPU_COUNT:-1}" SHLIB_LIBS="$(ncursesw6-config --libs)"
         make install DESTDIR="$NEM_STAGING_DIR"
   # readline installs no binary; expose a prefix printer so consumers can locate
   # this install via its bin dir on PATH.

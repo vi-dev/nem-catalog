@@ -69,7 +69,7 @@ build:
         for a in crypto ssl ssh; do
           test ! -f "lib/$a/SKIP" || { echo "app skipped: $a"; cat "lib/$a/SKIP"; exit 1; }
         done
-        make -j4
+        make -j"${NEM_CPU_COUNT:-4}"
         make install DESTDIR="$NEM_STAGING_DIR"
 
 test:

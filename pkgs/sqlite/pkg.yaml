@@ -36,7 +36,7 @@ build:
         TMPDIR: "{{.StagingDir}}/.tmp"
       script: |
         ./configure --prefix="$NEM_INSTALL_DIR" --disable-readline
-        make
+        make -j"${NEM_CPU_COUNT:-1}"
         make install DESTDIR="$NEM_STAGING_DIR"
 
 test:

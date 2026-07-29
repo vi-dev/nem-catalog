@@ -43,7 +43,7 @@ build:
         TMPDIR: "{{.StagingDir}}/.tmp"
       script: |
         ./configure --prefix="$NEM_INSTALL_DIR" --disable-udev
-        make
+        make -j"${NEM_CPU_COUNT:-1}"
         make install DESTDIR="$NEM_STAGING_DIR"
   # libusb installs no binary; nem exposes a dependency only via its bin dir on
   # PATH, so drop a prefix printer there for consumers to locate this install.

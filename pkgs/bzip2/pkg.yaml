@@ -31,7 +31,7 @@ build:
   - run:
       cwd: "{{.Var.src}}"
       script: |
-        make CFLAGS="-fPIC -O2 -D_FILE_OFFSET_BITS=64" \
+        make -j"${NEM_CPU_COUNT:-1}" CFLAGS="-fPIC -O2 -D_FILE_OFFSET_BITS=64" \
           PREFIX="$NEM_STAGING_DIR$NEM_INSTALL_DIR" install
 
 test:

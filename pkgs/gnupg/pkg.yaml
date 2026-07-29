@@ -65,7 +65,7 @@ build:
         for d in HAVE_BZIP2 HAVE_LIBREADLINE HAVE_LIBUSB HTTP_USE_NTBTLS USE_TOFU; do
           grep -q "^#define $d" config.h || { echo "feature not enabled: $d"; exit 1; }
         done
-        make -j4
+        make -j"${NEM_CPU_COUNT:-4}"
         make install DESTDIR="$NEM_STAGING_DIR"
 
 test:

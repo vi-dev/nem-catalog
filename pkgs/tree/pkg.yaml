@@ -33,7 +33,7 @@ build:
       env:
         TMPDIR: "{{.StagingDir}}/.tmp"
       script: |
-        make CC=cc
+        make -j"${NEM_CPU_COUNT:-1}" CC=cc
         cp tree "$NEM_STAGING_DIR$NEM_INSTALL_DIR/bin/tree"
 
 test:

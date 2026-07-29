@@ -40,7 +40,7 @@ build:
           --enable-pinentry-gnome3=no --enable-pinentry-qt=no \
           --enable-pinentry-qt5=no --enable-pinentry-fltk=no \
           --enable-pinentry-tqt=no --enable-pinentry-efl=no
-        make
+        make -j"${NEM_CPU_COUNT:-1}"
         make install DESTDIR="$NEM_STAGING_DIR"
 
 test:

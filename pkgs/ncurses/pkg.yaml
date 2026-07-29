@@ -40,7 +40,7 @@ build:
           --with-pkg-config-libdir="$NEM_INSTALL_DIR/lib/pkgconfig" \
           --without-ada --without-cxx-binding --without-tests \
           --without-manpages --without-debug --disable-stripping
-        make
+        make -j"${NEM_CPU_COUNT:-1}"
         make install DESTDIR="$NEM_STAGING_DIR"
 
 test:

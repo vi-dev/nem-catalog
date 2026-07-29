@@ -45,7 +45,7 @@ build:
           --with-libgpg-error-prefix="$ge" \
           --with-libgcrypt-prefix="$gc" \
           --with-ksba-prefix="$kb"
-        make
+        make -j"${NEM_CPU_COUNT:-1}"
         make install DESTDIR="$NEM_STAGING_DIR"
 
 test:

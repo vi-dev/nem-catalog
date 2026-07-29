@@ -30,7 +30,7 @@ build:
         TMPDIR: "{{.StagingDir}}/.tmp"
       script: |
         ./configure --prefix="$NEM_INSTALL_DIR" --disable-nls --disable-doc
-        make
+        make -j"${NEM_CPU_COUNT:-1}"
         make install DESTDIR="$NEM_STAGING_DIR"
   # npth-config is built but left uninstalled upstream (noinst); copy it into the
   # staged tree so the package has an executable to smoke-test.
