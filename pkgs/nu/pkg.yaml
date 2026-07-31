@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: nu
+description: Nushell — a shell that treats data as structured tables
+homepage: https://www.nushell.sh
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: nushell/nushell
+      # Rust target-triple naming: nu-<ver>-<arch>-<os-triple>.tar.gz.
+      assetName: 'nu-{{.Version | trimPrefix "v"}}-{{.Arch}}-{{.OS}}.tar.gz'
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    checksumGitHubAsset: 'SHA256SUMS'
+
+install:
+  # Tarball nests under nu-<ver>-<triple>/ (the nu binary plus nu_plugin_* and
+  # docs); take just the nu executable.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/nu"
+      to: "{{.InstallDir}}/bin/nu"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/nu", "--version"]
