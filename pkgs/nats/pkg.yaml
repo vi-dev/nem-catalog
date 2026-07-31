@@ -1,0 +1,28 @@
+schemaVersion: 1
+name: nats
+description: Command-line client for the NATS messaging system
+homepage: https://github.com/nats-io/natscli
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: nats-io/natscli
+      assetName: 'nats-{{.Version | trimPrefix "v"}}-{{.OS}}-{{.Arch}}.zip'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'SHA256SUMS'
+
+install:
+  # Zip nests everything under nats-<ver>-<os>-<arch>/ (LICENSE, README, nats).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/nats"
+      to: "{{.InstallDir}}/bin/nats"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/nats", "--version"]
