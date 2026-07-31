@@ -1,0 +1,35 @@
+schemaVersion: 1
+name: slumber
+description: Terminal-based HTTP and REST API client
+homepage: https://slumber.lucaspickering.me
+license: MIT
+
+archive:
+  fetch:
+    github_release:
+      repo: LucasPickering/slumber
+      # Rust target-triple naming: slumber-<arch>-<os-triple>.tar.xz.
+      assetName: 'slumber-{{.Arch}}-{{.OS}}.tar.xz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: apple-darwin
+        linux: unknown-linux-gnu
+        amd64: x86_64
+        arm64: aarch64
+  verify:
+    # Each asset has a single-line <asset>.tar.xz.sha256 sidecar.
+    checksumGitHubAsset: 'slumber-{{.Arch}}-{{.OS}}.tar.xz.sha256'
+
+install:
+  # Tarball nests under slumber-<triple>/ (slumber binary plus docs).
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+      stripComponents: 1
+  - copy:
+      from: "{{.Var.src}}/slumber"
+      to: "{{.InstallDir}}/bin/slumber"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/slumber", "--version"]
