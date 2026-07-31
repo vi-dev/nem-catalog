@@ -1,0 +1,41 @@
+schemaVersion: 1
+name: k8sgpt
+description: Scan Kubernetes clusters and diagnose issues in plain English
+homepage: https://k8sgpt.ai
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: k8sgpt-ai/k8sgpt
+      # Assets are k8sgpt_<OS>_<arch>.tar.gz with a capitalized OS token
+      # (Darwin/Linux) and x86_64 for amd64; arm64 is spelled as-is.
+      assetName: 'k8sgpt_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+      templateOverrides:
+        darwin: Darwin
+        linux: Linux
+        amd64: x86_64
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Tarball is flat: k8sgpt, LICENSE, README.md, CHANGELOG.md at the root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/k8sgpt"
+      to: "{{.InstallDir}}/bin/k8sgpt"
+
+test:
+  # k8sgpt creates its config dir on startup (UserConfigDir → ~/Library/Application
+  # Support on macOS, XDG_CONFIG_HOME on Linux), which is read-only in the sandbox;
+  # point HOME and the XDG dirs at the writable scratch cwd.
+  - run:
+      script: |
+        export HOME="$PWD/nem-k8sgpt-home"
+        export XDG_CONFIG_HOME="$HOME/.config"
+        export XDG_CACHE_HOME="$HOME/.cache"
+        mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+        "$NEM_INSTALL_DIR/bin/k8sgpt" version
