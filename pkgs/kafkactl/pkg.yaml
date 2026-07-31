@@ -1,0 +1,27 @@
+schemaVersion: 1
+name: kafkactl
+description: Command-line tool for managing Apache Kafka
+homepage: https://github.com/deviceinsight/kafkactl
+license: Apache-2.0
+
+archive:
+  fetch:
+    github_release:
+      repo: deviceinsight/kafkactl
+      assetName: 'kafkactl_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
+  verify:
+    checksumGitHubAsset: 'checksums.txt'
+
+install:
+  # Tarball is flat: kafkactl, LICENSE.md, CHANGELOG.md at the root.
+  - extract:
+      from: "{{.Archive}}"
+      as: src
+  - copy:
+      from: "{{.Var.src}}/kafkactl"
+      to: "{{.InstallDir}}/bin/kafkactl"
+
+test:
+  - run:
+      cmd: ["{{.InstallDir}}/bin/kafkactl", "version"]
