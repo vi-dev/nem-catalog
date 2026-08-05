@@ -8,10 +8,10 @@ license: Apache-2.0
 # there is no prebuilt asset to install-gate on macOS. umoci is pure Go, though,
 # and builds static with CGO off (upstream's own `umoci.static` target), so build
 # it from the pinned tag's vendored source instead.
-dependsOn:
-  - go
-
 buildFromSource: true
+
+buildDependsOn:
+  - go
 
 source:
   fetch:

@@ -8,6 +8,9 @@ buildFromSource: true
 dependsOn:
   - libgpg-error
 
+buildDependsOn:
+  - libgpg-error
+
 source:
   fetch:
     http:

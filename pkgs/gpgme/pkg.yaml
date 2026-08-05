@@ -5,9 +5,12 @@ homepage: https://www.gnupg.org/software/gpgme/index.html
 license: LGPL-2.1-or-later
 
 buildFromSource: true
-# libgpg-error + libassuan are build deps (found via their *-config scripts on
-# PATH); gnupg supplies the gpg/gpgconf engine gpgme drives at runtime.
 dependsOn:
+  - libgpg-error
+  - libassuan
+  - gnupg           # spawned at runtime; configure also probes gpg/gpgconf at build
+
+buildDependsOn:
   - libgpg-error
   - libassuan
   - gnupg

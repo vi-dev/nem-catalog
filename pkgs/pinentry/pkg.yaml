@@ -9,6 +9,10 @@ dependsOn:
   - libgpg-error
   - libassuan
 
+buildDependsOn:
+  - libgpg-error
+  - libassuan
+
 source:
   fetch:
     http:

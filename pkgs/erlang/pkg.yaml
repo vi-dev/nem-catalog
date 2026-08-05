@@ -9,7 +9,10 @@ buildFromSource: true
 # openssl is linked statically into the crypto NIF; ncurses provides termcap
 # for the erts terminal driver on Linux (macOS links the SDK's curses).
 dependsOn:
-  - openssl
+  - ncurses
+
+buildDependsOn:
+  - openssl            # build-only: statically linked, no runtime coupling
   - ncurses
 
 # Prebuilt OTP (erlef/otp_builds) exists only for macOS, so build the official

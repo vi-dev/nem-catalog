@@ -5,11 +5,14 @@ homepage: https://github.com/containers/skopeo
 license: Apache-2.0
 
 dependsOn:
-  - go
-  - gpgme      # libgpgme for signature verification (pulls gnupg + libassuan + libgpg-error)
-  - pkgconf    # cgo resolves libgpgme via pkg-config
+  - gpgme
 
 buildFromSource: true
+
+buildDependsOn:
+  - go
+  - pkgconf
+  - gpgme
 
 source:
   fetch:

@@ -8,6 +8,9 @@ buildFromSource: true
 dependsOn:
   - ncurses
 
+buildDependsOn:
+  - ncurses
+
 source:
   fetch:
     http:

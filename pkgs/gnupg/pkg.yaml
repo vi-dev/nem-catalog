@@ -18,6 +18,18 @@ dependsOn:
   - bzip2
   - readline
 
+buildDependsOn:         # pinentry omitted: a runtime helper gpg-agent spawns, never linked
+  - libgpg-error
+  - libgcrypt
+  - libassuan
+  - libksba
+  - npth
+  - ntbtls
+  - sqlite
+  - libusb
+  - bzip2
+  - readline
+
 source:
   fetch:
     http:
