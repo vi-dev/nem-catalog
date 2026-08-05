@@ -17,6 +17,10 @@ archive:
   fetch:
     http:
       url: 'https://archive.apache.org/dist/maven/maven-3/{{.Version}}/binaries/apache-maven-{{.Version}}-bin.tar.gz'
+      versionsFrom:
+        github_tag:
+          repo: apache/maven
+          tagFilter: '^maven-(3\.\d+\.\d+)$'
   verify:
     checksumURL: 'https://archive.apache.org/dist/maven/maven-3/{{.Version}}/binaries/apache-maven-{{.Version}}-bin.tar.gz.sha512'
     algorithm: sha512

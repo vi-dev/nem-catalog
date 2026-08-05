@@ -10,6 +10,10 @@ source:
   fetch:
     http:
       url: 'https://distfiles.ariadne.space/pkgconf/pkgconf-{{.Version}}.tar.xz'
+      versionsFrom:
+        github_tag:
+          repo: pkgconf/pkgconf
+          tagFilter: '^pkgconf-(\d+\.\d+\.\d+)$'
 
 versions:
   - version: "2.5.1"

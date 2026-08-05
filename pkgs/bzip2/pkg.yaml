@@ -13,6 +13,10 @@ source:
   fetch:
     http:
       url: 'https://sourceware.org/pub/bzip2/bzip2-{{.Version}}.tar.gz'
+      versionsFrom:
+        github_tag:
+          repo: libarchive/bzip2
+          tagFilter: '^bzip2-(\d+\.\d+\.\d+)$'
 
 versions:
   - version: "1.0.8"

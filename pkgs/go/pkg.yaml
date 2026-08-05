@@ -17,6 +17,11 @@ archive:
   fetch:
     http:
       url: 'https://dl.google.com/go/go{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz'
+      versionsFrom:
+        github_tag:
+          repo: golang/go
+          tagFilter: '^go(\d+\.\d+\.\d+)$'
+          versionTemplate: "v{{.Capture}}"
   verify:
     sha256URL: 'https://dl.google.com/go/go{{.Version | trimPrefix "v"}}.{{.OS}}-{{.Arch}}.tar.gz.sha256'
 

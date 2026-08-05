@@ -17,6 +17,10 @@ source:
   fetch:
     http:
       url: 'https://gnupg.org/ftp/gcrypt/pinentry/pinentry-{{.Version}}.tar.bz2'
+      versionsFrom:
+        github_tag:
+          repo: gpg/pinentry
+          tagFilter: '^pinentry-(\d+\.\d+\.\d+)$'
 
 versions:
   - version: "1.3.2"

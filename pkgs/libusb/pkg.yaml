@@ -13,6 +13,10 @@ source:
   fetch:
     http:
       url: 'https://github.com/libusb/libusb/releases/download/v{{.Version}}/libusb-{{.Version}}.tar.bz2'
+      versionsFrom:
+        github_tag:
+          repo: libusb/libusb
+          tagFilter: '^v(\d+\.\d+\.\d+)$'
 
 versions:
   - version: "1.0.30"

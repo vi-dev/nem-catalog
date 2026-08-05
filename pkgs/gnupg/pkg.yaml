@@ -34,6 +34,10 @@ source:
   fetch:
     http:
       url: 'https://gnupg.org/ftp/gcrypt/gnupg/gnupg-{{.Version}}.tar.bz2'
+      versionsFrom:
+        github_tag:
+          repo: gpg/gnupg
+          tagFilter: '^gnupg-(\d+\.\d+\.\d+)$'
 
 versions:
   - version: "2.5.20"

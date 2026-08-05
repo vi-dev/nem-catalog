@@ -20,6 +20,11 @@ archive:
   fetch:
     http:
       url: 'https://archive.apache.org/dist/groovy/{{.Version}}/distribution/apache-groovy-binary-{{.Version}}.zip'
+      versionsFrom:
+        github_tag:
+          repo: apache/groovy
+          tagFilter: '^GROOVY_(\d+_\d+_\d+)$'
+          versionTemplate: '{{.Capture | replace "_" "."}}'
   verify:
     checksumURL: 'https://archive.apache.org/dist/groovy/{{.Version}}/distribution/apache-groovy-binary-{{.Version}}.zip.sha256'
 

@@ -8,6 +8,10 @@ archive:
   fetch:
     http:
       url: 'https://ziglang.org/download/{{.Version}}/zig-{{.Arch}}-{{.OS}}-{{.Version}}.tar.xz'
+      versionsFrom:
+        github_tag:
+          repo: ziglang/zig
+          tagFilter: '^(\d+\.\d+\.\d+)$'
       templateOverrides:
         darwin: macos
         amd64: x86_64

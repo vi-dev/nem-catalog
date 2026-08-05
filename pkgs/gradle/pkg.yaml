@@ -11,6 +11,10 @@ archive:
   fetch:
     http:
       url: 'https://services.gradle.org/distributions/gradle-{{.Version}}-bin.zip'
+      versionsFrom:
+        github_tag:
+          repo: gradle/gradle
+          tagFilter: '^v(\d+\.\d+\.\d+)$'
   verify:
     checksumURL: 'https://services.gradle.org/distributions/gradle-{{.Version}}-bin.zip.sha256'
 

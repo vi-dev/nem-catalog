@@ -8,6 +8,10 @@ archive:
   fetch:
     http:
       url: 'https://awscli.amazonaws.com/{{if eq .OS "darwin"}}AWSCLIV2-{{.Version}}.pkg{{else}}awscli-exe-linux-{{.Arch}}-{{.Version}}.zip{{end}}'
+      versionsFrom:
+        github_tag:
+          repo: aws/aws-cli
+          tagFilter: '^(\d+\.\d+\.\d+)$'
       templateOverrides:
         amd64: x86_64
         arm64: aarch64

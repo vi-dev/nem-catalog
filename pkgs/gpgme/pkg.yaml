@@ -19,6 +19,10 @@ source:
   fetch:
     http:
       url: 'https://gnupg.org/ftp/gcrypt/gpgme/gpgme-{{.Version}}.tar.bz2'
+      versionsFrom:
+        github_tag:
+          repo: gpg/gpgme
+          tagFilter: '^gpgme-(\d+\.\d+\.\d+)$'
 
 versions:
   - version: "2.1.1"

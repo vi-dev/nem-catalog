@@ -10,6 +10,10 @@ archive:
   fetch:
     http:
       url: 'https://download.swift.org/swift-{{.Version}}-release/{{if eq .OS "darwin"}}xcode/swift-{{.Version}}-RELEASE/swift-{{.Version}}-RELEASE-osx.pkg{{else}}ubuntu2204{{if eq .Arch "arm64"}}-aarch64{{end}}/swift-{{.Version}}-RELEASE/swift-{{.Version}}-RELEASE-ubuntu22.04{{if eq .Arch "arm64"}}-aarch64{{end}}.tar.gz{{end}}'
+      versionsFrom:
+        github_tag:
+          repo: swiftlang/swift
+          tagFilter: '^swift-(\d+\.\d+\.\d+)-RELEASE$'
 
 # swift.org publishes no SHA-256 (Linux: detached PGP signature only; macOS:
 # nothing), so hashes computed from the assets are embedded here; the Linux

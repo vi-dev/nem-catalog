@@ -10,6 +10,10 @@ source:
   fetch:
     http:
       url: 'https://gnupg.org/ftp/gcrypt/npth/npth-{{.Version}}.tar.bz2'
+      versionsFrom:
+        github_tag:
+          repo: gpg/npth
+          tagFilter: '^npth-(\d+\.\d+)$'
 
 versions:
   - version: "1.8"

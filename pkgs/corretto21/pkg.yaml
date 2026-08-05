@@ -12,6 +12,10 @@ archive:
   fetch:
     http:
       url: 'https://corretto.aws/downloads/resources/{{.Version}}/amazon-corretto-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz'
+      versionsFrom:
+        github_tag:
+          repo: corretto/corretto-21
+          tagFilter: '^(\d+\.\d+\.\d+\.\d+\.\d+)$'
       templateOverrides:
         darwin: macosx
         amd64: x64
