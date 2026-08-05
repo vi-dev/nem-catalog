@@ -11,6 +11,7 @@ archive:
       versionsFrom:
         github_release:
           repo: kubernetes/kubernetes
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:
     sha256URL: "https://dl.k8s.io/release/{{.Version}}/bin/{{.OS}}/{{.Arch}}/kubectl.sha256"
 

@@ -8,6 +8,7 @@ archive:
   fetch:
     github_release:
       repo: cilium/hubble
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
       assetName: "hubble-{{.OS}}-{{.Arch}}.tar.gz"
   verify:
     sha256GitHubAsset: "hubble-{{.OS}}-{{.Arch}}.tar.gz.sha256sum"

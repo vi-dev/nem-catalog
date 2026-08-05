@@ -8,6 +8,7 @@ archive:
   fetch:
     github_release:
       repo: wagoodman/dive
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
       assetName: 'dive_{{.Version | trimPrefix "v"}}_{{.OS}}_{{.Arch}}.tar.gz'
   verify:
     sha256GitHubAsset: 'dive_{{.Version | trimPrefix "v"}}_checksums.txt'

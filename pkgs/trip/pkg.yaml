@@ -8,6 +8,7 @@ archive:
   fetch:
     github_release:
       repo: fujiapple852/trippy
+      releaseFilter: '^(\d+\.\d+\.\d+)$'
       # Rust target triples: <arch>-apple-darwin on macOS, <arch>-unknown-linux-gnu on Linux.
       assetName: 'trippy-{{.Version}}-{{.Arch}}-{{if eq .OS "darwin"}}apple-darwin{{else}}unknown-linux-gnu{{end}}.tar.gz'
       templateOverrides:

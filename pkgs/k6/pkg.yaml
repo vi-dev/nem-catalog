@@ -8,6 +8,7 @@ archive:
   fetch:
     github_release:
       repo: grafana/k6
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
       assetName: 'k6-{{.Version}}-{{.OS}}-{{.Arch}}{{if eq .OS "macos"}}.zip{{else}}.tar.gz{{end}}'
       templateOverrides:
         darwin: macos

@@ -8,6 +8,7 @@ archive:
   fetch:
     github_release:
       repo: sigstore/cosign
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
       assetName: "cosign-{{.OS}}-{{.Arch}}"
   verify:
     sha256GitHubAsset: "cosign_checksums.txt"

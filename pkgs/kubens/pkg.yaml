@@ -8,6 +8,7 @@ archive:
   fetch:
     github_release:
       repo: ahmetb/kubectx
+      releaseFilter: '^(v\d+\.\d+\.\d+)$'
       assetName: "kubens_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
       templateOverrides:
         amd64: x86_64

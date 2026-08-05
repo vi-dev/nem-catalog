@@ -11,6 +11,7 @@ archive:
       versionsFrom:
         github_release:
           repo: helm/helm
+          releaseFilter: '^(v\d+\.\d+\.\d+)$'
   verify:
     sha256URL: "https://get.helm.sh/helm-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz.sha256sum"
 
