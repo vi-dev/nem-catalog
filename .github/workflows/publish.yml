@@ -1,0 +1,217 @@
+name: Publish
+
+on:
+  push:
+    branches: [main]
+    paths: ["pkgs/**"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  packages: write
+
+# Registry writes must serialize.
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    permissions:
+      contents: read
+      packages: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      linux_amd64: ${{ steps.plan.outputs.linux_amd64 }}
+      linux_arm64: ${{ steps.plan.outputs.linux_arm64 }}
+      darwin_arm64: ${{ steps.plan.outputs.darwin_arm64 }}
+      smoke: ${{ steps.plan.outputs.smoke }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - id: plan
+        name: Compute build and smoke plans
+        shell: bash
+        run: |
+          nem catalog missing ghcr.io/vi-dev/nem-catalog . --json > /tmp/missing.json
+          for plat in linux/amd64 linux/arm64 darwin/arm64; do
+            key=$(printf '%s' "$plat" | tr '/' '_')
+            echo "$key=$(jq -c --arg p "$plat" '.[$p]' /tmp/missing.json)" >> "$GITHUB_OUTPUT"
+          done
+          {
+            echo "### Missing archives"
+            echo '```json'
+            cat /tmp/missing.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          nem catalog diff ghcr.io/vi-dev/nem-catalog:v2 . --json > /tmp/diff.json
+          smoke=$(jq -c '[.[] | select(.status == "new" or .status == "updated") | . as $r
+            | (if ($r.versionsAdded | length) > 0 then $r.versionsAdded[] else $r.local end)
+            | "\($r.name)@\(.)"]' /tmp/diff.json)
+          echo "smoke=$smoke" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Changed vs live catalog"
+            echo '```json'
+            jq '[.[] | select(.status != "unchanged")]' /tmp/diff.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  warm:
+    permissions:
+      contents: read
+      packages: read
+    runs-on: ubuntu-latest
+    container: ghcr.io/vi-dev/nem:unstable
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+
+  build-linux-amd64:
+    needs: [plan, warm]
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.linux_amd64 != '[]' }}
+    runs-on: ubuntu-latest
+    container: ghcr.io/vi-dev/nem:unstable
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.linux_amd64) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build and push archive
+        shell: bash
+        env:
+          PKG: ${{ matrix.package }}
+          VER: ${{ matrix.version }}
+        run: nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER" --push ghcr.io/vi-dev/nem-catalog
+
+  build-linux-arm64:
+    needs: [plan, build-linux-amd64]
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.linux_arm64 != '[]' }}
+    runs-on: ubuntu-24.04-arm
+    container: ghcr.io/vi-dev/nem:unstable
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.linux_arm64) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build and push archive
+        shell: bash
+        env:
+          PKG: ${{ matrix.package }}
+          VER: ${{ matrix.version }}
+        run: nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER" --push ghcr.io/vi-dev/nem-catalog
+
+  build-darwin-arm64:
+    needs: [plan, build-linux-arm64]
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.darwin_arm64 != '[]' }}
+    runs-on: macos-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.darwin_arm64) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build and push archive
+        shell: bash
+        env:
+          PKG: ${{ matrix.package }}
+          VER: ${{ matrix.version }}
+        run: nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER" --push ghcr.io/vi-dev/nem-catalog
+
+  stage:
+    needs: [plan, build-darwin-arm64]
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          ghcr-token: ${{ github.token }}
+      - run: nem catalog publish ghcr.io/vi-dev/nem-catalog . --tag v2-staging
+
+  smoke:
+    needs: [plan, stage]
+    if: ${{ !failure() && !cancelled() && needs.plan.outputs.smoke != '[]' }}
+    permissions:
+      contents: read
+      packages: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            script: .github/scripts/install-rootless.sh
+            install: "false"
+          - runner: ubuntu-24.04-arm
+            script: .github/scripts/install-rootless.sh
+            install: "false"
+          - runner: macos-latest
+            script: .github/scripts/install-each.sh
+            install: "true"
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    env:
+      CATALOG_REF: ghcr.io/vi-dev/nem-catalog:v2-staging
+      CATALOG_DIR: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          install: ${{ matrix.install }}
+          catalog: ${{ matrix.install == 'true' && env.CATALOG_REF || '' }}
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+          cache-key: staging-nem-catalogs
+      - name: Install changed versions
+        shell: bash
+        env:
+          ENTRIES: ${{ needs.plan.outputs.smoke }}
+        run: |
+          jq -r '.[]' <<< "$ENTRIES" | ${{ matrix.script }}
+
+  promote:
+    needs: [stage, smoke]
+    if: ${{ !cancelled() && needs.stage.result == 'success' && contains(fromJSON('["success","skipped"]'), needs.smoke.result) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: oras-project/setup-oras@1d808f7d7f6995cc68b7bf507bfe5c5446e1dc9d # v2.0.1
+      - name: Promote v2-staging to v2
+        shell: bash
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+        run: |
+          echo "$GHCR_TOKEN" | oras login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          oras tag ghcr.io/vi-dev/nem-catalog:v2-staging v2

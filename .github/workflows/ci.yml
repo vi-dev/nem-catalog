@@ -1,0 +1,127 @@
+name: CI
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+      - run: nem catalog lint .
+
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+      - name: Publish dry-run
+        shell: bash
+        run: |
+          nem catalog publish ghcr.io/vi-dev/nem-catalog . --dry-run \
+            > /tmp/publish-plan.txt
+          {
+            echo "### Publish plan (dry-run)"
+            echo '```'
+            cat /tmp/publish-plan.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  changes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      source: ${{ steps.detect.outputs.source }}
+      prebuilt: ${{ steps.detect.outputs.prebuilt }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          ghcr-token: ${{ github.token }}
+      - id: detect
+        uses: ./.github/actions/changed-packages
+
+  build:
+    needs: changes
+    if: needs.changes.outputs.source != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        entry: ${{ fromJSON(needs.changes.outputs.source) }}
+        runner: [ubuntu-latest, ubuntu-24.04-arm, macos-latest]
+    runs-on: ${{ matrix.runner }}
+    # macOS runners cannot run job containers; an empty string means none.
+    container: ${{ matrix.runner != 'macos-latest' && 'ghcr.io/vi-dev/nem:unstable' || '' }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build without publishing
+        shell: bash
+        env:
+          PKG: ${{ matrix.entry.package }}
+          VER: ${{ matrix.entry.version }}
+        run: nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER"
+
+  install-check:
+    needs: changes
+    if: needs.changes.outputs.prebuilt != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            script: .github/scripts/install-rootless.sh
+            install: "false"
+          - runner: ubuntu-24.04-arm
+            script: .github/scripts/install-rootless.sh
+            install: "false"
+          - runner: macos-latest
+            script: .github/scripts/install-each.sh
+            install: "true"
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    env:
+      CATALOG_REF: .
+      CATALOG_DIR: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          install: ${{ matrix.install }}
+          catalog: ${{ matrix.install == 'true' && env.CATALOG_REF || '' }}
+      - name: Install from the PR's dir catalog
+        shell: bash
+        env:
+          PREBUILT: ${{ needs.changes.outputs.prebuilt }}
+        run: |
+          jq -r '.[] | .package + "@" + .version' <<< "$PREBUILT" \
+            | ${{ matrix.script }}
+
+  ci-ok:
+    needs: [lint, dry-run, changes, build, install-check]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check required jobs
+        shell: bash
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+        run: |
+          jq -e 'all(.[]; .result == "success" or .result == "skipped")' <<<"$NEEDS_JSON" >/dev/null

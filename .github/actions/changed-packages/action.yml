@@ -1,0 +1,24 @@
+name: Changed packages
+description: Classify packages whose manifests differ from the published catalog into source-built and prebuilt (package, version) entries
+inputs:
+  catalog-ref:
+    description: Published catalog ref to diff the working tree against
+    default: ghcr.io/vi-dev/nem-catalog:v2
+outputs:
+  source:
+    description: JSON array of {package, version} entries for source-built packages, one per added version
+    value: ${{ steps.detect.outputs.source }}
+  prebuilt:
+    description: JSON array of {package, version} entries for prebuilt packages, one per added version
+    value: ${{ steps.detect.outputs.prebuilt }}
+  any:
+    description: '"true" when at least one package differs from the published catalog'
+    value: ${{ steps.detect.outputs.any }}
+runs:
+  using: composite
+  steps:
+    - id: detect
+      shell: bash
+      env:
+        CATALOG_REF: ${{ inputs['catalog-ref'] }}
+      run: ${{ github.action_path }}/detect.sh

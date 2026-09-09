@@ -1,0 +1,67 @@
+name: Setup nem
+description: Install nem (unstable channel); optionally write ghcr.io credentials and configure the catalog
+inputs:
+  catalog:
+    description: Catalog ref (OCI ref or dir path) to configure as "official"
+    default: ""
+  ghcr-token:
+    description: Token written to ~/.docker/config.json for ghcr.io
+    default: ""
+  install:
+    description: Install nem onto the runner
+    default: "true"
+  cache-catalog:
+    description: Cache the nem config and catalog store so syncs only transfer changed blobs
+    default: "false"
+  cache-key:
+    description: Cache key prefix; jobs syncing a different catalog ref need their own cache key
+    default: "nem-catalogs"
+runs:
+  using: composite
+  steps:
+    - name: Pin NEM_HOME to the step home
+      shell: bash
+      run: echo "NEM_HOME=$HOME/.nem" >> "$GITHUB_ENV"
+    - name: Install nem
+      if: inputs.install == 'true'
+      shell: bash
+      run: |
+        # Job containers built from ghcr.io/vi-dev/nem ship nem already.
+        if command -v nem >/dev/null; then
+          nem version
+          exit 0
+        fi
+        curl -fsSL https://raw.githubusercontent.com/vi-dev/nem/main/install.sh \
+          | NEM_VERSION=unstable bash
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+    - name: Write ghcr.io credentials
+      if: inputs['ghcr-token'] != ''
+      shell: bash
+      env:
+        GHCR_TOKEN: ${{ inputs['ghcr-token'] }}
+      run: |
+        # A credentials file instead of `docker login`: macOS runners have no
+        # docker CLI, and nem reads the standard config file via oras-go.
+        mkdir -p "$HOME/.docker"
+        auth=$(printf '%s:%s' "$GITHUB_ACTOR" "$GHCR_TOKEN" | base64 | tr -d '\n')
+        printf '{"auths":{"ghcr.io":{"auth":"%s"}}}\n' "$auth" > "$HOME/.docker/config.json"
+    - name: Restore catalog store cache
+      if: inputs['cache-catalog'] == 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          ~/.nem/config.yaml
+          ~/.nem/catalogs
+        key: ${{ inputs['cache-key'] }}-${{ github.run_id }}-${{ github.job }}
+        restore-keys: |
+          ${{ inputs['cache-key'] }}-
+    - name: Ensure catalog store path exists
+      if: inputs['cache-catalog'] == 'true'
+      shell: bash
+      run: mkdir -p "$HOME/.nem/catalogs"
+    - name: Configure catalog
+      if: inputs.catalog != ''
+      shell: bash
+      env:
+        CATALOG_REF: ${{ inputs.catalog }}
+      run: .github/scripts/configure-catalog.sh

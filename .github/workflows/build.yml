@@ -1,0 +1,179 @@
+name: Build
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # Mondays 04:00 UTC
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Space- or comma-separated package@version pairs to force-build (empty = only missing archives)
+        default: ""
+      force:
+        description: With package, overwrite archives even when a rebuilt platform entry is unchanged
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+
+# Archive pushes must serialize with publish runs.
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    permissions:
+      contents: read
+      packages: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      linux_amd64: ${{ steps.plan.outputs.linux_amd64 }}
+      linux_arm64: ${{ steps.plan.outputs.linux_arm64 }}
+      darwin_arm64: ${{ steps.plan.outputs.darwin_arm64 }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - id: plan
+        name: Compute build plan
+        shell: bash
+        env:
+          PACKAGE: ${{ inputs.package }}
+        run: |
+          if [ -n "$PACKAGE" ]; then
+            plan='[]'
+            for pv in $(printf '%s\n' "$PACKAGE" | tr ',' ' '); do
+              case "$pv" in
+                *@*) ;;
+                *) echo "invalid package spec '$pv'; want name@version" >&2; exit 1 ;;
+              esac
+              plan=$(jq -c --arg p "${pv%@*}" --arg v "${pv##*@}" '. + [{package: $p, version: $v}] | unique' <<<"$plan")
+            done
+            for plat in linux/amd64 linux/arm64 darwin/arm64; do
+              key=$(printf '%s' "$plat" | tr '/' '_')
+              echo "$key=$plan" >> "$GITHUB_OUTPUT"
+            done
+            {
+              echo "### Force-build plan"
+              echo '```json'
+              jq . <<<"$plan"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            nem catalog missing ghcr.io/vi-dev/nem-catalog . --json > /tmp/plan.json
+            {
+              echo "### Missing archives"
+              echo '```json'
+              cat /tmp/plan.json
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            for plat in linux/amd64 linux/arm64 darwin/arm64; do
+              key=$(printf '%s' "$plat" | tr '/' '_')
+              echo "$key=$(jq -c --arg p "$plat" '.[$p] // []' /tmp/plan.json)" >> "$GITHUB_OUTPUT"
+            done
+          fi
+
+  warm:
+    permissions:
+      contents: read
+      packages: read
+    runs-on: ubuntu-latest
+    container: ghcr.io/vi-dev/nem:unstable
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+
+  build-linux-amd64:
+    needs: [plan, warm]
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.linux_amd64 != '[]' }}
+    runs-on: ubuntu-latest
+    container: ghcr.io/vi-dev/nem:unstable
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.linux_amd64) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build and push archive
+        shell: bash
+        env:
+          PKG: ${{ matrix.package }}
+          VER: ${{ matrix.version }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          args=()
+          if [ "$FORCE" = "true" ]; then args+=(--force); fi
+          nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER" --push ghcr.io/vi-dev/nem-catalog "${args[@]}"
+
+  build-linux-arm64:
+    needs: [plan, build-linux-amd64]
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.linux_arm64 != '[]' }}
+    runs-on: ubuntu-24.04-arm
+    container: ghcr.io/vi-dev/nem:unstable
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.linux_arm64) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build and push archive
+        shell: bash
+        env:
+          PKG: ${{ matrix.package }}
+          VER: ${{ matrix.version }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          args=()
+          if [ "$FORCE" = "true" ]; then args+=(--force); fi
+          nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER" --push ghcr.io/vi-dev/nem-catalog "${args[@]}"
+
+  build-darwin-arm64:
+    needs: [plan, build-linux-arm64]
+    if: ${{ !cancelled() && needs.plan.result == 'success' && needs.plan.outputs.darwin_arm64 != '[]' }}
+    runs-on: macos-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.darwin_arm64) }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ghcr.io/vi-dev/nem-catalog:v2
+          ghcr-token: ${{ github.token }}
+          cache-catalog: "true"
+      - name: Build and push archive
+        shell: bash
+        env:
+          PKG: ${{ matrix.package }}
+          VER: ${{ matrix.version }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          args=()
+          if [ "$FORCE" = "true" ]; then args+=(--force); fi
+          nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER" --push ghcr.io/vi-dev/nem-catalog "${args[@]}"
