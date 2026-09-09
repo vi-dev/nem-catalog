@@ -1,0 +1,45 @@
+schema: 2
+name: ruff
+description: Extremely fast Python linter and code formatter
+homepage: https://docs.astral.sh/ruff/
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: astral-sh/ruff
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/astral-sh/ruff/releases/download/{{.Version}}/ruff-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "ruff", dst: "bin/ruff", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.16.6
+    sha256:
+      darwin/arm64: "77513748c833b435b82453ba20e07db808ef6c5121945ede80a6cf21bee468a4"
+      darwin/amd64: "87cce7e591603efa979be9044ac00835638a5d9052947070b6e2e7c0cdb21940"
+      linux/arm64: "3c1b99f65b8bf2df64ff099ee072e11b4652813e2c164ec875a26fc9e99be88f"
+      linux/amd64: "0696335ef16615d8c7445ad438750eb0f55b3da6f153df21265a7c6d5750254f"
+  - version: 0.16.5
+    sha256:
+      darwin/arm64: "ed142f8656e0092828c103dd058b55b871c88e13a801cade8f860d8a9ca8943e"
+      darwin/amd64: "4895245fe294cd9f38b8c941b9aa009b3015729f73327bdbf8a716b7fec8f84d"
+      linux/arm64: "796079ea998dba3e455394077ba51a4c500c2402d3920580c646a0580f20370c"
+      linux/amd64: "65b8bae7e43f12a91b71036a52176012b3aefb725d5ae263e2771474110a0983"
+  - version: 0.16.4
+    sha256:
+      darwin/arm64: "b4ad832b7734592aa1c6710dbc15277ed9d3d54c8bd44bb25bb7b14ae9098b88"
+      darwin/amd64: "233b7368e00b25064abd0db19f7cb1b43117fef41d7106170e6ffec50a0201ca"
+      linux/arm64: "08eb65c07016f1b6d2a874777492a230c7d5822bdf34030af217825b57911b0a"
+      linux/amd64: "9cb1234804ddb0f7f57cef3f81623ce5acb990e40af7cce08dc7778c9d7ee96c"
+  - version: 0.16.3
+    sha256:
+      darwin/arm64: "136a4db6512d9b16dda56ac8604696ed65c3b1a914a142de029e7f8d5006f1d9"
+      darwin/amd64: "05c2a6705e7c0c056d6d93ff538978583f0c47b4c28d334ab9d58d2e8daf4c24"
+      linux/arm64: "b9cc833f5db856484b38718c9da195a6ec990707307bda30530913a09705419a"
+      linux/amd64: "7ab3b978d2c0b1c96b2323d4e5c4f35284ae1cdf35d2f7399595c74c805f5fa3"

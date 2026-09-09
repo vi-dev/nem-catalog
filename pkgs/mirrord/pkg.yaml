@@ -1,0 +1,69 @@
+schema: 2
+name: mirrord
+description: Run local processes in the context of a Kubernetes cluster
+homepage: https://mirrord.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: metalbear-co/mirrord
+    filter: '^\d+\.\d+\.\d+$'
+
+# macOS ships one universal binary; Linux is per-arch.
+artifact:
+  url: "https://github.com/metalbear-co/mirrord/releases/download/{{.Version}}/mirrord_{{if eq .OS \"darwin\"}}mac_universal{{else}}linux_{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}{{end}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/mirrord", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.254.0
+    sha256:
+      darwin/arm64: "d386fcf81dba46d890d87ad53f2b9a5ef6045d6ed74d3df5f750c14eb08093fc"
+      darwin/amd64: "d386fcf81dba46d890d87ad53f2b9a5ef6045d6ed74d3df5f750c14eb08093fc"
+      linux/arm64: "6127f22f135b66e8a8c77b55fb9f3d0cdf0f78ff5e938fbadf874fdbc78a32c4"
+      linux/amd64: "82d6d2ff9dc70d01825de47ec55c512047ee2cbddf24e2df429c238614157689"
+  - version: 3.253.1
+    sha256:
+      darwin/arm64: "a6683b15cabd3819af4af2a115db0a425664f8138c53248d395dda1166676ce0"
+      darwin/amd64: "a6683b15cabd3819af4af2a115db0a425664f8138c53248d395dda1166676ce0"
+      linux/arm64: "b579919d7906866b02cb1423daff1ba9be4c68417b03dedf02b6473f1e2a6142"
+      linux/amd64: "61e0164c0bdc5f2b512d90b0c56e75adccc842a194492f02b025308da929a988"
+  - version: 3.253.0
+    sha256:
+      darwin/arm64: "337bfcbc3d2512dc543f42fe86218bc2eef92db56291acc06d4e4897ee7ad3e3"
+      darwin/amd64: "337bfcbc3d2512dc543f42fe86218bc2eef92db56291acc06d4e4897ee7ad3e3"
+      linux/arm64: "bcb2bdd59b0f5d3d14c390e08aba2e064471eb191f8d813640cf30f72d4ecb48"
+      linux/amd64: "2b73fd0bc9e740deaf39d8c3a0a9c69102c34e5e99549979e6a28404d43b6006"
+  - version: 3.252.1
+    sha256:
+      darwin/arm64: "ae5a710b81b4045044ed40737ee8aaed0b37c0a29641e0858ec32f10a10a9adc"
+      darwin/amd64: "ae5a710b81b4045044ed40737ee8aaed0b37c0a29641e0858ec32f10a10a9adc"
+      linux/arm64: "9efbb897bc46a9f20f818f78784d67abac56dc7b98f81a48f92646a0130cf6b4"
+      linux/amd64: "26cc5942557a0424734b277ff7883b280e4db7f04083b5121ed6af5db70b8b93"
+  - version: 3.252.0
+    sha256:
+      darwin/arm64: "8e6eb99451fba915d68e4785f46702b03ba25e91aea34abb4c58a0b4c02dd656"
+      darwin/amd64: "8e6eb99451fba915d68e4785f46702b03ba25e91aea34abb4c58a0b4c02dd656"
+      linux/arm64: "a7d1b7325a0672fc6303f00bbdda29afd806ddb0176d246f0f5420e28ccc6fe9"
+      linux/amd64: "7db27a94ecee9577288f921c72df84a33e6ed55f9a09f2c38260c101bcfd5061"
+  - version: 3.251.0
+    sha256:
+      darwin/arm64: "0f99b192a2e195fa7c88d4fad9d3f4871402d458af4e7c77ea934674f1f799a4"
+      darwin/amd64: "0f99b192a2e195fa7c88d4fad9d3f4871402d458af4e7c77ea934674f1f799a4"
+      linux/arm64: "f713631a63ca362f746197b17acaacb459772e8882bec3eda907f4a6a696069c"
+      linux/amd64: "ef60f02f5595f9ee7a26e4ffc24b7d3ef8d32c1808e20a363435fbfe513bf658"
+  - version: 3.250.0
+    sha256:
+      darwin/arm64: "e25cc14a1de7d09c53dd207e4f053ec448ee664314bea791c4786a7ccafd1691"
+      darwin/amd64: "e25cc14a1de7d09c53dd207e4f053ec448ee664314bea791c4786a7ccafd1691"
+      linux/arm64: "a5f28306744461e20786afb52cf7fcfb0afa7596cf82e66cab7110f8f5b3f3ba"
+      linux/amd64: "727872016e01d225a4304a2c042113ed08decc84841e894e6bbee864f1206085"
+  - version: 3.249.0
+    sha256:
+      darwin/arm64: "6b59fa1d6ce9bc8367f11b6c87fe9c0c35f8e8dce1574227d9fd68baf4e8c8fc"
+      darwin/amd64: "6b59fa1d6ce9bc8367f11b6c87fe9c0c35f8e8dce1574227d9fd68baf4e8c8fc"
+      linux/arm64: "414c88a0155ea10a4a4bcfd3faa0390007cda6813c2208e7a288edf40cc23395"
+      linux/amd64: "c7db909c7ed08462c5ca8e4f128369a95653ad7da47a917872b9ce6686bdb5b4"

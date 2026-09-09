@@ -1,0 +1,53 @@
+schema: 2
+name: bun
+description: All-in-one JavaScript runtime, bundler, and package manager
+homepage: https://bun.com
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: oven-sh/bun
+    filter: '^bun-v\d+\.\d+\.\d+$'
+    prefix: "bun-v"
+
+artifact:
+  url: "https://github.com/oven-sh/bun/releases/download/bun-v{{.Version}}/bun-{{.OS}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x64\"}}.zip"
+
+# The zip nests a single self-contained binary under a per-platform dir;
+# stripping it leaves just the bun executable at the install root.
+install:
+  - extract: {strip: 1}
+
+bins: ["."]
+
+versions:
+  - version: 1.4.2
+    sha256:
+      darwin/arm64: "90987a3a16d7db556d886ac3d551e7b6d3edf0a1cf43acaed622e8676be1d12f"
+      darwin/amd64: "80520d7e17526308c9185d261679ac6d27798d3803a0e9f7ff9121ab8affb012"
+      linux/arm64: "54328bbc2d9c8e0c9f892c544d66c57a83b84139e34909e5ee81758f1ac8fda7"
+      linux/amd64: "36368faef7527875d5ffa52e53cd48021741f2a83eb6208a8dd64068d422a913"
+  - version: 1.4.1
+    sha256:
+      darwin/arm64: "d8973ce835fa7867e5cc79afee6fc6f1ae0117aa4bd5fc2546fd00c512f71386"
+      darwin/amd64: "8f34239f276a3f0d27bfcd1ffecfe5d2127e74fb0aa4c0971a0cdec7b225c965"
+      linux/arm64: "580ce77533108dc6b10bec1721397e4f5aa44e909726da2451d483dfc5e581d6"
+      linux/amd64: "74c1c3bee7cd998500c8f969cd8972355ac6a07207e94a39eece1999b56ffabf"
+  - version: 1.4.0
+    sha256:
+      darwin/arm64: "c669e97f6164e1c96e0701748db98dfa77492908cbd8394c7557134a735de381"
+      darwin/amd64: "1d0211b8f1dc991182344687ad15e72ee86f154845a5f7fa477994cd341dd9b0"
+      linux/arm64: "4b1a332ee861983eb93bcfe6f770fff94e3e31b2c388bdaea3c8ed35e58eed0e"
+      linux/amd64: "2d03fb5fb83ac8b567aca0a281b2ce1a1a19d488f56c2968d88c3f25e92fe452"
+  - version: 1.3.14
+    sha256:
+      darwin/arm64: "d8b96221828ad6f97ac7ac0ab7e95872341af763001e8803e8267652c2652620"
+      darwin/amd64: "4183df3374623e5bab315c547cfa0974533cd457d86b73b639f7a87974cd6633"
+      linux/arm64: "a27ffb63a8310375836e0d6f668ae17fa8d8d18b88c37c821c65331973a19a3b"
+      linux/amd64: "951ee2aee855f08595aeec6225226a298d3fea83a3dcd6465c09cbccdf7e848f"
+  - version: 1.3.13
+    sha256:
+      darwin/arm64: "5467e3f65dba526b9fea98f0cce04efafc0c63e169733ec27b876a3ad32da190"
+      darwin/amd64: "e5a6c8b64f419925232d111ecb13e25f0abf55e54f792341f987623fd0778009"
+      linux/arm64: "70bae41b3908b0a120e1e58c5c8af30e74afae3b8d11b0d3fdd8e787ddfb4b22"
+      linux/amd64: "79c0771fa8b92c33aae41e15a0e0d307ea99d0e2f00317c71c6c53237a78e25a"

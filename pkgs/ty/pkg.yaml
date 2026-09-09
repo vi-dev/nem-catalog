@@ -1,0 +1,57 @@
+schema: 2
+name: ty
+description: Python type checker and language server
+homepage: https://github.com/astral-sh/ty
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: astral-sh/ty
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/astral-sh/ty/releases/download/{{.Version}}/ty-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "ty", dst: "bin/ty", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.0.78
+    sha256:
+      darwin/arm64: "793cb933deae417d6befd2c7f95454b62b428717766e03a14032504827ad398a"
+      darwin/amd64: "9ba471b1dd5c711cbcf8f57c5248ccce7832a38c5eb3fe5650c4108fb455eb83"
+      linux/arm64: "11604480eef76c0588ae4b1b6f75ba284950157a25bfc1cdf57309bb5d22c3eb"
+      linux/amd64: "b79ead5b710d0ee19ec9e9def572a557bc447ae13ea0a45d08b7dbf930900401"
+  - version: 0.0.77
+    sha256:
+      darwin/arm64: "d86ca04e12c7b110d95cebe7b192ae0164f596605e28e081c1b71a0ee30ea711"
+      darwin/amd64: "6da0da90db79b01f8552f0d7cda40151d54d55b70982c6d1046f818ab9b0b5d3"
+      linux/arm64: "38730d0146a07536e8e67d8f4ab7a806f24a3fc7510d056b63ef6a3a349b98c0"
+      linux/amd64: "b538162da342afd5462fb68812baaa1c6a80d1cce92aa869ed6a35247e094ae9"
+  - version: 0.0.76
+    sha256:
+      darwin/arm64: "f5b56d88b4e358e92948567e248e282dcbc5ba732f660237aad7f432e92f3955"
+      darwin/amd64: "e976d5e2e6fa30ab40a55366d7ee6d5d645e5f596c20dae9721023b1556795f6"
+      linux/arm64: "647ecf594f908bec0ea2c33a9f8ec8c6863d4719c2337c93807d85a4d905ed6f"
+      linux/amd64: "b4a65cd65da3a0cfbb36e7efb92eba537c28cb63e387e3938b22165648ef2790"
+  - version: 0.0.75
+    sha256:
+      darwin/arm64: "7ceb90dc5c60097640d10cb8330bf1ebef7833273b4afdf91e8670f49294cbe6"
+      darwin/amd64: "e3df3cc012ef75b3c8aca49b93783fa32bb15b3a8237ba7b3b63d32cac7ead8a"
+      linux/arm64: "1e44393d9e3f029808a3b1af33729db1b01b9d90808bed821604d390df2f58b4"
+      linux/amd64: "3a2e99afb590e82f424dc1d1436b25e56caf91d1c69702090d4ad596880fec47"
+  - version: 0.0.74
+    sha256:
+      darwin/arm64: "79b08069f29833383650515a31f260a60a81224b31fdb9fa21a56c1ead032a6e"
+      darwin/amd64: "5f49f82e8f057de44a8e747fe0afa5573a3d324ce1c4e29bb9d97e6decbe7570"
+      linux/arm64: "4c886aacc65fecbf00c127a401f56f3c6ca64db1c1ce9f107900e19534720040"
+      linux/amd64: "547c7f82547261ba62038b608d0958cfab2247c324aba39dcbf09522da705357"
+  - version: 0.0.73
+    sha256:
+      darwin/arm64: "9adcc77248a6ef6c4f185a71dfec87d7d0499c1d0a5e61e32dff4f8b21d8cd83"
+      darwin/amd64: "0ea1cf4577dfac855b3ae15b02326b9ba27c0d020373938f59cd4a662bce2e08"
+      linux/arm64: "efc09714a11d74aa7dfcbbb35d849e068839bb77f2420816a51559c33bb08dd7"
+      linux/amd64: "a3a8fe9c4ece8236630a426e747981a480a1e79a90dc9b27bb149f69b9a56a2f"

@@ -1,0 +1,52 @@
+schema: 2
+name: melange
+description: Build apk packages from declarative pipelines
+homepage: https://github.com/chainguard-dev/melange
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: chainguard-dev/melange
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/chainguard-dev/melange/releases/download/v{{.Version}}/melange_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "melange", dst: "bin/melange", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.59.5
+    sha256:
+      darwin/arm64: "ea7e1fe54f7f86c735519871bcc42a5cb2208d948b94922466c28702539db7bb"
+      darwin/amd64: "09f469c2328304b9d658ade4b03a2f1d7ceb4983e7e748836d1a66e60e736652"
+      linux/arm64: "cad4f7820cd49507afdebd049009bf86e662f481adc8e55ee548633523a32118"
+      linux/amd64: "0cc1afa9f283a2c4e4efe002a8fd4afbdd166b7db538fb985f33faf81d4f0319"
+  - version: 0.59.4
+    sha256:
+      darwin/arm64: "09a1f83a9ff2cc0a43c9a68f315cd48ac8ab9aff315f1b038036e1effdd9d8c4"
+      darwin/amd64: "46067685a3fc9851959f9c113b7ebeced88a6afd2c39ae3ced52c72709efb15d"
+      linux/arm64: "9cb70639788311b0ca9bf63494ae1ccba48f25f622f07c5ce652e7337e2f5734"
+      linux/amd64: "bd875ee39c1c2fd3a262ece518595b30e987eb2df07c4471e59202851044552b"
+  - version: 0.59.3
+    sha256:
+      darwin/arm64: "ef612215f4b3c73ed8be9924ab22356bfb7267ebc7ccb27772346c4b835a68c5"
+      darwin/amd64: "c46ca87f8363fd93475f121b1e623781f5050ce8155b93d8776b79a0f5e17354"
+      linux/arm64: "713ab41051d767d4745ec28d67e415eddb3cb41f0b2ef16a98c52e7a12654836"
+      linux/amd64: "a03c98e5a17a41a288f2aac50c20e01265141c7489a21d0648dd0727d8b979dd"
+  - version: 0.59.2
+    sha256:
+      darwin/arm64: "00f63508773cc6a0433352db7210facbb64f3d406ae719db2f98ab4c2a5e9e7a"
+      darwin/amd64: "af13dc0af9442a67e581732d43730b727d40a4e5848d190101cb1a43c1bae5b7"
+      linux/arm64: "aa429edad9bfab86ef2584d4478baa317d8c5c6eb58bdb12f40007aac0bf3f3b"
+      linux/amd64: "871dd0ec48efc21c5f370e71a2247bff5dfd12d09d8cea8d0c17ee80f21d78c7"
+  - version: 0.59.1
+    sha256:
+      darwin/arm64: "6485fcff49ca60fc3f75a773eb1f7f81562cf394b86cc9fe8371f7d55e8f9b98"
+      darwin/amd64: "0a1080caa973c9a10b9e331542e927531710810647c4f3b9ec9e53bf22f2e960"
+      linux/arm64: "aa5d221f92a248ba9aa490d1441c733417ad4c02f32fa9a13b8800acb42946f9"
+      linux/amd64: "90f76f3e5fcb90ddc4c932ad352982bda98d58001d2bcccb982dd7fb2e608a1f"

@@ -1,0 +1,40 @@
+schema: 2
+name: pulumi
+description: Infrastructure as code in general-purpose languages
+homepage: https://www.pulumi.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: pulumi/pulumi
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/pulumi/pulumi/releases/download/v{{.Version}}/pulumi-v{{.Version}}-{{.OS}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
+
+install:
+  # the tarball nests every binary under pulumi/, exposed directly
+  - extract: {strip: 0}
+
+bins: ["pulumi"]
+
+versions:
+  - version: 3.261.0
+    sha256:
+      darwin/arm64: "6cf9054b00de8c48599af6a6e3deaaf65bd0ca92447396912d05f2fa899e9fce"
+      darwin/amd64: "36b0f48824983e3d17690cb462d4ff044a4e9a180b8ac6a4a282879342b6d395"
+      linux/arm64: "631ab5c09455016087846c1142761cd16b2f1900dd71904a0c21193601f6fb0c"
+      linux/amd64: "39bc0d2427e22ead6039fad7a7337c2fdc53a68b737ccc52dc897d244aaa8853"
+  - version: 3.260.0
+    sha256:
+      darwin/arm64: "33629055fa0f93b2c3f2f159155ff3638443e2a0cc36ea4f4a1faee09c3c5550"
+      darwin/amd64: "b820b402648fb524dd54349884b744f3bf1894e6aecb10a313e336dc71970aad"
+      linux/arm64: "1e7176d55274be10778b5ec7ebb0ae24be4061ad78e9ebfd0e9c1d874927617a"
+      linux/amd64: "d7b2936f986e82fd5fa2025bafe27f74d4a50cb6ba6785a16884fd5f270453fe"
+  - version: 3.259.0
+    sha256:
+      darwin/arm64: "57c27f179e527e2cf9f62b841a448af72a020e44b2fb4ee0d9bd85556c00c864"
+      darwin/amd64: "eaca4c3b8277bfa3ab061fa3b270d1c66358a0b2e613da8c5587a04b7226c534"
+      linux/arm64: "edc8327463a72160bb36cf82cf5062da9c8a244290a706d9980988e7bf486853"
+      linux/amd64: "94ba357acac23d01474084c4b00098dc0f7bc70ce13f34c777459254a5f718e5"

@@ -1,0 +1,76 @@
+schema: 2
+
+name: gpgme
+description: GnuPG Made Easy — high-level crypto API library over the GnuPG engine
+homepage: https://www.gnupg.org/software/gpgme/
+license: LGPL-2.1-or-later
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat is the version-major float; each dep stays within one soname
+# (libassuan.9, libgpg-error.0). libgpg-error is listed directly, not only
+# transitively via libassuan, so the loader path is always complete.
+deps:
+  - name: libassuan
+    kind: link
+    compat: "3"
+  - name: libgpg-error
+    kind: link
+    compat: "1"
+
+bins: [bin]
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://gnupg.org/ftp/gcrypt/gpgme/
+    filter: 'gpgme-(\d+\.\d+\.\d+)\.tar\.bz2'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 2.2.0
+    sourceSha256: "7160e80e84dafd00d956c84891c533bb7ab16a6a54fbe1574b2f3acf0496977b"
+  - version: 2.1.2
+    sourceSha256: "0687a95b299871c4141f507c0f740de6b429c9ac067d0fa4e062e3264df5fb77"
+  - version: 2.1.1
+    sourceSha256: "6d7ee12b209d7dce75468db53f72a90e1ad3d21f4c304ef2c002612a52f5333a"
+  - version: 2.1.0
+    sourceSha256: "841c5ea53fc26259f4fbf0e8bde982dea1b8a1ca0cb77e681c82b050566bf92b"
+  - version: 2.0.1
+    sourceSha256: "821ab0695c842eab51752a81980c92b0410c7eadd04103f791d5d2a526784966"
+  - version: 2.0.0
+    sourceSha256: "ddf161d3c41ff6a3fcbaf4be6c6e305ca4ef1cc3f1ecdfce0c8c2a167c0cc36d"
+  - version: 1.24.3
+    sourceSha256: "bfc17f5bd1b178c8649fdd918956d277080f33df006a2dc40acdecdce68c50dd"
+  - version: 1.24.2
+    sourceSha256: "e11b1a0e361777e9e55f48a03d89096e2abf08c63d84b7017cfe1dce06639581"
+
+build:
+  deps:
+    - name: libassuan
+      kind: link
+      compat: "3"
+    - name: libgpg-error
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://gnupg.org/ftp/gcrypt/gpgme/gpgme-{{.Version}}.tar.bz2'
+  output: out
+  steps:
+    # --enable-languages= builds the C library only; MAKEINFO=true skips the
+    # texinfo manual; -fgnu89-inline (macOS only) avoids the duplicate __sputc.
+    - run: |
+        set -e
+        cflags="-O2"
+        case "$NEM_OS" in darwin) cflags="-fgnu89-inline -O2" ;; esac
+        ./configure --prefix=/ --libdir=/lib --disable-dependency-tracking --enable-shared --disable-static --disable-doc \
+          --disable-gpg-test --disable-gpgsm-test --disable-g13-test --disable-gpgconf-test \
+          --enable-languages= \
+          CFLAGS="$CFLAGS $cflags"
+        make MAKEINFO=true -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make MAKEINFO=true install DESTDIR="$NEM_OUTPUT"

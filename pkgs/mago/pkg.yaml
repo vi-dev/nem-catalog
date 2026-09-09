@@ -1,0 +1,51 @@
+schema: 2
+name: mago
+description: PHP toolchain with formatter, linter, and static analyzer
+homepage: https://mago.carthage.software
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: carthage-software/mago
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/carthage-software/mago/releases/download/{{.Version}}/mago-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "mago", dst: "bin/mago", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.47.6
+    sha256:
+      darwin/arm64: "713ba2670d9b2349981f74a1460037e818db37831aa870543111b6a712536f00"
+      darwin/amd64: "6c3a6ff0bf0839eb0b71b7828529004efcae2c66b820f083533f940b34eab749"
+      linux/arm64: "250bd2e21f96f9e0afe5b4852a5da05861d007ab94123111af83c981ed347421"
+      linux/amd64: "d40ec3c441eca54be1b1ba54fe17530f8d424d2dc23f8c7ca6ea6da69ab6e598"
+  - version: 1.47.5
+    sha256:
+      darwin/arm64: "9ce89ab38a0eb32fb3fc6989d1ba4ffad27c2bdce204c6ababd32cc8088e4ca9"
+      darwin/amd64: "06435019f5c08d604850759b0a7422d626b25e5544aebdf4aed78b26829fb60f"
+      linux/arm64: "1b9e6a8afc81c3301d777789f8a12f4deadd15ad5d160d7fa67e55a33adeae5d"
+      linux/amd64: "eb8b0f168ae97d4d69f8ab887fe66b8ef6be0e7e61f86df7a37476493aafea13"
+  - version: 1.47.4
+    sha256:
+      darwin/arm64: "ecfd09ff7700fe332b5ab95dde08e6dc78d2884de42a58cc36474c50e4a4a2b0"
+      darwin/amd64: "9161a6709fcd59f488185a1f24183d5000dc9d2010fcf92f66743883836010c2"
+      linux/arm64: "810611978ce99d5b1bba53089925a89c7a3f9683e3f99a3a6baf2f841c35ce1b"
+      linux/amd64: "dca3dc2e4e37949a65e1c3ff62ed03ca85ed50421df30132c4628f8186e5e155"
+  - version: 1.47.3
+    sha256:
+      darwin/arm64: "a38b26383643295980a39d1bb8b9b9ef806088d8440bc6e4bf0a5ce419a1189f"
+      darwin/amd64: "4e1a0e001d9820e5f0c2b96020ddf09c1733f77dab38bab6cb016a001553231d"
+      linux/arm64: "04848191c54037d64bf17424e591557b26377445665a94fb628137360ad4445e"
+      linux/amd64: "591c48e0f0d16d526191036e42e8f734aa58cae84fd87ce07beb0ccddaf2435a"
+  - version: 1.47.2
+    sha256:
+      darwin/arm64: "cba019c8bb654047d053fd0f8eb7cf6c7df48ef98ca3ac8d2de4504660f9ff2d"
+      darwin/amd64: "aded37851135104faa54c69b7552bf33835b857458400da1d6550322270120d2"
+      linux/arm64: "4c08a63b92807cac6beaad00b54f3eaf07772ea2e62d2a691b601feed308acd1"
+      linux/amd64: "37cc8edbc5bad4abdaeafb88b7840d4877c4379a69d53f78a1a85121a923312b"

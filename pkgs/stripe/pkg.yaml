@@ -1,0 +1,64 @@
+schema: 2
+name: stripe
+description: Command-line tool for the Stripe API
+homepage: https://github.com/stripe/stripe-cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: stripe/stripe-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/stripe/stripe-cli/releases/download/v{{.Version}}/stripe_{{.Version}}_{{replace .OS \"darwin\" \"mac-os\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "stripe", dst: "bin/stripe", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.50.10
+    sha256:
+      darwin/arm64: "29f7d7ead27625a04bd860aceb5fbdbee93a30b8c5338deba2952a821ac1b8fe"
+      darwin/amd64: "0d5816ccb3453eae720631a6ec61012eed858ae5592372198842a5824a4414fd"
+      linux/arm64: "173b74ce056029055097d0d2dfdecb9559a255febd6bacc30fd3f24cb0fbc8b1"
+      linux/amd64: "de57a83f97c813bb2440d06db4345a2361e57dd684198452cd121e9f22479b38"
+  - version: 1.50.9
+    sha256:
+      darwin/arm64: "db281c82af0fe699220b9e2c7711c17624101606589e7eed068daf27038d0144"
+      darwin/amd64: "5764370114ecfb33f601fe9698308b0c9586e752cb2030803841f65ca302bd67"
+      linux/arm64: "e928ecfe710a56030e852ebdc8f6532b8e14ac4fcf6c5823c6741e650fb01352"
+      linux/amd64: "7dc342d314349a6f319b15d2515c4f0426acbd12c416868fb2fa3bcea3746786"
+  - version: 1.50.8
+    sha256:
+      darwin/arm64: "5d5d0bbad17ba1b311b20d2ca8044264b11aff7cf68cbe5ba7b082561494031d"
+      darwin/amd64: "db92a61a40fdb40378d8be6615938bfa8c0c227f7dcdbf34982ca5006cb030a3"
+      linux/arm64: "2115214f843339a4609b6383cc4f7737a39426d753b1f43b663915675a867df4"
+      linux/amd64: "8a45ce4bec3266b1982aed764e963806f02539f3ed7c446ac6b50af994ffd8b7"
+  - version: 1.50.6
+    sha256:
+      darwin/arm64: "b4407f9b4c879eabc3cb4a67709602b73b573ac8e68d66dd3bb2fba522180d03"
+      darwin/amd64: "d3c5c9aaee15407234d7d46c51805dcde2c23196e43abb3d2717f7524403532c"
+      linux/arm64: "6fb5c1638cba7f50ae9b86123b7502670743b656028271dfbf113386348d305a"
+      linux/amd64: "7d020f23d4c91d3e0e6e89fd5729ad8885da243fa55d9a70aa74cd19cb05b9fa"
+  - version: 1.50.5
+    sha256:
+      darwin/arm64: "9ca86f19fb29c810f37547e3662a6917857bcb84f23d45fe8ae927b7e28db64c"
+      darwin/amd64: "6b0b6788c74e9f7ce7c7e343c39f9afe88a19c018a5ce685327aa6d58745b419"
+      linux/arm64: "17e02986ce8cdb96c8c8a8a4e2e266b59a2e35a1445e5bd74c0b407547bddcf0"
+      linux/amd64: "1fb8d36cc34c528af04d39bc72cb9754a0a7b63299a2b441e90e90d257c61887"
+  - version: 1.50.4
+    sha256:
+      darwin/arm64: "5dbf4bc580c3870d3f7cd0c56fde3c8a210340b59d45050a0c9c0ceb2110dc2f"
+      darwin/amd64: "30f85c4988d1e5d42a65d97a87265e6e4865fbf01083e6b3d1d90d2994446622"
+      linux/arm64: "35ff9ba4f861a10a94e1dff074b06b5fb36b0b3848caeeace995317de0f03f6e"
+      linux/amd64: "f6a04bbb318e678c20bb62f1ceb2bb6b03b47173189e08e043f7a6b4d9916bc2"
+  - version: 1.50.3
+    sha256:
+      darwin/arm64: "148a658e558fdc7b63c020e825d4189e50d90d4f05cb9087765132a5015ae3f5"
+      darwin/amd64: "0143c4ae333a6cc89915403c00a27bf8e2b91d00fcd48fa9a652a411acbeaffd"
+      linux/arm64: "390bfb9bdcc851a0abf96dd82887bbcd78aedc2d66c4c2a943d975957916a3b9"
+      linux/amd64: "4fda0794278c04f6594565d114ed145735bef7cfc91ddc1d2c18b1d83dec9ac9"

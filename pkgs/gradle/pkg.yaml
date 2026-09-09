@@ -1,0 +1,36 @@
+schema: 2
+name: gradle
+description: Gradle build automation tool
+homepage: https://gradle.org
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  github:
+    repo: gradle/gradle
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://services.gradle.org/distributions/gradle-{{.Version}}-bin.zip"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+versions:
+  - version: 9.7.1
+    sha256:
+      darwin/arm64: "acd53f1edaf02f1a8ff99879f8a34b302661a057d9b063ae9e35b552f804d20a"
+      darwin/amd64: "acd53f1edaf02f1a8ff99879f8a34b302661a057d9b063ae9e35b552f804d20a"
+      linux/arm64: "acd53f1edaf02f1a8ff99879f8a34b302661a057d9b063ae9e35b552f804d20a"
+      linux/amd64: "acd53f1edaf02f1a8ff99879f8a34b302661a057d9b063ae9e35b552f804d20a"
+  - version: 9.7.0
+    sha256:
+      darwin/arm64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"
+      darwin/amd64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"
+      linux/arm64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"
+      linux/amd64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"

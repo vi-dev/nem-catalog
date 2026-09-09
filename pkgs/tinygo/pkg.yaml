@@ -1,0 +1,35 @@
+schema: 2
+name: tinygo
+description: Go compiler for microcontrollers, WebAssembly, and small binaries
+homepage: https://tinygo.org
+license: BSD-3-Clause
+
+versionDiscovery:
+  github:
+    repo: tinygo-org/tinygo
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/tinygo-org/tinygo/releases/download/v{{.Version}}/tinygo{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+# The compiler resolves TINYGOROOT relative to its own path, so the whole
+# tree (bin, lib, src, targets) has to stay together.
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.42.0
+    sha256:
+      darwin/arm64: "493da3585e66c5da677a4be39402faf2041b4e45a61eb456e4547eca753a544e"
+      darwin/amd64: "ef7b96cf59de5714a7493a696e9db141a85a99459620b00c42cb3bad14be2af2"
+      linux/arm64: "f2f3f863e63728b87772e7306bd6030df6e6c89773a7082eb0122113cf9e453d"
+      linux/amd64: "b87688fa2e19cee7d813cad7fd7dadb71dff3198e47125aba66ba4af5e490438"
+  - version: 0.41.1
+    sha256:
+      darwin/arm64: "c684d154d89a452cc9c7fc5dc5fc80cb6a42445b3e44b3c12ed048692de0f341"
+      darwin/amd64: "1a8e62a234d3aea20793ada2c4a628de96ed7533384f0f5dc3c3f2ffa84f9bab"
+      linux/arm64: "789733bc3b5bace0bd1835a267b3ea267804a7ef1cfe69bc522c295f5226d624"
+      linux/amd64: "e156d1d93a376eef639a4143d13be07e8c463fb6cf2d7d447698ed4474d23e91"

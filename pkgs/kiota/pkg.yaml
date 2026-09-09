@@ -1,0 +1,35 @@
+schema: 2
+name: kiota
+description: OpenAPI-based HTTP client code generator
+homepage: https://github.com/microsoft/kiota
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: microsoft/kiota
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/microsoft/kiota/releases/download/v{{.Version}}/{{replace .OS \"darwin\" \"osx\"}}-{{replace .Arch \"amd64\" \"x64\"}}.zip"
+
+# kiota reads appsettings.json from its own directory, so the archive is kept
+# intact rather than copying the binary into bin/.
+install:
+  - extract: {strip: 0}
+
+bins: ["."]
+
+versions:
+  - version: 1.35.0
+    sha256:
+      darwin/arm64: "bd50a566dbcd2bd10f4ef4a919276dd193202dced990fb5d16d83b68030e2063"
+      darwin/amd64: "67fa0dd2a2d783ba52b504e115b2af029780aef3894617e303c1405a819d9450"
+      linux/arm64: "c542ef1b71c24912a002be87eab7cbfefea324b14eb353162a4b55b879e6925c"
+      linux/amd64: "8ca042683665f48cc6df1cbe6ff2c850d18f74ad0a1035a406eb486e192f50bc"
+  - version: 1.34.1
+    sha256:
+      darwin/arm64: "e355adbd16185ca2b9dac369d87c3562f98951546b6be39d8e4567b5d757750e"
+      darwin/amd64: "7c086271fcf779833e1966d9984abfc16af6116a6a53e40da3d1866fd997d59e"
+      linux/arm64: "0dc6ccc5d00cd870a47434d8209758f708ff2b905d318731407210c0c6938144"
+      linux/amd64: "682416ab85c07bb3152e4c2c54293ae51f582aebde381699d8999f7b076755dd"

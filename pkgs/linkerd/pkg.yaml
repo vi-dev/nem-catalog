@@ -1,0 +1,53 @@
+schema: 2
+name: linkerd
+description: Linkerd service mesh CLI (edge release channel)
+homepage: https://linkerd.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: linkerd/linkerd2
+    filter: '^edge-\d+\.\d+\.\d+$'
+    prefix: "edge-"
+
+# Open-source linkerd releases only on the edge channel; the darwin/amd64
+# asset carries no arch suffix.
+artifact:
+  url: "https://github.com/linkerd/linkerd2/releases/download/edge-{{.Version}}/linkerd2-cli-edge-{{.Version}}-{{if and (eq .OS \"darwin\") (eq .Arch \"amd64\")}}darwin{{else}}{{.OS}}-{{.Arch}}{{end}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/linkerd", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 26.9.1
+    sha256:
+      darwin/arm64: "5050da9d974e0c2f548a2e9f145540ec035582cfd67f47c58c37411ae3008913"
+      darwin/amd64: "acff9471f26552dd0ebb9560925a98d5ca1213a13dfc81464a2b815c9201664d"
+      linux/arm64: "f92eddc52dc1f3089b65fd16014cdb1bc6b07c3fd177091c365cf3d8c0ea1a8b"
+      linux/amd64: "094e1de06215fbe76fc011cf62c96214f8dae0cd5a58135fb40307be88b6b176"
+  - version: 26.8.4
+    sha256:
+      darwin/arm64: "5c56fde3869e2da9d6259a91b7a1afaf97d76362fc8a9d353851263773b98ff4"
+      darwin/amd64: "22007388cc3700d2cdbc20e816fcfd378c0cc2bd6f2f2e2b23f6fd1c1a23ca79"
+      linux/arm64: "1bc2371988ebf6addc3d0b00a782bdbc26980c4096bf0f6781f742f6a9706b3b"
+      linux/amd64: "49b9c1fd51634e98b7f5d37cc5652995c787a5abbf2fde29304dfc3cf956550c"
+  - version: 26.8.3
+    sha256:
+      darwin/arm64: "413a125188567418fa483a070e669c9c36137fd2b4123f2e1e471bc1a0e276de"
+      darwin/amd64: "59ef2d1cb097a21a373ae8f632277a31f64555616ac1774a1a7573b99274c8c8"
+      linux/arm64: "59567496a3732a397ce96bd0b72f898b834c4d0bd867d4b4ea6aba51fa9dd473"
+      linux/amd64: "d7c97472ac34e931fe143ca81c20617328845b439ed6601ce1f4bf6240cc6b1a"
+  - version: 26.8.2
+    sha256:
+      darwin/arm64: "68b54588d518a26b048e721faa23c9c23f379a75172074c03372340f00f638b3"
+      darwin/amd64: "67599ab801a955b43516717c753f6d0d6a83776925d7278e71bef02671713cf0"
+      linux/arm64: "e0bd2249b37feff24035132bfc27c681fb201e95021d3ca26794492673e618e6"
+      linux/amd64: "190e81584bd46d342c1fd63659495b700a5b5254865820d3b8e120aeaa288b16"
+  - version: 26.8.1
+    sha256:
+      darwin/arm64: "549a59a3a1ae6505c0aac3004d282a04f86a7621cbb16e74c0a6bce36007a2b9"
+      darwin/amd64: "c1d5e26a99b41f29e4199ae657cced844a198682516b743eba6eb7d34d4464ca"
+      linux/arm64: "d4cb27f7e5d71310cdf368dc1eeb846d2135d6206e9e6f35773c43b90ddac1f2"
+      linux/amd64: "e3afa455ea1dab2fcde64edca8936b4b147f285b1667633646633a05e4098b23"

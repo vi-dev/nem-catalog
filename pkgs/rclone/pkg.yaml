@@ -1,0 +1,40 @@
+schema: 2
+name: rclone
+description: Sync files to and from cloud storage providers
+homepage: https://rclone.org
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: rclone/rclone
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/rclone/rclone/releases/download/v{{.Version}}/rclone-v{{.Version}}-{{replace .OS \"darwin\" \"osx\"}}-{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "rclone", dst: "bin/rclone", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.75.1
+    sha256:
+      darwin/arm64: "c61d7a371c62bcbbe882c3423aa4b8bf63485c248dd0f692997b8f0c3f6d0c6f"
+      darwin/amd64: "29253d0288b8fbbac46baad6e5f6add6cb01d462c79f10805bbd4631c4cdf82c"
+      linux/arm64: "03f2504174034b6d004152ed7369251c9a9ec1f7e0836eda420f5c7a5ec0dff9"
+      linux/amd64: "982b5aa772841168f8e380f139e9e787b2a105403e32b94da8676a0e1c0a13ab"
+  - version: 1.75.0
+    sha256:
+      darwin/arm64: "35e8f2a666ce789b29111db0dd843ddabc0d59c6b609d07bcaae5d1a07cba6f8"
+      darwin/amd64: "19edbb8e5e73096eb66e92a42abbc5c34bfa8981ea3986a53872c7eef85a22f4"
+      linux/arm64: "d0ad88ba4c8e285b7c9efa591e0ab643280a91741e13c27f3a9c0957ccfa5203"
+      linux/amd64: "aa2804e08f48250e71009c727124b6341cd0288465804a9a09d14663cabafbaa"
+  - version: 1.74.4
+    sha256:
+      darwin/arm64: "c2100e2d4a4b3be04c55cd45380cafe7647e1ad772bb055f52f00876ed701167"
+      darwin/amd64: "4188aa84043d7a6240912923f47639a9d2da21f3b40a521c065c8d92e66563f6"
+      linux/arm64: "97685285c9ad6a0cf17d5844115d2a67245af6444db672187074bd9c358de419"
+      linux/amd64: "fe435e0c36228e7c2f116a8701f01127bb1f694005fc11d1f27186c8bca4115d"

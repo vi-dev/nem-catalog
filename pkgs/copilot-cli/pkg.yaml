@@ -1,0 +1,46 @@
+schema: 2
+name: copilot-cli
+description: GitHub Copilot coding agent for the terminal
+homepage: https://github.com/github/copilot-cli
+license: LicenseRef-GitHub-Copilot-CLI
+
+versionDiscovery:
+  github:
+    repo: github/copilot-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/github/copilot-cli/releases/download/v{{.Version}}/copilot-{{.OS}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "copilot", dst: "bin/copilot", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.0.83
+    sha256:
+      darwin/arm64: "80a5ded6f1db484b4661af676ea914605ecfbcaf49f6b4bed81e6df16cbd56bd"
+      darwin/amd64: "7e4f7236b0cd5ee474e6ab6d35ea67b8c33d5ec6483498e0fdd0218f458b2d53"
+      linux/arm64: "213b3a267042dbac3cd8ae22c82f5ea04ff3cabc008108c0f895055d46be4473"
+      linux/amd64: "ffbe1c429664b8a05efed67ecdb467123e40fcaa3c6c14ef9a98ba74da4687b7"
+  - version: 1.0.82
+    sha256:
+      darwin/arm64: "c03bfc58c4402ec31d09ca11c379e1c17e95c3441f48009d721bf556fcc2c42e"
+      darwin/amd64: "512cbd527e510664be8854ddfee3f3215f890a2f548b0477e9dd544b54abbd8c"
+      linux/arm64: "86c4c77a91b1ff5dd7313cbea9f861699a2cdceb4696f3864f3f0584e9684e0f"
+      linux/amd64: "37fa67686a9e4ed8d46dcd6a9c80ab524dea840ecaa0a3f7edf8d09f961b97a9"
+  - version: 1.0.81
+    sha256:
+      darwin/arm64: "568b0d6fe88d573c171ab95887d33276802dda2c5ca3cee7d0fe438df2343be4"
+      darwin/amd64: "269b2b42a4c3059c260063ca4ded9920132f5b9ad270a531ab80e569917c46a5"
+      linux/arm64: "f0e621e6793b14e04c0f651cd46d818a5bf0bf54d74c9566c9424744b41a279c"
+      linux/amd64: "3082c4a27aa683def52e48397c02606dc7f8267dcef1c93949f3f58de4a5cde3"
+  - version: 1.0.80
+    sha256:
+      darwin/arm64: "2346bb691981c2997d65c1c5bc3cef1aeddc9edd37dcb2f970b911aa597e59f6"
+      darwin/amd64: "a1a9c1f25740f9a27b34eb14b70b5d3175794dc8bb410875531aa198b3abc18f"
+      linux/arm64: "3ed85e711955e13be523bf492bc6c93b40b69925bcb7f817c9d08abf4839cf89"
+      linux/amd64: "039933c9247686131c4406abb1d439bdbf68103edc1ff585bd70d5b0dc940f72"

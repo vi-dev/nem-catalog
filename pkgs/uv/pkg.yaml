@@ -1,0 +1,58 @@
+schema: 2
+name: uv
+description: Fast Python package and project manager
+homepage: https://docs.astral.sh/uv
+license: MIT OR Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: astral-sh/uv
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/astral-sh/uv/releases/download/{{.Version}}/uv-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "uv", dst: "bin/uv", mode: 0o755}
+  - copy: {src: "uvx", dst: "bin/uvx", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.12.10
+    sha256:
+      darwin/arm64: "51c6170e8e3a01cef9f33b94f582b7b81ac65046f55d40afb35f9cff5a68c179"
+      darwin/amd64: "5296d5aa2b9143360405eea866f8ef4d5dc8986b164eb0dc35e8f876a9304d30"
+      linux/arm64: "9ff6b9d4665edcdd3a88dcc73cd1eb641754deb927f14e8c62ebfde6bf4f5f5e"
+      linux/amd64: "173d95a0c32d18c896c46ba6fafbf3cf9c14ab74b033f81b76c883ef492a976b"
+  - version: 0.12.9
+    sha256:
+      darwin/arm64: "301f72afaf54060f92da7016cb0115bd077f43a9c8e39c1d8170a0bac80fd398"
+      darwin/amd64: "e1ca175824f1056589ce9908f7631879ebc3c36535b5e63dc06510beb370b4c1"
+      linux/arm64: "c36fe17937ff6bd16dc42fc13854b5465999fcab2efe0af559381e945e3c6001"
+      linux/amd64: "ec7a99cd05e0cd7f80243f135ce1361c76835cb0ee60055d14d20eba8eba1460"
+  - version: 0.12.8
+    sha256:
+      darwin/arm64: "8ce083658dbff20143607ca7af8e0c1d64b6fd7bf03a5cdcb62bf3d47d991b5f"
+      darwin/amd64: "bfcd4407de99e0a2c1904df0902fa1795653d4edd145358e6561527e746a4f16"
+      linux/arm64: "ba8661f4fd207c8e94814191598e619b355ac10d5014e851e21eb800f9ef2b00"
+      linux/amd64: "2e2b37e9811e17675a9e70bed5e1a58fc8c0388be63d751d72cc735188c149ff"
+  - version: 0.12.7
+    sha256:
+      darwin/arm64: "127ebdda7ad953cdf198e964b570ea5771b85467ea93eb7cb6d6f8e6f55408f3"
+      darwin/amd64: "06b8ae1da8c2661c5434507a66f8c2b0b835933bf955b5958a9ac357a37d1959"
+      linux/arm64: "66393193038dd7eb108abd7a218d9cec04ac70ab98242b0720fa94de19223b7c"
+      linux/amd64: "788f18abea7c5f55d6216e4f5613fd89d4d59b631efeec117b2b07fe72f1da21"
+  - version: 0.12.6
+    sha256:
+      darwin/arm64: "14b459d51ea2e71eeba28c45a268c922bdf8607fc6455e3f40b4e082895d160d"
+      darwin/amd64: "2a26ea71bbeff1c7e12c2cc40245c96a041deff276bc921e7038e304d5d3e04c"
+      linux/arm64: "d58030acd26159499ac82f32da12d1b3c12a3a1bfc414232d9082070c03e128d"
+      linux/amd64: "8681d8921e7d520fb368991dcf5f9c1905b80f5bf2a265a0ed085c8d8e342477"
+  - version: 0.12.5
+    sha256:
+      darwin/arm64: "5bb0e5fe008a773c3dbcb97ff79cd89e1241464fe9d2f986d52ad8f1b037bd62"
+      darwin/amd64: "b3b2137477cf96c9686ebfb71524614cec780c673fd73e59bce099aef02e70e8"
+      linux/arm64: "9bf43b4d1a07665bf64d4c4e710930b382321a785e0eb10aac07f46471f86a31"
+      linux/amd64: "68a509da24b06b4223a1c0175fb5eb5bc79342b76cbeff0cfe51ac3f5b17b6b2"

@@ -1,0 +1,33 @@
+schema: 2
+name: tanka
+description: Jsonnet-based configuration utility for Kubernetes
+homepage: https://tanka.dev
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: grafana/tanka
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/grafana/tanka/releases/download/v{{.Version}}/tk-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/tk", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.39.0
+    sha256:
+      darwin/arm64: "95d618215de5bc5c3418478aa9c6db2e408c0aae67a6be3a777fc79146fcda15"
+      darwin/amd64: "5803d3805b4def3df7f4ca10613f0ec6d31a1409e2dae2d713c9b0225210324a"
+      linux/arm64: "30c7d9ebfbd855b9d7db7dfc49e8a2edd0b534f611c868870460ba8521b0d67d"
+      linux/amd64: "2163b110602665eb0ca86be53521a47d07f834c000177ea3dbfae30296c8925a"
+  - version: 0.38.0
+    sha256:
+      darwin/arm64: "0a4b797f44e94b0264ea662aea367300436f6189f3d2e197aff6c38d714b29ea"
+      darwin/amd64: "71493e9e129c624b41076050bf8188146efb8af723df75282c14c9b5f2455890"
+      linux/arm64: "c1034664031c8e44501617c2481bc3786802c938efc06431b4d28cfaa4e56a5a"
+      linux/amd64: "0dac1b5a087db22beb4a12d0bb2b1758c6abd8e660e0520072af4f6fd7cc8ce5"

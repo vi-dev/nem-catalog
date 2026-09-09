@@ -1,0 +1,39 @@
+schema: 2
+name: talosctl
+description: CLI for Talos Linux Kubernetes clusters
+homepage: https://www.talos.dev
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: siderolabs/talos
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/siderolabs/talos/releases/download/v{{.Version}}/talosctl-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/talosctl", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.14.0
+    sha256:
+      darwin/arm64: "f0c65a0e970b6f23cf0160e432e7496ba93957a49f369780d4e53888ed66ef46"
+      darwin/amd64: "6563baa43774ef5c351e0d9f2fd720941c482da01fe3aed53ee9644b552453c5"
+      linux/arm64: "19615e1d0eb222de86ec2f1487e7d6e74f5171a9038e73aeacde8cc647e3d9e0"
+      linux/amd64: "2c147c4a99d124c95bd5c190fe054e0b3c93495f2243fd652ebd423adb8377c7"
+  - version: 1.13.10
+    sha256:
+      darwin/arm64: "6050178a5a6686965fb7ea3f59dfe172872a888b3355a4f62814f3a8724a79c7"
+      darwin/amd64: "4c2a0ef132ec3a8891a2423492481c53d8d55c0e5c0146779e3c33e6c388e1f3"
+      linux/arm64: "3869c9fb411f3680976cc086b342e517bcf4bc720f7e5371611f3e49d95f1994"
+      linux/amd64: "28e9ccd9aebd690fa03d8cf2582221d87ea38b2a1704f411d75a03589c58f2aa"
+  - version: 1.13.9
+    sha256:
+      darwin/arm64: "ab4c27a959ff6c52f62c6cc2af07b22ca86ed27f1a138ed57582fa67f7b50f98"
+      darwin/amd64: "55902fec33e93d11b64e5e01ddd9dde7ae50679328b8f3556e6d86a51dbce866"
+      linux/arm64: "51caed158eda73d2888cbf2df2d67551f9c9f8229aa42d3725e481d073e76f0b"
+      linux/amd64: "7e1d4b7d5846964bdcf63a794e3c8161bb6ef2983d5ace58ea5322f3bf32a27e"

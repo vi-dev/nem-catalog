@@ -1,0 +1,34 @@
+schema: 2
+name: cilium-cli
+description: CLI for installing and managing Cilium on Kubernetes
+homepage: https://github.com/cilium/cilium-cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: cilium/cilium-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/cilium/cilium-cli/releases/download/v{{.Version}}/cilium-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cilium", dst: "bin/cilium", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.20.0
+    sha256:
+      darwin/arm64: "2850449e321c21e9556c312d0b6885838523d294b7e0b58955697507463a57cc"
+      darwin/amd64: "cc338e326235e76e3924f032d8a6eb41bf751d94bb04fce70d5f80014fc179d9"
+      linux/arm64: "9a9281dc79bd10a61fa35078b8ab63eaf491ab2f47edc6b9a3541b2fe4ede3ff"
+      linux/amd64: "94adc5c3be44d8240df91cec520536686f8a1eb29e5bc70c4c1c80137f00d764"
+  - version: 0.19.7
+    sha256:
+      darwin/arm64: "c9aaa1b033919d47a3dce37bc266f1f1e0bc7a4f87e5288fc80f6061ec58cb3b"
+      darwin/amd64: "d45fcdb76535ff5439357f6ef9a5fe99a9acec76c1358dc828ddee6f276943d5"
+      linux/arm64: "9482937f14061fb239f2dbb2f97f4103de1b101f5d5defbff319f294f9bd540f"
+      linux/amd64: "cd15e0983bf0acc7946cd05d453d1e58376ea92dec2642e745212df2b07d8852"

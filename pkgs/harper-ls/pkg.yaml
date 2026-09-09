@@ -1,0 +1,34 @@
+schema: 2
+name: harper-ls
+description: Language server for the Harper grammar checker
+homepage: https://writewithharper.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: Automattic/harper
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Automattic/harper/releases/download/v{{.Version}}/harper-ls-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "harper-ls", dst: "bin/harper-ls", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.9.1
+    sha256:
+      darwin/arm64: "ceeece9af29d6c8224df92b09dce13c88c24e6d48d396afa801b17e96042f8f5"
+      darwin/amd64: "8fe18a24c0fc47ed9d270b29d6676b2abd84d949d793617bd60f2dc8e2b27742"
+      linux/arm64: "09ec00f1feff1b920f62e70c271ee455329927a4246db8cd1930c9ab607378c4"
+      linux/amd64: "4e82093e118ea086115d611e67256e7e1e2748977b5ba723e29c7690365b3433"
+  - version: 2.8.0
+    sha256:
+      darwin/arm64: "98fe862ff3d468f14ac009509ebff07b9362f83ffc742407f64573fc2a519d03"
+      darwin/amd64: "6fd18f3e7de08c518afdfbb7c49362159e6f938801955aad9e55008c945d684a"
+      linux/arm64: "57069a5f239f290cb4d293137af6997bd48b919ba2add3ff8401059a3388ff9b"
+      linux/amd64: "07cd5b5d603b95bc2148fcec4434d39061b777aa518bbff024fa4bbfa3ae77c5"

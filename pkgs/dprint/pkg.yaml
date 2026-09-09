@@ -1,0 +1,63 @@
+schema: 2
+name: dprint
+description: Pluggable code formatting platform
+homepage: https://dprint.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: dprint/dprint
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/dprint/dprint/releases/download/{{.Version}}/dprint-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "dprint", dst: "bin/dprint", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.57.4
+    sha256:
+      darwin/arm64: "f9e752812791f258e89ff88a7affd05c793b0db3d929718651eae7df5f19eb2e"
+      darwin/amd64: "8978bd5d9a564ec19472545fb853da9ec468e024e75d39c3a9df9fd5750ecdfd"
+      linux/arm64: "e1b713806f7f7b94072ba2b069aa19ac28f475dbb1fbc5b672d3030a2ab001ee"
+      linux/amd64: "03f3e8002f9d952bf53325fc8853686d2e8808b9e5b652b215600ba147e73a5c"
+  - version: 0.57.3
+    sha256:
+      darwin/arm64: "72bf6537685d3d27fc572bbb77ce07e43f481de7c1422b5fcc2fe9484894dd53"
+      darwin/amd64: "a17ac9a99c8d27800599e7362887a75e36a46204eb874bf1819c74aad473427c"
+      linux/arm64: "f077da91d84cf0c307431fb95ed4eeeeaa38cde039a0251097991920c1f55d63"
+      linux/amd64: "e361513ede569f5da8164d036146578b0c50e232452ebe0c2c00f38ffc6ba4f1"
+  - version: 0.57.2
+    sha256:
+      darwin/arm64: "e0df7c5024a65ba865b89d357263d1ffea9cf380120986e301655e5037673a6f"
+      darwin/amd64: "e6ecff3eb8246b62f35123905bbab077f16ec8f73516ab92aa91727ab6812a17"
+      linux/arm64: "24b6f3cf8cc7a116681907843b777a1dc56cd75ffa98727e66a94b2d2f05ad89"
+      linux/amd64: "dd0fc5214329c95e552d7bfbb86d4a608e64f9482c6ec33dd182f4c839ee11cd"
+  - version: 0.57.1
+    sha256:
+      darwin/arm64: "3113fb58a126df96c95653638f068fe430f342623dfdf08e3fa32d4e704194ea"
+      darwin/amd64: "f1529d394126ebf0104af12290345b662196f8b9604d2d578cef91a8b6057f9d"
+      linux/arm64: "371b63109cbd7b34e179fc3af0815f65a5d9f3a560d2a245a78ef99ec71b3f9e"
+      linux/amd64: "d956144fa8d873dc43c37d1811b3f8c42701f74bb0be7c25c543b189ab53d6c0"
+  - version: 0.57.0
+    sha256:
+      darwin/arm64: "14bdbfb9b1e3ebd614d5ec08a068b04b0d0370d70c112723003dd9103a4c0c3a"
+      darwin/amd64: "41b6bb07d121d0506edd85d8176caf3d3909648089ee6c0b8b4f9c896791c14f"
+      linux/arm64: "4458fb5ad357c2735210470a91e3f2a95abafcd7f2d7840cb94afc96dd11fbfe"
+      linux/amd64: "981a98fd4d245be8dda9bfb3d52a826d532b3290a559cb335970cebca7bf0b45"
+  - version: 0.56.1
+    sha256:
+      darwin/arm64: "c9af77af134987fada60344e8b9f23b2238081f7eea94a7bcd53ec49369354f6"
+      darwin/amd64: "f944e33a1bf8f6125eaa5ea77ee8a01db96093a6fb80df127b390f2a106774f7"
+      linux/arm64: "6f9541637ff47289409d709e4b006eeed84fd11c212dc029c4d26504a2cae0ff"
+      linux/amd64: "913032d493340643d6b98ce250a2407c5d0abab8613b3e16a09d92661131425a"
+  - version: 0.56.0
+    sha256:
+      darwin/arm64: "79f5c80a3ddebb4717a89a25a79ec1c50947d4cef141df243757925cb47d32e1"
+      darwin/amd64: "466dd67e15fca266f3749008ef5d23ea7a6c657ef8204257dbb8c23636fc9aca"
+      linux/arm64: "2e7d50e342d9d9d85b811635a04f3d49abdf7ec96d5b346cda932a7c4d42a7ab"
+      linux/amd64: "e958bfa3fec5256e72c2e4e028fa5674e43023eaff80d704ca96827af2eba240"

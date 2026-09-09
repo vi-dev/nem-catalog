@@ -1,0 +1,40 @@
+schema: 2
+name: dart-sass
+description: Reference implementation of the Sass compiler
+homepage: https://sass-lang.com
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: sass/dart-sass
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/sass/dart-sass/releases/download/{{.Version}}/dart-sass-{{.Version}}-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"amd64\" \"x64\"}}{{if eq .OS \"linux\"}}-musl{{end}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+# sass is a shell wrapper that resolves src/dart and src/sass.snapshot relative
+# to itself, so the SDK tree stays at the package root instead of moving to bin/.
+bins: ["."]
+
+versions:
+  - version: 1.104.0
+    sha256:
+      darwin/arm64: "bd12160a98a44545ce37189f48f55d8c078a07504380bb427d315fc15e3f0777"
+      darwin/amd64: "cc9e752131aae9f76cd3c9ee9f33818a46a771835009ec2507bdf399b83b4f94"
+      linux/arm64: "b97c11be4a7617309c37cf9801f886b09328533b2e120f47f31b06dde9c1c35d"
+      linux/amd64: "b4a2e997e172097e15bf8834f8e7db5f664a989de954769075d098c80ad081b4"
+  - version: 1.103.1
+    sha256:
+      darwin/arm64: "7f48b426ed9ea77c2866c031e1b055cc4ecda7940b3500b630970ce37daef391"
+      darwin/amd64: "dbd5257cf503a56e8d0d693a6c47e07149769a45346538d07b4db0f702994f17"
+      linux/arm64: "08354700b647570ae42226b33693f8e0c4499f5f3baec12ffc9f53e7dab5d157"
+      linux/amd64: "7f3898ec11f8392f72bbf59e85e5183e0e20071a0b853816bee18e682568477c"
+  - version: 1.103.0
+    sha256:
+      darwin/arm64: "9ec2abef15fc88da2fe10b883044101e4d34072828b6a837aaada4bbb3a9b32c"
+      darwin/amd64: "fbfb608053055b8898f7559859ed01119d09db6cd54b1141bdc058c9bbd2510b"
+      linux/arm64: "8d96201d8c381fde326e4b8df3f379ac848584026ae5e8b2e9b3e5e560a7b2a2"
+      linux/amd64: "647acf0c3ec3c84a51c8ab417adfb1e79f3f8e830b397148e29512d4d14ad14d"

@@ -1,0 +1,40 @@
+schema: 2
+name: cargo-binstall
+description: Install Rust binaries from prebuilt release artifacts
+homepage: https://github.com/cargo-bins/cargo-binstall
+license: GPL-3.0-only
+
+versionDiscovery:
+  github:
+    repo: cargo-bins/cargo-binstall
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/cargo-bins/cargo-binstall/releases/download/v{{.Version}}/cargo-binstall-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{if eq .OS \"darwin\"}}apple-darwin.zip{{else}}unknown-linux-musl.tgz{{end}}"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-binstall", dst: "bin/cargo-binstall", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.23.0
+    sha256:
+      darwin/arm64: "0f679c0bc992c6b84fdcbb0f65492588447d26596ef387cb6cb1ba41ad8ceb33"
+      darwin/amd64: "5b4d6cd99651318e17a26ed9bab7505de0f496d88793a7735a0fc6e2079efe83"
+      linux/arm64: "ba9b7bf426c7b7375825cd3fa367c3f8a632ca7c6c546fdcb738114b167f4103"
+      linux/amd64: "64bf954c68bb558431deeabecaec7687edd5541c2189ee263bb8bc18bc4fdf55"
+  - version: 1.22.0
+    sha256:
+      darwin/arm64: "c364fd10e494b4fc0cc88a89995446364379a914930f0b0182b1151ad27690a1"
+      darwin/amd64: "88f4459e166c50ece5f240934197ef60b88d12a7b459cb4cea15ab0b7d5dc123"
+      linux/arm64: "2fdf0ad20ffc7c7f94f32c19566f417d227484ff0335664d5df429e459d1354b"
+      linux/amd64: "df2921254924066627685ee09f6c8b9acd7acef68a338668f879d2b033c09458"
+  - version: 1.21.1
+    sha256:
+      darwin/arm64: "bd03935f1a6d652647f6d42a2cd39396a55094ffddc65bed0debebfe32feea43"
+      darwin/amd64: "73894951a5c5343476e703b9f2ccea9e829396147ee33bded6a5e94c09298d81"
+      linux/arm64: "1dc2979f3c83aade9a1b4344589d14fafa63459b759222528d11419f5cca9cc2"
+      linux/amd64: "630c8f8803a686aa6779497f0f0fb51d49822fb5fc3c514d8ced33b34e338e6e"

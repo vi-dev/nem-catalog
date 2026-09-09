@@ -1,0 +1,34 @@
+schema: 2
+name: gost
+description: Tunnel and proxy server speaking many protocols
+homepage: https://gost.run
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: go-gost/gost
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/go-gost/gost/releases/download/v{{.Version}}/gost_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "gost", dst: "bin/gost", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.3.0
+    sha256:
+      darwin/arm64: "f170226106844b50ab3435147f35d4300da773efca256b50cb2f8c7d3a151101"
+      darwin/amd64: "9be5b30354bbe59b6b160af01c66b209c93335db29b272b67bd73feca4abe4ec"
+      linux/arm64: "d03699e3f385d4ff5dad68046712adfcc7515325a064d2ab046e0bece30f8f8f"
+      linux/amd64: "676fb7f78d267b6ae73df719c0c7f2b565dde7147da935cfafbc1e1da558b6d5"
+  - version: 3.2.6
+    sha256:
+      darwin/arm64: "e54f6c22e81c00650adfbbb23317c74a4dca9b9b73fa28cfa150f5559cc3ff2e"
+      darwin/amd64: "0892485bd94e37b67a1f1d0d2372ed12d7dc0f1bc763d56177a0c0ee734855e6"
+      linux/arm64: "f674c8f4a033dc1dfd4f0d5e9602fbe5b0d0f81307bf3794f44b5b5d6d622eae"
+      linux/amd64: "b39037b0380ea001fb3c0c28441c2e10bfc694f90682739a65b53e55dce5238b"

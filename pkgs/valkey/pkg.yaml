@@ -1,0 +1,58 @@
+schema: 2
+
+name: valkey
+description: Valkey in-memory data store — server, CLI, and benchmark tools
+homepage: https://valkey.io
+license: BSD-3-Clause
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+deps:
+  - name: openssl
+    kind: link
+    compat: "4"
+
+bins: [bin]
+
+versionDiscovery:
+  github:
+    repo: valkey-io/valkey
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 9.1.2
+    sourceSha256: "19c23908e7d57e8d91ef85b41f5646307582f10f4f0fb999bbf89ed24ec9c983"
+  - version: 9.1.1
+    sourceSha256: "7d7232acd1b8a49b4e05d07a00b3ca8c801ae06ab633ca6a3423bc5f385ab7ee"
+
+build:
+  deps:
+    - pkgconf
+    - name: openssl
+      kind: link
+      compat: "4"
+  source:
+    url: 'https://github.com/valkey-io/valkey/archive/refs/tags/{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # Env CFLAGS/LDFLAGS make the bundled deps re-clean mid-build and break
+    # jemalloc's configure, so unset them; the rpaths return via
+    # SERVER_LDFLAGS, which reaches only the final link. GTEST_LIBS placates
+    # a parse-time error in the unit-test Makefile; tests are not built.
+    - run: |
+        set -e
+        openssl_prefix=$(pkg-config --variable=prefix openssl)
+        rpath_ldflags=$LDFLAGS
+        unset CFLAGS CPPFLAGS LDFLAGS
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" BUILD_TLS=yes OPENSSL_PREFIX="$openssl_prefix" SERVER_LDFLAGS="$rpath_ldflags" GTEST_LIBS=unused
+        make install PREFIX="$NEM_OUTPUT" BUILD_TLS=yes OPENSSL_PREFIX="$openssl_prefix" SERVER_LDFLAGS="$rpath_ldflags" GTEST_LIBS=unused
+
+test:
+  - run: valkey-cli --version | grep -q "$NEM_VERSION"
+  - run: valkey-server --version | grep -q "$NEM_VERSION"

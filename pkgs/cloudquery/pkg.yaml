@@ -1,0 +1,52 @@
+schema: 2
+name: cloudquery
+description: Data integration platform syncing sources into destinations
+homepage: https://www.cloudquery.io
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: cloudquery/cloudquery
+    # Monorepo: plugins tag alongside the CLI, so match the cli- tags only.
+    filter: '^cli-v\d+\.\d+\.\d+$'
+    prefix: "cli-v"
+
+artifact:
+  url: "https://github.com/cloudquery/cloudquery/releases/download/cli-v{{.Version}}/cloudquery_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/cloudquery", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 6.42.2
+    sha256:
+      darwin/arm64: "1abd8c3a94d7d7b65fe08583156f21e874b30807feaafc6971664984a8b398af"
+      darwin/amd64: "9a0fd7ed37e83e7eeedaf178fc4f2f85ff456f16014f878cad859d7dd23f548b"
+      linux/arm64: "df575b0fdfa4a0a35c8f30e821a358777c35930b89d8897f866f4df762d2831d"
+      linux/amd64: "b0537768c449ac84f49a00846b639cd3fb13f80ac63f5a489deaa31438146aa4"
+  - version: 6.42.1
+    sha256:
+      darwin/arm64: "66cca6c30f0f7638867e715df305cf00810daa01ad34358daa755b31d7377237"
+      darwin/amd64: "df2272b3757ca8c846dcb1ff3b033311f3887588c4bccd3ad9ffc45237a62a1a"
+      linux/arm64: "c86ad8677a3bb044fa2ef9ad800b92f7bfa2dfa781d11a758cc0611590ebe8c8"
+      linux/amd64: "d05925964d46f8653500a674d196d5ee4dad721f0b07a8277846304b141128e6"
+  - version: 6.42.0
+    sha256:
+      darwin/arm64: "9b382c045fe4d6536b0eccaafcd6b17fd981737f147d5b9975563e62f192574e"
+      darwin/amd64: "49d8437e1b5f2e997c6aaef79603767c116155210350e610c9ffa6d88c650bf9"
+      linux/arm64: "8e6bc69aa59d20e49b76a0a2931a7f8ab40d32f912dd59d46d9271d7232d8e49"
+      linux/amd64: "afc61b8a5112e607bfd7bb9a657c14fa00881b465bfccf40ff806d8735a2d42e"
+  - version: 6.41.2
+    sha256:
+      darwin/arm64: "68154ee28a17a9147ab9baa72bc08a7d2fab10e45968e5339cb1e5eaae9ec345"
+      darwin/amd64: "3e54c7fafaa6ecbf40a034fcf790a0e204cfd842055401b4f530b5c9193faadc"
+      linux/arm64: "ee55b2160447e6ba9c021be5798a99ab2ef7c79b28fe1047b1fbc7d60d89e6ec"
+      linux/amd64: "fd20ebba7e0259262e23b49ccffcc4947ef18e97247373378a903de425a32482"
+  - version: 6.41.1
+    sha256:
+      darwin/arm64: "7313b01e994fadb40fc970fa315aaa24a9ce061f761b74f8ab3181b57b50d096"
+      darwin/amd64: "1002c4d684029c54ba463085f9236d1a17f24564642c4cf514866cec83d2ea8b"
+      linux/arm64: "d038139c50d971269fcb75379e93a545d3dd6eed7bf9b7fa54cc0093be7cb1da"
+      linux/amd64: "c076a6f914d4909bc0fe03c4ccec71a3f9ff482f816952642b8773ef444a2fc9"

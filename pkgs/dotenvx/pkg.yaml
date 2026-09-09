@@ -1,0 +1,40 @@
+schema: 2
+name: dotenvx
+description: Encrypted .env loader and secrets manager
+homepage: https://dotenvx.com
+license: BSD-3-Clause
+
+versionDiscovery:
+  github:
+    repo: dotenvx/dotenvx
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/dotenvx/dotenvx/releases/download/v{{.Version}}/dotenvx-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "dotenvx", dst: "bin/dotenvx", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.23.0
+    sha256:
+      darwin/arm64: "92ce94fda1f0a5f5755598130a2176382fb4edeb456df69f98605d36f3e77c69"
+      darwin/amd64: "180f3051616fe9561076d4bad8c6b63f6fa91077c7ba17011c851966a1a632bb"
+      linux/arm64: "6230391b05a15c493b2e5fe04256da47dc840d2fee8c4ed7d5502490df613da2"
+      linux/amd64: "6674e6fdbe458e9f8f7d26c9523083814395f15c0b9044dc47518464a8cefe49"
+  - version: 2.22.0
+    sha256:
+      darwin/arm64: "e7ff04ffdb53935bbabfc180c410a19772fe35df5acc007f9e3f054170a4ad43"
+      darwin/amd64: "06d45845f367685e8f13dc513c8d651e857a47a95fa7d2e0d7bdcf1af42f1a94"
+      linux/arm64: "522870dd7f3c6a9125caef4f8a15818a764218ba4970c59513689798664c9b82"
+      linux/amd64: "8bd3d1700d352c7b84d82670f5fd3ad711e890c7af8e2f01d2ddbc9db903817b"
+  - version: 2.21.0
+    sha256:
+      darwin/arm64: "7605bf421441577b6557c3cdd388ff1afd3834bb60084b0958b8cffb419fdfeb"
+      darwin/amd64: "503d48f98ece834e6f9bd71696ba5f0afbc334a22b459237ecad2eddcf4cf0a8"
+      linux/arm64: "10ccba55ef9c7040f6b8a4196c289a143725a8b6dd8aced27662338938e6d5dc"
+      linux/amd64: "48bf8a7eda39722f9f4cf32662fc756da68ad98fc96c6925f0d2bd6c9d9035af"

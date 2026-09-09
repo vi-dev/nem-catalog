@@ -1,0 +1,39 @@
+schema: 2
+name: aws-iam-authenticator
+description: Authenticate to Kubernetes clusters with AWS IAM credentials
+homepage: https://github.com/kubernetes-sigs/aws-iam-authenticator
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kubernetes-sigs/aws-iam-authenticator
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v{{.Version}}/aws-iam-authenticator_{{.Version}}_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/aws-iam-authenticator", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.7.20
+    sha256:
+      darwin/arm64: "0dea17eda9c6fdb3d56fbb90ce1776330dd5ada404da1fb033428ceb5451192c"
+      darwin/amd64: "1d7b95e472ef83ea23a79e1e410b6d49ec0a8c40d3632a8f9f7aaa09cc434cf7"
+      linux/arm64: "8afd45da2ba288ee515e31215ab5a7247d92449c179281e0610522226c5e21a5"
+      linux/amd64: "a60921d38d2b51bc998f37eb1eba81c92aed21d9315a35a01b283ac398c43f87"
+  - version: 0.7.19
+    sha256:
+      darwin/arm64: "4eddd4d73daa6d10494f1a0d5f6423bff5f6871fbe5a81fc4a9f19f62c303e64"
+      darwin/amd64: "e6c6cdc4484bbcf9a10a7bcde4b8b79dd842d109db29d4efeb855d7d63af43b1"
+      linux/arm64: "07f8ba7a3bfab585119eecc99cfff502bd22f60c12e17d5627b146f9bc8230c3"
+      linux/amd64: "9172940f11c21863a0bdef99ea6cf6c2ea14026b9fb7b041eaa96af830734a30"
+  - version: 0.7.18
+    sha256:
+      darwin/arm64: "3704767c72ab56676ea1e398aa90ea42a53b0a9bd215a0babfae8e86bb21cf95"
+      darwin/amd64: "ccc6756f9d41008e1a643f72e542097952c6f88457425a7b8a2f4500f79bf657"
+      linux/arm64: "9d77c45e3a7a791ec3eb09a4913f9fff3be6e1d86d6af698ea104e4bbb7c933c"
+      linux/amd64: "fbebd5350dd1a5f377097fd1b2e1ca8c5a5e7ecb35cc44ddc694b775d498d7a5"

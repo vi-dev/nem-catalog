@@ -1,0 +1,33 @@
+schema: 2
+name: goose
+description: Database migration tool with embedded support
+homepage: https://github.com/pressly/goose
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: pressly/goose
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/pressly/goose/releases/download/v{{.Version}}/goose_{{.OS}}_{{replace .Arch \"amd64\" \"x86_64\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/goose", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.28.0
+    sha256:
+      darwin/arm64: "e0bc7db0b4cfc652495f86dbf1681a668bb26e17d0ca28bad44218a905d01ac9"
+      darwin/amd64: "8aa97e65273da3f58d6eae031d09f43089ef34e6b44cd713e80b2ffd5465bda7"
+      linux/arm64: "3968855c11b4093af271c5226909789ea294468f6e50203d738b7504995b6247"
+      linux/amd64: "ab073515b78ef345f64f018c0d79aa7db50106806efc686dda7181253765ae13"
+  - version: 3.27.3
+    sha256:
+      darwin/arm64: "86bf41d1a81e2eabc0f621dc020303513364d9cad9e3d1d4987fdfcf7dd8f4ae"
+      darwin/amd64: "bdaaddcaf1bce02a31a580242db507cfec35354ea14fb9e4a6c6aea1031422d5"
+      linux/arm64: "a774a3ed3381352a795b2a019b604792965546f6f47b34b59896288d97bf4809"
+      linux/amd64: "ca18112e2438b3ad608af9a5938beafd01fa36a4a19a3edbe4f29226ca5c8533"

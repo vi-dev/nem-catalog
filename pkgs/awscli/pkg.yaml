@@ -1,0 +1,70 @@
+schema: 2
+name: awscli
+description: Official Amazon AWS command-line interface
+homepage: https://aws.amazon.com/cli/
+license: Apache-2.0
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: aws/aws-cli
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+bins: [bin]
+
+versions:
+  - version: 2.36.40
+    sourceSha256: "7473f8485827327b16012aced0f1445e1185c5f44ca62f0b6c44a8835c2812b4"
+  - version: 2.36.39
+    sourceSha256: "a3bd7cc1b901eeaf561513908696c2ef3d68544ee3b395a65858548b11f38f50"
+  - version: 2.36.38
+    sourceSha256: "a29a77b9d3533ec9439897bad5d6961807c03706063c0c607be403e11deaa2a5"
+  - version: 2.36.37
+    sourceSha256: "e3b9301a9264514677d3428d652d7dcd9920c095d43d503acf3f38304bf9c3cd"
+  - version: 2.36.36
+    sourceSha256: "f46da93bbdee8f05d6f5aa76eed5363d8d62ed9ad3f03159dab216dfec02bb91"
+  - version: 2.36.35
+    sourceSha256: "2a01a1f81961c182eef396996887c28e920e1235f41f93a070b195628c8dc043"
+  - version: 2.36.34
+    sourceSha256: "ba2171f7a7bd99fb07ddd1ce55e03ab93c59f7f951be5837791a8b096155507d"
+  - version: 2.36.33
+    sourceSha256: "15b947e233471187036a792585a3c93affe9e7c61bd227f29312e439144b2132"
+  - version: 2.36.32
+    sourceSha256: "f4b66c1654e7ec4cce75f6604a6962d62b577ef353b44753fe83caf20bf2bd22"
+  - version: 2.36.31
+    sourceSha256: "0b33e6bb32a9d2294ded74c96d4b9200ce49f6ec0e21f90dfd1620d59245b3f0"
+  - version: 2.36.30
+    sourceSha256: "bf08cf2627aa21e42ffea11f0e003cbebd3194d172fb047d68833082e1a97434"
+  - version: 2.36.29
+    sourceSha256: "4970bec7094595367f847f0010fa79743c269c7750112d91cca93a9c1f76cada"
+  - version: 2.36.28
+    sourceSha256: "559dd065f5c388553cbc200d20f23be6f922c08e81a1526d1a43c427a5815a45"
+  - version: 2.36.27
+    sourceSha256: "2c99a8fb3eac3392b9dc785b6e8f0fc387b10ef6886dffffb5492238d1580764"
+  - version: 2.36.26
+    sourceSha256: "02f9a588349aa4560c15cfbcd417d5dbc38c9208ecae2c3ad240e26b81f51ff3"
+  - version: 2.36.25
+    sourceSha256: "d631d8f046e9f85abdcec3b0b9aecd939a1918f830ff12e26ea732543dc75bc8"
+  - version: 2.36.24
+    sourceSha256: "7db9e51ef9e40bebb958e0ab248d08322b350a215aa64d565a5ab00caf8aec51"
+
+build:
+  deps:
+    - python
+  source:
+    url: 'https://github.com/aws/aws-cli/archive/refs/tags/{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # portable-exe is the frozen, relocatable install type; the default
+    # system-sandbox type is a venv wired to build-time absolute paths.
+    - run: ./configure --prefix=/ --with-download-deps --with-install-type=portable-exe && make && make install DESTDIR="$NEM_OUTPUT"
+    # The installed bin/ symlinks point at absolute prefix paths, which
+    # archive extraction rejects — rewrite them relative.
+    - run: cd "$NEM_OUTPUT/bin" && ln -sf ../lib/aws-cli/aws aws && ln -sf ../lib/aws-cli/aws_completer aws_completer

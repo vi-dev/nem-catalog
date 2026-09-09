@@ -1,0 +1,41 @@
+schema: 2
+name: moon
+description: Build system and monorepo management tool
+homepage: https://moonrepo.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: moonrepo/moon
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/moonrepo/moon/releases/download/v{{.Version}}/moon_cli-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.xz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "moon", dst: "bin/moon", mode: 0o755}
+  - copy: {src: "moonx", dst: "bin/moonx", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.5.4
+    sha256:
+      darwin/arm64: "c4e0f41f43f80533be4120917858ca68e1d65063375de0088882342e45366867"
+      darwin/amd64: "1d0b6368e891e7a691831a768b136bd824e421a862cd17de4e542fd60b06a5e6"
+      linux/arm64: "644c4c08975f35943bf4fbdfede7ee9c7cc98bc76ba7e8f0e8443c3029a1e525"
+      linux/amd64: "d289e8c0cdb30d080445a38c7f2635b7c2f2c29618abe7c2ef48ca29525ba926"
+  - version: 2.5.3
+    sha256:
+      darwin/arm64: "8fd663667bf75a66e6990d9d1251dd628dca3fb7621a8696277a593f67703f8f"
+      darwin/amd64: "1cc339dc18de5b0fa7e7984080cbdb2e88772d45062a20f45a2b4672c33db48a"
+      linux/arm64: "d38cc7f55d98d96aa88300c60321885fba15cb340a43974f834b03d2528f1027"
+      linux/amd64: "f098bfc3dc30ec1706bfcc118ab70bf2fae8a724c247c88ab721d9e10bfb45ae"
+  - version: 2.5.2
+    sha256:
+      darwin/arm64: "3315002e7a0f394f2a7590ffea0c1d91d10c41a6b5d3639d31f06dd03b9497da"
+      darwin/amd64: "30fce63e507657c0aab8ef7a5b5edddc4847e1da7a26c96b588c97666fdec5e6"
+      linux/arm64: "e56bb8cc86c9b19e80f8c70f8ec579a2e4ca0af0edc5ac223afa7254ffceaec6"
+      linux/amd64: "e1ed70f1d6ce7f50ce8acc05d4ad230d03680d6646552a494446623338f41ab8"

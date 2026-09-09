@@ -1,0 +1,33 @@
+schema: 2
+name: regctl
+description: Registry client for inspecting and copying OCI images
+homepage: https://github.com/regclient/regclient
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: regclient/regclient
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/regclient/regclient/releases/download/v{{.Version}}/regctl-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/regctl", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.11.6
+    sha256:
+      darwin/arm64: "5b52b71861abc300ab513e87a4c3794cff6508035ac7f6b6bdfa1fa5688c0040"
+      darwin/amd64: "d651381c58357e9b9446cec172761c7418b7621da57960d438175d8f4c5b479d"
+      linux/arm64: "a9b71a3ee79b2d1dbbd7d51fd5e8fa214722c192864235d3d8764463c751a1ff"
+      linux/amd64: "8e0e62a497fcdb8048d18aa927a139613176ba0531f412bc541044e28f9856bd"
+  - version: 0.11.5
+    sha256:
+      darwin/arm64: "f4d536d64d0c3cc1db7400902175a1c314675991d22e87e15c319501a2676d3f"
+      darwin/amd64: "c132fdddda68b9c7584ac19f3b40cd17f71916c2bca8182270ebe65b55198a12"
+      linux/arm64: "c4cf231e74cda685f1599f3d866b02b03c572e54b79ec8b062f32070b0ba4587"
+      linux/amd64: "c93aa7638749f5aaac1a8e01787321889c78f0101809bb2880343478d0ba0467"

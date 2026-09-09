@@ -1,0 +1,43 @@
+schema: 2
+
+name: m4
+description: GNU macro processor, the engine behind autoconf
+homepage: https://www.gnu.org/software/m4/
+license: GPL-3.0-or-later
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+bins: [bin]
+
+versionDiscovery:
+  http:
+    url: https://ftp.gnu.org/gnu/m4/
+    filter: 'm4-(\d+\.\d+\.\d+)\.tar\.xz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.4.21
+    sourceSha256: "f25c6ab51548a73a75558742fb031e0625d6485fe5f9155949d6486a2408ab66"
+
+build:
+  source:
+    url: 'https://ftp.gnu.org/gnu/m4/m4-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-dependency-tracking
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: m4 --version | grep -q "$NEM_VERSION"
+  - run: '[ "$(printf "define(a,b)a\n" | m4)" = b ]'

@@ -1,0 +1,34 @@
+schema: 2
+name: git-cliff
+description: Changelog generator from conventional commits
+homepage: https://git-cliff.org
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: orhun/git-cliff
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/orhun/git-cliff/releases/download/v{{.Version}}/git-cliff-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "git-cliff", dst: "bin/git-cliff", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.14.1
+    sha256:
+      darwin/arm64: "2e2d1f60963aa6a201dbd21df14d7f44025328b8bb33437695f15a516598615a"
+      darwin/amd64: "d1ca51bfd8b8c2a09434532bdb85bab50179b7c0bde2378aa48f3c1a7dc2fd36"
+      linux/arm64: "ee79fa39a8bb100b12937b0ac4800cc4436ae48f678ef8a1502ce99754552b0c"
+      linux/amd64: "cba6ae86f0a4205784eed8ef049fe53c904138806e33a1bda2e25026b17198eb"
+  - version: 2.13.1
+    sha256:
+      darwin/arm64: "21547ae4a0421164070ab75c2522864ea5565858a011fabc5f583061b20f1226"
+      darwin/amd64: "6e60ae390d375cecb9d8008c49f0e724a8dfe40390b532ef5501e421d2cc8acb"
+      linux/arm64: "4054c124b926c117f3fa048939bc8be0a954f29f3b6f367627e8cb22c1971882"
+      linux/amd64: "200d2535da6d9703f3bcc8a4d159c3b55eacdb01cf2148c55b3eee9dd04d5249"

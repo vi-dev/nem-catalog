@@ -1,0 +1,40 @@
+schema: 2
+name: grpcui
+description: Web UI for interacting with gRPC servers
+homepage: https://github.com/fullstorydev/grpcui
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: fullstorydev/grpcui
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/fullstorydev/grpcui/releases/download/v{{.Version}}/grpcui_{{.Version}}_{{replace .OS \"darwin\" \"osx\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "grpcui", dst: "bin/grpcui", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.5.4
+    sha256:
+      darwin/arm64: "ca66b65aa4e4df03b7cbbb299dbae55f368c9f301b74c52cbafdbf861dce5aed"
+      darwin/amd64: "aab61c729815ab6266b18731c07a79f07de3f1cf5a5715c85ced0139ef908caa"
+      linux/arm64: "6d61052378ffbfad038d6cda614ebc2b75b5fe1b35e678c29b6c682ef40c994f"
+      linux/amd64: "c5393203248854b2f6eda054bfaf55b6b26f248a45c8a2c8df7f43bd007396ff"
+  - version: 1.5.3
+    sha256:
+      darwin/arm64: "3dc2b7606964c4938e6c77360fc216a3d4a8573a2a9a2b436be12f04881a9f27"
+      darwin/amd64: "5676ea03bc3d3d20016126ae60d4c2ee45716ae1c64c6411baada7d06ad2938f"
+      linux/arm64: "774d51281472780f0fdd6e72ee2785ceae4c584f8e87ea8ead61459037732b58"
+      linux/amd64: "6277454ae17074c6e14ac7e1ff4bcdbe0dd87469baf931884782953eb4ba5f8c"
+  - version: 1.5.2
+    sha256:
+      darwin/arm64: "e84ce9ddf5a09dfa47c32c9a36aadb20d5a56e6d7a8c676713fff3673818c06d"
+      darwin/amd64: "52301bbaf45bf2244577a7bdaed29660ab9ed66592e8d46b9441b012c3c23a62"
+      linux/arm64: "79ebb98b6833ffc46ffff04bc8125ea2e1870e6e34970b9a8b7c463b31da45aa"
+      linux/amd64: "a57acb97726c70ce2f323118ccbd1ac28fbe608d8af7e9037526aff16d7a0bc4"

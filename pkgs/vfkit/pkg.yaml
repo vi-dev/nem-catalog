@@ -1,0 +1,49 @@
+schema: 2
+
+name: vfkit
+description: Virtualization.framework command line front end, used by podman machine
+homepage: https://github.com/crc-org/vfkit
+license: Apache-2.0
+
+platforms: [darwin/arm64]
+
+bins: [bin]
+
+versionDiscovery:
+  github:
+    repo: crc-org/vfkit
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 0.6.4
+    sourceSha256: "ff496bd6ee6772ed070f286c4282a8a2e2f5231d4f8e98b2255b883ba69af42d"
+
+build:
+  deps:
+    - go
+  source:
+    url: 'https://github.com/crc-org/vfkit/archive/refs/tags/v{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # One archive serves every macOS version, so the floor has to be set:
+        # clang defaults it to the builder's OS. Upstream targets 13.0, which
+        # is also the oldest release Virtualization.framework boots EFI on.
+        CGO_ENABLED=1 MACOSX_DEPLOYMENT_TARGET=13.0 \
+          go build -trimpath -ldflags "-s -w" -o "$NEM_OUTPUT/bin/vfkit" ./cmd/vfkit
+        # Virtualization.framework refuses to create a VM unless the binary
+        # carries com.apple.security.virtualization.
+        codesign -f --entitlements vf.entitlements -s - "$NEM_OUTPUT/bin/vfkit"
+
+test:
+  - run: vfkit --version | grep -q "$NEM_VERSION"
+  - run: codesign -d --entitlements - "$NEM_PREFIX/bin/vfkit" 2>&1 | grep -q com.apple.security.virtualization
+  - run: '[ "$(otool -l "$NEM_PREFIX/bin/vfkit" | awk ''/LC_BUILD_VERSION/{f=1} f&&/minos/{print $2; exit}'')" = 13.0 ]'

@@ -1,0 +1,34 @@
+schema: 2
+name: zizmor
+description: Static analysis for GitHub Actions workflows
+homepage: https://github.com/zizmorcore/zizmor
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: zizmorcore/zizmor
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/zizmorcore/zizmor/releases/download/v{{.Version}}/zizmor-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "zizmor", dst: "bin/zizmor", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.30.0
+    sha256:
+      darwin/arm64: "c9c5d83730efb86f2cd71b487605c00a4d63903e4f9458485ed5eac3b1924ab1"
+      darwin/amd64: "343c85c8f709edf14bf3c8781d53574975ecbb2d23c80ed1eab4932ab0a72343"
+      linux/arm64: "018a024d6b6d09733b07f6ef42838d984c23ec04bc9b2acd55f7d67826aeafe5"
+      linux/amd64: "ec8c95cd800845abb9bbc5f377ec7c57d2eb8e2386a00a201d3a74ee4092e5ed"
+  - version: 1.29.0
+    sha256:
+      darwin/arm64: "720322fade9e83a9c7953944c438f2ba942636b86b96a8f0e6b15ce94c8a6b6f"
+      darwin/amd64: "648b72ab9941a7f2a8d65d7b68a8e76cef789538c8df3a3950384d38423375b0"
+      linux/arm64: "415eaa7c0a06479a701b8e44a3e812c1047decc848ec4bede7bd6bbf49f22d20"
+      linux/amd64: "dd96df044a6e8538d5f423790f453bdd03d49e5b2bcc38214acc41a2f1297839"

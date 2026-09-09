@@ -1,0 +1,76 @@
+schema: 2
+name: dagu
+description: Self-hosted workflow engine for YAML-defined job pipelines
+homepage: https://github.com/dagucloud/dagu
+license: GPL-3.0
+
+versionDiscovery:
+  github:
+    repo: dagucloud/dagu
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/dagucloud/dagu/releases/download/v{{.Version}}/dagu_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "dagu", dst: "bin/dagu", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.16.2
+    sha256:
+      darwin/arm64: "4f9446ec9744ee8e2d186f3afe7372039213a6970ad2841a98a07476f8207c4b"
+      darwin/amd64: "8bd985e2a4b9d6756cf2199fae77947f368e0a39aac5447282f63ce9cd8fa302"
+      linux/arm64: "f01a1f3eb79ca62d9caf9ab00e81f704725ea67300339624102bcb49d55476f3"
+      linux/amd64: "4e9e5132accc31ec07af98b1c038751b8c9ea77e4fda583d881e562af75d2156"
+  - version: 2.16.1
+    sha256:
+      darwin/arm64: "b9692f340807657cdbaaea8e133f4b454e75bac2e86a91313509753d1a7dada6"
+      darwin/amd64: "3b9a448f9467b0a9d27890a1c4d7170ca95a46e7497bad10887b9ea3fc0151ab"
+      linux/arm64: "441d25d8ff2b8b4984fdad5bd3cc84ecdfe574a01de95a8169d9c905645df732"
+      linux/amd64: "e624ef89c96465dc63e9263911bf31163dd7021738eba122b264380e4f854919"
+  - version: 2.16.0
+    sha256:
+      darwin/arm64: "cafde07c3f07a2b64a863d4905a292b27490ec74498f773e24a87b2921e2767c"
+      darwin/amd64: "13d00f7fde1ec09e26bae17003287dec4ae4d76647e8d35833b22820a32f4860"
+      linux/arm64: "b5f63d82dad03891ea8406093e7ede5144617f14bf2e99635e72c41c6996d3a2"
+      linux/amd64: "5b7fd6332371f1b169294659d29930edf2b2d97d79e631c1d7bd495b07842070"
+  - version: 2.15.4
+    sha256:
+      darwin/arm64: "ece683dd74dffb5ae32c8f652eeeaf7d5b8481c65b0fbb50e88825eff6d74e0e"
+      darwin/amd64: "1dd3198a09dc7e7fa3ec1be372e5c729d8620cb8afa513847f5ab7412ed5e190"
+      linux/arm64: "942b6878f0d1995cea5f178a6effbb0b06e11b1cf850f3a7d17073e966aebcb9"
+      linux/amd64: "ce99ff82722d4f270509d40c29d411b35efdc10ad79388b56cb99567353f4c5f"
+  - version: 2.15.3
+    sha256:
+      darwin/arm64: "a3fb3853bec535a3b2adf24e80120fe6058813c23c280396fb48eb8aa0c3fc3e"
+      darwin/amd64: "644fa00780bb0f98f0bde7cba35ba7a95fde0144c670d811e18a8e32c76f1cce"
+      linux/arm64: "2584e34fd515de13e15a1b2be8de5fcba57d465a984cdac6347418606a5fd40e"
+      linux/amd64: "ec294a6f59120a221c9965f6e8c8b07be712a7612f053cad9872ef0481c71abb"
+  - version: 2.15.2
+    sha256:
+      darwin/arm64: "de7db933deb4b3681300f6afd622d971f8aa86fe3d208967762986b695792fee"
+      darwin/amd64: "d33c63d507870e049e9cfd4bb999c0e849fec4a444e8d4cc181c9c31b3149661"
+      linux/arm64: "6f2316202df1549f535fab60af6c9fc8fdaf2e2d1a0c1cda4a8f85d05b93bb5e"
+      linux/amd64: "a6feed4b8db20cc86c4fe3a5e3e9451f86fc14e63ef9a04d0ea97d2899180ab3"
+  - version: 2.15.1
+    sha256:
+      darwin/arm64: "e7343a08bfb42091c2a177cc1a75f7df5a4fc9c256735dfc769b3bed18f2a319"
+      darwin/amd64: "a7fbed8e194668b9ede73de486f06f706574731ccf58fba1cffa86a1ffe84c18"
+      linux/arm64: "75c757bd5ca34962f59121e4fa8f64d27ccb0617d5702ca5edf4f7eb9136e37d"
+      linux/amd64: "cfadd9606af9ff74d0ea8aef91fd89a831b3c63cf99a95c456fe2fcb3bb0471e"
+  - version: 2.15.0
+    sha256:
+      darwin/arm64: "bebf2bb0e9f8342790edb61a67c1a37de6508d290f2b8f784609fd765aa2ff6b"
+      darwin/amd64: "9420fd6102ffde74158775ef5c0577ae358e4bfe6e08868d04acdaa51049afd5"
+      linux/arm64: "a9426a580dbdaf4385d4528b717a83092d901e871ca455e9bf23a2a449b12fff"
+      linux/amd64: "7789fd5bf53101ff6442faf602ae404f3e64f438e982c86c57653277d93d1ad2"
+  - version: 2.14.0
+    sha256:
+      darwin/arm64: "92c236f6527271340aa2fcc64e748891c13d5c18afe89380b79dffd364aeea1e"
+      darwin/amd64: "68f61fe273ce2cad1a15071eb894a6ebbc98563a8d61fa8cd08d8715654adbee"
+      linux/arm64: "c1061503cfe729593ac5433b29e6959830cc2dad50205f1003f4287998ee0cd6"
+      linux/amd64: "ca902060f08ad69f7e68be53b0c6f8146cef9ae3f3558529d31d773db202d00d"

@@ -1,0 +1,48 @@
+schema: 2
+name: rust-analyzer
+description: Rust compiler front-end for IDEs
+homepage: https://rust-analyzer.github.io
+license: MIT OR Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: rust-lang/rust-analyzer
+    filter: '^\d{4}-\d{2}-\d{2}(\.\d+)?$'
+
+# The standalone assets are bare gzipped binaries, not tars, so the VS Code
+# extension package (a zip) is the only extractable asset shipping the server.
+artifact:
+  url: "https://github.com/rust-lang/rust-analyzer/releases/download/{{.Version}}/rust-analyzer-{{.OS}}-{{replace .Arch \"amd64\" \"x64\"}}.vsix"
+
+install:
+  - extract: {strip: 1}
+  - mkdir: bin
+  - move: {src: "server/rust-analyzer", dst: "bin/rust-analyzer"}
+
+bins: ["bin"]
+
+versions:
+  - version: 2026-09-07
+    sha256:
+      darwin/arm64: "3c4899966ad94acb3ad787a66cbb501f79ee60edac21b17bec2693fe50994b78"
+      darwin/amd64: "bdaa625fdb6162912aa4f9967203728b9b5c8a38adf38d5b58c325ba3149d0a6"
+      linux/arm64: "f33d35db89c12bf5cb09f3c2280f3ba88e7c34727f93fefb6afec6ffbb766384"
+      linux/amd64: "0b8ce8b4baddcaecd58980d4778883cdfca273597f7d4c9680338bbaed6ab2f0"
+  - version: 2026-08-31
+    sha256:
+      darwin/arm64: "b2e64dd505af3f7e6b8286f63705c86696cdfdf63a8a8126117fcc71cfaca1c8"
+      darwin/amd64: "9697c7e5b60389d420b3e0f5522bc5716457779ef301a4784599ab31d2ca9222"
+      linux/arm64: "564ad8d3eab364a0acdff5b1bae5aacaab5be5b24bdc90988552fda1f2d97741"
+      linux/amd64: "4f28ff429512b2b37d7742a4b3f3b3dcaafae5dc459d7cfe16d5b2bb0b23c2ae"
+  - version: 2026-08-24
+    sha256:
+      darwin/arm64: "de534e9cadcb52729108f4a26d2852db8ef3429a736f2310543e75834b0b9e7b"
+      darwin/amd64: "43d3c2e9f3c4f80af00ef57ac441733baf798ba99c9a05c89c0c4822b4ebd5c7"
+      linux/arm64: "13169086e8c42492ca06a5d4189bfff674938e02605ed2d4015d2f9cb02c2be3"
+      linux/amd64: "f686c4de0058214a9f16b8d45ca4041303b459a4e08043c0ad7c77fdbaeba1dd"
+  - version: 2026-08-17.4
+    sha256:
+      darwin/arm64: "cbc342413b39041ea64a2bc16e072106e6d1b3f72ff3d92c8b7790649df8a3df"
+      darwin/amd64: "6f0469ff1229d0f9034e708c75f52d3f67ca9b1b5382e35c6a42c2169e0d09dc"
+      linux/arm64: "355a68d0719f6d6b221af8e8907ea510467cae6078f44e353038210a60779901"
+      linux/amd64: "8c025a5b56c32163776ed4d1030db9a8e5e4b28c2941fcd9643b8479a8b296b6"

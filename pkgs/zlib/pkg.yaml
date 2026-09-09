@@ -1,0 +1,35 @@
+schema: 2
+
+name: zlib
+description: The zlib general-purpose compression library
+homepage: https://zlib.net
+license: Zlib
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+libs: [lib]
+
+versionDiscovery:
+  github:
+    repo: madler/zlib
+    filter: '^v\d+\.\d+(\.\d+)?$'
+    prefix: "v"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.3.2
+    sourceSha256: "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16"
+  - version: 1.3.1
+    sourceSha256: "9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23"
+
+build:
+  source:
+    url: 'https://github.com/madler/zlib/releases/download/v{{.Version}}/zlib-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: ./configure --prefix=/ && make && make install DESTDIR="$NEM_OUTPUT"

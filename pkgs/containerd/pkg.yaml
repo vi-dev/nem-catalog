@@ -1,0 +1,31 @@
+schema: 2
+name: containerd
+description: Container runtime daemon with shim and ctr client
+homepage: https://containerd.io
+license: Apache-2.0
+
+platforms: [linux/arm64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: containerd/containerd
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/containerd/containerd/releases/download/v{{.Version}}/containerd-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.3.5
+    sha256:
+      linux/arm64: "06f46cbc073872c5ad1fbc922a53543e9a26b798d62ff106d44639dcb9947942"
+      linux/amd64: "2f0a095a71e3262d0d91ff0e50e2e4ae73c3866c4d1ff6a15f341097fba3dd44"
+  - version: 2.3.4
+    sha256:
+      linux/arm64: "a985fbb7e18fc0362d31a055338f5d7b0e087a3e27f14c70d1c5965399a29f95"
+      linux/amd64: "9d68969855fbf676cdb8ed758e420fb048d61f984f61de3e53eddfebe484d168"

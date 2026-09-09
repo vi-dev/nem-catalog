@@ -1,0 +1,34 @@
+schema: 2
+name: scc
+description: Fast code counter with complexity and COCOMO estimates
+homepage: https://github.com/boyter/scc
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: boyter/scc
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/boyter/scc/releases/download/v{{.Version}}/scc_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "scc", dst: "bin/scc", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 4.0.0
+    sha256:
+      darwin/arm64: "02cfdfcaf5baf7f6595746efdfcc6301fce89cfc6a5bf8b52ed78064937fd933"
+      darwin/amd64: "8ee6d4ed42a89d9e5f71fe3e06a48d575050d264d48cbf33babbcac0a32d7ac5"
+      linux/arm64: "a73d5378017abb1d86da8c19a73ede2878c3f7369e9ea6987827cd710aa14657"
+      linux/amd64: "b8535fb0714dd33c5434c24de181e4d1a632e6a1f869e1985bbd10ad8b838545"
+  - version: 3.7.0
+    sha256:
+      darwin/arm64: "376cbae670be59ee64f398de20e0694ec434bf8a9b842642952b0ab0be5f3961"
+      darwin/amd64: "c3f7457856b9169ccb3c1dd14198e67f730bee065f24d9051bf52cdc2a719ecc"
+      linux/arm64: "dcb05c6e993bb2d8d2da4765ff018f2e752325dd205a41698929c55e4123575d"
+      linux/amd64: "3d9d65b00ca874c2b29151abe7e1480736f5229edc3ce8e4b2791460cdfabf5a"

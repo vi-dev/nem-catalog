@@ -1,0 +1,45 @@
+schema: 2
+name: atmos
+description: Orchestrate Terraform and Helmfile stacks
+homepage: https://atmos.tools
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: cloudposse/atmos
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/cloudposse/atmos/releases/download/v{{.Version}}/atmos_{{.Version}}_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/atmos", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.228.0
+    sha256:
+      darwin/arm64: "7847b49709c80efe4e4d212e7b2885351d73d1c96bd34f6092a43e7061f6ac54"
+      darwin/amd64: "f7917ffcf8e72de84390e0619b11dce68a2d558dd006cb53737586c9a58cccd8"
+      linux/arm64: "c5e475056506a9d3b4ce5ed7c38f4fdc14d354ab0c6705031149605c93cdf2de"
+      linux/amd64: "69bbc2e238c086d54f125954e035cb80e60243e82489b0ebc3d7dff2141f9fa3"
+  - version: 1.227.0
+    sha256:
+      darwin/arm64: "f5a60354dafbd4adcd4d9692f649a49daf9e484c2e8c9ba79be5ccc7bd0a5f25"
+      darwin/amd64: "d6181c7114e3a42be23256b9c4f31dd10625a298b6bea581401780d1ac2f9998"
+      linux/arm64: "9b910778a57d48dab27320cffb56c68a1fd89f6277d84bf86bfa3465f45d8e1c"
+      linux/amd64: "430b7f681c1b8dda9368f7f5bb33b63f74025cacb3d9691296b5dac53fe6e6af"
+  - version: 1.226.1
+    sha256:
+      darwin/arm64: "07cc629c4d5f54a0fd33f2199726b423de9f64f68e253442a823ef2fe9a6c759"
+      darwin/amd64: "abc4d5d48a384af007d5f7d42e4c5b8590515e482dbf783525e67a94eef32afd"
+      linux/arm64: "fd071d345c43f8126e3900b395b1590ab271ae67fadd4c738bbec9026859d58c"
+      linux/amd64: "0aaf8eec2fc01dd601b113eba9f3cf4da406c84f969fd0b9e5535cef8b0d1850"
+  - version: 1.226.0
+    sha256:
+      darwin/arm64: "56d07a38423f01f880f96bdbf251c60bf5c7a70b36ff65e0019463b7af5d95a2"
+      darwin/amd64: "79cf2c93e7891d9a8cace2f5f8f96a739119a9e0e0744646ab4c6395bf08530e"
+      linux/arm64: "fa4f340767ab4080c1e3606e7306799488ce23a53230bfeffb4c4db4c61f21dc"
+      linux/amd64: "7dea111ca81b17208abc68b092732adc1a45b19fcc4cff2579f1851fe148c9dd"

@@ -1,0 +1,46 @@
+schema: 2
+name: prek
+description: Drop-in pre-commit replacement written in Rust
+homepage: https://prek.j178.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: j178/prek
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/j178/prek/releases/download/v{{.Version}}/prek-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "prek", dst: "bin/prek", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.5.2
+    sha256:
+      darwin/arm64: "f3ef7692f8873c36d9437c77389833d3165fbe705ea66e53e169d83a89055f9b"
+      darwin/amd64: "5dfd123b8cf15f51dc8cbff6f12b674448b19a684ff1696db20f963ec2417e11"
+      linux/arm64: "ffc9334cdac13b2df716d391353d5e8307c06a08c135b844dabd3781c4c6518b"
+      linux/amd64: "6b4f5c74a621d71f8dba09a9c0669f0d9488207805861c8a7d5f6b15201d4771"
+  - version: 0.5.1
+    sha256:
+      darwin/arm64: "9e5384f128d8731203d7cdd683e2786c269ac5c9dc04d5962f7d078966b16177"
+      darwin/amd64: "f3fd514c2f2ff0b00b06ca48af161c64db723f6300849c77d504c27ca0926c80"
+      linux/arm64: "1507bd22f6ae5ffb465aff6e7a0159d6f419770286c8b3a8b2f51c5919949997"
+      linux/amd64: "01f873ac49f157885774a5bdb1aa1bc8e3b9db6941d79539df02cc182bdbbcec"
+  - version: 0.5.0
+    sha256:
+      darwin/arm64: "73947efd142420dc1ad2856d155385b3fd54b88ba8bb769187dc8b359cc94681"
+      darwin/amd64: "da5cdb10ca7821ed15c888d2a9b2ae94a6d4f7eadf1bc735ac1f668dec40654e"
+      linux/arm64: "6a48bc5de0b134e1ecbd469714bdf88fc83b7895529d59f95303e839241473c2"
+      linux/amd64: "99531890378759c04d38a93804d502d7df8a5c4bfb24c3e98af3031e868b9ba1"
+  - version: 0.4.14
+    sha256:
+      darwin/arm64: "87f7fb2b99871820eb352d9a2327461d25affe354d6d48c4edf3a34f360c6be8"
+      darwin/amd64: "59073820f5145cea2fa91b7e4256bbab6ed44de364d4b6809311d7ee9653d3b7"
+      linux/arm64: "27a873abf78df8ec842829f6def4356f1f10c8ddf1741c6b2b3ba0c1e1e93f95"
+      linux/amd64: "388f2e5216684c22e635dc1bde1bac5bd008a5dfc21c754ced382d19ff31413b"

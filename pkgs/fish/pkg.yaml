@@ -1,0 +1,50 @@
+schema: 2
+name: fish
+description: User-friendly command line shell
+homepage: https://fishshell.com
+license: GPL-2.0-only
+
+versionDiscovery:
+  github:
+    repo: fish-shell/fish-shell
+    filter: '^\d+\.\d+\.\d+$'
+
+# Linux gets a standalone tarball; macOS ships only the .app bundle (zip) and a
+# .pkg, so the binary is pulled out of the bundle payload.
+artifact:
+  url: "https://github.com/fish-shell/fish-shell/releases/download/{{.Version}}/{{if eq .OS \"darwin\"}}fish-{{.Version}}.app.zip{{else}}fish-{{.Version}}-linux-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}.tar.xz{{end}}"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "fish", dst: "bin/fish", mode: 0o755}
+    platforms: [linux/arm64, linux/amd64]
+  - copy: {src: "fish-{{.Version}}.app/Contents/Resources/base/usr/local/bin/fish", dst: "bin/fish", mode: 0o755}
+    platforms: [darwin/arm64, darwin/amd64]
+
+bins: ["bin"]
+
+versions:
+  - version: 4.9.2
+    sha256:
+      darwin/arm64: "ad0504c3e46c3c0fc2d3fb3bee22c1e48165e450a4370925905df4b987e2ad3c"
+      darwin/amd64: "ad0504c3e46c3c0fc2d3fb3bee22c1e48165e450a4370925905df4b987e2ad3c"
+      linux/arm64: "f6b99103964905f9ae9c0ab16ec96537010a8b7a031f1c3ec0c4be1892962353"
+      linux/amd64: "677f352e4ed8f8ba35295754b17ed2f08d228abaf9344a8b1b2715afa5c80814"
+  - version: 4.9.1
+    sha256:
+      darwin/arm64: "682627b3fa7460a63d08ca1f87819873764b89a0b3c01c9a00cac0d3d718744d"
+      darwin/amd64: "682627b3fa7460a63d08ca1f87819873764b89a0b3c01c9a00cac0d3d718744d"
+      linux/arm64: "653db83a827e9b0a5a683cee71c90347dc413ebbd8bcf9ed38f99dbd71fa2505"
+      linux/amd64: "5801f04276a14ce0718d9e72c4dcb6b8b22a887c174ea5cf476b5cb6707da0c8"
+  - version: 4.9.0
+    sha256:
+      darwin/arm64: "ba3d066d7e75a0f04935000c8624cf5c80dce8677a7acd51dd51d6b8f3f43e11"
+      darwin/amd64: "ba3d066d7e75a0f04935000c8624cf5c80dce8677a7acd51dd51d6b8f3f43e11"
+      linux/arm64: "9f38e3d12c80d526b32f8c1cc9bcdea50aa22424dfe52167e6f84084beb7083f"
+      linux/amd64: "eeb6b98d88af915d38deca8782cd538f7715d1690f66d72656da2c0c3e68b399"
+  - version: 4.8.1
+    sha256:
+      darwin/arm64: "aec7606269bbd0af8ac29f66d7f50f32f72b1d68d3b278227ae3e94cf501bb7f"
+      darwin/amd64: "aec7606269bbd0af8ac29f66d7f50f32f72b1d68d3b278227ae3e94cf501bb7f"
+      linux/arm64: "a03c8a445570a2a37e114cb13cebe41842cf17c4dd67a6530a57f742db04eee4"
+      linux/amd64: "39cab35242ab77bfdbce73b473000c3b045aaf2fe0951b042199bb7fdba3df78"

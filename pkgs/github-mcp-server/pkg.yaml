@@ -1,0 +1,40 @@
+schema: 2
+name: github-mcp-server
+description: MCP server for GitHub repositories, issues, and pull requests
+homepage: https://github.com/github/github-mcp-server
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: github/github-mcp-server
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/github/github-mcp-server/releases/download/v{{.Version}}/github-mcp-server_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "github-mcp-server", dst: "bin/github-mcp-server", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.12.0
+    sha256:
+      darwin/arm64: "e559f9da66cd639d14f72ca5402d2ad8e258849d30458bbbf3347d5408b02676"
+      darwin/amd64: "bd386e398f37011db94f186a7b30ddf1be943fa2d414824d749455e2c83feb42"
+      linux/arm64: "51f2411e93d981eb7038ca23229aa960006209ce82a4dd80a92d7875a7931a5c"
+      linux/amd64: "f34de295acd8f1012c7f2c0e3b909d87361d0993b9489b57ee92ac72b85d7cca"
+  - version: 1.11.0
+    sha256:
+      darwin/arm64: "b08e962fb797a9069fb932c25957209026dcbaa9478f3a248a1bf2354af978ec"
+      darwin/amd64: "e7cc6b5d16bcb86b01cae2ba32fa7525266a10c96db8d64df63a172ebb7b8f95"
+      linux/arm64: "3f7615254f6b619469c471c5d275029299ff7431c93d6075496ea4b2eec020cb"
+      linux/amd64: "3b73bb7be0c8b043f861e90410df8ebdfc71b83128c54ced75fb32c4ff697fc5"
+  - version: 1.10.1
+    sha256:
+      darwin/arm64: "ca530ba9abf04030104166cc37e1072087a30a173e921c0ed9064f98c73ca039"
+      darwin/amd64: "ea6e86baea583c6c5b55cce071c1c19253009a90f1e987788cb5eb228fcd9556"
+      linux/arm64: "c51dc6cf192c35a328b9f71696d42c38a9a3ba3c2ffe010da836bed071d1ac8a"
+      linux/amd64: "c2629e850a344275cfc5a1590acdfd8c11476a44b688812d460163768e05572d"

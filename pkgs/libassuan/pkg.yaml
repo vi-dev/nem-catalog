@@ -1,0 +1,54 @@
+schema: 2
+
+name: libassuan
+description: IPC library used by the GnuPG components to talk to their helpers
+homepage: https://www.gnupg.org/software/libassuan/
+license: LGPL-2.1-or-later
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat "1" floats within libgpg-error 1.x, all sharing the libgpg-error.0
+# soname (soname number is independent of the version).
+deps:
+  - name: libgpg-error
+    kind: link
+    compat: "1"
+
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://gnupg.org/ftp/gcrypt/libassuan/
+    filter: 'libassuan-(\d+\.\d+\.\d+)\.tar\.bz2'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 3.0.2
+    sourceSha256: "d2931cdad266e633510f9970e1a2f346055e351bb19f9b78912475b8074c36f6"
+  - version: 3.0.1
+    sourceSha256: "c8f0f42e6103dea4b1a6a483cb556654e97302c7465308f58363778f95f194b1"
+
+build:
+  deps:
+    - name: libgpg-error
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://gnupg.org/ftp/gcrypt/libassuan/libassuan-{{.Version}}.tar.bz2'
+  output: out
+  steps:
+    # -fgnu89-inline (macOS only) stops the stdio extern-inline __sputc
+    # becoming a duplicate global under the modern linker.
+    - run: |
+        set -e
+        cflags="-O2"
+        case "$NEM_OS" in darwin) cflags="-fgnu89-inline -O2" ;; esac
+        ./configure --prefix=/ --libdir=/lib --disable-dependency-tracking --enable-shared --disable-static --disable-doc \
+          CFLAGS="$CFLAGS $cflags"
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"

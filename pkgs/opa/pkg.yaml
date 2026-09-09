@@ -1,0 +1,53 @@
+schema: 2
+name: opa
+description: Open Policy Agent, a general-purpose policy engine
+homepage: https://www.openpolicyagent.org
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: open-policy-agent/opa
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+# Upstream publishes darwin/amd64 only as a dynamic binary and darwin/arm64
+# only as _static; the static variant is used everywhere it exists.
+artifact:
+  url: "https://github.com/open-policy-agent/opa/releases/download/v{{.Version}}/opa_{{.OS}}_{{.Arch}}{{if or (eq .OS \"linux\") (eq .Arch \"arm64\")}}_static{{end}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/opa", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.20.2
+    sha256:
+      darwin/arm64: "54e7008e696d39e8e4f96594e2b71bcbe45fd9a4f838102bcf1240638bf3fbe1"
+      darwin/amd64: "e9b8d205db1aeaa6ec350855087b7d7fc014e7728b65cdf822464ee59e63f601"
+      linux/arm64: "431bed5a365578241ab06c7cc1c7d0cdff8c11dcbc6f12c3488590deb8b8d66d"
+      linux/amd64: "69da5179ee403d10fa11bab6cfb4ffb0d23dba5f9b682fa977db772a1da5670f"
+  - version: 1.20.1
+    sha256:
+      darwin/arm64: "2b805d476099f81828e0a72466f23b7c5f7035e8e51823f5e1ef3cbf4f2321ce"
+      darwin/amd64: "2e0ba7a7a45940ac4c7df878af269ebd86b221d4776f746a7fa0b6d85ba209d4"
+      linux/arm64: "827f00e9530120394005a3e831e8eeb4a47cb17f11cee4d4c0f2df9b57449a44"
+      linux/amd64: "0b3f152e61be276b70396cfbca49e39fc9d0c5089e0a8574e8f6a30f41a9187f"
+  - version: 1.20.0
+    sha256:
+      darwin/arm64: "492b2ab44460722324e1a174775577f0fa4d92c77c72b7a48bdfa8331fce6a5e"
+      darwin/amd64: "b30fa8887e02d5518bf2cbe963dfea0a818328d1ae16db0b4bfd0507e9fa128b"
+      linux/arm64: "cc17a757e1d1a80bc9311f867c673836f88fb2116f6330a568d0b64da2e767ad"
+      linux/amd64: "4e4c65be08ed27e7375d816d446a444e65ba101806014c7a51b2a7652c2a942a"
+  - version: 1.19.1
+    sha256:
+      darwin/arm64: "805ce3f336154150bef73bafa2dab8806631851bccc7cae95bef46ffabdf8fc3"
+      darwin/amd64: "80a9e2bce1a44fd81dc4b5415439918786b4685f0709d533d0005abea7e10e02"
+      linux/arm64: "19dcb5186fd394c32023918c53eaacda55f835abb05e13e0f9a766dd1429494f"
+      linux/amd64: "c9f985ce0d345f5484006ade2c695ed9e3f308e4441139e46695c5c182ac0839"
+  - version: 1.19.0
+    sha256:
+      darwin/arm64: "6de003137cc54b65cb4a6a9c7cf6b29a248f10c1c16fc34f793a8a83b5f9d004"
+      darwin/amd64: "a6bb096502d176a23b721e023f3ca615a0e4773fec69511143093a2281118f5c"
+      linux/arm64: "06680087ed236c8c6aaa021660d83178db829a2ad30bdb3482481fada6791b2a"
+      linux/amd64: "1dd5c5591ff856f5e20a1d66bafae9511ddf3c5552ed3b5070c70b2b6580ee3f"

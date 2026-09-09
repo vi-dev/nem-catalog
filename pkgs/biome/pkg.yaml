@@ -1,0 +1,51 @@
+schema: 2
+name: biome
+description: Fast formatter and linter for JavaScript, TypeScript, and web languages
+homepage: https://biomejs.dev
+license: MIT OR Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: biomejs/biome
+    filter: '^@biomejs/biome@\d+\.\d+\.\d+$'
+    prefix: "@biomejs/biome@"
+
+artifact:
+  url: "https://github.com/biomejs/biome/releases/download/@biomejs/biome@{{.Version}}/biome-{{.OS}}-{{replace .Arch \"amd64\" \"x64\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/biome", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.5.12
+    sha256:
+      darwin/arm64: "0e8d513eb6c612236b47ccf0e218ac3917d863d41f853c65c38410774daa26ed"
+      darwin/amd64: "0680097ec839fadc82451634680e39b9b7e48cc4334ef920525850b4d8f54a8b"
+      linux/arm64: "4c1c9908e5cfd5d327e4ac3205baa13b1d3dfd24f184ed289a0c0ef1b2e0274f"
+      linux/amd64: "e2475688799c9e78dd25ba5cf676676ffe74caf182a35082b1d22039151fdf63"
+  - version: 2.5.11
+    sha256:
+      darwin/arm64: "7a067b00fdf8eeefb7f5f5f247b7dac1bb23adfeaea380a91293353b8e2eba2b"
+      darwin/amd64: "74f6d1845e5c1a47ebafd42ba4a90ed174b4bb7a669d70acc1fd925894dbb168"
+      linux/arm64: "b1e422c4cf5de788553f612b3952deadd6cb7669b35659197af14c4b1f763fab"
+      linux/amd64: "629a72d30e5b625b70723a651c510c0c2d4adc7c9b7334a690afe848ba4426ce"
+  - version: 2.5.10
+    sha256:
+      darwin/arm64: "828bc29680765b656b6a354de01d9a7f9f5111e6af99b04cefe06d09c6d2dbda"
+      darwin/amd64: "3d87fe407532d708650be535573b159293e5c0176b51f8065eb45cc6e6861f48"
+      linux/arm64: "fb1238183c5dcfe9bb48772922c2ab62fa54158bfdc78352fa2851f41a71fa5a"
+      linux/amd64: "511592536991d4b07179d063b93ff0c092ccedba556a4b1ea70d12d46ea0785a"
+  - version: 2.5.9
+    sha256:
+      darwin/arm64: "7d8b51dec857ffa8aa35ce5eaa3a4476cd62bed013adc2896bf43cac0a67a79b"
+      darwin/amd64: "df2b50ee283634cdd6f7570b7da06bc3c9cd7ec0590ecbbaf986c7590bef3289"
+      linux/arm64: "bf593f7955e3a437fb8056b255142b50872baa3e81371cda2c3fce9239af1890"
+      linux/amd64: "013eb5158b9e53235dbbf31255cb3b776fb9338b32fa6ff4a44ee1ceed65ee63"
+  - version: 2.5.8
+    sha256:
+      darwin/arm64: "04c2d44e61242c8bf56e2d663e5312e78639334b4a2fef84b5f59ac8bc9579fb"
+      darwin/amd64: "6bfc751bfff3429888c527d2bb1fe632808769d2f5849579ed8cf71e5fe25c8b"
+      linux/arm64: "3f2be9f1f68dca8e0b96d2a9212b408f15dc2668203b2c42cfb78a2894cc966b"
+      linux/amd64: "17abac7ef72e7a1aaccd89892f7e2e62c9919d27473defe772be04ad78400ac2"

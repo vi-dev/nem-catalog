@@ -1,0 +1,56 @@
+schema: 2
+name: quarto
+description: Scientific and technical publishing system built on Pandoc
+homepage: https://quarto.org
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: quarto-dev/quarto-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/quarto-dev/quarto-cli/releases/download/v{{.Version}}/quarto-{{.Version}}-{{if eq .OS \"darwin\"}}macos{{else}}linux-{{.Arch}}{{end}}.tar.gz"
+
+# The macOS asset is a universal build whose tree sits at the archive root;
+# the Linux assets wrap the same tree in a quarto-<version>/ directory.
+install:
+  - extract: {strip: 0}
+    platforms: [darwin]
+  - extract: {strip: 1}
+    platforms: [linux]
+
+bins: ["bin"]
+
+versions:
+  - version: 1.11.3
+    sha256:
+      darwin/arm64: "1a37fc683e4ddb4ba067c6fe1af071cfe78ac15ed25119c96eef55359e983a53"
+      darwin/amd64: "1a37fc683e4ddb4ba067c6fe1af071cfe78ac15ed25119c96eef55359e983a53"
+      linux/arm64: "f4f83a7a6dca346049a097122634e8d612f21ef3ac70c869b7260e98d5c9d1df"
+      linux/amd64: "c408f8184233882ae9281a37dcc3f836817a5c2ab3322efc877e11926eeec696"
+  - version: 1.11.2
+    sha256:
+      darwin/arm64: "015f829598efb2ea14a8f91548d66a5d7e579895cb657dbf319572724c992968"
+      darwin/amd64: "015f829598efb2ea14a8f91548d66a5d7e579895cb657dbf319572724c992968"
+      linux/arm64: "a740af076ebdeb90e58cfa963efd7970800b57c568ecba774f962cf672a69a79"
+      linux/amd64: "58672dbc60e093ffbc601c3ca7e6c4df23288880c4d135402b46f42be7dd5e55"
+  - version: 1.11.1
+    sha256:
+      darwin/arm64: "39af2c40644fc8d4c70f747ee80838423cbac0addfdccfe3a3e580f6b51d8451"
+      darwin/amd64: "39af2c40644fc8d4c70f747ee80838423cbac0addfdccfe3a3e580f6b51d8451"
+      linux/arm64: "19b81b88b16afb9fa196c182013bd1ea6d1fc9c99b5668c29a06de2d5861c743"
+      linux/amd64: "83251de1640bd7ee87e4df9bdd83bd46d116ce93783c19bbef6f64f1c913a1fe"
+  - version: 1.11.0
+    sha256:
+      darwin/arm64: "2011119460fc590c1ae0a33ab1f7a374e6f5c8c0a3362bcdca4e4c15eb1e45e3"
+      darwin/amd64: "2011119460fc590c1ae0a33ab1f7a374e6f5c8c0a3362bcdca4e4c15eb1e45e3"
+      linux/arm64: "8767befa7ef938819d63d631ea53bee9c8c4de57f6b216dbf4069f5938e11802"
+      linux/amd64: "0e5150940c0c041e5d8a2c42a59bc418e142c362c922946af703502d1f3853f1"
+  - version: 1.10.18
+    sha256:
+      darwin/arm64: "ddd6a71a9e0448ab15fb655bc589e11cb6589a248ec35ccd7f7f44137531688e"
+      darwin/amd64: "ddd6a71a9e0448ab15fb655bc589e11cb6589a248ec35ccd7f7f44137531688e"
+      linux/arm64: "f6a07df68e25330b5df34f65d3df66bca605acce3b830c593a58e91884d4cf6c"
+      linux/amd64: "afad071b5bd22c02f2d300695743189d3650e0537a53073e654b630cff2b0c73"

@@ -1,0 +1,52 @@
+schema: 2
+name: crush
+description: Terminal AI coding agent with multi-model support
+homepage: https://github.com/charmbracelet/crush
+license: FSL-1.1-MIT
+
+versionDiscovery:
+  github:
+    repo: charmbracelet/crush
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/charmbracelet/crush/releases/download/v{{.Version}}/crush_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "crush", dst: "bin/crush", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.92.0
+    sha256:
+      darwin/arm64: "2b052a927801a9ea91698de48228ac3e6e1171498c55617e1f9d79540f19b3ac"
+      darwin/amd64: "966b8f89072392e88776a667466fa0e1fef5df730c5c0aec1774a1323c7e649d"
+      linux/arm64: "1b6f0384297a1e77d01df41db1f56fc0872f1e9c9d99634c4b2c208b7bb5d935"
+      linux/amd64: "7d9aca9ab7808ee828a0bb0fde01d96fc480ce0a66a5ff617aa27ac09e23cbd5"
+  - version: 0.91.2
+    sha256:
+      darwin/arm64: "c655c07091300b95e431a96af5f568e3433427af53d606498aeeb99f870736d0"
+      darwin/amd64: "423ab67c36d5f148333eb5627b7cfecf8c60d2707a69025f71229c253c1f5acc"
+      linux/arm64: "b9eb8179bb8a9b82a0fc87cff0470c821afd3789f570a922e61cddbe3b6d64a2"
+      linux/amd64: "225eb39adff654190fb1d1afb4c28a68a39e8397e44779896035e8fbb5f1de16"
+  - version: 0.91.1
+    sha256:
+      darwin/arm64: "349598e7bd852d417ae91d0082eb0e0e5da49b19441bf14741dd507cddb65b22"
+      darwin/amd64: "3918ec636007968960fee02e09d4aa94266968b1d3acf80cad1801f057fd6bf2"
+      linux/arm64: "3c3b49346f21e6bf0fdb1096c24cd936698f8eb0fd8a77ff48118380248bf776"
+      linux/amd64: "4d85889585023f587bd11dcd69954bfcc573e43ff03b78664e747282f8770d5f"
+  - version: 0.91.0
+    sha256:
+      darwin/arm64: "c5d0714307c5129e860d73e9aa5b681e9f014e53e076426cf7a08616a8f803a6"
+      darwin/amd64: "d18013cd0e3b2c93343f0864c5c69b89dec2bd4b46ed1e3d2f40d0782c39d1bb"
+      linux/arm64: "bd9a88dba0c694bf63f679da3e7f0adef86125d35b466c8e30fadfe8bd9548f6"
+      linux/amd64: "74afc41d03243894b5221f03b1bbc4032f1a219671ec9116148946dc2af4c708"
+  - version: 0.90.0
+    sha256:
+      darwin/arm64: "fcd956f05db3e57e8a72de30ad541a8bdc09d711bfba5d3d57bf01926a9933a8"
+      darwin/amd64: "825140048dec4651b624a691303c2ab3d90c6def034de0215a7e9e1ea53d6a4d"
+      linux/arm64: "5b08301c9f1127427350ac11ba4fa98829453c38e1d93e70eef8ef0e9d6dbbf1"
+      linux/amd64: "4eebb9ce1a3655560bae03c64bebcc546f6b24ba9f9ebd1e8ea844b8c3b37ea0"

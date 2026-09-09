@@ -1,0 +1,42 @@
+schema: 2
+name: tree-sitter
+description: Incremental parsing system for programming tools
+homepage: https://tree-sitter.github.io
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: tree-sitter/tree-sitter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+# The tree-sitter-<os>-<arch> assets are bare gzipped binaries, not tars; the
+# tree-sitter-cli zips carry the same binary in an extractable form.
+artifact:
+  url: "https://github.com/tree-sitter/tree-sitter/releases/download/v{{.Version}}/tree-sitter-cli-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"amd64\" \"x64\"}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tree-sitter", dst: "bin/tree-sitter", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.27.0
+    sha256:
+      darwin/arm64: "f278063d8544160f6f89f7f8dba6ba112cb0dd1669757788d2bb7a8a613d2c58"
+      darwin/amd64: "4509c86918341ca50877ce20ef1507390257d203b4893f6c66b6f5cc632a61cd"
+      linux/arm64: "6260b621bf5ab87027dfb463bf955504ef32cdcda62b81f28447753e48c83a62"
+      linux/amd64: "e4a3826bcd0fe099ee3a5617767374939cbc23c4a35b5b53f5fc04142525a2c1"
+  - version: 0.26.13
+    sha256:
+      darwin/arm64: "eeb4c0fd909187de2e77a6403ca9c748d41f209f1186cac0d38f38f571930c02"
+      darwin/amd64: "052f2866ad453bb39ab2905e5b7bbb9de670875f67483243cd9659c0503d97ef"
+      linux/arm64: "72c6d6c669c70491f93db290b285d9e85fd68ead9e324cc55ace35a1be66c3bd"
+      linux/amd64: "1b781c0dc1dfefea44b5db2ec2a58440fe9d006856c3f5b3fd9a17119d1138a2"
+  - version: 0.26.12
+    sha256:
+      darwin/arm64: "3ca18160518d0ac8f631448c771ac102748482af518992adcb09f96423ba153f"
+      darwin/amd64: "37102afe56fbcc6975c9f8e76a7bfbd383f28484e9a34e3acfeaf280a7f8c8c9"
+      linux/arm64: "be970bfad7b557ffc62b1a7b4c92341a9c6e16d619e9880e43f07c4a4e6eb52a"
+      linux/amd64: "c33ace12fa7a94d09c97054da621bf7a6a3159f765b1839a898232de283d641d"

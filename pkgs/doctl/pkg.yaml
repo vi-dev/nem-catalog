@@ -1,0 +1,34 @@
+schema: 2
+name: doctl
+description: Command-line interface for the DigitalOcean API
+homepage: https://docs.digitalocean.com/reference/doctl/
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: digitalocean/doctl
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/digitalocean/doctl/releases/download/v{{.Version}}/doctl-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "doctl", dst: "bin/doctl", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.168.0
+    sha256:
+      darwin/arm64: "c945952e174146f120593b48d840680b652974b3a3bd19789b1bccfec4d98564"
+      darwin/amd64: "67189d0f83e2938382ff946748207cf3b2b7ddbfbfed43ffd718ffe9f03259e6"
+      linux/arm64: "cb5bc103b00e83021f348e555df703f9b5a40d50be5ddbd549e867f4039ae3cb"
+      linux/amd64: "ad817330e1a12fd60729f105d8c39af31ca845f221a60886a1b2215f74d9b35d"
+  - version: 1.167.0
+    sha256:
+      darwin/arm64: "7b0821a02da695bceda027e4b6446d7fb7519a323257fcf4914bef6dc66a6047"
+      darwin/amd64: "ec6c7c7c455ecdb092174acc20b30e8e0f748dfacef688d180193a5dea1f21b4"
+      linux/arm64: "d014a856dc2f25b3e2ee970f23a05dbbcc7d39a780e6d152e903020e363714cc"
+      linux/amd64: "8d7b39ad749698693458aa701c0c8d522035f923455a9bf0ee03a0b01601e51c"

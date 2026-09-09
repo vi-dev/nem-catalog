@@ -1,0 +1,43 @@
+schema: 2
+name: checkov
+description: Static analysis for infrastructure as code
+homepage: https://www.checkov.io
+license: Apache-2.0
+
+platforms: [darwin/amd64, linux/arm64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: bridgecrewio/checkov
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/bridgecrewio/checkov/releases/download/{{.Version}}/checkov_{{.OS}}_{{replace .Arch \"amd64\" \"X86_64\"}}.zip"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "checkov", dst: "bin/checkov", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.3.16
+    sha256:
+      darwin/amd64: "fd5f8c999baf2204660dd2ff6ce3718d9eeb8263b77596144f2792652ad55284"
+      linux/arm64: "6de0dd6ae9189efb22b5affd637f5386873d8088cc3121c0cc433805d9c4c175"
+      linux/amd64: "2c7b6cbe7a32d8463248ea8a9919410c9947a85ea56592a8bcc4b70f5d559601"
+  - version: 3.3.15
+    sha256:
+      darwin/amd64: "9e1f0c27294acbf4b010801889179520b9cfdff8a0ea1fb943665b3d983ddb68"
+      linux/arm64: "7fe9481bff90731f1cec68a1ab37f4f95fb822a970ca4f5094ed52cb0fe4fb8e"
+      linux/amd64: "c1cc66e0e2d147fb8b0a0c23bd6744e6eb2516ce348ab3160a7cd87b272ec998"
+  - version: 3.3.13
+    sha256:
+      darwin/amd64: "85dc1d4d4f476bd35b753486fa57affa25ee7b9df17f3704db8f99523d24997c"
+      linux/arm64: "54cb307b6cb608dc92c70e4c685c3b67b4c1e4ab53480aa751263972929e135f"
+      linux/amd64: "1901428ef96baf8a3dcb698b2d32ba3a4b8072f4754912d7769ae1bc6cbed628"
+  - version: 3.3.12
+    sha256:
+      darwin/amd64: "6140165e4e1576533379d72b78831fc422faba4a9bc53fcbca3f187b9070de44"
+      linux/arm64: "c6d18d1b1a8cc1796016215caf181d51db6fbe75683ef4251d79ca252c5da322"
+      linux/amd64: "efa2b6f61f4f50eef3b26ce540ec41a698016c3ef8109ec697dd25a58e4d0cb8"

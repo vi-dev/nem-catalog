@@ -1,0 +1,52 @@
+schema: 2
+name: watchexec
+description: Runs commands in response to file changes
+homepage: https://watchexec.github.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: watchexec/watchexec
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/watchexec/watchexec/releases/download/v{{.Version}}/watchexec-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.xz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "watchexec", dst: "bin/watchexec", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.7.2
+    sha256:
+      darwin/arm64: "31e553b7160720796266168987c5e0728c388cc4776a26297b6a9feb00ab6437"
+      darwin/amd64: "6a5481a14165f30da8826c7ae1ab3501402328834e7e2483d7c8b7ec4e608810"
+      linux/arm64: "83cbce2ffc85adaab14d6ded09b292f4383358ac6d9a51b4e4e083df0cb7c831"
+      linux/amd64: "a2c01f82fb4cdafca1fa12cb88e4a1145dec63364dbdf92664efbaac3bb44dd2"
+  - version: 2.7.1
+    sha256:
+      darwin/arm64: "91790a4ca5079612efd2a8b3a7806f7876289a3530bb5ea6ce62384170a51de2"
+      darwin/amd64: "c9bd6a400e7df64e7cd8dbbe252ddf4550dfedf8bbdd65ce5a4acd5e3fc9bcd0"
+      linux/arm64: "30edef1d001c680c6f69f12714eb386cc27afd2a67c3fca3014cabefe79b50b9"
+      linux/amd64: "816b51381e328468258d9c687052a57f6f587bb1702dc69e4ebc449518a82c44"
+  - version: 2.7.0
+    sha256:
+      darwin/arm64: "63402816e7efbe3b3fe6f418d476d57f236bc63de7cfd6f1badc50b254b295fb"
+      darwin/amd64: "765e2fdcf7142e3ec228ec5a25597d09a16842c5860cdbbac713d035488a2f82"
+      linux/arm64: "a24a0362c89106cb6af23316dcc538bcb8ee28d067d770badb474850deadad38"
+      linux/amd64: "480065f4459b9f7fb25927ac43df85ff7f46a9b25d04f90001022b875ab0b1a5"
+  - version: 2.6.1
+    sha256:
+      darwin/arm64: "fe9a466babccaf57ae78d71b44d7773b902b0e28ed932e2a1a1d75b44fbdc096"
+      darwin/amd64: "cf70d2d24092e12480eb6989f8c138e843e25314de0bbb159f40ae8d91b30856"
+      linux/arm64: "b1d1d36334ea9910ef8de5f5af41bcdcdfeb96c3bc28882fe726f9b51a14c054"
+      linux/amd64: "bd76e9265f5fb0e6ebf80e9e600ffef4ae34612c0dcffa3f027651b70ce6f3a0"
+  - version: 2.5.1
+    sha256:
+      darwin/arm64: "c5e405dd1109940b2510398d2182990c1be59063b94e11d7ace9c7b435cb1df1"
+      darwin/amd64: "bb74bf33286ff7f31dd8e763e017fbc0418360d88baefd35bc57d662d28394e2"
+      linux/arm64: "c073887583d502fa0b393a8b847bb4460a111b3b0a199d1f70dafd5d89e71a2f"
+      linux/amd64: "9efabd08de720c1ee7e57b487fe11904f0966828e76146e2b5ea5deee90626be"

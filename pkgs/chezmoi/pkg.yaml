@@ -1,0 +1,34 @@
+schema: 2
+name: chezmoi
+description: Manage your dotfiles across multiple machines
+homepage: https://chezmoi.io
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: twpayne/chezmoi
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/twpayne/chezmoi/releases/download/v{{.Version}}/chezmoi_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "chezmoi", dst: "bin/chezmoi", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.72.1
+    sha256:
+      darwin/arm64: "938d422091cc001e68fe3fd7efea9b923a36facbf2b8db67063639abbaf72de2"
+      darwin/amd64: "bf0f0e048291efe126cb8bc51cf566057b92755cd53ce82c45efa11d2f8f4898"
+      linux/arm64: "75508ef41216b6d64f3145986b751729d7f92d09c6bad77d51cf2895ab35a508"
+      linux/amd64: "9f97d32caca166e5c92160ec3a9325519809c38963121cef38173142065c981f"
+  - version: 2.72.0
+    sha256:
+      darwin/arm64: "53e576042afba703290bbc320e64d0b6bdf1082a8fb9f0d13b97e68a6e6c059f"
+      darwin/amd64: "41be255eacf46b1b333591b4ddc7e90e2aa98ccb8dce47609b8284b856841652"
+      linux/arm64: "e79a27621256390f03166d3965e6a1946f983a096c4d90f02c43d2aa5b563728"
+      linux/amd64: "0d6665b96c527d57fdc562bf19e808f80f48c2d977062c03e3e65c6b09eafbce"

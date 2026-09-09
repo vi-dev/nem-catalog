@@ -1,0 +1,34 @@
+schema: 2
+name: lazygit
+description: Simple terminal UI for git commands
+homepage: https://github.com/jesseduffield/lazygit
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: jesseduffield/lazygit
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/jesseduffield/lazygit/releases/download/v{{.Version}}/lazygit_{{.Version}}_{{.OS}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "lazygit", dst: "bin/lazygit", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.65.0
+    sha256:
+      darwin/arm64: "d8ea1cade9e4279e45cbb58652e84edb07e98a9f8ec0604099c8b0a8f709e63a"
+      darwin/amd64: "3848033450205f975aa6a587e76f01c9796bff3a3cc0e32060ac77b9423264e3"
+      linux/arm64: "d954a09c128bd37b2bd0d254308474e87de3729cfe0e37f5b46a49357a4fe257"
+      linux/amd64: "44d8e7dd1484b4a66e191bd4ab25a71e8b4b3a65ab122f838e65677ef58c5506"
+  - version: 0.64.1
+    sha256:
+      darwin/arm64: "a106b4c1bf8ab7539c4afb40a01cbde263a96513cdcb8bf7630278f07e88cd99"
+      darwin/amd64: "f727fdf2efa46f78d102639eafe085cef437928da1e9ec79ec8e203b8a12f2a2"
+      linux/arm64: "8b7ca3b344e60340ad1f89f29b9868ee39bcaba5bb92ee818bbe65476bb8b6e7"
+      linux/amd64: "f8ea237c41f194cd799b48505518bfdaae4edf5a2ad6bd3d898e939785ee4532"

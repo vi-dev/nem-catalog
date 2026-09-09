@@ -1,0 +1,100 @@
+schema: 2
+name: croc
+description: Send files between computers over an encrypted relay
+homepage: https://github.com/schollz/croc
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: schollz/croc
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/schollz/croc/releases/download/v{{.Version}}/croc_v{{.Version}}_{{if eq .OS \"darwin\"}}macOS{{else}}Linux{{end}}-{{replace (replace .Arch \"amd64\" \"64bit\") \"arm64\" \"ARM64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "croc", dst: "bin/croc", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 11.5.0
+    sha256:
+      darwin/arm64: "641ea6e0f3e6691105a6fa94de426cb43fda88cd7e65b72f143850d6f498f217"
+      darwin/amd64: "73a08663f9ecbbe854aa5fcea9ea36169d49000f6e9422043274eb45772ba928"
+      linux/arm64: "b0d181d5c41b5c3f97e46c3907170b599e351c80c0f2d8d0ecb8c3bd152d924d"
+      linux/amd64: "ea040965dec526bd86b756b594a7f3958bbd795a3f7f89d195e8ed836c7bcd6e"
+  - version: 11.4.0
+    sha256:
+      darwin/arm64: "4067e364cfc34a46845d245c8bf6764d36d6b06e6e946b9d6db253f31147cffd"
+      darwin/amd64: "714aee1a59d768bd40210d899570364af6bbb961e887e5819c0604d6be73d226"
+      linux/arm64: "701c4e44480621c943466f14fea8515734e6787f8c84ef39fbd2e6ccd6d805b1"
+      linux/amd64: "e99840b74128779f7e84af2098de24b6a9dcd66a10e3f6bbeec1e0c868875cd5"
+  - version: 11.3.6
+    sha256:
+      darwin/arm64: "96c4ef67751b4387e3d44a7a559aafe54094f0089f34a6c71dfb5361bd48d368"
+      darwin/amd64: "701817a20f4d2bb4312f3234e6d328e0bdd68d6d1311db3a4ab4daf10906c5b2"
+      linux/arm64: "c26ac67207301ed75ae0ece63796ec8a2a002b1cf64f4e3d3d8e7bcee508b5b3"
+      linux/amd64: "bd18e01024f5ccc8e101c08c8233d4cffbfda4ff59acad80eaa1fc2963efc0b2"
+  - version: 11.3.5
+    sha256:
+      darwin/arm64: "7b436cba48ffa3a29c1d76a83da4c208813675eaa75b77ab683af5e603891ed7"
+      darwin/amd64: "20caf8cbce1312a7d10b65adaaafb4a433b919b6badf212f42134b1a1e98ec46"
+      linux/arm64: "d19ae628ba8ab54761ebd6bf31ceccf688884999741f95b533e13d7383f32479"
+      linux/amd64: "232335f53e6b55ada99034166f4158c7e05827934030cceb2a194d89e95f97d7"
+  - version: 11.3.4
+    sha256:
+      darwin/arm64: "ff7546e9d1e6232cb742a588308a87947756455c67e4cad3aaa059971b068835"
+      darwin/amd64: "69800a45f539000e3f721686cca4b86492947d77e2aad1ff3ca49936845c3801"
+      linux/arm64: "cca5fcd50d31b656028efa20bcfda7290dafcf64747b4b0fc2431ad3c8629605"
+      linux/amd64: "525223ecf24b4b95eafe8be97e485826a2d95a808eec409076886ef8e4606064"
+  - version: 11.3.3
+    sha256:
+      darwin/arm64: "a793ccb0b0a2f99ff9438fcb925fe9d49bd17a4006c3ccff05b818e8b21613ee"
+      darwin/amd64: "85ccb2b11b73f826752f56ec9d9e315d35dec5dab7b55a79fdfe246d626b777a"
+      linux/arm64: "9845a7bfd8d6936e175dad3d1098d614b5f7af89f8087f5237c7d900bda42430"
+      linux/amd64: "97d39451ab60e57607ecda0c0250e9e1da1cae76c19b4319f685fc15f56aeda8"
+  - version: 11.3.2
+    sha256:
+      darwin/arm64: "3280bcd20a976757ae28e497bd2f797f9f015784a7b20bee86f5fa35a135170e"
+      darwin/amd64: "0e5a7800dd4c172055014091ead84365a89f6ca192523068d95d1fad1d2a6cbb"
+      linux/arm64: "cc0349927e5938ac3f18b7fb43429b9800ab72c9f32fe644da32b1f1374b94a2"
+      linux/amd64: "806fd82b582b32cd5e6f297f7558de886ade1ff918bad8798270d2bd44a741b6"
+  - version: 11.3.1
+    sha256:
+      darwin/arm64: "7c3d077be3926b41e38306f01d3701b9b8d3c9cadb32b2731c2603fb1add8193"
+      darwin/amd64: "2c468949497c3491eb273c7f01204a9814e99eb7eda29685b5786332aa6a54d4"
+      linux/arm64: "d6d42bafc931ebb02601704b7e386fc5cbe07620ec4ba271c35e59221aaf0f43"
+      linux/amd64: "9ef275fb1a30a7cb53bec32911443ac01f166fa6701f15b83bbfab202d5ebd9e"
+  - version: 11.3.0
+    sha256:
+      darwin/arm64: "c71addba6bcdda62a7861554ece7834a066c6afd1c8113bb9a39dbde74771849"
+      darwin/amd64: "6f4d936091235df72df5a72d99f8df4229e4229d5158a9229e677709e640c2fd"
+      linux/arm64: "9b1d5636659fc480fff8dc8839df8657062cb5d389e18d55ab8075f7ff2491ae"
+      linux/amd64: "e49dddb320b9085f885c29f8dcd3fb317ff35f851a984680c4fcaf6e5abafd00"
+  - version: 11.2.5
+    sha256:
+      darwin/arm64: "6e6a7a4a515ba41a7888667df4c8214c031b941978383d04988917391ddf5872"
+      darwin/amd64: "be211f80944b716e80fb6dbbeb88427a8711401cbc8112d461f326e4eea9026d"
+      linux/arm64: "f4b1ba6ead100ec706331bbda0cbce7232c339413fe63d7982e3b23c8d520609"
+      linux/amd64: "4af565085d7eb1cf88f61ffda29b69de8739e07191d757eed7c6698203498f15"
+  - version: 11.2.4
+    sha256:
+      darwin/arm64: "003c481d4e17b4af7afe14f9736e855d8586b1aaab224d3a9c4196eb002f781b"
+      darwin/amd64: "9d7fbf547c2f135ab5c78ec7de9226a413a7539ecf8029c33310087fb51c7513"
+      linux/arm64: "84d4fa4d94b50eaf0b8720044a7715ad1a29716b9714faeef834c966c498c4ab"
+      linux/amd64: "d2cd785871d0719fa4b7c47bb98e0171b6d6be1c263311ff950e25999a544f0e"
+  - version: 11.2.3
+    sha256:
+      darwin/arm64: "243744fbddffa44c2ac997430e7e4785750369fa9c104c75072895f2b3038985"
+      darwin/amd64: "ebc56a3fd3eee3dfc8f56ff104d3fa00d95d5ca37066b073a9d6671bae5849c9"
+      linux/arm64: "5ad1367bf1ff726c4fb6ca70f6ac4415bcb23673fee55634050f617a31ca293d"
+      linux/amd64: "30919d6823ca757214d1f818ce370051bbbc08525423c466ab0c222490e644cc"
+  - version: 11.2.2
+    sha256:
+      darwin/arm64: "53e35044fcd8c7cba1d8a03821acb3b2c282928715fa9abc69faf190c4317811"
+      darwin/amd64: "fb7ffa42686eaf5985a69da599b10abe3459d7ad37e5076338c0547fd6fb0ff9"
+      linux/arm64: "54f6b1d252189a89c5468acdddc5c266a8156931179ae5ba4a9e16a2764d9290"
+      linux/amd64: "e4a35eb45a71d373f5e2470c1a8ba29fdf7bf1e5e79dc4d54b25ab5524fe0797"

@@ -1,0 +1,45 @@
+schema: 2
+name: istioctl
+description: Istio service mesh command-line tool
+homepage: https://istio.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: istio/istio
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/istio/istio/releases/download/{{.Version}}/istioctl-{{.Version}}-{{replace .OS \"darwin\" \"osx\"}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "istioctl", dst: "bin/istioctl", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.31.0
+    sha256:
+      darwin/arm64: "a0c4d35320f930e5254de119512f0761f65a76fb614973281bf9435e24306d66"
+      darwin/amd64: "8bbc6e93757e342ca90aa7b14be1d4f77272afe65db2ea8545e62875619a0005"
+      linux/arm64: "c2367fb837d8fd10ed9a742c1927d8207b06fdc5271255a7288eafd8f2a85d42"
+      linux/amd64: "ef3f4368122c9008d344b7c824e563dae6fec9078eb2b90e87836063887d15a8"
+  - version: 1.30.4
+    sha256:
+      darwin/arm64: "0a20feafb92b5b9b90d79258338d8b5debc049e6147a7ac5c2c10a7c39d92be3"
+      darwin/amd64: "b854fb6fd6f10f74a47a5340859acc78c144fe31c4a74fa36c2330405c37fcd6"
+      linux/arm64: "1045d90978d5cc46ad77a7447bebf1a26c66c796c4499bbd83f62cfcb4631f95"
+      linux/amd64: "feda625a00dfc69135f4692442ef66eb2fa8aea848b483348c330a1138fe392f"
+  - version: 1.30.3
+    sha256:
+      darwin/arm64: "b52f492e6c2306c9d209d2a30534e546c63f2623d6c150f0153c566c819299f0"
+      darwin/amd64: "ba7bbba3a07cdc9acad26616d089c497d2d043eb72621ed2ab5c771f56daec2b"
+      linux/arm64: "58102643b66d49232a51fdd130f5a207e9e1b40ef1230930b016bdeb41261560"
+      linux/amd64: "7b8559fb0a91466a3ff726ad291bedbcf5e4a24f1d9108dbe51a99e11f2010c8"
+  - version: 1.30.2
+    sha256:
+      darwin/arm64: "508b213e58c08080ff1b6d4d9ef3aaf10e53192c78bdbc5765ec595a2ca760c5"
+      darwin/amd64: "59a5ee270389b5ad9ef827c1b155b7ff247aed00b08d640ea1f3705ab1de0ed9"
+      linux/arm64: "e0b437ec604a813df2cdc3c1f4dfb409d6ddce10079ae59df6bd463399b12a93"
+      linux/amd64: "7d657367ab702d6fca03a1db626559435a10debc621fab5259d277e2822ed53e"

@@ -1,0 +1,154 @@
+schema: 2
+
+name: podman
+description: Daemonless container engine for OCI containers and pods
+homepage: https://podman.io
+license: Apache-2.0
+
+# The local engine is Linux-only. podman-remote covers macOS and ships a
+# same-named binary on Linux, so the two are alternatives there.
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+deps:
+  - name: gpgme
+    kind: link
+    compat: "1"
+    platforms: [linux/arm64, linux/amd64]
+  - name: libassuan
+    kind: link
+    compat: "3"
+    platforms: [linux/arm64, linux/amd64]
+  - name: libgpg-error
+    kind: link
+    compat: "1"
+    platforms: [linux/arm64, linux/amd64]
+  - name: libseccomp
+    kind: link
+    compat: "2"
+    platforms: [linux/arm64, linux/amd64]
+  - name: conmon
+    kind: run
+    platforms: [linux/arm64, linux/amd64]
+  - name: crun
+    kind: run
+    platforms: [linux/arm64, linux/amd64]
+
+bins: [bin]
+
+# podman 6 defaults to the libkrun machine provider, which needs krunkit; the
+# catalog has vfkit instead.
+env:
+  - name: CONTAINERS_MACHINE_PROVIDER
+    value: applehv
+    platforms: [darwin/arm64]
+
+versionDiscovery:
+  github:
+    repo: podman-container-tools/podman
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 6.1.1
+    sourceSha256: "3646384ab6eff7b3d4473e1a0c1e34b6a8001e5a89600af44cc12376da77bccc"
+  - version: 6.1.0
+    sourceSha256: "e086183db2f852476a7fa2580d0276cef32086b4cf17ae7020948f06eb613e0d"
+
+build:
+  deps:
+    - go
+    - pkgconf
+    - name: gpgme
+      kind: link
+      compat: "1"
+      platforms: [linux/arm64, linux/amd64]
+    - name: libassuan
+      kind: link
+      compat: "3"
+      platforms: [linux/arm64, linux/amd64]
+    - name: libgpg-error
+      kind: link
+      compat: "1"
+      platforms: [linux/arm64, linux/amd64]
+    - name: libseccomp
+      kind: link
+      compat: "2"
+      platforms: [linux/arm64, linux/amd64]
+    - name: gvproxy
+      platforms: [darwin/arm64]
+    - name: vfkit
+      platforms: [darwin/arm64]
+    - name: netavark
+      platforms: [linux/arm64, linux/amd64]
+    - name: aardvark-dns
+      platforms: [linux/arm64, linux/amd64]
+  source:
+    url: 'https://github.com/podman-container-tools/podman/archive/refs/tags/v{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # Every default helper_binaries_dir entry on linux is an absolute system
+    # path, so bake in the one form that follows the package: $BINDIR expands
+    # to the podman binary's own directory when the lookup runs.
+    - run: |
+        set -e
+        CGO_ENABLED=1 go build -trimpath -tags "seccomp exclude_graphdriver_btrfs" \
+          -ldflags '-s -w -X go.podman.io/common/pkg/config.additionalHelperBinariesDir=$BINDIR/../libexec/podman' \
+          -o "$NEM_OUTPUT/bin/podman" ./cmd/podman
+        mkdir -p "$NEM_OUTPUT/libexec/podman"
+        cp "$NEM_DEP_NETAVARK_PREFIX/bin/netavark" \
+          "$NEM_DEP_AARDVARK_DNS_PREFIX/bin/aardvark-dns" "$NEM_OUTPUT/libexec/podman/"
+      platforms: [linux/arm64, linux/amd64]
+    # macOS has no local engine, so this is upstream's remote client build
+    # plus the helper that redirects the docker socket.
+    - run: |
+        set -e
+        export MACOSX_DEPLOYMENT_TARGET=13.0
+        CGO_ENABLED=1 go build -trimpath -tags "remote exclude_graphdriver_btrfs containers_image_openpgp" \
+          -ldflags "-s -w" -o "$NEM_OUTPUT/bin/podman" ./cmd/podman
+        CGO_ENABLED=1 go build -trimpath -ldflags "-s -w" \
+          -o "$NEM_OUTPUT/bin/podman-mac-helper" ./cmd/podman-mac-helper
+        # podman resolves machine helpers through helper_binaries_dir, whose
+        # default $BINDIR/../libexec/podman is the only entry PATH cannot stand
+        # in for.
+        mkdir -p "$NEM_OUTPUT/libexec/podman"
+        cp "$NEM_DEP_GVPROXY_PREFIX/bin/gvproxy" "$NEM_DEP_VFKIT_PREFIX/bin/vfkit" \
+          "$NEM_OUTPUT/libexec/podman/"
+      platforms: [darwin/arm64]
+
+test:
+  - run: podman --version | grep -q "$NEM_VERSION"
+  - run: |
+      set -e
+      podman system connection ls >/dev/null
+      command -v podman-mac-helper >/dev/null
+      "$NEM_PREFIX/libexec/podman/gvproxy" --help 2>&1 | grep -q listen
+      "$NEM_PREFIX/libexec/podman/vfkit" --version >/dev/null
+      codesign -d --entitlements - "$NEM_PREFIX/libexec/podman/vfkit" 2>&1 | grep -q com.apple.security.virtualization
+    platforms: [darwin/arm64]
+  # Engine subcommands need conmon and an OCI runtime, which no CI container
+  # provides, so exercise the client paths and assert every library the
+  # binary links resolves through the runtime loader path.
+  - run: |
+      set -e
+      podman system connection ls >/dev/null
+      podman info --help >/dev/null
+      [ -x "$NEM_PREFIX/libexec/podman/netavark" ]
+      [ -x "$NEM_PREFIX/libexec/podman/aardvark-dns" ]
+      # info needs a rootless namespace the smoke image cannot set up, so the
+      # resolved-path check only runs where podman itself does.
+      if path=$(podman info --format '{{.Host.NetworkBackendInfo.Path}}' 2>/dev/null); then
+        [ "$path" = "$NEM_PREFIX/libexec/podman/netavark" ]
+      else
+        echo "skipped netavark resolution check: podman info unavailable here"
+      fi
+      out=$(ldd "$NEM_PREFIX/bin/podman")
+      printf '%s' "$out" | grep -q libgpgme
+      printf '%s' "$out" | grep -q libseccomp
+      ! printf '%s' "$out" | grep -q 'not found'
+    platforms: [linux/arm64, linux/amd64]

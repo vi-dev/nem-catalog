@@ -1,0 +1,103 @@
+schema: 2
+name: go
+description: The Go programming language
+homepage: https://go.dev
+license: BSD-3-Clause
+
+versionDiscovery:
+  github:
+    repo: golang/go
+    filter: '^go\d+\.\d+\.\d+$'
+    prefix: "go"
+
+artifact:
+  url: "https://go.dev/dl/go{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+env:
+  - name: GOROOT
+    value: "{{.InstallDir}}"
+
+versions:
+  - version: 1.27.1
+    sha256:
+      darwin/arm64: "ee215d57e0ec269c60cc9ceca68e6bda321ba9ee5afe24f4b0988703c2d87d12"
+      darwin/amd64: "8f8f52c6649542cf027bbc9b9c68d1ec042f9f34808a40413f0b8b3f66f3caa4"
+      linux/arm64: "3450b45a3f9ee8568792736a5c5e70a1f2e9b36c35a8f74958c03e51d7d92bec"
+      linux/amd64: "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+  - version: 1.27.0
+    sha256:
+      darwin/arm64: "90493b3bbd5e10f91d12153198bf1994fd756399b4fec93b49b0c6e2acdeeb3e"
+      darwin/amd64: "d3314e25496e4381d71a5c51d2907e7af655d199f6780b549f015bd85fef4986"
+      linux/arm64: "51798d2c42d0e1c6ed7fd9f48728b4193abac9e8aad6dbac2fe96a81f5909bda"
+      linux/amd64: "675c26c449cbb18fc24b74650de1eabbae6e16f64326fd85a283fb3b58280685"
+  - version: 1.26.7
+    sha256:
+      darwin/arm64: "020a1e8224811be75163e920bc77e0926a1390a6aeea19bdcf23f74b9d749f6d"
+      darwin/amd64: "92e8b34bff3c89ab16404c595669ac8cb004cc2f676dcbd1f5b87a6b8def3b47"
+      linux/arm64: "5a4ec883379d51ee9ce1040d5e87f8d35e20387574dd8c947feb01eabc3c1b37"
+      linux/amd64: "ffb5f8de10c62550dfddab66b36b57030721e0a44a3218e9e1181d7b59f121ca"
+  - version: 1.26.6
+    sha256:
+      darwin/arm64: "2dc95ce4675829f2df0e86b28bcef3283635902062a5f0580ca659bf570f3204"
+      darwin/amd64: "08b65a63f244115121ced6c3b55ad38d801a7442acad5c949a17aad84ae6d684"
+      linux/arm64: "d0507e9e9d7fe012aae570108cbd76c15de879e17130ab8cb90d4d7445cb1f2e"
+      linux/amd64: "708effb774be8237570d0add163225abbdfaf4fca28b2611df167beba4feef89"
+  - version: 1.26.5
+    sha256:
+      darwin/arm64: "efb87ff28af9a188d0536ef5d42e63dd52ba8263cd7344a993cc48dd11dedb6a"
+      darwin/amd64: "6231d8d3b8f5552ec6cbf6d685bdd5482e1e703214b120e89b3bf0d7bf1ef725"
+      linux/arm64: "fe4789e92b1f33358680864bbe8704289e7bb5fc207d80623c308935bd696d49"
+      linux/amd64: "5c2c3b16caefa1d968a94c1daca04a7ca301a496d9b086e17ad77bb81393f053"
+  - version: 1.25.14
+    sha256:
+      darwin/arm64: "5b26c0b6f308240fca2614fb02f622cfcc8c0cc3b69c78bba4845489a4590259"
+      darwin/amd64: "b09087a67d5792a8b0fcbf74212d62560c94ac8a8fd750ff920d8cb5f1e20118"
+      linux/arm64: "9bf234ea70ffec9347fdf6b22ce4add51717d3386a38a441e8c8743fceb5eaee"
+      linux/amd64: "a21ae5633a269bcd7e90cf767e48225633795e99d831742cbf3397064fee7712"
+  - version: 1.24.13
+    sha256:
+      darwin/arm64: "f282d882c3353485e2fc6c634606d85caf36e855167d59b996dbeae19fa7629a"
+      darwin/amd64: "6cc6549b06725220b342b740497ffd24e0ebdcef75781a77931ca199f46ad781"
+      linux/arm64: "74d97be1cc3a474129590c67ebf748a96e72d9f3a2b6fef3ed3275de591d49b3"
+      linux/amd64: "1fc94b57134d51669c72173ad5d49fd62afb0f1db9bf3f798fd98ee423f8d730"
+  - version: 1.23.12
+    sha256:
+      darwin/arm64: "5bfa117e401ae64e7ffb960243c448b535fe007e682a13ff6c7371f4a6f0ccaa"
+      darwin/amd64: "0f6efdc3ffc6f03b230016acca0aef43c229de022d0ff401e7aa4ad4862eca8e"
+      linux/arm64: "52ce172f96e21da53b1ae9079808560d49b02ac86cecfa457217597f9bc28ab3"
+      linux/amd64: "d3847fef834e9db11bf64e3fb34db9c04db14e068eeb064f49af747010454f90"
+  - version: 1.22.12
+    sha256:
+      darwin/arm64: "416c35218edb9d20990b5d8fc87be655d8b39926f15524ea35c66ee70273050d"
+      darwin/amd64: "e7bbe07e96f0bd3df04225090fe1e7852ed33af37c43a23e16edbbb3b90a5b7c"
+      linux/arm64: "fd017e647ec28525e86ae8203236e0653242722a7436929b1f775744e26278e7"
+      linux/amd64: "4fa4f869b0f7fc6bb1eb2660e74657fbf04cdd290b5aef905585c86051b34d43"
+  - version: 1.21.13
+    sha256:
+      darwin/arm64: "c04ee7bdc0e65cf17133994c40ee9bdfa1b1dc9587b3baedaea39affdb8e5b49"
+      darwin/amd64: "796fd05e8741f6776c505eb201922864f2e32991679b639d9fcb524dbe300c0d"
+      linux/arm64: "2ca2d70dc9c84feef959eb31f2a5aac33eefd8c97fe48f1548886d737bffabd4"
+      linux/amd64: "502fc16d5910562461e6a6631fb6377de2322aad7304bf2bcd23500ba9dab4a7"
+
+test:
+  - run: go version | grep -q "$NEM_VERSION"
+  # GOROOT must name the tree under test; also check that go itself
+  # resolves there, not just that the export renders.
+  - run: |
+      set -e
+      test "$(go env GOROOT)" = "$NEM_PREFIX"
+      case "$(command -v go)" in
+        "$NEM_PREFIX"/*) ;;
+        *) exit 1 ;;
+      esac
+  - run: |
+      set -e
+      export GOCACHE="$PWD/.gocache"
+      printf 'package main\nimport "fmt"\nfunc main(){fmt.Print("ok")}\n' > main.go
+      go mod init probe >/dev/null
+      [ "$(go run .)" = ok ]

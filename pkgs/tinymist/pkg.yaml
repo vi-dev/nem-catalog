@@ -1,0 +1,40 @@
+schema: 2
+name: tinymist
+description: Language server for Typst
+homepage: https://myriad-dreamin.github.io/tinymist
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: Myriad-Dreamin/tinymist
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Myriad-Dreamin/tinymist/releases/download/v{{.Version}}/tinymist-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "tinymist", dst: "bin/tinymist", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.15.6
+    sha256:
+      darwin/arm64: "1edd8a29cf9dcb79ce472d5821ec38051d1ccb73912de8e17b5e8aee0187ec49"
+      darwin/amd64: "86cbd39397ea2050bd429f48bc877a9307727f10f033fb36bf7a0576a9f1f1c0"
+      linux/arm64: "9b473b6326e43e091e2e9a646ac02985ba8e1583c53ca812168cfb61dd6338c9"
+      linux/amd64: "b2875e6cf680ef4ccfab3d04b7284b0f374bcdb0a1b5fdc43defa95c82401da1"
+  - version: 0.15.4
+    sha256:
+      darwin/arm64: "fada985700afa3a056f8cd96e5a178df57690af165d4ad07cefe47568aeef15b"
+      darwin/amd64: "cd6f6b52b06c30421ce2db7b5d0d4ed049eedf4e8ed417b2d598640b0266390b"
+      linux/arm64: "49b8ecb90b5fe88456a766d3b5a2a27fb0a57a276e5ddbf49cce149b239ce63e"
+      linux/amd64: "d33d47fc4f1025f23fc9d90354fc7bae4c4b1472e0d3f8f60779a8c51db5c025"
+  - version: 0.15.2
+    sha256:
+      darwin/arm64: "16241868c6752aa5e8f9c162562293c7cdf69e82f54687d7886336daf2c51915"
+      darwin/amd64: "fcfcfd01376394048443f81de349d165c271c17c36579eb9a08b889b30b8c3b2"
+      linux/arm64: "eba8e14338cf211906d77be6b18102736222da6721e98161133fa0d8ff5ab599"
+      linux/amd64: "9b8a1aea6bb3fc9c39cb70496f0082bd518cfede555757bc3cb5225b05abc99b"

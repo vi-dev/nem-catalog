@@ -1,0 +1,46 @@
+schema: 2
+name: goose-ai
+description: Extensible AI agent that runs and edits code locally
+homepage: https://goose-docs.ai
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: aaif-goose/goose
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/aaif-goose/goose/releases/download/v{{.Version}}/goose-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.bz2"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "goose", dst: "bin/goose", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.49.0
+    sha256:
+      darwin/arm64: "b0d29c99b310cfd58281ea50be6287be461438689506d6d4e994e4b05332fddb"
+      darwin/amd64: "c3186169787164b165688a805a8fb0a8ef05a21ecd49d499e9043f01c0f3bb0a"
+      linux/arm64: "246de5a95c5b283bca8419334d1a6088bbb6d2540170c26cec1ce97764bb8735"
+      linux/amd64: "c631a55e7d826d28c3bcd87b71a0aaecc9612f5a44e6c0d01e7a5b82dd8b7143"
+  - version: 1.48.0
+    sha256:
+      darwin/arm64: "a0568e64ab21d0defd2c8dfd9e236b876b6357fb752c8e451f4bfe706aeb40c0"
+      darwin/amd64: "89ee04ac95b1c512904a390af72add7bd777cb7c5c9f8a52f2c4cf162c2839f3"
+      linux/arm64: "b9700875ccfd4b976439aae11ebe7c315790e412abd1f702ddd1e69cd8d674bc"
+      linux/amd64: "fbe2f128ff68383cdab57431c577ed771e2ada035a9639520b2e28a871a56a1f"
+  - version: 1.47.0
+    sha256:
+      darwin/arm64: "2ec6bb5d2051de0d1c50151f62c0071b82353098e6b1e377ba01bdebe891df09"
+      darwin/amd64: "91c70ca0fa323c30cb567b650f9714246c6a76984039091abe4a97e8e48fdc88"
+      linux/arm64: "ebf4f573d7ce06707a5e5ce81002fc2f0703d7b2e3e8d4c03863aaf3aa378958"
+      linux/amd64: "a8340f47db1d33726fb031ca56e6d8bf05a7df923abdc96ae4bcbf6472de1664"
+  - version: 1.46.0
+    sha256:
+      darwin/arm64: "de263fb06839de31345dff08aeba999ba165b023cd3cec7ec3bef20f6f4f7e73"
+      darwin/amd64: "b5b66f5d4966aac74998c63420c98b3e289ae498f0c120463ac0b8dbc2a40083"
+      linux/arm64: "b56da65ab1004832ce5524ed40ec6fbe38ba84dae654d0a8eb86be9d90086cf6"
+      linux/amd64: "a1cf4856a765d07d6b95689a53c7bca21fcc6e6d65c0dfd064fc704052b85a7b"

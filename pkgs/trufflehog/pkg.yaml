@@ -1,0 +1,52 @@
+schema: 2
+name: trufflehog
+description: Find and verify leaked credentials
+homepage: https://github.com/trufflesecurity/trufflehog
+license: AGPL-3.0-only
+
+versionDiscovery:
+  github:
+    repo: trufflesecurity/trufflehog
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/trufflesecurity/trufflehog/releases/download/v{{.Version}}/trufflehog_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "trufflehog", dst: "bin/trufflehog", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.97.4
+    sha256:
+      darwin/arm64: "57e2a41c1e196cf96cae49ca2151f5e9207be2f5c41349b5ea49cb5dcfc606b7"
+      darwin/amd64: "36799557198a2187e205ed2e8f2a8deb0073c4fe83157f2cd8a04717c1962074"
+      linux/arm64: "7e65e771d2a247964056aa5edba0f8ae3945895e5dce867fe0ffbc7b0128239a"
+      linux/amd64: "dc24007c2f233bd61c05beabeb44aa27ea9b43288166279209abe0458c5ce76b"
+  - version: 3.97.3
+    sha256:
+      darwin/arm64: "d97e8a087aa7e402f16ad00537cb232997e8535bbcc81ccfa5dc603c0aa5d67e"
+      darwin/amd64: "e5e27e3d885db6374d358340a6dfce9438a32c39a564df83c97e49edc67e7ffb"
+      linux/arm64: "32fdd6f6032cbe4712fedd8640a351424bb719682752c4df29ffa13673163be8"
+      linux/amd64: "625c925468ea8bd1ee37dad85df22d9f6913d85a40b382bc8dbb6f4b6d5e067e"
+  - version: 3.97.2
+    sha256:
+      darwin/arm64: "8d4e7a3d28785de0a8ccee14d195e9e387b3e664f80c41437cb7a74708a542f5"
+      darwin/amd64: "cf6b9b0df4dfd183722fd55a580dedd402439d88ea5a1d72c4ae5509ea334982"
+      linux/arm64: "7c2e9f9dd77874f7e622d3e4b801c88507b500326e1fd01bbd5932d49948c7f7"
+      linux/amd64: "6a767a0ae95ba0c51628b37a6bb938765be17b9b6d7ad8b9a810da56f63656c1"
+  - version: 3.97.1
+    sha256:
+      darwin/arm64: "1af86cf30c1cc5c1735ec6af9292b399ec9bed3ff1b30be13fcbfd4a30ab449a"
+      darwin/amd64: "1515710bb16be5653ca9986c27ecd1a0e7536fc6e53ad46f7100992692f6a05f"
+      linux/arm64: "57bfcc0988aae3f2ef97e74abe1138cf37a8fbd84dd26299062c77a6a6b125dd"
+      linux/amd64: "f863ea3a8d786f7d097870496c977944cce7372a2fe1e56707d965016e543ece"
+  - version: 3.97.0
+    sha256:
+      darwin/arm64: "ad0a99bd48d6df80eabab24d11d0fd771e245fc55ed347f943cafb5e5f497c5c"
+      darwin/amd64: "037e4aeb197870555ff515432bb5f1f2c98dce5f1214631a689112b5e0e4c9fd"
+      linux/arm64: "f48f57e3d4343377865b1b64653f96d381d61a7792d89d026e85524732039fde"
+      linux/amd64: "62224de2f9dd7cd418800feb953760a302ed2f82a7c547fe1146a4874fb179e4"

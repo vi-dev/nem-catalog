@@ -1,0 +1,35 @@
+schema: 2
+name: nebula
+description: Overlay networking tool built on the Noise protocol
+homepage: https://github.com/slackhq/nebula
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: slackhq/nebula
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/slackhq/nebula/releases/download/v{{.Version}}/nebula-{{if eq .OS \"darwin\"}}darwin.zip{{else}}linux-{{.Arch}}.tar.gz{{end}}"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "nebula", dst: "bin/nebula", mode: 0o755}
+  - copy: {src: "nebula-cert", dst: "bin/nebula-cert", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.11.1
+    sha256:
+      darwin/arm64: "66b347e0bca9c2545ebcb769b9b41eae5a6e2dbf96bedbd0f2e37182ef96599c"
+      darwin/amd64: "66b347e0bca9c2545ebcb769b9b41eae5a6e2dbf96bedbd0f2e37182ef96599c"
+      linux/arm64: "e82e0ef4d20570b9411ee9c4c325b151b6414253a28191b58e9b8dc1d9761ecf"
+      linux/amd64: "2bcca0887d9c6b4c376e98cbf80fa2912b2583c61983d9553f46c97efda71439"
+  - version: 1.11.0
+    sha256:
+      darwin/arm64: "2e23051ba93cb2013fa2acb656a4edc73db37cd9f4bfd1fa45cf712197c21065"
+      darwin/amd64: "2e23051ba93cb2013fa2acb656a4edc73db37cd9f4bfd1fa45cf712197c21065"
+      linux/arm64: "da314d9791185583dddceb14dffe991caa6997eaff8dbe0445331a2fa70c6fd9"
+      linux/amd64: "e7cdb240597d0783c9943e9c89aad3c96c59b67e75c644d62f33ae558e69d09e"

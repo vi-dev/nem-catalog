@@ -1,0 +1,35 @@
+schema: 2
+name: docker-cli
+description: Docker command-line client
+homepage: https://www.docker.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: docker/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://download.docker.com/{{if eq .OS \"darwin\"}}mac{{else}}linux{{end}}/static/stable/{{replace (replace .Arch \"amd64\" \"x86_64\") \"arm64\" \"aarch64\"}}/docker-{{.Version}}.tgz"
+
+install:
+  - extract: {strip: 0}
+  # the linux bundle also ships the engine; only the CLI is packaged
+  - copy: {src: "docker/docker", dst: "bin/docker", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 29.8.0
+    sha256:
+      darwin/arm64: "3f37afe51f8f53f224192099a76a454a62eb6100d426738da17fdf8472cf4b5f"
+      darwin/amd64: "aeb74337d43dc9f863d056760e156daa71f9462ffdc0f836a14f1528fa1f0f13"
+      linux/arm64: "1462a696be6029bd478d7d60d7f3c31cdd15affd1178a4a278aaf4a1d1b7f8b5"
+      linux/amd64: "cc21815cf1e2efed867dc9c8b96b46ffed8ea176ffab32b0aacb54726ded8f25"
+  - version: 29.7.2
+    sha256:
+      darwin/arm64: "b8683ed19d1f06048a496f9b8429e2c71d0b088d475b7487c054ea3666c02a3c"
+      darwin/amd64: "fb1f1aa7ac7af4364165b9eadfda92e96c8ced508fca74f53079719891367438"
+      linux/arm64: "43d143448adf2c2787704e7d7704fd6d62d367a54c5edaef0a3f75509cb0938d"
+      linux/amd64: "803d433f226db4776e1768fd319fc6c6e4935a456acf84fcc0080818b854bc8f"

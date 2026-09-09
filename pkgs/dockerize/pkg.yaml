@@ -1,0 +1,34 @@
+schema: 2
+name: dockerize
+description: Utility to simplify running applications in Docker containers
+homepage: https://github.com/jwilder/dockerize
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: jwilder/dockerize
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/jwilder/dockerize/releases/download/v{{.Version}}/dockerize-{{.OS}}-{{.Arch}}-v{{.Version}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "dockerize", dst: "bin/dockerize", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.15.0
+    sha256:
+      darwin/arm64: "bf8fffce03dd352f9c0fc05362c8722616e04cec075890372b06944a0eae18ec"
+      darwin/amd64: "d4e40b5fbd871598c48feca8b5ad75f8388a81f3dd456cf593ae3ae67ef74ae6"
+      linux/arm64: "54ca20b9e75a99b5464c0f80e673cb313b40f043baed508ad46114bed3421be6"
+      linux/amd64: "c4d49216091b78e991b0f84aaf56a31556652769191c16e499f7022c3f43c436"
+  - version: 0.14.0
+    sha256:
+      darwin/arm64: "3c377350a7977d25409b3c05ac8b3a652bca819fcbe60ade0ccc1847abe95f20"
+      darwin/amd64: "c80cdcc10fe02f5b786974bd96fca4092c870b77a11d8b07105ddcc8064adaa4"
+      linux/arm64: "c210fb05d7170712aa046ef5339c01ac32e2af2b6b87637b096649cd087e9e8f"
+      linux/amd64: "856d1f1f81f41d814f98da2f9f998ce658d9524f59844b1b5fb3f747b2a5d3d3"

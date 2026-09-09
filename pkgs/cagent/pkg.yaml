@@ -1,0 +1,71 @@
+schema: 2
+name: cagent
+description: Declarative builder and runtime for multi-agent AI systems
+homepage: https://github.com/docker/cagent
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: docker/cagent
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+# Releases ship the binary under the docker-agent name; upstream still calls
+# the tool cagent.
+artifact:
+  url: "https://github.com/docker/cagent/releases/download/v{{.Version}}/docker-agent-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/cagent", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.133.0
+    sha256:
+      darwin/arm64: "354f78e74eeca996230c0a94a38dd354db0d7b32a291d47b38b449202ae349ab"
+      darwin/amd64: "f4b5ee273beae108a7b23d74482aa9dd8182ba6c327ef661cf2ad3995681c641"
+      linux/arm64: "46df87af0e1fa6c9cec2c7b00adedf3402d10e1b992a7250fb9576aeed3da395"
+      linux/amd64: "2a7f40b1daa206686615ac82b926094536b6c3f8a2e81aba834e4ce273f64781"
+  - version: 1.132.0
+    sha256:
+      darwin/arm64: "7e1357a7d120fd1a7024671136ab570925be48b010dfb88318041356811e098f"
+      darwin/amd64: "d032507d217b75d6f393d717c31211ab139e65f494fbe40c761ff1613492dd8a"
+      linux/arm64: "19c7614a263c1b0a4508c161c25367c7755793110b4f39d239dad488af2426a5"
+      linux/amd64: "49e32184c8a723e938bd94c71f0b7f888632f13481f3c11b85c3d58d7ce6bb06"
+  - version: 1.131.0
+    sha256:
+      darwin/arm64: "7f0d0d7afb04ff1bcc7e604307cacce2bc2e110c70041c4b33e57c103bfbd6b6"
+      darwin/amd64: "d47b348887dfa8e434d595744ac77680e7ee347f39c438d840a4f081b40b5881"
+      linux/arm64: "286b2dd34e301806476c3cf4ce222c83f4dc90e078f438ff54f7cae82bf45f2e"
+      linux/amd64: "4e78c641e3389b8d619c19e9eaf36effbeb01f350e0695b8197cd96adbe9178c"
+  - version: 1.130.0
+    sha256:
+      darwin/arm64: "c418b42cff0393a61e135e8866d810ca292a4abd29ed154e961193aa5214119f"
+      darwin/amd64: "b495b565bfc9fa6b6c2aca76fd2892e66155df3ad7914455cdb385feb4b998a5"
+      linux/arm64: "8385011052936180bce5fd5b08241ba5c2e35dd345d24dd4ad237d1034d36809"
+      linux/amd64: "fd5aab8f24d689add2d554976ccb78dab1ef8f70f732a897e164cc77583b4563"
+  - version: 1.129.0
+    sha256:
+      darwin/arm64: "af9742590e0ff9bd19dd2db0c2ebeab81c63f6ea509159ba78895bc73f57b269"
+      darwin/amd64: "51a927f6c0cb7efb302453656f32e8579e1f5866beba1cff85ac0316e4b0150d"
+      linux/arm64: "0a39d7a8d6c048087aeea3d597eca8a3a0c8bc301104dcd78a86c5332bff4fd5"
+      linux/amd64: "8ab708f61a3bec7a6347c4bafff44f73de3ca768c5b24e16b45755daf825a7df"
+  - version: 1.128.0
+    sha256:
+      darwin/arm64: "20decc5f086824a284895a6e80df5ac7501a9f0cb30d1b7038cadea09a31cd5e"
+      darwin/amd64: "2b96d155be1724fe7edfbd1ac2f64a98eb089f59fc2583980b281feccc8e1e66"
+      linux/arm64: "ac29fefe434c8ac8361dca68790db5dfde90256d7b98fa91929bc36b2dba8d94"
+      linux/amd64: "a5eafcb5122c17ec6184733edf0b5d11aca05e29683c58684439280ce42cf35c"
+  - version: 1.127.0
+    sha256:
+      darwin/arm64: "32c557d6fcb4501aeb363c15d061a018bbf3eca199923f2af1e907896a71736a"
+      darwin/amd64: "50f4ff47c3cce3e998a76b9832664586165d9b24640e80d712bdb3369ec78dab"
+      linux/arm64: "6f4a633ec52ccfd082e8492ef9473112746e49c1bc50bb0f347765085705dfd2"
+      linux/amd64: "0664fed123ddc15f58af7f17c67fed2fa592b91f6fff2798e9f78941a81c9d8e"
+  - version: 1.126.0
+    sha256:
+      darwin/arm64: "853a44a263df3148cba3288509e5921bd105be8f387da0b6b1ac48e39ca87c48"
+      darwin/amd64: "a4d1df600bd7e3c1991f2d94fdfca9f29656fb6c54d9f3967263bede4deb68c3"
+      linux/arm64: "e021d04c3e0c937256102617601c73bc2091e01b49801529956e3844f8a422e9"
+      linux/amd64: "32de0eb652dad6e7a39e2f9c5ff4e5ef3c28afdd33984c06bb9748f5e82d9beb"
