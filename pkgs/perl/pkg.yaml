@@ -1,0 +1,55 @@
+schema: 2
+
+name: perl
+description: The Perl programming language
+homepage: https://www.perl.org
+license: Artistic-1.0-Perl OR GPL-1.0-or-later
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+bins: [bin]
+
+versionDiscovery:
+  http:
+    url: https://www.cpan.org/src/5.0/
+    # Odd minors (5.43.x, 5.45.x) are development releases; keep even minors.
+    filter: 'perl-(5\.\d*[02468]\.\d+)\.tar\.gz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 5.44.0
+    sourceSha256: "3b855066b92491cb40e86affb1ca57d1a388aa43e51b91c7806a32c2f65f96c3"
+  - version: 5.42.1
+    sourceSha256: "6f84e6dc8cce97181d1c6aeeb552c13775c91ded3c6c73743c9211af87b16bf8"
+
+build:
+  source:
+    url: 'https://www.cpan.org/src/5.0/perl-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Builders stamp the host macOS as the minimum OS; pin the floor.
+        export MACOSX_DEPLOYMENT_TARGET=13.0
+        ./Configure -des \
+          -Dprefix="$NEM_OUTPUT" \
+          -Duserelocatableinc \
+          -Dusethreads \
+          -Dman1dir=none -Dman3dir=none
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install
+        # Script shebangs bake the staged prefix; replace with perl from env
+        for f in "$NEM_OUTPUT"/bin/*; do
+          [ -f "$f" ] && [ "$(head -c 2 "$f")" = "#!" ] || continue
+          sed -i.bak '1s|^#!.*/perl.*|#!/usr/bin/env perl|' "$f" && rm -f "$f.bak"
+        done
+
+test:
+  - run: perl --version | grep -q "v$NEM_VERSION"
+  - run: perl -MPOSIX -MFcntl -MStorable -MIO::Compress::Gzip -e 1
+  - run: corelist Config >/dev/null && prove --version >/dev/null
