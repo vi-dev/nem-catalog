@@ -28,6 +28,8 @@ install:
   - extract: {strip: 0}
 
 versions:
+  - version: 1.12.3
+    sourceSha256: "98d1b0b3202d2b03fa754a35aa3cbbfcf526a3260d8d2ee213748001b1043006"
   - version: 1.12.2
     sourceSha256: "7ce33c2492221a0436f96a8500215e9f3e3dcb5fd26a757cd415e7a843babd5e"
 
@@ -45,7 +47,9 @@ build:
         # Extraction skews mtimes; one shared stamp stops make regenerating
         # pregenerated files.
         find . -exec touch -t 202001010000 {} +
-        ./configure --prefix=/ --libdir=/lib --disable-static --disable-dependency-tracking --disable-doc
+        asm_flags=
+        case "$(uname -s)" in Darwin) asm_flags=--disable-asm ;; esac
+        ./configure --prefix=/ --libdir=/lib --disable-static --disable-dependency-tracking --disable-doc $asm_flags
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
