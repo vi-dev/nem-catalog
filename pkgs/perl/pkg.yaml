@@ -36,10 +36,6 @@ build:
         set -e
         # Builders stamp the host macOS as the minimum OS; pin the floor.
         export MACOSX_DEPLOYMENT_TARGET=13.0
-        # -Duserelocatableinc stores every @INC and Config lib path relative
-        # to the perl binary (".../.."), so the install relocates. Installing
-        # straight into the output (no DESTDIR) keeps Configure's prefix
-        # consistent with where files land at archive time.
         ./Configure -des \
           -Dprefix="$NEM_OUTPUT" \
           -Duserelocatableinc \
@@ -47,9 +43,7 @@ build:
           -Dman1dir=none -Dman3dir=none
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install
-        # installperl bakes the staged prefix into bin script shebangs
-        # (cpan, corelist, prove, ...); relocation would break them. nem puts
-        # this package's bin on PATH, so env resolves to our perl.
+        # Script shebangs bake the staged prefix; env resolves to our perl.
         for f in "$NEM_OUTPUT"/bin/*; do
           [ -f "$f" ] && [ "$(head -c 2 "$f")" = "#!" ] || continue
           sed -i.bak '1s|^#!.*/perl.*|#!/usr/bin/env perl|' "$f" && rm -f "$f.bak"
@@ -57,7 +51,5 @@ build:
 
 test:
   - run: perl --version | grep -q "v$NEM_VERSION"
-  # Dynamic loading of XS extensions survives relocation.
   - run: perl -MPOSIX -MFcntl -MStorable -MIO::Compress::Gzip -e 1
-  # Bin scripts exercise the rewritten env shebang after install.
   - run: corelist Config >/dev/null && prove --version >/dev/null
