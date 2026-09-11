@@ -1,0 +1,31 @@
+schema: 2
+name: qsv
+description: Blazing-fast CSV data-wrangling toolkit
+homepage: https://github.com/dathere/qsv
+license: MIT OR Unlicense
+
+platforms: ["darwin/arm64", "linux/arm64", "linux/amd64"]
+
+versionDiscovery:
+  github:
+    repo: dathere/qsv
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/dathere/qsv/releases/download/{{.Version}}/qsv-{{.Version}}-{{replace (replace (replace (printf \"%s-%s\" .Arch .OS) \"arm64-darwin\" \"aarch64-apple-darwin\") \"arm64-linux\" \"aarch64-unknown-linux-gnu\") \"amd64-linux\" \"x86_64-unknown-linux-musl\"}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "qsv", dst: "bin/qsv", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 22.0.1
+    sha256:
+      darwin/arm64: "735f366fb6272a772653c7106e42fd8b069a86d96eb0f9dbaf38945de09793ea"
+      linux/arm64: "b045bf3800fefdb9f7222a8db054cce2859a179ed5c14764a41aa362d6c8838b"
+      linux/amd64: "e74398627f24a3ccce09c7917cb4f75c95b96de41a79f4b600c646870cf59d9a"
+
+test:
+  - run: qsv --version | grep -q "$NEM_VERSION"
