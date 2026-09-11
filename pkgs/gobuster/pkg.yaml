@@ -1,0 +1,31 @@
+schema: 2
+name: gobuster
+description: Directory, DNS, and vhost brute-forcing tool
+homepage: https://github.com/OJ/gobuster
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: OJ/gobuster
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/OJ/gobuster/releases/download/v{{.Version}}/gobuster_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "gobuster", dst: "bin/gobuster", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.8.2
+    sha256:
+      darwin/arm64: "dc37fdfcb67db44e90f54db785218e2ed4ba4fe7552979f9032c6cc8df93d94e"
+      darwin/amd64: "f98ff2425bb1fda031556e1459ee86160a539464274a785cb203524fc8121df3"
+      linux/arm64: "84b175ae5ae770efddb3e675b0e24e56ef0f484a0d751beff0b0629e52c7f4da"
+      linux/amd64: "c8a8c6a966eeb011d682a0ef2305a3e3a86b8b3fabe744350c00a766cc0f8021"
+
+test:
+  - run: gobuster --version | grep -q "$NEM_VERSION"

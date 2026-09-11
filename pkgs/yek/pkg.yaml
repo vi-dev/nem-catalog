@@ -1,0 +1,31 @@
+schema: 2
+name: yek
+description: Serialize a repository into chunks for LLM consumption
+homepage: https://github.com/bodo-run/yek
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: bodo-run/yek
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/bodo-run/yek/releases/download/v{{.Version}}/yek-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "yek", dst: "bin/yek", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.25.5
+    sha256:
+      darwin/arm64: "0797f0b8f25537b33e870acf1ac172c7ef62415a8bd9e8528d03438e546167ee"
+      darwin/amd64: "51482c1b6a65e8182b84321eadd47c582620003134a4b4c45107612ea7ddcffd"
+      linux/arm64: "7f3e60da9b32f219b4b64bbef4491062562b8cf72fe552c28ba7a6abb259715d"
+      linux/amd64: "6a6302c596bba9ddfc8505bdbf83d96ea951576d695e43edf3f9a6def23c92cc"
+
+test:
+  - run: yek --version | grep -q "$NEM_VERSION"

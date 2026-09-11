@@ -1,0 +1,31 @@
+schema: 2
+name: soft-serve
+description: Self-hostable Git server for the command line, by Charm
+homepage: https://github.com/charmbracelet/soft-serve
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: charmbracelet/soft-serve
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/charmbracelet/soft-serve/releases/download/v{{.Version}}/soft-serve_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "soft", dst: "bin/soft", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.12.2
+    sha256:
+      darwin/arm64: "a5dace0dcfa8d49015fdf6f3be03e908412419e1e800b0f9df8ace5eab17ea0c"
+      darwin/amd64: "ba94b348bfcfecd624c3ea84a0b8b9bad001267af697865a8e8e4968865d0439"
+      linux/arm64: "9187a662b2b8e8478a09ece13026f58689eaa341cbfb46c24a4475fcb37b0205"
+      linux/amd64: "4f0759907dcbbdbf204e3a7e1bc4e76bcbfe6101c11c42c73a2b40388b67944a"
+
+test:
+  - run: soft --version | grep -q "$NEM_VERSION"

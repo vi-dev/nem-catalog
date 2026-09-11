@@ -1,0 +1,31 @@
+schema: 2
+name: terrascan
+description: Static code analyzer for infrastructure as code
+homepage: https://runterrascan.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: tenable/terrascan
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/tenable/terrascan/releases/download/v{{.Version}}/terrascan_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "terrascan", dst: "bin/terrascan", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.19.9
+    sha256:
+      darwin/arm64: "6658a47b17fb15f8f68723ea83020466a7d96288c5a6f84dddaf1a09821fde86"
+      darwin/amd64: "0be16a635d14a501c0fea141ae39fca58ae3f586460dc1534ddc5703b707ae54"
+      linux/arm64: "5473112b147fa852e7c21c29dcf3915acf419ba680484f53aa656ed895e91867"
+      linux/amd64: "9275d75210b7df52f8870252035803288646674f5701ced82812037700a39670"
+
+test:
+  - run: terrascan version | grep -q "$NEM_VERSION"

@@ -1,0 +1,31 @@
+schema: 2
+name: feroxbuster
+description: Fast, recursive content discovery tool
+homepage: https://github.com/epi052/feroxbuster
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: epi052/feroxbuster
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/epi052/feroxbuster/releases/download/v{{.Version}}/{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace .OS \"darwin\" \"macos\"}}-feroxbuster.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "feroxbuster", dst: "bin/feroxbuster", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.13.1
+    sha256:
+      darwin/arm64: "cc5b17041aadd775af5dec60fdd82df8f98ace03a9df5dd84c76792d2294887a"
+      darwin/amd64: "db50a69896845c0aa1b837c097ff205e3a4bfcca8db1869cb182b57128c132fb"
+      linux/arm64: "1e5244e1f52e55a647b65e0c76ae7afe0b9983c1fbea30ed7c67e477175eb381"
+      linux/amd64: "0978619a10049ccaad290b2d1241bc4d8a6aac18da07d6231186fb9d343f99de"
+
+test:
+  - run: feroxbuster --version | grep -q "$NEM_VERSION"

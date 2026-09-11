@@ -1,0 +1,29 @@
+schema: 2
+name: gfold
+description: Track the status of multiple Git repositories at once
+homepage: https://github.com/nickgerace/gfold
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: nickgerace/gfold
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/nickgerace/gfold/releases/download/{{.Version}}/gfold-{{replace .OS \"linux\" \"linux-musl\"}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86-64\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/gfold", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2026.3.0
+    sha256:
+      darwin/arm64: "1497e5dd7c5933cca6e375f3e3b8e7e5b9f43b55dee7402ebb488e0eaa2545f4"
+      darwin/amd64: "db201c4ec10ed829ff830ea8288329487a01f87b40df4e9b5396ba95c6ec29fc"
+      linux/arm64: "2bf9e0675bc5b14b49410934291a9ce134d6d259b60da086232c22d596e81c1d"
+      linux/amd64: "ebd3504cb74c52f0ddf0c0032995b61724b8cd31eb8e1e8be939fdf342a9fafe"
+
+test:
+  - run: gfold --version | grep -q "$NEM_VERSION"

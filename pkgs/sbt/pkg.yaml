@@ -1,0 +1,30 @@
+schema: 2
+name: sbt
+description: Build tool for Scala and Java
+homepage: https://www.scala-sbt.org
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  github:
+    repo: sbt/sbt
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sbt/sbt/releases/download/v{{.Version}}/sbt-{{.Version}}.tgz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.0.8
+    sha256:
+      darwin/arm64: "40c2a31786d36a286f0d9e8bfdf51181e5408c4f99eab85556e2bcd5e12eab44"
+      darwin/amd64: "40c2a31786d36a286f0d9e8bfdf51181e5408c4f99eab85556e2bcd5e12eab44"
+      linux/arm64: "40c2a31786d36a286f0d9e8bfdf51181e5408c4f99eab85556e2bcd5e12eab44"
+      linux/amd64: "40c2a31786d36a286f0d9e8bfdf51181e5408c4f99eab85556e2bcd5e12eab44"

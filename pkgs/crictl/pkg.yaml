@@ -1,0 +1,31 @@
+schema: 2
+name: crictl
+description: CLI for Kubernetes CRI-compatible container runtimes
+homepage: https://github.com/kubernetes-sigs/cri-tools
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kubernetes-sigs/cri-tools
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kubernetes-sigs/cri-tools/releases/download/v{{.Version}}/crictl-v{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "crictl", dst: "bin/crictl", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.37.0
+    sha256:
+      darwin/arm64: "cd691c0f5374f4547cf812c8d88eb0e7bb4ea63551c02e5dcbf3684bc64c9804"
+      darwin/amd64: "e274e10f7eba3df294869289bd13966918382252297c9665e61eb83a69786ed2"
+      linux/arm64: "c9dfdf9ebc353a0027c88622206a5e90ee6f0e78cfabf1a9ef4dc575298fd555"
+      linux/amd64: "67c983ee8a6bbce73d39a186e633c5fe4f8a70e62171ac3bd92a9c1b2c601670"
+
+test:
+  - run: crictl --version | grep -q "$NEM_VERSION"

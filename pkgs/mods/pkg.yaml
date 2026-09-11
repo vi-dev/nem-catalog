@@ -1,0 +1,31 @@
+schema: 2
+name: mods
+description: AI on the command line, by Charm
+homepage: https://github.com/charmbracelet/mods
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: charmbracelet/mods
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/charmbracelet/mods/releases/download/v{{.Version}}/mods_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "mods", dst: "bin/mods", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.8.1
+    sha256:
+      darwin/arm64: "a09528a438487fbda43809d5adcbc4211a5020bd69372ff0d319a8f28bd900b2"
+      darwin/amd64: "0ae5f55ae1764fd47c347a7b4e75b71dbcdbb41e56c64bf90be4f1481dba0377"
+      linux/arm64: "448d205e27e1ec0cb4e185275ff826e93b16182d35977652db01e4d475b1b671"
+      linux/amd64: "a3313f3064f7c104835e1f9c53788524cfafc1675c1e18fca786b7051766745d"
+
+test:
+  - run: mods --version | grep -q "$NEM_VERSION"
