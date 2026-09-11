@@ -1,0 +1,33 @@
+schema: 2
+name: liquibase
+description: Database change management and versioning
+homepage: https://www.liquibase.com
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  github:
+    repo: liquibase/liquibase
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/liquibase/liquibase/releases/download/v{{.Version}}/liquibase-{{.Version}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+
+bins: ["."]
+
+test:
+  - run: liquibase --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 5.0.4
+    sha256:
+      darwin/arm64: "bb08638d70dddd6af8cca6e033148576f8214b5996831b1f8864eb3528f4cfce"
+      darwin/amd64: "bb08638d70dddd6af8cca6e033148576f8214b5996831b1f8864eb3528f4cfce"
+      linux/arm64: "bb08638d70dddd6af8cca6e033148576f8214b5996831b1f8864eb3528f4cfce"
+      linux/amd64: "bb08638d70dddd6af8cca6e033148576f8214b5996831b1f8864eb3528f4cfce"

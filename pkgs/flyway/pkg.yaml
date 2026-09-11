@@ -1,0 +1,33 @@
+schema: 2
+name: flyway
+description: Database schema migration tool
+homepage: https://flywaydb.org
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  github:
+    repo: flyway/flyway
+    filter: '^flyway-\d+\.\d+\.\d+$'
+    prefix: "flyway-"
+
+artifact:
+  url: "https://download.red-gate.com/maven/release/com/redgate/flyway/flyway-commandline/{{.Version}}/flyway-commandline-{{.Version}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["."]
+
+test:
+  - run: flyway --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 13.6.0
+    sha256:
+      darwin/arm64: "088d6122c0ff415aef0abee5afa353de08b1d717e8738ec9b28f4740b93b3adf"
+      darwin/amd64: "088d6122c0ff415aef0abee5afa353de08b1d717e8738ec9b28f4740b93b3adf"
+      linux/arm64: "088d6122c0ff415aef0abee5afa353de08b1d717e8738ec9b28f4740b93b3adf"
+      linux/amd64: "088d6122c0ff415aef0abee5afa353de08b1d717e8738ec9b28f4740b93b3adf"

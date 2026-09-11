@@ -1,0 +1,31 @@
+schema: 2
+name: netbird
+description: WireGuard-based overlay network client
+homepage: https://netbird.io
+license: BSD-3-Clause
+
+versionDiscovery:
+  github:
+    repo: netbirdio/netbird
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/netbirdio/netbird/releases/download/v{{.Version}}/netbird_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "netbird", dst: "bin/netbird", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: netbird version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.78.1
+    sha256:
+      darwin/arm64: "8d613dc78aa0e5b9f01b07ec9d02417c27638bf68b829a72399293f76da0fa03"
+      darwin/amd64: "1441be19db0394497866fc19a519d7d0483fbad0fcd4d1adaeb0ed1bded739be"
+      linux/arm64: "d686745aa64bb4c597602ce95e76558f5f848d0672c88d63f96397d2507005b2"
+      linux/amd64: "9239c9e37c2acc0612563ef5ce0c3326397460d0eb811b5a59a8e373f1a4ebde"

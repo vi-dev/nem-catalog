@@ -1,0 +1,31 @@
+schema: 2
+name: mysqldef
+description: Idempotent schema management for MySQL
+homepage: https://github.com/sqldef/sqldef
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: sqldef/sqldef
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sqldef/sqldef/releases/download/v{{.Version}}/mysqldef_{{.OS}}_{{.Arch}}.{{replace (replace .OS \"darwin\" \"zip\") \"linux\" \"tar.gz\"}}"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "mysqldef", dst: "bin/mysqldef", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: mysqldef --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.11.20
+    sha256:
+      darwin/arm64: "f7477cc6ac09a9ede74d92aa0a4ae4d58d8120e39c588c5560f0806dae017216"
+      darwin/amd64: "02e0bdf889f9acb41023fa84c90aa44b5f85323e99504cfa5361a80b1f99403f"
+      linux/arm64: "6f9539d1647f479e6823cf0f8a1363413d17e63088252682f3e6f217dc467d8c"
+      linux/amd64: "2bf15861cc9c0c168a42ddfad343b9b344dc8f35630f6cd7e721d718a79fa145"

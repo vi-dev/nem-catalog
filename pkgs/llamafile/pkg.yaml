@@ -1,0 +1,29 @@
+schema: 2
+name: llamafile
+description: Distribute and run LLMs with a single portable executable
+homepage: https://github.com/Mozilla-Ocho/llamafile
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: Mozilla-Ocho/llamafile
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/Mozilla-Ocho/llamafile/releases/download/{{.Version}}/llamafile-{{.Version}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/llamafile", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: llamafile --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.10.5
+    sha256:
+      darwin/arm64: "417bcc3348cd5162c2751812fc0ea2f6e79e89e7be6f17e8401ed95de2ed4246"
+      darwin/amd64: "417bcc3348cd5162c2751812fc0ea2f6e79e89e7be6f17e8401ed95de2ed4246"
+      linux/arm64: "417bcc3348cd5162c2751812fc0ea2f6e79e89e7be6f17e8401ed95de2ed4246"
+      linux/amd64: "417bcc3348cd5162c2751812fc0ea2f6e79e89e7be6f17e8401ed95de2ed4246"

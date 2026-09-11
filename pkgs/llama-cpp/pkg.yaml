@@ -1,0 +1,29 @@
+schema: 2
+name: llama-cpp
+description: LLM inference in C/C++ with the llama.cpp toolset
+homepage: https://github.com/ggml-org/llama.cpp
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: ggml-org/llama.cpp
+    filter: '^b\d+$'
+
+artifact:
+  url: "https://github.com/ggml-org/llama.cpp/releases/download/{{.Version}}/llama-{{.Version}}-bin-{{replace (replace .OS \"darwin\" \"macos\") \"linux\" \"ubuntu\"}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["."]
+
+test:
+  - run: llama-cli --version 2>&1 | grep -q "${NEM_VERSION#b}"
+
+versions:
+  - version: b10903
+    sha256:
+      darwin/arm64: "a1893edd4e63645fb04ac9ef89fa932d3cc7ac5c513e8002b6031dbe7d104c2d"
+      darwin/amd64: "58d5f475960ce6d6c28541da0ccdbdff88bfd31b64a9db8babc0dd3add3a45f8"
+      linux/arm64: "dfa3e27e204c5322c29419baf4b57df4aa4a30d49d9d55cbf19863e6697fdcb5"
+      linux/amd64: "5366d9db6a3d22a8dfde0b5105d9f002438d309971594ffcb65b180d7cc3f592"

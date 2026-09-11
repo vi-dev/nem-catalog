@@ -1,0 +1,32 @@
+schema: 2
+name: kafka
+description: Distributed event streaming platform
+homepage: https://kafka.apache.org
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  http:
+    url: https://archive.apache.org/dist/kafka/
+    filter: 'href="(\d+\.\d+\.\d+)/"'
+
+artifact:
+  url: "https://archive.apache.org/dist/kafka/{{.Version}}/kafka_2.13-{{.Version}}.tgz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+test:
+  - run: kafka-topics.sh --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 4.3.1
+    sha256:
+      darwin/arm64: "f118328b2d053497350d5befd82c08db7ffd710327ff52943dd5caaa1b25db21"
+      darwin/amd64: "f118328b2d053497350d5befd82c08db7ffd710327ff52943dd5caaa1b25db21"
+      linux/arm64: "f118328b2d053497350d5befd82c08db7ffd710327ff52943dd5caaa1b25db21"
+      linux/amd64: "f118328b2d053497350d5befd82c08db7ffd710327ff52943dd5caaa1b25db21"

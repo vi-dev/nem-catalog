@@ -1,0 +1,32 @@
+schema: 2
+name: rqlite
+description: Lightweight distributed database built on SQLite
+homepage: https://rqlite.io
+license: MIT
+
+platforms: ["linux/arm64", "linux/amd64"]
+
+versionDiscovery:
+  github:
+    repo: rqlite/rqlite
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/rqlite/rqlite/releases/download/v{{.Version}}/rqlite-v{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "rqlited", dst: "bin/rqlited", mode: 0o755}
+  - copy: {src: "rqlite", dst: "bin/rqlite", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: rqlited -version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 10.3.2
+    sha256:
+      linux/arm64: "2cfeaad8fad0feaa086e2f8c2e1cf50ae2b11ae2c64c2a76122ba72d63040f89"
+      linux/amd64: "1ac96c125e043bea0b8ab0bf1dc66a2521cdfec6a4dfc9a75f7691999b5bdb60"

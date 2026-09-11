@@ -1,0 +1,30 @@
+schema: 2
+name: ferretdb
+description: Open-source MongoDB alternative backed by PostgreSQL
+homepage: https://www.ferretdb.com
+license: Apache-2.0
+
+platforms: ["linux/arm64", "linux/amd64"]
+
+versionDiscovery:
+  github:
+    repo: FerretDB/FerretDB
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/FerretDB/FerretDB/releases/download/v{{.Version}}/ferretdb-{{.Arch}}-{{.OS}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/ferretdb", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: ferretdb --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.7.0
+    sha256:
+      linux/arm64: "74abfea8c6647929e8dab8f59f5438cb29948bc5e477626b771721ef1c07576b"
+      linux/amd64: "f81ecae6adf33e0c5e949acf85f94a40b0790c07b8f87d480b91518225da26b4"

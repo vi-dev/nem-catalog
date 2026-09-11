@@ -1,0 +1,31 @@
+schema: 2
+name: sqlite3def
+description: Idempotent schema management for SQLite
+homepage: https://github.com/sqldef/sqldef
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: sqldef/sqldef
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sqldef/sqldef/releases/download/v{{.Version}}/sqlite3def_{{.OS}}_{{.Arch}}.{{replace (replace .OS \"darwin\" \"zip\") \"linux\" \"tar.gz\"}}"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "sqlite3def", dst: "bin/sqlite3def", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: sqlite3def --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.11.20
+    sha256:
+      darwin/arm64: "8069c0763ea9071481fbdd208d6e189fd3f8a18d0abe0322cea52e0fa8a000bb"
+      darwin/amd64: "7b375423645be4e9e278c322b60076e46e9a7655774039610eda688d428c62c2"
+      linux/arm64: "5fbdf42e98722fd4e465725d8e45381522f12ce8a9a0718a8d2382b7bdd051d7"
+      linux/amd64: "28cbdd82a4c9f6ff2d36d43c5ac0f1b88da130bb6aacc35ba109b171a83a77aa"
