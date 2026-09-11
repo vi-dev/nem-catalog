@@ -1,0 +1,31 @@
+schema: 2
+name: legitify
+description: Detect and remediate misconfigurations in GitHub and GitLab
+homepage: https://github.com/Legit-Labs/legitify
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: Legit-Labs/legitify
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Legit-Labs/legitify/releases/download/v{{.Version}}/legitify_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "legitify", dst: "bin/legitify", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.0.11
+    sha256:
+      darwin/arm64: "ad89438d425213305a025eb3034e55e7f40fd0f012e00ea18aced14859ac40c8"
+      darwin/amd64: "45d6c59d171e339cc02c312e8a1c46ffd3aea56ca327179a39e14593a2097c90"
+      linux/arm64: "a0d76859fc8f5fe7285d51420b44277eda81501ed226c393083c35290b6c2de2"
+      linux/amd64: "90a8df588c7c2a334c8397ac74b614f411adb8cdf14b6472b7a7cfbe7ef57bdd"
+
+test:
+  - run: legitify version | grep -q "$NEM_VERSION"

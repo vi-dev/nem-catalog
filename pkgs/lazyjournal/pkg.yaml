@@ -1,0 +1,29 @@
+schema: 2
+name: lazyjournal
+description: TUI for reading logs from journalctl, Docker, and files
+homepage: https://github.com/Lifailon/lazyjournal
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: Lifailon/lazyjournal
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/Lifailon/lazyjournal/releases/download/{{.Version}}/lazyjournal-{{.Version}}-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/lazyjournal", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.8.6
+    sha256:
+      darwin/arm64: "806374515099844f2b97790df19d215ea18cd9f45717afab30fe0a0b1de50e23"
+      darwin/amd64: "0134a1c51685661d406d126210391c6c06e577dd65ed433ef2124b339fb9b3f4"
+      linux/arm64: "2718c73349ff1ef297f5a19d3e636ca116c6f8e85106ea5744c6d71bf8df6924"
+      linux/amd64: "c264bbcb6b30fa6418bbfce2087d0e1ecdc7ad17421772c0f002e4cbf8cf4bd7"
+
+test:
+  - run: lazyjournal --version 2>&1 | grep -q "$NEM_VERSION"

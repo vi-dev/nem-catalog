@@ -1,0 +1,31 @@
+schema: 2
+name: upterm
+description: Instant terminal sharing over SSH
+homepage: https://upterm.dev
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: owenthereal/upterm
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/owenthereal/upterm/releases/download/v{{.Version}}/upterm_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "upterm", dst: "bin/upterm", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.26.0
+    sha256:
+      darwin/arm64: "ef2a2b03a708e870a541fee052089f58006569feca8eab3d2f10ed7d49e4c512"
+      darwin/amd64: "66d7b42fbe7233276f737d100c69542ef4e8f4f8df1f99500c1014592a511dff"
+      linux/arm64: "da854031eb29d271235fa313d6690be52538cb776a77103dbf7c9cc39da1a61b"
+      linux/amd64: "faf76bbc517202b9173cf12ee3a3231c16fbd5883a3287477d9292bbb59355a6"
+
+test:
+  - run: upterm version | grep -q "$NEM_VERSION"

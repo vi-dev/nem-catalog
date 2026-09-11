@@ -1,0 +1,32 @@
+schema: 2
+name: crystal
+description: The Crystal programming language
+homepage: https://crystal-lang.org
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: crystal-lang/crystal
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/crystal-lang/crystal/releases/download/{{.Version}}/crystal-{{.Version}}-1-{{replace (replace (replace (replace (printf \"%s-%s\" .OS .Arch) \"darwin-arm64\" \"darwin-universal\") \"darwin-amd64\" \"darwin-universal\") \"linux-arm64\" \"linux-aarch64\") \"linux-amd64\" \"linux-x86_64\"}}{{replace (replace .OS \"darwin\" \"\") \"linux\" \"-bundled\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+    platforms: ["darwin/arm64", "darwin/amd64"]
+  - extract: {strip: 2}
+    platforms: ["linux/arm64", "linux/amd64"]
+
+bins: ["bin"]
+
+versions:
+  - version: 1.21.0
+    sha256:
+      darwin/arm64: "7fc4af56b0cb5c7ea5703f744c6629bb19ff36ba3abbf232d50e40c39a20ee16"
+      darwin/amd64: "7fc4af56b0cb5c7ea5703f744c6629bb19ff36ba3abbf232d50e40c39a20ee16"
+      linux/arm64: "87e042842baad7a03014dba819fe74bd81ba221d2a84200984433bcfb691d133"
+      linux/amd64: "cc407bd071915cc7b5d9348281e669a911d20a1f4b9fac52a62088660eb22208"
+
+test:
+  - run: crystal --version | grep -q "$NEM_VERSION"

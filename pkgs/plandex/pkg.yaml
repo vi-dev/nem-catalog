@@ -1,0 +1,31 @@
+schema: 2
+name: plandex
+description: Terminal-based AI coding agent for large projects
+homepage: https://plandex.ai
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: plandex-ai/plandex
+    filter: '^cli/v\d+\.\d+\.\d+$'
+    prefix: "cli/v"
+
+artifact:
+  url: "https://github.com/plandex-ai/plandex/releases/download/cli/v{{.Version}}/plandex_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "plandex", dst: "bin/plandex", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.2.1
+    sha256:
+      darwin/arm64: "1fd4ee494e5ad9bfd19d1cea6e7cbce971500f7bec93aef826f6e09dde9e70e5"
+      darwin/amd64: "4ce02e7b74246b30d979e9ee4502866104a40d559dd17c3c29e80e993b3d9df5"
+      linux/arm64: "5539441719cd8dc34f7209e5a04051540e748ff97d0d85b1cf79035b6cef7920"
+      linux/amd64: "2094c11700bef5dc87369214d3da6d9a8a76c1d2e51459045f0c8268fdaeabc9"
+
+test:
+  - run: plandex version | grep -q "$NEM_VERSION"

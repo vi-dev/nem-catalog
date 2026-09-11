@@ -1,0 +1,28 @@
+schema: 2
+name: octosql
+description: Query multiple data sources with SQL from the command line
+homepage: https://github.com/cube2222/octosql
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: cube2222/octosql
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/cube2222/octosql/releases/download/v{{.Version}}/octosql_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "octosql", dst: "bin/octosql", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.13.0
+    sha256:
+      darwin/arm64: "994328eb8493562903148861eb09619adfbaa017866b599783847aed677c1fac"
+      darwin/amd64: "70a3100f093147a3dfe360505bee1eed89c66924410298b5560c62b7e7d51591"
+      linux/arm64: "8455bc6f9f9164d4469b286bcb58921887e2fe9390e50195fa2f4ea45d85d235"
+      linux/amd64: "49963463c2dc515bedd7e9d77e0e75a394532102ce878caa097250a8260aa815"

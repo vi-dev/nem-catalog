@@ -1,0 +1,31 @@
+schema: 2
+name: turso
+description: Command-line interface for the Turso database platform
+homepage: https://turso.tech
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: tursodatabase/turso-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/tursodatabase/turso-cli/releases/download/v{{.Version}}/turso-cli_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "turso", dst: "bin/turso", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.0.32
+    sha256:
+      darwin/arm64: "f180b794032f29b4ab44ad7451b2be661cd581311119ff5160359d2562d5f2be"
+      darwin/amd64: "d6ba8b73d7cafff8b6a318215f19a6933fe3fca6a74960b7c8ad42758eebbd6e"
+      linux/arm64: "672f29e8f77b4c30a5f31c04fe0d5636d29fb1bb5be1137c40234bb2e76c2150"
+      linux/amd64: "c35acbcad8e2e7a32580fe380adc4658d3032ddc56d25396b9b123aa4a704107"
+
+test:
+  - run: turso --version | grep -q "$NEM_VERSION"
