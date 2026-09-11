@@ -14,9 +14,6 @@ artifact:
 
 install:
   - extract: {strip: 1}
-    platforms: ["darwin/arm64", "darwin/amd64"]
-  - extract: {strip: 2}
-    platforms: ["linux/arm64", "linux/amd64"]
 
 bins: ["bin"]
 
