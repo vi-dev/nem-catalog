@@ -1,0 +1,31 @@
+schema: 2
+name: kluctl
+description: Declarative deployment tool for Kubernetes
+homepage: https://kluctl.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kluctl/kluctl
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kluctl/kluctl/releases/download/v{{.Version}}/kluctl_v{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "kluctl", dst: "bin/kluctl", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.28.2
+    sha256:
+      darwin/arm64: "7d834c09133aef01da037816be8ac3cbb7970b2abec8d6ec5f943b919a8db24d"
+      darwin/amd64: "aa14015138163308ef4477f15a07595aa4fdac4c9b7b2034a508057616f9cd46"
+      linux/arm64: "2c09a5db40fd7af3583b465117de206afc2dc9fc36bce67fc3f3c39f6861fe89"
+      linux/amd64: "aa344c687327e33ba73ced7b196ae5705a0d60840262295d1191eab39526789e"
+
+test:
+  - run: kluctl version | grep -q "$NEM_VERSION"

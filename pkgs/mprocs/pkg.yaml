@@ -1,0 +1,31 @@
+schema: 2
+name: mprocs
+description: Run multiple commands in parallel with a TUI
+homepage: https://github.com/pvolok/mprocs
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: pvolok/mprocs
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/pvolok/mprocs/releases/download/v{{.Version}}/mprocs-{{.Version}}-{{.OS}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}{{replace (replace .OS \"darwin\" \"\") \"linux\" \"-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "mprocs", dst: "bin/mprocs", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.9.6
+    sha256:
+      darwin/arm64: "6b557dc4d446009105f2ae1a33206f54f97cea72f9674af513a7279572350641"
+      darwin/amd64: "51c3b363d5a2d32ae50a5307954b8d5aa336379aa986be580e9fe27682392545"
+      linux/arm64: "ebe73f04e02e2134df463c8f0a0e1c293aa3b41dd7909180687529b21780adb0"
+      linux/amd64: "52591a9aab797a5e164fa37a5f81b516fa3c25f125b59a60724e38ae98bfe77b"
+
+test:
+  - run: mprocs --version | grep -q "$NEM_VERSION"

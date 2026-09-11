@@ -1,0 +1,31 @@
+schema: 2
+name: argo
+description: Command-line interface for Argo Workflows
+homepage: https://argo-workflows.readthedocs.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: argoproj/argo-workflows
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/argoproj/argo-workflows/releases/download/v{{.Version}}/argo-{{.OS}}-{{.Arch}}.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "argo-{{.OS}}-{{.Arch}}", dst: "bin/argo", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 4.1.2
+    sha256:
+      darwin/arm64: "086b755814775036ae85659d4b9008bc68292530992bbb6b035884a8188a04c5"
+      darwin/amd64: "e78469b7c6538b32de07507642db5bea9d975cb957728e89733e29011f622595"
+      linux/arm64: "04e2e1e0fc6d738034ff356e5bc8b2b819f963bf007331df4606611b3fa967b6"
+      linux/amd64: "1edee3c25de0129e4d358a87591f04b89b522ceccb11975970d45217a3cd9cdd"
+
+test:
+  - run: argo version | grep -q "$NEM_VERSION"

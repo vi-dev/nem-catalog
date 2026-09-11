@@ -1,0 +1,31 @@
+schema: 2
+name: efm-langserver
+description: General-purpose language server configured with external tools
+homepage: https://github.com/mattn/efm-langserver
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: mattn/efm-langserver
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/mattn/efm-langserver/releases/download/v{{.Version}}/efm-langserver_v{{.Version}}_{{.OS}}_{{.Arch}}.{{replace (replace .OS \"darwin\" \"zip\") \"linux\" \"tar.gz\"}}"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "efm-langserver", dst: "bin/efm-langserver", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.0.57
+    sha256:
+      darwin/arm64: "7eb4b9ee4d5af106a539f582801f59461aef63946f835136e036368e039f49db"
+      darwin/amd64: "c3de994fa89a44fa733da9a08d31be1e2d27575c7d7c0d00f430c82378bfca22"
+      linux/arm64: "f10ac39ac66cbe75cb6621b1d155aa479a6c6a58d91d4d0eb124d4dacd37881e"
+      linux/amd64: "f01a653b5c6c252c23ec19677b040eff961b8da784317ee0b8b852245a3999e2"
+
+test:
+  - run: efm-langserver -v | grep -q "$NEM_VERSION"

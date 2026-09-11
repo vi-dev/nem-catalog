@@ -1,0 +1,31 @@
+schema: 2
+name: timoni
+description: Package manager for Kubernetes powered by CUE
+homepage: https://timoni.sh
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: stefanprodan/timoni
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/stefanprodan/timoni/releases/download/v{{.Version}}/timoni_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "timoni", dst: "bin/timoni", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.34.0
+    sha256:
+      darwin/arm64: "673bde5ccf8b14fcde95335c4c72d05a08341faa07aa79d912e6bfc6523a5625"
+      darwin/amd64: "565213cba5fcc0fe297383241edb180a872ce09dd72ddf2eeaf996dc4c8195b6"
+      linux/arm64: "0794a36cebd5409b1bdcb81e8ecd0258f57a3dddd784426be1df869602e4fdfa"
+      linux/amd64: "232c5f20fb397981143ecb150bcb268e3131809c144e8a3368d8d81a0d2406f4"
+
+test:
+  - run: timoni version | grep -q "$NEM_VERSION"

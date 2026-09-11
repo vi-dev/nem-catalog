@@ -1,0 +1,30 @@
+schema: 2
+name: werf
+description: GitOps delivery tool gluing Git, Helm, and Kubernetes
+homepage: https://werf.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: werf/werf
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://tuf.werf.io/targets/releases/{{.Version}}/{{.OS}}-{{.Arch}}/bin/werf"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/werf", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.76.0
+    sha256:
+      darwin/arm64: "d761f43378e72ab82b05c6dcb394bf0ea282ce3396c91807e04a18f8abb4577d"
+      darwin/amd64: "e7236a94f0254896cf5ccb65b1f94931260b57592f9b624c1e786f4e1700cd7c"
+      linux/arm64: "6286687d6f4a97f5cd37d10c0415cc0810cd5dde44ce94263995f0ad36dd08d3"
+      linux/amd64: "078511459d0ba81111c629c3d4ecb24dc41a3736736f515084aef38182344202"
+
+test:
+  - run: werf version | grep -q "$NEM_VERSION"

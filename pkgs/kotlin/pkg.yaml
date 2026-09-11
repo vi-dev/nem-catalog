@@ -1,0 +1,33 @@
+schema: 2
+name: kotlin
+description: The Kotlin compiler and command-line tools
+homepage: https://kotlinlang.org
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  github:
+    repo: JetBrains/kotlin
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/JetBrains/kotlin/releases/download/v{{.Version}}/kotlin-compiler-{{.Version}}.zip"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.4.20
+    sha256:
+      darwin/arm64: "59e9ca74c7904ef2c122b12114937673ccce68de820a663f0ed66ccf8799e0b7"
+      darwin/amd64: "59e9ca74c7904ef2c122b12114937673ccce68de820a663f0ed66ccf8799e0b7"
+      linux/arm64: "59e9ca74c7904ef2c122b12114937673ccce68de820a663f0ed66ccf8799e0b7"
+      linux/amd64: "59e9ca74c7904ef2c122b12114937673ccce68de820a663f0ed66ccf8799e0b7"
+
+test:
+  - run: kotlinc -version 2>&1 | grep -q "$NEM_VERSION"

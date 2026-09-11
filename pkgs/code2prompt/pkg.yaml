@@ -1,0 +1,31 @@
+schema: 2
+name: code2prompt
+description: Convert a codebase into a single LLM prompt
+homepage: https://code2prompt.dev
+license: MIT
+
+platforms: ["darwin/arm64", "darwin/amd64", "linux/amd64"]
+
+versionDiscovery:
+  github:
+    repo: mufeedvh/code2prompt
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/mufeedvh/code2prompt/releases/download/v{{.Version}}/code2prompt-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/code2prompt", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 4.2.0
+    sha256:
+      darwin/arm64: "23e78b3fca75c898e52b128276e8959e7f9524e7b9aced59521868c38b78e596"
+      darwin/amd64: "97f588d80f6bf39ad65b1440bc1c8e8ed125a276f87e3f08c0a62564d56dda57"
+      linux/amd64: "69ff91f6e690de4814f38eb79d1fff5971d5a39bdc82b23ea784dcd450bf965f"
+
+test:
+  - run: code2prompt --version | grep -q "$NEM_VERSION"

@@ -1,0 +1,33 @@
+schema: 2
+name: coursier
+description: Scala application and artifact manager
+homepage: https://get-coursier.io
+license: Apache-2.0
+
+deps:
+  - jdk25
+
+versionDiscovery:
+  github:
+    repo: coursier/coursier
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/coursier/coursier/releases/download/v{{.Version}}/coursier"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/cs", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.1.24
+    sha256:
+      darwin/arm64: "7aa975f12469726d6bb87852107afe0b8d6f3c82b12a49ef43cc6647c4e057ca"
+      darwin/amd64: "7aa975f12469726d6bb87852107afe0b8d6f3c82b12a49ef43cc6647c4e057ca"
+      linux/arm64: "7aa975f12469726d6bb87852107afe0b8d6f3c82b12a49ef43cc6647c4e057ca"
+      linux/amd64: "7aa975f12469726d6bb87852107afe0b8d6f3c82b12a49ef43cc6647c4e057ca"
+
+test:
+  - run: cs version | grep -q "$NEM_VERSION"

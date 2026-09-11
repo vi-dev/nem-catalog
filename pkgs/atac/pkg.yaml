@@ -1,0 +1,31 @@
+schema: 2
+name: atac
+description: Terminal API client inspired by Postman
+homepage: https://atac.julien-cpsn.com
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: Julien-cpsn/ATAC
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Julien-cpsn/ATAC/releases/download/v{{.Version}}/atac-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "atac", dst: "bin/atac", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.23.1
+    sha256:
+      darwin/arm64: "a3204b7ccea12c2674762dea91ae14bdbd6395fac1ccad06a3728e257a94247d"
+      darwin/amd64: "7505659829e026982de368b2a17fc0087dd0d83ee275da1c42575eaefa8dc3fa"
+      linux/arm64: "fea0eb4adb7d3df156b94e95d74c59c7489da6d8c6ad5c0be0ca1e3b910952e4"
+      linux/amd64: "dcd61727c3871e3643439dd32d3182995bb5337feeba5bdbbcd3d6432cf00618"
+
+test:
+  - run: atac --version | grep -q "$NEM_VERSION"
