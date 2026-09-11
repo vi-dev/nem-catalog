@@ -1,0 +1,31 @@
+schema: 2
+name: meilisearch
+description: Lightning-fast search engine API
+homepage: https://www.meilisearch.com
+license: MIT
+
+platforms: ["darwin/arm64", "linux/arm64", "linux/amd64"]
+
+versionDiscovery:
+  github:
+    repo: meilisearch/meilisearch
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/meilisearch/meilisearch/releases/download/v{{.Version}}/meilisearch-{{replace (replace (printf \"%s-%s\" .OS .Arch) \"darwin-arm64\" \"macos-apple-silicon\") \"linux-arm64\" \"linux-aarch64\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/meilisearch", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.53.2
+    sha256:
+      darwin/arm64: "7fa492746343c1dd7217ead82fc6d42e74c1304593e4604f52ca71cf44d61b28"
+      linux/arm64: "12a38c387953e61807a5a0deb64e4bf52def38e49872c7963949a7d4d41a2117"
+      linux/amd64: "6c00019a887813ccbce54eec52718c9343bf4234383871146c67c76b1d2646cd"
+
+test:
+  - run: meilisearch --version | grep -q "$NEM_VERSION"

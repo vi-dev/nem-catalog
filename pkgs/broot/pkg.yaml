@@ -1,0 +1,32 @@
+schema: 2
+name: broot
+description: Interactive tree view, file navigator, and fuzzy search
+homepage: https://dystroy.org/broot
+license: MIT
+
+platforms: ["darwin/arm64", "linux/arm64", "linux/amd64"]
+
+versionDiscovery:
+  github:
+    repo: Canop/broot
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Canop/broot/releases/download/v{{.Version}}/broot_{{.Version}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}/broot", dst: "bin/broot", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.60.1
+    sha256:
+      darwin/arm64: "de4a054424ac01ef73fb30c3b3fac0cda437e7426388085d7467b5e0aaa1cb55"
+      linux/arm64: "de4a054424ac01ef73fb30c3b3fac0cda437e7426388085d7467b5e0aaa1cb55"
+      linux/amd64: "de4a054424ac01ef73fb30c3b3fac0cda437e7426388085d7467b5e0aaa1cb55"
+
+test:
+  - run: broot --version | grep -q "$NEM_VERSION"

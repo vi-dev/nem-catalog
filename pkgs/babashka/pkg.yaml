@@ -1,0 +1,32 @@
+schema: 2
+name: babashka
+description: Native, fast-starting Clojure interpreter for scripting
+homepage: https://babashka.org
+license: EPL-1.0
+
+versionDiscovery:
+  github:
+    repo: babashka/babashka
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/babashka/babashka/releases/download/v{{.Version}}/babashka-{{.Version}}-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"arm64\" \"aarch64\"}}{{replace (replace .OS \"darwin\" \"\") \"linux\" \"-static\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "bb", dst: "bin/bb", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.13.220
+    sha256:
+      darwin/arm64: "f7d18c3ab11bb4ad0e32a45c1ae40ae25911d5fa06ba4ded07cb90b8af158077"
+      darwin/amd64: "ebbfdf159e8d5ee8b7015b15c6558b2039fe76478de893cf317c8c50805340de"
+      linux/arm64: "0efd6ef36b93ea2f0ae6ebf9d1bcd1a66167c2f41c17e990659aa067654437e8"
+      linux/amd64: "eb3edd128276f0b6fbdefcb18dc7d42652a95ea409a81b34f08e36b8ac3cbc3c"
+
+test:
+  - run: bb --version | grep -q "$NEM_VERSION"
+  - run: '[ "$(bb -e "(+ 1 2)")" = 3 ]'

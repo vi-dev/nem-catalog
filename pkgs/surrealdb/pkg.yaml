@@ -1,0 +1,31 @@
+schema: 2
+name: surrealdb
+description: Multi-model database with SQL-like query language
+homepage: https://surrealdb.com
+license: BUSL-1.1
+
+versionDiscovery:
+  github:
+    repo: surrealdb/surrealdb
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/surrealdb/surrealdb/releases/download/v{{.Version}}/surreal-v{{.Version}}.{{.OS}}-{{.Arch}}.tgz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "surreal", dst: "bin/surreal", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.2.4
+    sha256:
+      darwin/arm64: "8d703e9c5ed12e509ec7eb9b17385d3cac440077f93980d5c98b57c2d99cbbe8"
+      darwin/amd64: "bcbb5cabf1695cda6a5d0d5866e54f020bd64f7d641abb932d946e2b8dbb0ad7"
+      linux/arm64: "64d9f9c6138df768bf04c0d3637d2ca3655022819ae0b1772a0d62f2fb3f5f03"
+      linux/amd64: "aaf9c8d388248db63e10300385c94ec9f85ef4430e79f9569886045d896df369"
+
+test:
+  - run: surreal version | grep -q "$NEM_VERSION"

@@ -1,0 +1,28 @@
+schema: 2
+name: scala-cli
+description: Command-line tool to interact with the Scala language
+homepage: https://scala-cli.virtuslab.org
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: VirtusLab/scala-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/VirtusLab/scala-cli/releases/download/v{{.Version}}/scala-cli-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"pc-linux\"}}.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "scala-cli-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"pc-linux\"}}", dst: "bin/scala-cli", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.17.0
+    sha256:
+      darwin/arm64: "17391b0087715613ae9da4f6e1de11efbbda4db450d4b0f188ed8f0884ba9ca8"
+      darwin/amd64: "003df151f7cb6e4a9a2ef9a30f662cc16686187fd00f2cdad51eb7b9cb95d301"
+      linux/arm64: "41776b61e55c19dbbc4b9e5c54e5e49e60536f8aaab525cd172f6bafb9e869f8"
+      linux/amd64: "ff9b5b7ed85624cb111fa6ede732b242e44dba8719b52b97af32d61545e40c3c"

@@ -1,0 +1,31 @@
+schema: 2
+name: node-exporter
+description: Prometheus exporter for machine metrics
+homepage: https://prometheus.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/node_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/node_exporter/releases/download/v{{.Version}}/node_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "node_exporter", dst: "bin/node_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.12.1
+    sha256:
+      darwin/arm64: "35b246a34af55a8f0c3f11067f17aecf9836cfd4689bde364776b3a4ad3a84d6"
+      darwin/amd64: "3506a6d788b768a3c2cd1f58dc97b9ff3fecc5ac9196623d582982db2aa9d0f6"
+      linux/arm64: "ad35b605f9954b9f1ffddf5ba054bdc5a98d790b9eae5291e1eeb83f1ecbd0e7"
+      linux/amd64: "b51d8a76aa2a9156a55d501aca6276fae09e262259a5e4e831d2c2222f084e63"
+
+test:
+  - run: node_exporter --version | grep -q "$NEM_VERSION"

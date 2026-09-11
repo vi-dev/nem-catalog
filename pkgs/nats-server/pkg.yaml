@@ -1,0 +1,31 @@
+schema: 2
+name: nats-server
+description: High-performance server for the NATS messaging system
+homepage: https://nats.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: nats-io/nats-server
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/nats-io/nats-server/releases/download/v{{.Version}}/nats-server-v{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "nats-server", dst: "bin/nats-server", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.14.6
+    sha256:
+      darwin/arm64: "291b9aa8c342b3cdcc53d872585bd467de4b5c9acf375066d882eb5412a09d55"
+      darwin/amd64: "239d4f3314334cc86cb12d7c252cf9b3461364451cc8ec5a39fb4915acd717c1"
+      linux/arm64: "3ff6e463762db64186a36cf0276dae8320509e995151ad0153ba9c9f67eee3f9"
+      linux/amd64: "61c3d55f69f61ec616b75782250936445f2819e9e5f2ae6159b10a31abd2200c"
+
+test:
+  - run: nats-server --version | grep -q "$NEM_VERSION"

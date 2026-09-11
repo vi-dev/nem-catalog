@@ -1,0 +1,31 @@
+schema: 2
+name: logcli
+description: Command-line client for querying Grafana Loki
+homepage: https://grafana.com/docs/loki/latest/query/logcli/
+license: AGPL-3.0-only
+
+versionDiscovery:
+  github:
+    repo: grafana/loki
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/grafana/loki/releases/download/v{{.Version}}/logcli-{{.OS}}-{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "logcli-{{.OS}}-{{.Arch}}", dst: "bin/logcli", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.7.7
+    sha256:
+      darwin/arm64: "9fa38ea5d24d8de8f11b5089ffaa5668853f5ce2c4f921bc01ca8248e231d70d"
+      darwin/amd64: "bb583442e847165a28c30310bdffe30791d63c377b67644da62f05f85d418fe9"
+      linux/arm64: "39d138cd3f9959b6d297d111f2c44ab10a0a6f2bb8fc1d8f7967e8368b324f75"
+      linux/amd64: "4b1c7177291056c3c0ab9a40745b73ec9d9daf3efa3ff857c923ef1cf4a96d23"
+
+test:
+  - run: logcli --version 2>&1 | grep -q "$NEM_VERSION"

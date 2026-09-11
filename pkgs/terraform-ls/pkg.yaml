@@ -1,0 +1,31 @@
+schema: 2
+name: terraform-ls
+description: Terraform language server
+homepage: https://github.com/hashicorp/terraform-ls
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: hashicorp/terraform-ls
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://releases.hashicorp.com/terraform-ls/{{.Version}}/terraform-ls_{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "terraform-ls", dst: "bin/terraform-ls", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.39.0
+    sha256:
+      darwin/arm64: "6f80fe0b34af184175508f3d9135d8159f5dce4000d9b39540553eb1c267c54b"
+      darwin/amd64: "cc5bbc5b5a39d12d455c0d2b1e4b3a2c1f237d02d2cf819cf5252358f2d674de"
+      linux/arm64: "62f32ea22cb78e5e5667ed638ad6e0fbde30ab59228d073c3c9bb249f89c7f5a"
+      linux/amd64: "7750edc736845fd8c04ff0fc6332423c12d8275b358668c8c17e8aedc43ef971"
+
+test:
+  - run: terraform-ls version | grep -q "$NEM_VERSION"

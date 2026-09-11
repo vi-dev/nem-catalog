@@ -1,0 +1,31 @@
+schema: 2
+name: otelcol
+description: OpenTelemetry Collector (core distribution)
+homepage: https://opentelemetry.io/docs/collector/
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: open-telemetry/opentelemetry-collector-releases
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v{{.Version}}/otelcol_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "otelcol", dst: "bin/otelcol", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.160.0
+    sha256:
+      darwin/arm64: "a56143a40a2c205cdd63da4af0249f2534691785c14cdd2a0c532becb4335521"
+      darwin/amd64: "480fcb29a9fc3f54da661166f7eb40677d4230198123759220255acc5cf35130"
+      linux/arm64: "a8d4f0fe0701ab0e20d7c198381a80552d5d58d25ca43e074d542d31b454738d"
+      linux/amd64: "5415b8daf782f17cc463c3e46816abf181a68a04b7bcf98c273c3c204096c743"
+
+test:
+  - run: otelcol --version | grep -q "$NEM_VERSION"

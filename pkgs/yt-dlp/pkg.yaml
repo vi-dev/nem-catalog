@@ -1,0 +1,29 @@
+schema: 2
+name: yt-dlp
+description: Feature-rich audio/video downloader
+homepage: https://github.com/yt-dlp/yt-dlp
+license: Unlicense
+
+versionDiscovery:
+  github:
+    repo: yt-dlp/yt-dlp
+    filter: '^\d{4}\.\d{2}\.\d{2}(?:\.\d+)?$'
+
+artifact:
+  url: "https://github.com/yt-dlp/yt-dlp/releases/download/{{.Version}}/yt-dlp_{{replace (replace (replace (replace (printf \"%s_%s\" .OS .Arch) \"darwin_arm64\" \"macos\") \"darwin_amd64\" \"macos\") \"linux_arm64\" \"linux_aarch64\") \"linux_amd64\" \"linux\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/yt-dlp", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2026.08.19
+    sha256:
+      darwin/arm64: "0f192b7ec147ab6288885d6351d9ab67367640029b4377576ef46dd79cf7b202"
+      darwin/amd64: "0f192b7ec147ab6288885d6351d9ab67367640029b4377576ef46dd79cf7b202"
+      linux/arm64: "b16e4dab368a816cd05d477d698a605a6ae87ccee1c8ffd38fa21d7254141fcc"
+      linux/amd64: "58162f9bfdc27458ea47bfcb311cf47028f17d8154a8bf7d689861d46399230a"
+
+test:
+  - run: yt-dlp --version | grep -q "$NEM_VERSION"

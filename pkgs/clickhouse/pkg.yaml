@@ -1,0 +1,36 @@
+schema: 2
+name: clickhouse
+description: Fast open-source OLAP database (single-binary CLI and server)
+homepage: https://clickhouse.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: ClickHouse/ClickHouse
+    filter: '^v\d+\.\d+\.\d+\.\d+-stable$'
+    prefix: "v"
+    suffix: "-stable"
+
+artifact:
+  url: "https://github.com/ClickHouse/ClickHouse/releases/download/v{{.Version}}-stable/{{if eq .OS \"darwin\"}}clickhouse-macos{{if eq .Arch \"arm64\"}}-aarch64{{end}}{{else}}clickhouse-common-static-{{.Version}}-{{.Arch}}.tgz{{end}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/clickhouse", mode: 0o755}
+    platforms: ["darwin/arm64", "darwin/amd64"]
+  - extract: {strip: 1}
+    platforms: ["linux/arm64", "linux/amd64"]
+  - copy: {src: "usr/bin/clickhouse", dst: "bin/clickhouse", mode: 0o755}
+    platforms: ["linux/arm64", "linux/amd64"]
+
+bins: ["bin"]
+
+versions:
+  - version: 26.7.6.57
+    sha256:
+      darwin/arm64: "0512d6acb4bb7cd57d88800a24dd3983d914c7e515be344ad7f43c95ca020f64"
+      darwin/amd64: "1edfc8dfedbf0cdbedbe985ea25538843b4eb96b37ed47b111660362196c016a"
+      linux/arm64: "0f3f3b189267ff322b35dcf711eae7f5e4f58703be49b7f7120bed183ed54299"
+      linux/amd64: "8bf61133b877ef0ae421db633ffd2fb3240388394e4eb81724b4a63819bfc0cd"
+
+test:
+  - run: clickhouse local --query "SELECT 1" | grep -q 1

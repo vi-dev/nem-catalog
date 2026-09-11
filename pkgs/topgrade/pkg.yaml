@@ -1,0 +1,31 @@
+schema: 2
+name: topgrade
+description: Upgrade everything on your system with one command
+homepage: https://github.com/topgrade-rs/topgrade
+license: GPL-3.0-only
+
+versionDiscovery:
+  github:
+    repo: topgrade-rs/topgrade
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/topgrade-rs/topgrade/releases/download/v{{.Version}}/topgrade-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "topgrade", dst: "bin/topgrade", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 17.9.0
+    sha256:
+      darwin/arm64: "f51add733b9aa92f1249fbdedc6a6c270a55670c4890e31483ec7bfc16abf309"
+      darwin/amd64: "974571688eef5cf71e9a390e8717133a86efee3f4a6a15236517ff14f0816483"
+      linux/arm64: "4d0e0b4acdb80c7ad99b54f6bcaf4df6ca9c8352637bd7f17791f13dd50bb003"
+      linux/amd64: "21a3e62f6c6e1f150d27e8b8a52530aaf2d87296f3624fa23bafcf6946dff73f"
+
+test:
+  - run: topgrade --version | grep -q "$NEM_VERSION"

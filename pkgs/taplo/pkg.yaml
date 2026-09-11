@@ -1,0 +1,30 @@
+schema: 2
+name: taplo
+description: TOML toolkit with formatter, linter, and language server
+homepage: https://taplo.tamasfe.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: tamasfe/taplo
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  url: "https://github.com/tamasfe/taplo/releases/download/{{.Version}}/taplo-{{.OS}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "taplo-{{.OS}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}", dst: "bin/taplo", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.10.0
+    sha256:
+      darwin/arm64: "713734314c3e71894b9e77513c5349835eefbd52908445a0d73b0c7dc469347d"
+      darwin/amd64: "898122cde3a0b1cd1cbc2d52d3624f23338218c91b5ddb71518236a4c2c10ef2"
+      linux/arm64: "033681d01eec8376c3fd38fa3703c79316f5e14bb013d859943b60a07bccdcc3"
+      linux/amd64: "8fe196b894ccf9072f98d4e1013a180306e17d244830b03986ee5e8eabeb6156"
+
+test:
+  - run: taplo --version | grep -q "$NEM_VERSION"

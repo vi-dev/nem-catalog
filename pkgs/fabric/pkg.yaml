@@ -1,0 +1,31 @@
+schema: 2
+name: fabric
+description: Open-source framework for augmenting humans using AI
+homepage: https://github.com/danielmiessler/fabric
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: danielmiessler/fabric
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/danielmiessler/fabric/releases/download/v{{.Version}}/fabric_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "fabric", dst: "bin/fabric", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.4.478
+    sha256:
+      darwin/arm64: "439c1ec6a501b84a93f4d2bf89057e7b6ac0377b847c818f1a3e9b424dbb855a"
+      darwin/amd64: "1e560e47a443e06764f0d2a583f442b81516ce66ec568bc41b0f735fee923c1f"
+      linux/arm64: "2de9c66a5c5b2bc96de4e6f8adc57fc97ee22af6f171f60e8e82ea0897d3c1f4"
+      linux/amd64: "06d8c5c47c51907d90509d0cfb8e3835a39a4a5799a6df9cdd2ab91974116886"
+
+test:
+  - run: fabric --version | grep -q "$NEM_VERSION"

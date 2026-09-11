@@ -1,0 +1,31 @@
+schema: 2
+name: hcloud
+description: Command-line interface for Hetzner Cloud
+homepage: https://github.com/hetznercloud/cli
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: hetznercloud/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/hetznercloud/cli/releases/download/v{{.Version}}/hcloud-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "hcloud", dst: "bin/hcloud", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.67.0
+    sha256:
+      darwin/arm64: "086295a836f4ee3ff062d6435c4b93108833b35278249414c461857aa42ac21a"
+      darwin/amd64: "e3b90eeff9505640359e1a13de65314d31700d599b56cd18bfefd5571c32d949"
+      linux/arm64: "343a0c86cbdae5d370f1a199ecdfc67c2026d153114ef0992529b692cb9937e8"
+      linux/amd64: "7164483e05a1abef492768db429a28c21d579dc70e807558cb140debc2971477"
+
+test:
+  - run: hcloud version | grep -q "$NEM_VERSION"

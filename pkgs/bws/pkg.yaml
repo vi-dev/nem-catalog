@@ -1,0 +1,31 @@
+schema: 2
+name: bws
+description: Bitwarden Secrets Manager CLI
+homepage: https://bitwarden.com/products/secrets-manager
+license: LicenseRef-Bitwarden-SDK
+
+versionDiscovery:
+  github:
+    repo: bitwarden/sdk-sm
+    filter: '^bws-v\d+\.\d+\.\d+$'
+    prefix: "bws-v"
+
+artifact:
+  url: "https://github.com/bitwarden/sdk-sm/releases/download/bws-v{{.Version}}/bws-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}-{{.Version}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "bws", dst: "bin/bws", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 2.1.0
+    sha256:
+      darwin/arm64: "9cb1c1c6e6164d83b2e339883ba02b4cbb37188ce9a484b1ce8249443163e066"
+      darwin/amd64: "6f626b3971368902af1b9847c02791a1b4666969d7561e2047681cded7997537"
+      linux/arm64: "eb0f1ae61d1c3b74244d2841233276e05c77e8be4da197ed90fc6248387005e1"
+      linux/amd64: "f59ee150e42b82128d437087e9bac920053c6bfddcb960d20ce9386e5ac9bba6"
+
+test:
+  - run: bws --version | grep -q "$NEM_VERSION"
