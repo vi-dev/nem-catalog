@@ -1,0 +1,31 @@
+schema: 2
+name: skate
+description: Personal key-value store for the command line, by Charm
+homepage: https://github.com/charmbracelet/skate
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: charmbracelet/skate
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/charmbracelet/skate/releases/download/v{{.Version}}/skate_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "skate", dst: "bin/skate", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.0.1
+    sha256:
+      darwin/arm64: "e340d47557741aa8cc07ca158eca063e810c5038098f040f50b476b2a328f295"
+      darwin/amd64: "59ba6143eb449d343a110ef762b4108e1e25cf591baf4b714a47a74c748c36f4"
+      linux/arm64: "49c3eb8d8acf20bdc1de273c1cf7d09a0ba9ec23a3d772441990543070672425"
+      linux/amd64: "5da31f39c6394d85e6d58a57559233148f7b47d77057cbaa4924ea02ca645ee8"
+
+test:
+  - run: skate --version | grep -q "$NEM_VERSION"

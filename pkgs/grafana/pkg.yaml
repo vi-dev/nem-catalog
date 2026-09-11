@@ -1,0 +1,30 @@
+schema: 2
+name: grafana
+description: Observability and data visualization platform
+homepage: https://grafana.com
+license: AGPL-3.0-only
+
+versionDiscovery:
+  github:
+    repo: grafana/grafana
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://dl.grafana.com/oss/release/grafana-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+versions:
+  - version: 13.2.1
+    sha256:
+      darwin/arm64: "d7a16f9f93a1b340a195e3e2f5dd7f3029820e08a8c76a6941ed7971acb9b7c6"
+      darwin/amd64: "2087c23aec277250badc31d1e6036b0e6862febf7f021020fdd904c531dcd9c4"
+      linux/arm64: "5334fbd40f8b583437305b80d99527a758b0912c56f5b812aa897db321152236"
+      linux/amd64: "849b3f17a0a318a2f1a681b663e9feb4e4fc7f70d43bb0b4ea07cd34b1987462"
+
+test:
+  - run: grafana --version 2>&1 | grep -q "$NEM_VERSION"

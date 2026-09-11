@@ -1,0 +1,31 @@
+schema: 2
+name: wishlist
+description: SSH directory and multiplexer, by Charm
+homepage: https://github.com/charmbracelet/wishlist
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: charmbracelet/wishlist
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/charmbracelet/wishlist/releases/download/v{{.Version}}/wishlist_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "wishlist", dst: "bin/wishlist", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.15.2
+    sha256:
+      darwin/arm64: "733c360a25b3787e5b33576a406124867d8de42ee7be604e67ca2cdb9ba779c4"
+      darwin/amd64: "692f97e88c800f54696453b5ba3fcb6817ebad0f655f057d3794a8adbdc7c60e"
+      linux/arm64: "8098b23e4e2464cf9507c58da572a9de396114c7bc9cda4eda7e3316d57754b9"
+      linux/amd64: "09b9bf4623b77b115e85403440122128a15edfc3021d3fac9f2c0ab01fb32555"
+
+test:
+  - run: wishlist --version | grep -q "$NEM_VERSION"

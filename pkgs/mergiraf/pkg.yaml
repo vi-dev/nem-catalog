@@ -1,0 +1,31 @@
+schema: 2
+name: mergiraf
+description: Syntax-aware Git merge driver for structured conflicts
+homepage: https://mergiraf.org
+license: GPL-3.0-only
+
+versionDiscovery:
+  git:
+    url: https://codeberg.org/mergiraf/mergiraf.git
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://codeberg.org/mergiraf/mergiraf/releases/download/v{{.Version}}/mergiraf_{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "mergiraf", dst: "bin/mergiraf", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.19.1
+    sha256:
+      darwin/arm64: "5bdcacc88dcabfd131591b3852a34c98fc9a23afdb5bc5ed1a58450269f7ddb2"
+      darwin/amd64: "6e7a0414823cd07c79539f48523b54f3b6e29144a0efad511c30d3288f14713b"
+      linux/arm64: "c5f26a6b75d1b7b5450594518c6a83fbf85b07fa2a635636dfc1384921be2053"
+      linux/amd64: "632ad77f90bf4874e8b89cfe7073bfbd6ad55c7565d2fa9530062b8df683cc30"
+
+test:
+  - run: mergiraf --version | grep -q "$NEM_VERSION"

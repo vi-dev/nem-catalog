@@ -1,0 +1,31 @@
+schema: 2
+name: loki
+description: Horizontally scalable log aggregation system
+homepage: https://grafana.com/oss/loki/
+license: AGPL-3.0-only
+
+versionDiscovery:
+  github:
+    repo: grafana/loki
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/grafana/loki/releases/download/v{{.Version}}/loki-{{.OS}}-{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "loki-{{.OS}}-{{.Arch}}", dst: "bin/loki", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 3.7.7
+    sha256:
+      darwin/arm64: "14bd87f38e38651efa2ed709997fa156a7869384bd2cf6818c4606a56a96e1ae"
+      darwin/amd64: "6ca1c6bbd59c2877aba9f9d0ce369785bb2aab3a37b58e0fef8795c75f9c1600"
+      linux/arm64: "bfccc75f573eeaa34a6346803f076e066bbf971664b8130b800d2b9d89c3a694"
+      linux/amd64: "2ddedde361e7026f15627c28ef2ae79a3a82b4a89434795995891edf733a05ff"
+
+test:
+  - run: loki --version 2>&1 | grep -q "$NEM_VERSION"

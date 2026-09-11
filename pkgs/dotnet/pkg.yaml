@@ -1,0 +1,38 @@
+schema: 2
+name: dotnet
+description: The .NET SDK and runtime
+homepage: https://dotnet.microsoft.com
+license: MIT
+
+versionDiscovery:
+  http:
+    url: https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json
+    filter: '"latest-sdk": "(\d+\.\d+\.\d+)"'
+
+artifact:
+  url: "https://builds.dotnet.microsoft.com/dotnet/Sdk/{{.Version}}/dotnet-sdk-{{.Version}}-{{replace (replace .OS \"darwin\" \"osx\") \"linux\" \"linux\"}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+
+bins: ["."]
+
+env:
+  - name: DOTNET_ROOT
+    value: "{{.InstallDir}}"
+  - name: DOTNET_CLI_TELEMETRY_OPTOUT
+    value: "1"
+  - name: DOTNET_SYSTEM_GLOBALIZATION_INVARIANT
+    value: "1"
+    platforms: [linux]
+
+versions:
+  - version: 10.0.401
+    sha256:
+      darwin/arm64: "d143ccec4474dce17d7b778854598137a2599b81828bce51e809897fe8bdf035"
+      darwin/amd64: "0616332aa0b5edfa19443a9d217d14d086d2e9605d7c72979cf8ebbb494ac792"
+      linux/arm64: "91d3d67f2ed065909bd2e1ba50a37192aff6df15178304939d5b55634d72da6a"
+      linux/amd64: "137268c8ad939c064ff1ee2a6fdf0899d8725377114ea012fbd1ad5fa2550418"
+
+test:
+  - run: dotnet --version | grep -q "$NEM_VERSION"

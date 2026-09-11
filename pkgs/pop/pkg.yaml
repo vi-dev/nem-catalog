@@ -1,0 +1,31 @@
+schema: 2
+name: pop
+description: Send emails from the command line, by Charm
+homepage: https://github.com/charmbracelet/pop
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: charmbracelet/pop
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/charmbracelet/pop/releases/download/v{{.Version}}/pop_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "pop", dst: "bin/pop", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 0.5.0
+    sha256:
+      darwin/arm64: "2a0e8cdc70c51e8e49af54e5e1a366b654376f7f673e2804f1c35ac0b31231ad"
+      darwin/amd64: "108dae3baad6610015ae523d26ab08a27d3d6993de9335549c1c13aabc2ca247"
+      linux/arm64: "79a4785d48548974a225ad44f160de447e627ba9291e973341c5fcb9fd96e0f5"
+      linux/amd64: "5017aad5378fede81c5879e4205f869a5a94841df3b65649c0248ab1a6a3d536"
+
+test:
+  - run: pop --version | grep -q "$NEM_VERSION"

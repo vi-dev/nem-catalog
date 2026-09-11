@@ -1,0 +1,30 @@
+schema: 2
+name: wormhole-william
+description: End-to-end encrypted file transfer, magic-wormhole compatible
+homepage: https://github.com/psanford/wormhole-william
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: psanford/wormhole-william
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/psanford/wormhole-william/releases/download/v{{.Version}}/wormhole-william-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/wormhole-william", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.0.8
+    sha256:
+      darwin/arm64: "2d1204a1cf6f3f73e16965b90aa6682cab28eae3d5411c4094a9b7e4b650a70c"
+      darwin/amd64: "104db5d55bf08989bec53911cf66805806f5eb6133550a5046c6202741d60bdd"
+      linux/arm64: "d1b727288bda91463e35e0312c102d35a95c77eb638aa6567eb6f2cc6f2759e8"
+      linux/amd64: "a6e501a9f3555617d980d8de49fb2f91783c27cfd875cb42a1ac5cf8fc11205d"
+
+test:
+  - run: wormhole-william --version | grep -q "$NEM_VERSION"
