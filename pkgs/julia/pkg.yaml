@@ -1,0 +1,30 @@
+schema: 2
+name: julia
+description: The Julia programming language
+homepage: https://julialang.org
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: JuliaLang/julia
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://julialang-s3.julialang.org/bin/{{replace .OS \"darwin\" \"mac\"}}/{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x64\"}}/{{versionMajorMinor .Version}}/julia-{{.Version}}-{{replace (replace (replace (replace (printf \"%s-%s\" .OS .Arch) \"darwin-arm64\" \"macaarch64\") \"darwin-amd64\" \"mac64\") \"linux-arm64\" \"linux-aarch64\") \"linux-amd64\" \"linux-x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+versions:
+  - version: 1.13.0
+    sha256:
+      darwin/arm64: "c8546ad39de9df9edd74b8104066fb23be0ece60890bb2dbfffadd24e73ba2c2"
+      darwin/amd64: "409fb6bbf34d1068a1292a6c1ffaa2e3f26356a9b3187cc2eec2c5669a55a138"
+      linux/arm64: "6cd4a3e4baa2dc5f55638c28e9835fc294f41c78ada4a740dc408436778ab8b4"
+      linux/amd64: "8975da61c128a5e5ded3e719e868da8c8781deb7ad7913d37fb99be02a81904b"
+
+test:
+  - run: julia --version | grep -q "$NEM_VERSION"
