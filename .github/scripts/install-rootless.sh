@@ -27,6 +27,9 @@ esac
 if [ -d "$HOME/.nem/catalogs" ]; then
   args+=(-v "$HOME/.nem/catalogs:/catalog-seed:ro")
 fi
+if [ -n "${CATALOG_FALLBACK:-}" ]; then
+  args+=(-e CATALOG_FALLBACK)
+fi
 
 exec docker run --rm -i "${args[@]}" \
   --entrypoint bash \

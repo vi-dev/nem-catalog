@@ -20,6 +20,17 @@ if [ "$current" != "$CATALOG_REF" ]; then
   fi
 fi
 
+if [ -n "${CATALOG_FALLBACK:-}" ]; then
+  current=$(nem catalog list | awk '$1 == "fallback" { print $3 }')
+  if [ "$current" != "$CATALOG_FALLBACK" ]; then
+    nem catalog remove fallback 2>/dev/null || true
+    nem catalog add fallback "$CATALOG_FALLBACK"
+  fi
+  nem catalog reorder official fallback
+else
+  nem catalog remove fallback 2>/dev/null || true
+fi
+
 case "$CATALOG_REF" in
   /*|./*|../*|.) ;;
   *) nem catalog update ;;

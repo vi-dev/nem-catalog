@@ -97,10 +97,22 @@ jobs:
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 60
     env:
-      CATALOG_REF: .
+      CATALOG_REF: ./pr-catalog
       CATALOG_DIR: .
+      CATALOG_FALLBACK: ghcr.io/vi-dev/nem-catalog:v2
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Prune the dir catalog to the PR's packages
+        shell: bash
+        env:
+          PREBUILT: ${{ needs.changes.outputs.prebuilt }}
+        run: |
+          mkdir -p pr-catalog/pkgs
+          jq -r '.[].package' <<< "$PREBUILT" | sort -u | while read -r p; do
+            if [ -d "pkgs/$p" ]; then
+              cp -R "pkgs/$p" "pr-catalog/pkgs/$p"
+            fi
+          done
       - uses: ./.github/actions/setup-nem
         with:
           install: ${{ matrix.install }}
