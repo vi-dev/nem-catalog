@@ -1,0 +1,45 @@
+schema: 2
+
+name: libgomp
+description: GNU OpenMP runtime library from GCC
+homepage: https://gcc.gnu.org/projects/gomp/
+license: GPL-3.0-or-later WITH GCC-exception-3.1
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://ftp.gnu.org/gnu/gcc/
+    filter: 'gcc-(\d+\.\d+\.\d+)/'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 16.2.0
+    sourceSha256: "e6738e29597f733270731aa90600f37ffdc045079dfc27ec7e8192cc81085c3e"
+
+build:
+  source:
+    url: 'https://ftp.gnu.org/gnu/gcc/gcc-{{.Version}}/gcc-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        find . -exec touch -t 202001010000 {} +
+        mkdir -p build && cd build
+        ../libgomp/configure --prefix=/ --disable-werror
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      [ -x "$NEM_PREFIX/lib/libgomp.so.1" ]
+      ldd "$NEM_PREFIX/lib/libgomp.so.1" > /dev/null
+      ! ldd "$NEM_PREFIX/lib/libgomp.so.1" | grep -q "not found"
