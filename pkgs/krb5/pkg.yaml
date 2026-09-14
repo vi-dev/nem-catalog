@@ -1,0 +1,42 @@
+schema: 2
+
+name: krb5
+description: MIT Kerberos 5 network authentication libraries and tools
+homepage: https://web.mit.edu/kerberos/
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+bins: [bin]
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://kerberos.org/dist/
+    filter: 'krb5-(\d+\.\d+\.\d+)\.tar\.gz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.22.2
+    sourceSha256: "3243ffbc8ea4d4ac22ddc7dd2a1dc54c57874c40648b60ff97009763554eaf13"
+
+build:
+  source:
+    url: 'https://kerberos.org/dist/krb5/{{versionMajorMinor .Version}}/krb5-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        cd src
+        ./configure --prefix=/ --without-system-verto --without-keyutils \
+          --without-libedit --without-readline
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: klist -V 2>&1 | grep -q "$NEM_VERSION"
