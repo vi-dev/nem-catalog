@@ -33,7 +33,7 @@ build:
         set -e
         find . -exec touch -t 202001010000 {} +
         mkdir -p build && cd build
-        ../libgomp/configure --prefix=/ --disable-werror
+        ../libgomp/configure --prefix=/ --disable-werror --disable-multilib
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
 
