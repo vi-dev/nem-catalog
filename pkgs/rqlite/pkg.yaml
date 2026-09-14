@@ -23,7 +23,7 @@ install:
 bins: ["bin"]
 
 test:
-  - run: rqlited -version | grep -q "$NEM_VERSION"
+  - run: rqlited -version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
   - version: 10.3.2
