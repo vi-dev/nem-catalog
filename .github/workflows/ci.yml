@@ -16,15 +16,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: ./.github/actions/setup-nem
       - run: nem catalog lint .
+      - name: Assert canonical manifest formatting
+        shell: bash
+        run: |
+          nem catalog fmt .
+          git diff --exit-code -- pkgs
 
-  dry-run:
+  plan:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: ./.github/actions/setup-nem
       - name: Publish dry-run
         shell: bash
@@ -42,91 +47,36 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
-      source: ${{ steps.detect.outputs.source }}
+      build: ${{ steps.detect.outputs.build }}
       prebuilt: ${{ steps.detect.outputs.prebuilt }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: ./.github/actions/setup-nem
-        with:
-          ghcr-token: ${{ github.token }}
       - id: detect
         uses: ./.github/actions/changed-packages
 
-  build:
+  archives:
     needs: changes
-    if: needs.changes.outputs.source != '[]'
-    strategy:
-      fail-fast: false
-      matrix:
-        entry: ${{ fromJSON(needs.changes.outputs.source) }}
-        runner: [ubuntu-latest, ubuntu-24.04-arm, macos-latest]
-    runs-on: ${{ matrix.runner }}
-    # macOS runners cannot run job containers; an empty string means none.
-    container: ${{ matrix.runner != 'macos-latest' && 'ghcr.io/vi-dev/nem:unstable' || '' }}
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: ./.github/actions/setup-nem
-        with:
-          catalog: ghcr.io/vi-dev/nem-catalog:v2
-          ghcr-token: ${{ github.token }}
-          cache-catalog: "true"
-      - name: Build without publishing
-        shell: bash
-        env:
-          PKG: ${{ matrix.entry.package }}
-          VER: ${{ matrix.entry.version }}
-        run: nem catalog build "pkgs/$PKG/pkg.yaml" --version "$VER"
+    if: needs.changes.outputs.build != '[]'
+    uses: ./.github/workflows/build-archives.yml
+    with:
+      catalog: "."
+      packages: ${{ join(fromJSON(needs.changes.outputs.build), ' ') }}
+      push: false
 
-  install-check:
+  prebuilt:
     needs: changes
     if: needs.changes.outputs.prebuilt != '[]'
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - runner: ubuntu-latest
-            script: .github/scripts/install-rootless.sh
-            install: "false"
-          - runner: ubuntu-24.04-arm
-            script: .github/scripts/install-rootless.sh
-            install: "false"
-          - runner: macos-latest
-            script: .github/scripts/install-each.sh
-            install: "true"
-    runs-on: ${{ matrix.runner }}
-    timeout-minutes: 60
-    env:
-      CATALOG_REF: ./pr-catalog
-      CATALOG_DIR: .
-      CATALOG_FALLBACK: ghcr.io/vi-dev/nem-catalog:v2
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Prune the dir catalog to the PR's packages
-        shell: bash
-        env:
-          PREBUILT: ${{ needs.changes.outputs.prebuilt }}
-        run: |
-          mkdir -p pr-catalog/pkgs
-          jq -r '.[].package' <<< "$PREBUILT" | sort -u | while read -r p; do
-            if [ -d "pkgs/$p" ]; then
-              cp -R "pkgs/$p" "pr-catalog/pkgs/$p"
-            fi
-          done
-      - uses: ./.github/actions/setup-nem
-        with:
-          install: ${{ matrix.install }}
-          catalog: ${{ matrix.install == 'true' && env.CATALOG_REF || '' }}
-      - name: Install from the PR's dir catalog
-        shell: bash
-        env:
-          PREBUILT: ${{ needs.changes.outputs.prebuilt }}
-        run: |
-          jq -r '.[] | .package + "@" + .version' <<< "$PREBUILT" \
-            | ${{ matrix.script }}
+    uses: ./.github/workflows/test-packages.yml
+    with:
+      catalog: "."
+      entries: ${{ needs.changes.outputs.prebuilt }}
+      prune: true
+      official: ghcr.io/vi-dev/nem-catalog:v2
+      timeout-minutes: 60
 
   ci-ok:
-    needs: [lint, dry-run, changes, build, install-check]
+    needs: [lint, plan, changes, archives, prebuilt]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

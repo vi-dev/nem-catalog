@@ -1,21 +1,15 @@
 name: Setup nem
-description: Install nem (unstable channel); optionally write ghcr.io credentials and configure the catalog
+description: Install nem (unstable channel), write ghcr.io credentials and optionally configure the official catalog
 inputs:
   catalog:
-    description: Catalog ref (OCI ref or dir path) to configure as "official"
+    description: OCI catalog ref to configure and sync as "official"
     default: ""
   ghcr-token:
     description: Token written to ~/.docker/config.json for ghcr.io
-    default: ""
+    default: ${{ github.token }}
   install:
     description: Install nem onto the runner
     default: "true"
-  cache-catalog:
-    description: Cache the nem config and catalog store so syncs only transfer changed blobs
-    default: "false"
-  cache-key:
-    description: Cache key prefix; jobs syncing a different catalog ref need their own cache key
-    default: "nem-catalogs"
 runs:
   using: composite
   steps:
@@ -45,23 +39,9 @@ runs:
         mkdir -p "$HOME/.docker"
         auth=$(printf '%s:%s' "$GITHUB_ACTOR" "$GHCR_TOKEN" | base64 | tr -d '\n')
         printf '{"auths":{"ghcr.io":{"auth":"%s"}}}\n' "$auth" > "$HOME/.docker/config.json"
-    - name: Restore catalog store cache
-      if: inputs['cache-catalog'] == 'true'
-      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-      with:
-        path: |
-          ~/.nem/config.yaml
-          ~/.nem/catalogs
-        key: ${{ inputs['cache-key'] }}-${{ github.run_id }}-${{ github.job }}
-        restore-keys: |
-          ${{ inputs['cache-key'] }}-
-    - name: Ensure catalog store path exists
-      if: inputs['cache-catalog'] == 'true'
-      shell: bash
-      run: mkdir -p "$HOME/.nem/catalogs"
-    - name: Configure catalog
+    - name: Configure the official catalog
       if: inputs.catalog != ''
       shell: bash
       env:
         CATALOG_REF: ${{ inputs.catalog }}
-      run: .github/scripts/configure-catalog.sh
+      run: .github/scripts/configure-official.sh

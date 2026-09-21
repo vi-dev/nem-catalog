@@ -1,0 +1,68 @@
+name: Build archives
+
+on:
+  workflow_call:
+    inputs:
+      catalog:
+        type: string
+        required: true
+      missing:
+        type: boolean
+        default: false
+      packages:
+        type: string
+        default: ""
+      push:
+        type: boolean
+        default: false
+      force:
+        type: boolean
+        default: false
+
+env:
+  CATALOG: ${{ inputs.catalog }}
+  MISSING: ${{ inputs.missing }}
+  PACKAGES: ${{ inputs.packages }}
+  PUSH: ${{ inputs.push }}
+  FORCE: ${{ inputs.force }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: ./.github/actions/setup-nem
+      - name: Render the build plan
+        shell: bash
+        env:
+          DRY_RUN: "true"
+        run: |
+          {
+            echo "### Build plan"
+            echo '```'
+            .github/scripts/build-archives.sh
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  build:
+    needs: plan
+    strategy:
+      fail-fast: false
+      # Pushes commit into one shared archive index, so they must not overlap.
+      max-parallel: ${{ inputs.push && 1 || 3 }}
+      matrix:
+        include:
+          - { platform: linux-amd64, runner: ubuntu-latest }
+          - { platform: linux-arm64, runner: ubuntu-24.04-arm }
+          - { platform: darwin-arm64, runner: macos-latest }
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    container: ${{ matrix.runner != 'macos-latest' && 'ghcr.io/vi-dev/nem:unstable' || '' }}
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: ./.github/actions/setup-nem
+      - name: Build archives
+        shell: bash
+        run: .github/scripts/build-archives.sh

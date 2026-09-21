@@ -1,0 +1,76 @@
+name: Test packages
+
+on:
+  workflow_call:
+    inputs:
+      catalog:
+        description: Catalog to test from, a dir or an OCI ref
+        type: string
+        required: true
+      entries:
+        description: JSON array of name[@version] entries to test
+        type: string
+        default: "[]"
+      all:
+        description: Test every package in the catalog instead of entries
+        type: boolean
+        default: false
+      prune:
+        description: Copy only the entries' packages out of the dir catalog before testing it
+        type: boolean
+        default: false
+      official:
+        description: Catalog ref configured as "official" for dependency fallback; empty when the catalog is complete
+        type: string
+        default: ""
+      timeout-minutes:
+        type: number
+        default: 90
+
+env:
+  TEST_CATALOG: ${{ inputs.prune && './pr-catalog' || inputs.catalog }}
+  CATALOG_REF: ${{ inputs.official }}
+  ENTRIES: ${{ inputs.entries }}
+  ALL: ${{ inputs.all }}
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { platform: linux-amd64, runner: ubuntu-latest }
+          - { platform: linux-arm64, runner: ubuntu-24.04-arm }
+          - { platform: darwin-arm64, runner: macos-latest }
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      # nem catalog test resolves every dependency from the target catalog
+      # first and fetches archives only from the catalog that resolved the
+      # package, so an unchanged source-built dependency must stay out of the
+      # dir catalog to be served from the official one.
+      - name: Prune the dir catalog to the selected packages
+        if: inputs.prune
+        shell: bash
+        env:
+          SOURCE: ${{ inputs.catalog }}
+        run: |
+          mkdir -p pr-catalog/pkgs
+          jq -r '.[] | split("@")[0]' <<< "$ENTRIES" | sort -u | while read -r p; do
+            if [ -d "$SOURCE/pkgs/$p" ]; then
+              cp -R "$SOURCE/pkgs/$p" "pr-catalog/pkgs/$p"
+            fi
+          done
+      # Linux legs run nem inside the rootless image, so the host only needs
+      # registry credentials.
+      - uses: ./.github/actions/setup-nem
+        with:
+          install: ${{ matrix.runner == 'macos-latest' }}
+          catalog: ${{ matrix.runner == 'macos-latest' && inputs.official || '' }}
+      - name: Test
+        shell: bash
+        run: |
+          jq -r '.[]' <<< "$ENTRIES" \
+            | ${{ matrix.runner == 'macos-latest' && '.github/scripts/test-packages.sh' || '.github/scripts/test-packages-rootless.sh' }}
