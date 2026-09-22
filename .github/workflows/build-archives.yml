@@ -18,9 +18,18 @@ on:
       force:
         type: boolean
         default: false
+      prune:
+        description: Copy only the packages' manifests out of the dir catalog before building it
+        type: boolean
+        default: false
+      official:
+        description: Catalog ref configured as "official" for dependency fallback; empty when the catalog is complete
+        type: string
+        default: ""
 
 env:
-  CATALOG: ${{ inputs.catalog }}
+  CATALOG: ${{ inputs.prune && './pr-catalog' || inputs.catalog }}
+  SOURCE: ${{ inputs.catalog }}
   MISSING: ${{ inputs.missing }}
   PACKAGES: ${{ inputs.packages }}
   PUSH: ${{ inputs.push }}
@@ -32,6 +41,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Prune the dir catalog to the selected packages
+        if: inputs.prune
+        shell: bash
+        run: .github/scripts/prune-catalog.sh
       - uses: ./.github/actions/setup-nem
       - name: Render the build plan
         shell: bash
@@ -62,7 +75,13 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Prune the dir catalog to the selected packages
+        if: inputs.prune
+        shell: bash
+        run: .github/scripts/prune-catalog.sh
       - uses: ./.github/actions/setup-nem
+        with:
+          catalog: ${{ inputs.official }}
       - name: Build archives
         shell: bash
         run: .github/scripts/build-archives.sh

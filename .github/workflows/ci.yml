@@ -63,6 +63,8 @@ jobs:
       catalog: "."
       packages: ${{ join(fromJSON(needs.changes.outputs.build), ' ') }}
       push: false
+      prune: true
+      official: ghcr.io/vi-dev/nem-catalog:v2
 
   prebuilt:
     needs: changes
