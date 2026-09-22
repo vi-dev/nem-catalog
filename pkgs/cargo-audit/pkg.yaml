@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-audit
+description: Audit Cargo.lock for crates with security vulnerabilities
+homepage: https://rustsec.org
+license: MIT OR Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: rustsec/rustsec
+    filter: '^cargo-audit/v\d+\.\d+\.\d+$'
+    prefix: "cargo-audit/v"
+
+artifact:
+  url: "https://github.com/rustsec/rustsec/releases/download/cargo-audit/v{{.Version}}/cargo-audit-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}-v{{.Version}}.tgz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-audit", dst: "bin/cargo-audit", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-audit --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.22.2
+    sha256:
+      darwin/arm64: "ec7ca4263769593df4d909be85b94a6b79efa2897be5d2bb8ebd516e823175af"
+      darwin/amd64: "847831323de932155b226ab60ee4a180e13e5d007a019f0d4b7b4d89a6de2ab2"
+      linux/arm64: "c6603814ddaa45e51263dafd31c0ac98808f688d26f7395804f9670b0fd599dd"
+      linux/amd64: "ab28a1bdb54db4d5d8ad5981cf1f959410370b3d28250dbd35f6a44248620e39"

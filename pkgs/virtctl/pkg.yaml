@@ -1,0 +1,30 @@
+schema: 2
+name: virtctl
+description: KubeVirt CLI for managing virtual machines on Kubernetes
+homepage: https://kubevirt.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kubevirt/kubevirt
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kubevirt/kubevirt/releases/download/v{{.Version}}/virtctl-v{{.Version}}-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/virtctl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: virtctl version --client | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.9.0
+    sha256:
+      darwin/arm64: "8527cf7601a6d1a2fa3e8014bacacc9e7dd1a338bc572c74d3734360a344d116"
+      darwin/amd64: "8777a451a7e0e7f7692fe4ad30d5acf4464c439f8fb44eb0069d081eba60c1d7"
+      linux/arm64: "9d9b45d0f09ba2316d255bc629154f293210f803d51ace7995c9f2260999e78e"
+      linux/amd64: "40ede2ee37c98a1aeed71c9c219616a05247ce2be109e1edddf0477572e8b978"

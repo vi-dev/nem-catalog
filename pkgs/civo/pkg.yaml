@@ -1,0 +1,31 @@
+schema: 2
+name: civo
+description: Civo CLI
+homepage: https://github.com/civo/cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: civo/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/civo/cli/releases/download/v{{.Version}}/civo-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "civo", dst: "bin/civo", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: civo version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.5.5
+    sha256:
+      darwin/arm64: "0cea284c00b8fa5b7b5f3b5c0baacd14778671c6c4a2692a415be84c344e18dc"
+      darwin/amd64: "e630a37af9ce6b1d5a0808270d68576d5f8dde564b1ca468858c0bc64d40d441"
+      linux/arm64: "cfeea4e6e53f448a3d42a9d11b504da1040102c91fdf78e9eaa5dbec49a64b95"
+      linux/amd64: "f2ee1278f45f97d46b13cefcd629ec1d61c06adbf8557c1377614d2778c946c8"

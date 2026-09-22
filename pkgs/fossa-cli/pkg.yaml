@@ -1,0 +1,31 @@
+schema: 2
+name: fossa-cli
+description: Dependency, license and vulnerability analysis for any codebase
+homepage: https://fossa.com
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: fossas/fossa-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/fossas/fossa-cli/releases/download/v{{.Version}}/fossa_{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "fossa", dst: "bin/fossa", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: fossa --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.19.0
+    sha256:
+      darwin/arm64: "f75c6bb502f7bd6a258dcba027306136032298816d9386ca56e2f9e99c29db8c"
+      darwin/amd64: "41547d430e889f595d8d5cb0c5559cf48e3674c0a63286390edd179184219e2f"
+      linux/arm64: "4362ecb2c9e6df04a75ae0db708dd631e2ba3d73f8e18b918765462dd4635fc4"
+      linux/amd64: "84b64e2426860ee728bbe788f8ce9445b07ea255b2601de3ac71f485757e907f"

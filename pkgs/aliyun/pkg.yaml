@@ -1,0 +1,31 @@
+schema: 2
+name: aliyun
+description: Alibaba Cloud CLI
+homepage: https://help.aliyun.com/zh/cli/
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: aliyun/aliyun-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/aliyun/aliyun-cli/releases/download/v{{.Version}}/aliyun-cli-{{replace .OS \"darwin\" \"macosx\"}}-{{.Version}}-{{.Arch}}.tgz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "aliyun", dst: "bin/aliyun", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: aliyun version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.5.1
+    sha256:
+      darwin/arm64: "cbd7d5b92e5f74d6bc530c20cbbfbd5a03fe38c8e823eecc36551e1c0a5e2994"
+      darwin/amd64: "29775394536b4a35043dd8897c4b4feb9b6a9e3ccfde4d1c35d4888b72c526dd"
+      linux/arm64: "6973475472496a840de140b7997b6f11616e842b82737e2851acd6dda4c5c0c6"
+      linux/amd64: "3a9a45b9c7899228074135612d2b7ebbf32abb97826d825787cb454cd3011bdc"

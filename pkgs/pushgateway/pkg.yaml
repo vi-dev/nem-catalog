@@ -1,0 +1,31 @@
+schema: 2
+name: pushgateway
+description: Prometheus push acceptor for ephemeral and batch jobs
+homepage: https://prometheus.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/pushgateway
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/pushgateway/releases/download/v{{.Version}}/pushgateway-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "pushgateway", dst: "bin/pushgateway", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: pushgateway --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.11.3
+    sha256:
+      darwin/arm64: "7a6f3e643a1b744b57fd3233df062d56c771bb1c623bae9e322c5127dddf8c04"
+      darwin/amd64: "3626e11ba4d828bcfc305b7e06d0d5f507f3837190d552f837480be0073219de"
+      linux/arm64: "727ff0098943657b44c21a029be9d9fcc4f249ec72dcb9f0a34aa66b2d5f1ecc"
+      linux/amd64: "bb0a44dee0953df9e8cd3c082981ff50327de56d965d83bdd9b0957d83921e38"

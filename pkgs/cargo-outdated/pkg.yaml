@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-outdated
+description: Show out-of-date Rust dependencies
+homepage: https://github.com/kbknapp/cargo-outdated
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: kbknapp/cargo-outdated
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kbknapp/cargo-outdated/releases/download/v{{.Version}}/cargo-outdated-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-outdated", dst: "bin/cargo-outdated", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-outdated outdated --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.19.0
+    sha256:
+      darwin/arm64: "c3a3ca56a748d94fdaa1f208c641685d996ee1c4954cd4fbe358b7c06a2186a5"
+      darwin/amd64: "945b64728ae9021be49a70346424da7634d889f181f2d33af64c7bf95265f6d3"
+      linux/arm64: "0570cb34034784aa10315aef8cc84d008104f5b60ccc93efcf83b0b08fb585e3"
+      linux/amd64: "648021f279e737e11f4be0f5967ae2a01d4d66f7a2e462a0b24ccd6dd5e6b372"

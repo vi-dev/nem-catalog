@@ -1,0 +1,31 @@
+schema: 2
+name: release-plz
+description: Publish Rust crates from CI with a release PR
+homepage: https://release-plz.dev
+license: Apache-2.0
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: release-plz/release-plz
+    filter: '^release-plz-v\d+\.\d+\.\d+$'
+    prefix: "release-plz-v"
+
+artifact:
+  url: "https://github.com/release-plz/release-plz/releases/download/release-plz-v{{.Version}}/release-plz-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "release-plz", dst: "bin/release-plz", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: release-plz --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.3.169
+    sha256:
+      darwin/arm64: "3bb728a921e0f9d6aca48723de2d8a49a71099ca8a113efb9350781120648a7e"
+      linux/arm64: "9fe32973a63bf1d18f02e877becf8619abc8b283f25d294f00d951e55c9946f2"
+      linux/amd64: "ed709642b7f5b5fda4d47309884e65f84ca097cf9176cfd9793e8e66e28b48ad"

@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-semver-checks
+description: Scan a Rust crate for semver violations
+homepage: https://github.com/obi1kenobi/cargo-semver-checks
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: obi1kenobi/cargo-semver-checks
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/obi1kenobi/cargo-semver-checks/releases/download/v{{.Version}}/cargo-semver-checks-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-semver-checks", dst: "bin/cargo-semver-checks", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-semver-checks --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.50.0
+    sha256:
+      darwin/arm64: "f99f928d67501c29e8410026f27a54cf799fb13611c3b4a6a58f2772cf7e3799"
+      darwin/amd64: "e320f7368a3d37a96d6509c0d5dd1d69bde4e8ef5fcb76d60b5a5a0ae4b755be"
+      linux/arm64: "3c44160c3fdd93f72d2f5c84774c370a63e09d0d17ae0cdcc3dde346f30a1348"
+      linux/amd64: "5763f6f62310f76428ba19d42cac060c56e07a1b8e3be0394c8c686398978f48"

@@ -1,0 +1,31 @@
+schema: 2
+name: witness
+description: Attest and verify software supply chain provenance
+homepage: https://witness.dev
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: in-toto/witness
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/in-toto/witness/releases/download/v{{.Version}}/witness_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "witness", dst: "bin/witness", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: witness version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.12.0
+    sha256:
+      darwin/arm64: "4b89d598d4d784460eb930099cca72f533df5adb173f786915c89b5916414573"
+      darwin/amd64: "2f6f69cb0df83acff93a9e6630189dd77f74842d28d6d9cca1e9e7e6a1c2644b"
+      linux/arm64: "3043bba438276c4c2b1afff7deb97cf1c0301c77515a4b1cff15549b378d2aaf"
+      linux/amd64: "543d05898731fe5b9c176443ec596a0242bd27f0b327d73aff60f6f7398b7dd0"

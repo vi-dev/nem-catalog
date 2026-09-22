@@ -1,0 +1,31 @@
+schema: 2
+name: pgbouncer-exporter
+description: Prometheus exporter for PgBouncer
+homepage: https://github.com/prometheus-community/pgbouncer_exporter
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: prometheus-community/pgbouncer_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus-community/pgbouncer_exporter/releases/download/v{{.Version}}/pgbouncer_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "pgbouncer_exporter", dst: "bin/pgbouncer_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: pgbouncer_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.12.1
+    sha256:
+      darwin/arm64: "9eca132c7668066eef013310bb6df2bff00d0b73b8b40fb48be7f147ca9e1785"
+      darwin/amd64: "80f5444008fb6bf70b3da74a70659690b0d5b9396abe1e0c898450f4ef4f2f39"
+      linux/arm64: "0abb808ae8e251126c854ebdce382993876df629b34c0401816d3818db92c700"
+      linux/amd64: "fa391b513d3a3f03843a6e0d64e711fda1f057dc43133db5c1b130ba38767857"

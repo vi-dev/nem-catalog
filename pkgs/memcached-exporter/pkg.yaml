@@ -1,0 +1,31 @@
+schema: 2
+name: memcached-exporter
+description: Prometheus exporter for memcached metrics
+homepage: https://github.com/prometheus/memcached_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/memcached_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/memcached_exporter/releases/download/v{{.Version}}/memcached_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "memcached_exporter", dst: "bin/memcached_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: memcached_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.17.0
+    sha256:
+      darwin/arm64: "119aeab016be57ffd10a5734aee27cf9df2018015639babb3bd5459da8273a78"
+      darwin/amd64: "de3d57bb943b8ae91ec157c9171a191e390c35d082f94a3bda20d6adda779e4e"
+      linux/arm64: "d1abf0ef1196ff5de5cf3462eb962b4a3d6733327951ae6d81c062902b5f2a60"
+      linux/amd64: "40e85262e4340a56fa7cc96722cd596d25ed76ab501459b0b42f1f8e0562d0d1"

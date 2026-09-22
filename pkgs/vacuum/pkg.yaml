@@ -1,0 +1,31 @@
+schema: 2
+name: vacuum
+description: OpenAPI, AsyncAPI and JSON Schema linter
+homepage: https://quobix.com/vacuum
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: daveshanley/vacuum
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/daveshanley/vacuum/releases/download/v{{.Version}}/vacuum_{{.Version}}_{{.OS}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "vacuum", dst: "bin/vacuum", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: vacuum version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.30.6
+    sha256:
+      darwin/arm64: "2725a960bc3677c111c6659636e57dfbc899b266064c425d4410de169a681e4e"
+      darwin/amd64: "1f862a54ea4067c6ca2b7213769ffc0fd5fa938565dae3d41559a0f408199077"
+      linux/arm64: "4e8389c0ad529b7bcdcfcff7e293f47adaf0e61a09e03186d5164dfd0a29cbe4"
+      linux/amd64: "179f038a71cd88721738d6c739dd07fbeebc905b48301935f2416e66aead95c6"

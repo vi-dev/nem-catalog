@@ -1,0 +1,30 @@
+schema: 2
+name: kctrl
+description: CLI for kapp-controller package management on Kubernetes
+homepage: https://carvel.dev/kapp-controller
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: carvel-dev/kapp-controller
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/carvel-dev/kapp-controller/releases/download/v{{.Version}}/kctrl-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kctrl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kctrl version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.60.8
+    sha256:
+      darwin/arm64: "04f5a7350a9343d91d19c75dae0dc46546ca00df9954bcc8ea0dd4c6f633f49a"
+      darwin/amd64: "6315b0b189a9c01c4f1daf782dfdbf43a4dc2ba83b06cfa4e93e8d8b6eccb789"
+      linux/arm64: "1964484d2d432fbac03acaad9c6bd0fcd759c6084ea2978631bf8a6070b52406"
+      linux/amd64: "0d909461445bc43775a821e95a80e129cc914a4bc9e118afe5ccd6cc565dccb2"

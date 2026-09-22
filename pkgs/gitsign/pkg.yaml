@@ -1,0 +1,33 @@
+schema: 2
+name: gitsign
+description: Keyless Git commit signing with Sigstore
+homepage: https://github.com/sigstore/gitsign
+license: Apache-2.0
+
+deps:
+  - git
+
+versionDiscovery:
+  github:
+    repo: sigstore/gitsign
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sigstore/gitsign/releases/download/v{{.Version}}/gitsign_{{.Version}}_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/gitsign", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: gitsign --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.17.1
+    sha256:
+      darwin/arm64: "4994e9629aae6a3fea9c0f770f279b273bad3e86ac8ebd3e9dc90f317428589d"
+      darwin/amd64: "32c469eee2859694a67df0efee1a17f2574600ad73769a81315f360ee75f89e7"
+      linux/arm64: "477018736a80b36e703dd58db8d6e158a2c1b8b727af0ab8ffdcce9fdf610ada"
+      linux/amd64: "69213a8a0813a151e5a47d0060862952ff833a845d57309dff76f7ba6600abae"

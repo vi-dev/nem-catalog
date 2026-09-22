@@ -1,0 +1,30 @@
+schema: 2
+name: kubetail
+description: Real-time logging dashboard for Kubernetes
+homepage: https://www.kubetail.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kubetail-org/kubetail
+    filter: '^cli/v\d+\.\d+\.\d+$'
+    prefix: "cli/v"
+
+artifact:
+  url: "https://github.com/kubetail-org/kubetail/releases/download/cli/v{{.Version}}/kubetail-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kubetail", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kubetail --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.18.0
+    sha256:
+      darwin/arm64: "aaa80f37644abc40b0f939cc566e3f0b7499925423655172c5a6cecc7632f4db"
+      darwin/amd64: "aae83e3520bcdf0fc1990412f1fc2f7f4c6e738bcf912bd17aedd0badc7f72dc"
+      linux/arm64: "9275f226d848b3fb424e594071d1527cbe66c8d4c42f55eef583cca564600f7e"
+      linux/amd64: "243888a95ca6190f915f2909ed38c824002603bf59f1cd8ab619441651af0377"

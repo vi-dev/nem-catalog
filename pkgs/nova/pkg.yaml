@@ -1,0 +1,31 @@
+schema: 2
+name: nova
+description: Find outdated or deprecated Helm charts in a cluster
+homepage: https://nova.docs.fairwinds.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: FairwindsOps/nova
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/FairwindsOps/nova/releases/download/v{{.Version}}/nova_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "nova", dst: "bin/nova", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: nova version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.12.1
+    sha256:
+      darwin/arm64: "6956076e26c5404461155acfb7e955b5343b68c598e4d200eec60100a55f3447"
+      darwin/amd64: "8d2bdcc1788dfa4e1c8b76e13ca68940f4b0bfd5ff7633a60c837b132eb2aaab"
+      linux/arm64: "ec7886af93845d6e81b81ba8ddea2fa483a4d5282aa3422b692cf17838e1bb81"
+      linux/amd64: "626bc3738ee0407f9c42539178b9343ec12f16f2f3c51fe3353e583554ea359f"

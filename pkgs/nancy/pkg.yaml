@@ -1,0 +1,30 @@
+schema: 2
+name: nancy
+description: Check Go dependencies for known vulnerabilities
+homepage: https://github.com/sonatype-nexus-community/nancy
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: sonatype-nexus-community/nancy
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sonatype-nexus-community/nancy/releases/download/v{{.Version}}/nancy-v{{.Version}}-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/nancy", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: nancy --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.1.0
+    sha256:
+      darwin/arm64: "7a6c6e5fdb9ba63c2d6b4ad7089c0a139e698d86002f9c3096edf6802ba9c83d"
+      darwin/amd64: "398ab2d8acd250a682e58c52147726381ab6514c0e69cab28f0ed61279396bc5"
+      linux/arm64: "6fb32952c537669fe06a3191ec42ccab66254afc03b45806ed67c7bfd8573bd8"
+      linux/amd64: "c8e5e4a4c299a52cc8a3f8f1c28b5ffa443f781706e0340a37e21eb0f76e912a"

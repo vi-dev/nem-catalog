@@ -1,0 +1,31 @@
+schema: 2
+name: kafka-exporter
+description: Prometheus exporter for Kafka
+homepage: https://github.com/danielqsj/kafka_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: danielqsj/kafka_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/danielqsj/kafka_exporter/releases/download/v{{.Version}}/kafka_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "kafka_exporter", dst: "bin/kafka_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kafka_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.10.0
+    sha256:
+      darwin/arm64: "1b700284a5ef09ce05c9959da87a20642e3f19409d348cddd82aa1c4c9a94900"
+      darwin/amd64: "132edf15765bf74708cba29c853ce8d574ff4d8e2920a5165fcaeaa396d9e3e9"
+      linux/arm64: "47c3c19eec67a511fde2afcc714f9cdc382642ffcd72a1ac4c9535d8d433fee1"
+      linux/amd64: "246720dc4ecd8670801625423b7e44bbeb93115de07353cc6b4ea27e5bb7b87d"

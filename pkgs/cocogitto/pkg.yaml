@@ -1,0 +1,31 @@
+schema: 2
+name: cocogitto
+description: Conventional Commits toolbox
+homepage: https://docs.cocogitto.io
+license: MIT
+platforms: [darwin/arm64, darwin/amd64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: cocogitto/cocogitto
+    filter: '^\d+\.\d+\.\d+$'
+    prefix: ""
+
+artifact:
+  url: "https://github.com/cocogitto/cocogitto/releases/download/{{.Version}}/cocogitto-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cog", dst: "bin/cog", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cog --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 7.0.0
+    sha256:
+      darwin/arm64: "429303b6d68c6461aa221ab4de82b26d0bbcdee7127947ea9c7c411ab9bc574c"
+      darwin/amd64: "591dcd462e2e35ecc21caf41a15a65d464b7ce1ce8a5c299fa0d46a7798dddb0"
+      linux/amd64: "e03938ff2c4c86d71c00c0f3284dbbe95c5ca76fe34a51f33e945c23010d59bb"

@@ -1,0 +1,30 @@
+schema: 2
+name: grpc-health-probe
+description: Health checks for gRPC applications
+homepage: https://github.com/grpc-ecosystem/grpc-health-probe
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: grpc-ecosystem/grpc-health-probe
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/v{{.Version}}/grpc_health_probe-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/grpc_health_probe", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: grpc_health_probe -version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.4.57
+    sha256:
+      darwin/arm64: "02b1755ac8188c13f4a82e307794abb6f7276082ed9aa041aaa456eb784a9914"
+      darwin/amd64: "7d8fdc49b3c83bff993ebff00083bc8a0e735af6a5272c5353e70d8fc54ccfaa"
+      linux/arm64: "1a68f86e8d11bf06d6f5828ee091af17be5a4fa4ea05df685e97e5e1e434932e"
+      linux/amd64: "9193773627d3ed5a0fabe37ed81264b4a8e9d5a2156ce09fb6010caaabb0f06b"

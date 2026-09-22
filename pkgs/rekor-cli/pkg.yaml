@@ -1,0 +1,30 @@
+schema: 2
+name: rekor-cli
+description: CLI for the Rekor transparency log
+homepage: https://sigstore.dev
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: sigstore/rekor
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sigstore/rekor/releases/download/v{{.Version}}/rekor-cli-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/rekor-cli", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: rekor-cli version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.5.4
+    sha256:
+      darwin/arm64: "dab71f46d12ebae63643320bb820f63bc5fd3d2b81b943d6f0b90296e14ec392"
+      darwin/amd64: "247177ffbded74a63d9fe34ea20e0f294f56e1988974b691b99f21d646df5b00"
+      linux/arm64: "7a8f347ce1c7804948f0e176a42ee3fbbb85a8ae5127e521cfc48e4c9c93e632"
+      linux/amd64: "f998f4c36b90803d6b58af648c9c21750ff43bc7fb30d8fbe2b11fb1bcb0a892"

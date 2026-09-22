@@ -1,0 +1,31 @@
+schema: 2
+name: dependabot-cli
+description: Run Dependabot update jobs locally
+homepage: https://github.com/dependabot/cli
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: dependabot/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/dependabot/cli/releases/download/v{{.Version}}/dependabot-v{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "dependabot", dst: "bin/dependabot", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: dependabot --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.92.0
+    sha256:
+      darwin/arm64: "5cca36765294bd43a5f80343b1660ab1434b5ddd638b4a58e9dbadccda2c9de5"
+      darwin/amd64: "ec778fd8af514de31c42e7c2e7474ac927f8934f51251410e89b4d8281921ba3"
+      linux/arm64: "0c7ab84c15769e12c2ebaee42b38c48276d733762e9c20ad5d2832c34c57dc62"
+      linux/amd64: "99c7aadbb2baa73d349f00ea0ceb5b603d7a7db963056dc8567ab55bff922c8d"

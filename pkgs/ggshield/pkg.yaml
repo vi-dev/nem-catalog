@@ -1,0 +1,30 @@
+schema: 2
+name: ggshield
+description: Detect hardcoded secrets with GitGuardian
+homepage: https://gitguardian.com
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: GitGuardian/ggshield
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/GitGuardian/ggshield/releases/download/v{{.Version}}/ggshield-{{.Version}}-{{if eq .OS \"darwin\"}}{{replace .Arch \"amd64\" \"x86_64\"}}-apple-darwin{{else}}{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-unknown-linux-gnu{{end}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["."]
+
+test:
+  - run: ggshield --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.54.0
+    sha256:
+      darwin/arm64: "b39aa5632f6defdafbfaba4c7d98c96b7332bd19d88c20d9f50436838b55da0d"
+      darwin/amd64: "20e3e9d38cc1ce97254b615ba0435f1f0ce5a20a1d028d6d73987710c2f8f198"
+      linux/arm64: "71576fba22d00f8558fd7d30d87cb9740047aa77c78cc6770fa8059496458f80"
+      linux/amd64: "c91a9d638ba5d73f658985e90887193e77aac7d5dd45a70ef746bc32a96cf95e"

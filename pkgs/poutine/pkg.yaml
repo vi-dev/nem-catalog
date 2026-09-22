@@ -1,0 +1,31 @@
+schema: 2
+name: poutine
+description: Supply chain vulnerability scanner for build pipelines
+homepage: https://github.com/boostsecurityio/poutine
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: boostsecurityio/poutine
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/boostsecurityio/poutine/releases/download/v{{.Version}}/poutine_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "poutine", dst: "bin/poutine", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: poutine version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.1.6
+    sha256:
+      darwin/arm64: "9384f02eeefb4d0778fc61ee4c675e15898b9b01c9cf821dc854d702c4e8a6b2"
+      darwin/amd64: "27c9b86bd12db19e27c05c22a42dc44492dd00ed2ab7287900b28cd2effb94d3"
+      linux/arm64: "460c90300c6329106b551c150682d12e457365f6436a6cbbd08fe79eb9a98131"
+      linux/amd64: "abde716599a65608b023a69ed9316e5f083a7bca48612151c2720835883757ea"

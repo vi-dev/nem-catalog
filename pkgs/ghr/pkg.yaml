@@ -1,0 +1,31 @@
+schema: 2
+name: ghr
+description: Upload artifacts to GitHub Releases in parallel
+homepage: https://github.com/tcnksm/ghr
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: tcnksm/ghr
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/tcnksm/ghr/releases/download/v{{.Version}}/ghr_v{{.Version}}_{{.OS}}_{{.Arch}}.{{if eq .OS \"darwin\"}}zip{{else}}tar.gz{{end}}"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "ghr", dst: "bin/ghr", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: ghr --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.18.4
+    sha256:
+      darwin/arm64: "65dab14a0acafbad37da3f50279c01c8c13be3bf029cb59d90ddbb1f1f5f0ba6"
+      darwin/amd64: "b0f8abbb18064cb417b5bd9e469590312f71d91d08133d42922013b4c41bdce6"
+      linux/arm64: "5e1538106655ac131c1725a920fe05e51a684165c7b927809751dd85a8a2bfbe"
+      linux/amd64: "dd6789b65a564cda0d6a87b08aa5b8a3b64f3f9fee7dcbd688b7ef5c68ae19f4"

@@ -1,0 +1,30 @@
+schema: 2
+name: jreleaser
+description: Release projects to many targets from one config
+homepage: https://jreleaser.org
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: jreleaser/jreleaser
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/jreleaser/jreleaser/releases/download/v{{.Version}}/jreleaser-native-{{.Version}}-{{replace .OS \"darwin\" \"osx\"}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}.zip"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+test:
+  - run: jreleaser --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.26.0
+    sha256:
+      darwin/arm64: "0bd1d7be189c11d4612c58a14032c9ff1de6e6f09ee160483c072eac5e001187"
+      darwin/amd64: "3ae946479be8d603c62e8fba4cf8cbf4129e3aa92dda50a65d308c70ccd5f475"
+      linux/arm64: "6b7735c91e5ca8927f1840b1d390b556ba78d4a04e91c309cb455a193bfd699e"
+      linux/amd64: "054ef6de101f64b5d2fdf7d41a1fc81c086872800cd5276a20a67c0378f24886"

@@ -1,0 +1,31 @@
+schema: 2
+name: nginx-prometheus-exporter
+description: Prometheus exporter for NGINX and NGINX Plus
+homepage: https://github.com/nginx/nginx-prometheus-exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: nginx/nginx-prometheus-exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/nginx/nginx-prometheus-exporter/releases/download/v{{.Version}}/nginx-prometheus-exporter_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "nginx-prometheus-exporter", dst: "bin/nginx-prometheus-exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: nginx-prometheus-exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.5.3
+    sha256:
+      darwin/arm64: "781106d36a7875f09454b7818b728760a5f122cb15d7dcda26139a546dfc6a3c"
+      darwin/amd64: "e84d2f7efcad135c137313751ce1fb3b3a6790b0cf7640dbf252b98aa9ef5321"
+      linux/arm64: "a0b1a5f5bba09483bd2e04c759c1a75fffe46ca72c0314ee2bb925d1742ff23b"
+      linux/amd64: "3a0dd1ea6db57cd360544d0aed38df4adabcfeb31e931dc481d535c66f92641d"

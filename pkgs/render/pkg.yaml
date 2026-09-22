@@ -1,0 +1,31 @@
+schema: 2
+name: render
+description: Render CLI
+homepage: https://render.com/docs/cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: render-oss/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/render-oss/cli/releases/download/v{{.Version}}/cli_{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cli_v{{.Version}}", dst: "bin/render", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: render --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.28.0
+    sha256:
+      darwin/arm64: "c102919d50195e1f5bc287d4fef79bbe0eb5e85f6fc01d9103e9e96fda02be2c"
+      darwin/amd64: "72ece4ceb8be7f8ae2b46ea348687c2bfc507a91b10e68a873716afabe4c2608"
+      linux/arm64: "aa4a3070fefe2aaaaa87f7bfa21674ea6d63df0ebadbfafd974bdc7216d72271"
+      linux/amd64: "00d1ca6f3c31b1f4bc7316837b8ee24acbeb11cf372b7593c7d2c3106a1987b4"

@@ -1,0 +1,31 @@
+schema: 2
+name: okta-aws-cli
+description: Okta as the identity provider for AWS CLI credentials
+homepage: https://github.com/okta/okta-aws-cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: okta/okta-aws-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/okta/okta-aws-cli/releases/download/v{{.Version}}/okta-aws-cli_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "okta-aws-cli", dst: "bin/okta-aws-cli", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: okta-aws-cli --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.6.0
+    sha256:
+      darwin/arm64: "d16ca0054dc78e41b14fe61fd5bd844a375ea7a3a7413f705dd4c9bff2347c2d"
+      darwin/amd64: "082225bd72879ffd7fa984531b81292a35666c604ec60bc5ff80bb7139c3009a"
+      linux/arm64: "7f7c98bf2b4814f53a7cd0dddea3389640ace0f05e59a64e301c788aba4cd26d"
+      linux/amd64: "c0a4519e868324323ccfaa0f034465914227c2698478ea898cb25d36c57d071e"

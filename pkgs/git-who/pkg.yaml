@@ -1,0 +1,31 @@
+schema: 2
+name: git-who
+description: Git blame for file trees
+homepage: https://github.com/sinclairtarget/git-who
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: sinclairtarget/git-who
+    filter: '^v\d+\.\d+(\.\d+)?$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sinclairtarget/git-who/releases/download/v{{.Version}}/gitwho_v{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "git-who", dst: "bin/git-who", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: git-who --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.3
+    sha256:
+      darwin/arm64: "ad8625e4de557a29eeba8c7912eb12255e627307586ae247552a363d63e9b6cb"
+      darwin/amd64: "16d44a87d232b6c52ba989ab2f1fcd249d2772bfdb3f070d9f8c7dae110679a9"
+      linux/arm64: "86b9a856da39dc8d7f2dafb1ff1ce812227d5d45f9593a9553306e97da07c14d"
+      linux/amd64: "f031ea951f837d1a67c906e3a672c6afe09c4314fa5bf7e63a00b86749f86b72"

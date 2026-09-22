@@ -1,0 +1,31 @@
+schema: 2
+name: ovhcloud
+description: OVHcloud CLI
+homepage: https://github.com/ovh/ovhcloud-cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: ovh/ovhcloud-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/ovh/ovhcloud-cli/releases/download/v{{.Version}}/ovhcloud-cli_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "ovhcloud", dst: "bin/ovhcloud", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: ovhcloud version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.15.0
+    sha256:
+      darwin/arm64: "26b78ca0045dd21db040b2991d8a301bafcb898454ea80b5285a04e184132142"
+      darwin/amd64: "5aadbdc9f9eae915fdb13e189fa8e5b492b302418c8b9ef3b57d720128fbbee8"
+      linux/arm64: "5c2beb56e6d83a4b426565a1557791ef759316abcc4effb38dd627c90aeb80e0"
+      linux/amd64: "1109d157dcf677bf3a7616e4b27b4fe3b5cc984e1cc82987592016541a6c88ed"

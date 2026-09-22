@@ -1,0 +1,30 @@
+schema: 2
+name: git-xargs
+description: Run a command across many GitHub repositories and open pull requests
+homepage: https://github.com/gruntwork-io/git-xargs
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: gruntwork-io/git-xargs
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/gruntwork-io/git-xargs/releases/download/v{{.Version}}/git-xargs_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/git-xargs", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: git-xargs --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.1.16
+    sha256:
+      darwin/arm64: "1b7f1e5fa1d5a0d010a047e08453f66743c5500b3b42237bd5abccbd6c1dd11e"
+      darwin/amd64: "726434e64e5c53b6f3b33de38697302712d631e3e6c841a3c5d6dd5d1db99e34"
+      linux/arm64: "f1a9691b8a8eeabb6ca1191dfa1646088f8b10cf1b837182bbfa660a1ba8165a"
+      linux/amd64: "0df4e37853249bf7ba0ff35066dedc8beb02a0660988414a07527f1a6bada984"

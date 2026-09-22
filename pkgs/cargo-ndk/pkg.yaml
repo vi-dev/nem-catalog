@@ -1,0 +1,33 @@
+schema: 2
+name: cargo-ndk
+description: Compile Rust projects with the Android NDK
+homepage: https://github.com/bbqsrc/cargo-ndk
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: bbqsrc/cargo-ndk
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/bbqsrc/cargo-ndk/releases/download/v{{.Version}}/cargo-ndk-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}-v{{.Version}}.tgz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-ndk", dst: "bin/cargo-ndk", mode: 0o755}
+  - copy: {src: "cargo-ndk-env", dst: "bin/cargo-ndk-env", mode: 0o755}
+  - copy: {src: "cargo-ndk-runner", dst: "bin/cargo-ndk-runner", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-ndk 2>&1 | grep -q 'cargo ndk'
+
+versions:
+  - version: 4.1.2
+    sha256:
+      darwin/arm64: "76d87f5f1bbbbe3980b979f7d1bdef00849dde11c669be243223942b296f5006"
+      darwin/amd64: "ea30f5e7898ce0b1c7af89e0a2dd2db61c494d81ad1b36284f74f1ab5fd85956"
+      linux/arm64: "2d9f4f28f797ee98a97a5b760197e4e64f2ce2967d716cf57c69ad01f4ed72ba"
+      linux/amd64: "dc148bebbfcd7d5355e9858530d5a69c20ce69cf3268c54b9f63c60cb4c9a966"

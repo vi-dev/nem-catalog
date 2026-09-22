@@ -1,0 +1,31 @@
+schema: 2
+name: lumen
+description: Git diff viewer and AI commit generator
+homepage: https://github.com/jnsahaj/lumen
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: jnsahaj/lumen
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/jnsahaj/lumen/releases/download/v{{.Version}}/lumen-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "lumen", dst: "bin/lumen", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: lumen --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.32.0
+    sha256:
+      darwin/arm64: "45377ec96f28f9b9c1831cb52fd5d21e3f8bc58c2f1dd8abb79ba44d3ef33537"
+      darwin/amd64: "254010a118fb225565589c56411d51b27521fcc5a9b94a5dcf9a2fe706d92e96"
+      linux/arm64: "cd7d4c46249e85192b7621f927b68311b0e1ec8e9d40a7fbee18c287f438f045"
+      linux/amd64: "60caee48278762d017b66264b6b015c706c956e06230a74b681063c9cfa56fd4"

@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-llvm-cov
+description: Cargo subcommand for LLVM source-based code coverage
+homepage: https://github.com/taiki-e/cargo-llvm-cov
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: taiki-e/cargo-llvm-cov
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/taiki-e/cargo-llvm-cov/releases/download/v{{.Version}}/cargo-llvm-cov-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-llvm-cov", dst: "bin/cargo-llvm-cov", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-llvm-cov llvm-cov --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.9.1
+    sha256:
+      darwin/arm64: "7e821a6c90c0884f79f759f5d9be50799ade67bb82515186d922f26032ef43b8"
+      darwin/amd64: "ddf949b82a63017441ea76aa068bdd7e2dde8055f47cd3ef736fdbbd633bc33e"
+      linux/arm64: "49c0085628392a8d727c4464d91ec417c613c5015f5197cd16d5c05aa3fb5ad1"
+      linux/amd64: "3fca950394a3c49457657c158b1619cec8dfd2647ae5b48746734c0ab969a522"

@@ -1,0 +1,32 @@
+schema: 2
+name: gitoxide
+description: Pure Rust implementation of Git with the gix and ein CLIs
+homepage: https://github.com/GitoxideLabs/gitoxide
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: GitoxideLabs/gitoxide
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/GitoxideLabs/gitoxide/releases/download/v{{.Version}}/gitoxide-max-pure-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "gix", dst: "bin/gix", mode: 0o755}
+  - copy: {src: "ein", dst: "bin/ein", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: gix --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.58.0
+    sha256:
+      darwin/arm64: "91cc49e95eb2b3363f6cdd692f168a5062a2a63b54304b984d000a39b7026549"
+      darwin/amd64: "937e6a7ec3b1c22bbe7f372be67db3ce7e1381271a727787df92751f9c6945a5"
+      linux/arm64: "3d090dffbc13881d40e4739389685356409e6e83576f03ba0a207f1e1a7faf4c"
+      linux/amd64: "bab79b46348ea82596690fea4dabe4e40e7428def8dae85000501aa6e0393d5b"

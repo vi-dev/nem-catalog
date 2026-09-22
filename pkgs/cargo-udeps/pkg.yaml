@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-udeps
+description: Find unused dependencies in Cargo.toml
+homepage: https://github.com/est31/cargo-udeps
+license: MIT OR Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: est31/cargo-udeps
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/est31/cargo-udeps/releases/download/v{{.Version}}/cargo-udeps-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-udeps", dst: "bin/cargo-udeps", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-udeps udeps --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.1.61
+    sha256:
+      darwin/arm64: "0ca49f226c268ff3f7d65e82dd471900b962e4dcb3e75793558e5f4287be2011"
+      darwin/amd64: "0840c47e3ac640db8cf1ac9136c7a133eff68f07753a8a450363b95124d0ee34"
+      linux/arm64: "d257553c03b36d2ee7e8028d622c80b1244fc512fabb2de058c1e0ceeb92169b"
+      linux/amd64: "27031ca3902390a1d793901d17ec073ac85297ab3477b13faea984e4c97de479"

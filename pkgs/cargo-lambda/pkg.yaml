@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-lambda
+description: Cargo subcommand for AWS Lambda functions in Rust
+homepage: https://www.cargo-lambda.info
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: cargo-lambda/cargo-lambda
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/cargo-lambda/cargo-lambda/releases/download/v{{.Version}}/cargo-lambda-v{{.Version}}.{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-lambda", dst: "bin/cargo-lambda", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-lambda lambda --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.9.2
+    sha256:
+      darwin/arm64: "6c3eac6957c2acdc0bcded6451ccecf6083f116e71d0f7f2b525866e3bcc1083"
+      darwin/amd64: "fac46c099aa1427a0f596846b10a7b6345dff8661ca22e10448925cc63e91091"
+      linux/arm64: "c3fd0a352bb439e4e84a09e5361ea333f7cdc58b0894105e93a33c43b867bc2d"
+      linux/amd64: "b5c258c424ebaef39541c3641f33c51137ee6c426016f365628fedb2c737271d"

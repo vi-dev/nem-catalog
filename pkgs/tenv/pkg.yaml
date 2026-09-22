@@ -1,0 +1,31 @@
+schema: 2
+name: tenv
+description: Version manager for OpenTofu, Terraform, Terragrunt and Atmos
+homepage: https://tofuutils.github.io/tenv/
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: tofuutils/tenv
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/tofuutils/tenv/releases/download/v{{.Version}}/tenv_v{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tenv", dst: "bin/tenv", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tenv version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 4.15.1
+    sha256:
+      darwin/arm64: "46697b3f8e94596b9fb354acb22f238746ac5a1e07f9627e383405d81f221c41"
+      darwin/amd64: "29a912ba349f463cd3808c3eb6a01556e9aed820273ef5e9f2fdaa0630ec4dbe"
+      linux/arm64: "7ea9bafcfd9145f69751e94fbdc42a6cd3d161002b04e0a5bae3d53e3e88278b"
+      linux/amd64: "0d931096eefb9d9147bc23f3f29f9bf302a2ee8d3455a86d0171787a7b06bce6"

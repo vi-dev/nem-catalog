@@ -1,0 +1,31 @@
+schema: 2
+name: git-credential-oauth
+description: Git credential helper using OAuth for GitHub, GitLab and Bitbucket
+homepage: https://github.com/hickford/git-credential-oauth
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: hickford/git-credential-oauth
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/hickford/git-credential-oauth/releases/download/v{{.Version}}/git-credential-oauth_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "git-credential-oauth", dst: "bin/git-credential-oauth", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: git-credential-oauth version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.17.2
+    sha256:
+      darwin/arm64: "1736b355765b562ac2eef6068fd1831468415f6ec94762e184f1242b1e0ecf7d"
+      darwin/amd64: "cbdc055ab6aa822efd3985085c1b677756a88615c15a62722fd0c42a8d79a12f"
+      linux/arm64: "9ef59ffcb9742d3783396d5418d282d0445374e0fb7391461a343e4e220da144"
+      linux/amd64: "7a234633ddb24c8f208505763bcb7daaa80ad068e6a4753e7660d558443b1d4a"

@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-generate
+description: Generate a new Rust project from a template
+homepage: https://cargo-generate.github.io/cargo-generate
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: cargo-generate/cargo-generate
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/cargo-generate/cargo-generate/releases/download/v{{.Version}}/cargo-generate-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-generate", dst: "bin/cargo-generate", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-generate --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.25.0
+    sha256:
+      darwin/arm64: "ba11f85d917e006d5e55aac984f1300a1375fcda0b14a15e6be4730a7228134d"
+      darwin/amd64: "dec4b491a34fe699c92de6c6fa1aaee8cd2c42b72738a59cb9ff198ceb477d0b"
+      linux/arm64: "0a969ce6cdf14b10cfa64d77ed7654bcf66e78f70f31ba9ae60314ed69f7e258"
+      linux/amd64: "2e71538c10410827579987c546db7030f71c0283774891bd8ebf107962260e80"

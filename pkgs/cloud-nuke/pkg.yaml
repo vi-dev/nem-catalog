@@ -1,0 +1,30 @@
+schema: 2
+name: cloud-nuke
+description: Delete all resources in a cloud account
+homepage: https://gruntwork.io
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: gruntwork-io/cloud-nuke
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/gruntwork-io/cloud-nuke/releases/download/v{{.Version}}/cloud-nuke_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/cloud-nuke", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cloud-nuke --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.52.0
+    sha256:
+      darwin/arm64: "366d209ce427d25342542f4304bc1eb6987daa6561823e761336bc9edfdb710d"
+      darwin/amd64: "c3988edb427724762de138a2a9f5b5eccfe5735e28a864eaf826f4ba2ad0ceb6"
+      linux/arm64: "66d64b53422381495b946fc574f04c29e84ec68ce6b3a9ad3fa89ed1aaec24f7"
+      linux/amd64: "c9ed50ab0bd14e7694d1fef52e33d57d5079624d381b56fe34c289d989fda656"

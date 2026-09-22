@@ -1,0 +1,30 @@
+schema: 2
+name: git-absorb
+description: Automatic git commit fixups
+homepage: https://github.com/tummychow/git-absorb
+license: BSD-3-Clause
+platforms: [darwin/amd64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: tummychow/git-absorb
+    filter: '^\d+\.\d+\.\d+$'
+    prefix: ""
+
+artifact:
+  url: "https://github.com/tummychow/git-absorb/releases/download/{{.Version}}/git-absorb-{{.Version}}-x86_64-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "git-absorb", dst: "bin/git-absorb", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: git-absorb --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.9.0
+    sha256:
+      darwin/amd64: "1df9ad9206b2a2f0ce312a89188f80d3bace8471ca2799533beec6d83371f760"
+      linux/amd64: "517b442260a38617b05df0078b9e659b95068fabe8d0a83a33589d15f198d9a7"

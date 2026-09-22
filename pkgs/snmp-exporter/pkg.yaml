@@ -1,0 +1,31 @@
+schema: 2
+name: snmp-exporter
+description: Prometheus exporter for SNMP
+homepage: https://github.com/prometheus/snmp_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/snmp_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/snmp_exporter/releases/download/v{{.Version}}/snmp_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "snmp_exporter", dst: "bin/snmp_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: snmp_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.30.1
+    sha256:
+      darwin/arm64: "043f8e9a1b329f8d467b99ba520b11742f9dab68dac418246ac1b7ae9f1969ac"
+      darwin/amd64: "af78b658002e356178c16cd4fce4b7c058eb9cde4ec0ab009942ba648fc9f004"
+      linux/arm64: "a12d159a8fee527e9f7b4dfa36eec490629f8d3c1fe4bcd155a7820ae8983949"
+      linux/amd64: "026aac4e23447ed593a783eccab9089cd41d77d17c9d2a0ab84398e45a0bb93e"

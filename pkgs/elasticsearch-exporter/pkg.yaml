@@ -1,0 +1,31 @@
+schema: 2
+name: elasticsearch-exporter
+description: Prometheus exporter for Elasticsearch stats
+homepage: https://github.com/prometheus-community/elasticsearch_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus-community/elasticsearch_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus-community/elasticsearch_exporter/releases/download/v{{.Version}}/elasticsearch_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "elasticsearch_exporter", dst: "bin/elasticsearch_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: elasticsearch_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.11.0
+    sha256:
+      darwin/arm64: "fdfd53a5f63dcdf488818dc9a18d3241f00db2e762440be6950229b18d5d3e0f"
+      darwin/amd64: "d52afd97d291c7721ae412cc5e5cc9f0dc6be9a31d053ab84878c880eb01f0c6"
+      linux/arm64: "7020d10e29896d329cecc7bfe2e90dcc376d68fc0c75ac27014af3747870ce1f"
+      linux/amd64: "2bebc50d6980578ad37a376000bc039485ceea129ae229f78baed3379db4f61c"

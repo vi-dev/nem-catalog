@@ -1,0 +1,31 @@
+schema: 2
+name: mysqld-exporter
+description: Prometheus exporter for MySQL server metrics
+homepage: https://github.com/prometheus/mysqld_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/mysqld_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/mysqld_exporter/releases/download/v{{.Version}}/mysqld_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "mysqld_exporter", dst: "bin/mysqld_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: mysqld_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.20.0
+    sha256:
+      darwin/arm64: "c0f834a7d015138fdb0fad3fa6a1076fcf0361ae8b90c58f2257cab76f33382b"
+      darwin/amd64: "ed5bb6a130156586c995840dacc4faad1cdfc1624741ea28a873e56ba17232ae"
+      linux/arm64: "837804c0a59cbe1f3ab46670dec1b4c37940c8d48062374691b27f1f37abf8dd"
+      linux/amd64: "5773496e9962ca3817b3599fe4d74f218c95c1295eb2a742462df8e035fe51bd"

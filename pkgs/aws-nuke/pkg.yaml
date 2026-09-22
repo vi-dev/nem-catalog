@@ -1,0 +1,31 @@
+schema: 2
+name: aws-nuke
+description: Remove all resources from an AWS account
+homepage: https://aws-nuke.ekristen.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: ekristen/aws-nuke
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/ekristen/aws-nuke/releases/download/v{{.Version}}/aws-nuke-v{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "aws-nuke", dst: "bin/aws-nuke", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: aws-nuke version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.68.2
+    sha256:
+      darwin/arm64: "352c44866904f35dd1733618f2a7e96095873ec55f1760d8ce8ce20979393ffe"
+      darwin/amd64: "184e1b572679c11056afdd9906dfd131a15ac0748e32a1ee0462db46e4aa8700"
+      linux/arm64: "e115512351786b35e847a0128f797b3b34ee874f584afdcf9e22a605f8fe219f"
+      linux/amd64: "549957c1cc3525b12950ca27c60bf4fe43448faa8634d0f641e6c6d0545c583d"

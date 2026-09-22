@@ -1,0 +1,30 @@
+schema: 2
+name: vendir
+description: Declaratively vendor git repos, releases, charts and images
+homepage: https://carvel.dev/vendir
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: carvel-dev/vendir
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/carvel-dev/vendir/releases/download/v{{.Version}}/vendir-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/vendir", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: vendir version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.46.2
+    sha256:
+      darwin/arm64: "dd77c509214e3a7114d30de4b9a94ba09cdcb84230244589db10448d8c744662"
+      darwin/amd64: "92160571582d04e1da66a15e476d4f63b6ca894593c6b126b0d53bea8da0f58b"
+      linux/arm64: "bb0574c3aff6a5ae99801ceb3d63893917f763908700883bc1fbbcfed2ab6c9b"
+      linux/amd64: "0b4bad28b765c4cbf0cc2234d0d420bcf2d352b58eb202e9c55263374f95bd71"

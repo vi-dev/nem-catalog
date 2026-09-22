@@ -1,0 +1,31 @@
+schema: 2
+name: vultr-cli
+description: Vultr CLI
+homepage: https://github.com/vultr/vultr-cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: vultr/vultr-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/vultr/vultr-cli/releases/download/v{{.Version}}/vultr-cli_v{{.Version}}_{{replace .OS \"darwin\" \"macOs\"}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "vultr-cli", dst: "bin/vultr-cli", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: vultr-cli version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.11.0
+    sha256:
+      darwin/arm64: "abec4b083b97df2a5287618131cf1b0acb933e3d67d391339bc21d3da2ccc8b0"
+      darwin/amd64: "840613f8ccf0162e01b423c85fc6dced2c9aadf6a688987451a20f598902ea43"
+      linux/arm64: "7112253bb09cefdbc2a7ff5bc90d9f4be788e4f2843ff86837c1b5f20a50b9ac"
+      linux/amd64: "c7794d06cca80c41d2b42b692d040f62245c76bac86e3ed8fa08004e163c8935"
