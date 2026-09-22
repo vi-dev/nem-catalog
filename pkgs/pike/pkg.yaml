@@ -1,0 +1,31 @@
+schema: 2
+name: pike
+description: Determine the IAM permissions required by infrastructure-as-code
+homepage: https://github.com/JamesWoolfenden/pike
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: JamesWoolfenden/pike
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/JamesWoolfenden/pike/releases/download/v{{.Version}}/pike_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "pike", dst: "bin/pike", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: pike version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.0.12
+    sha256:
+      darwin/arm64: "abc83527222e897866678f98e1d8b2f95749ff4023a64d940cfa984a4fda30c8"
+      darwin/amd64: "8ef3fbec87cfae577b4e446da74b5cb08721ba5f966a92655bbbf841d5a6882d"
+      linux/arm64: "23e84a76a7adbf3d32a841692de97111fb9d97a5e244551dfdc3c3bdab734c2a"
+      linux/amd64: "16a3f5f26d52c453bf6230115077601430663fea7cec93517aa7ddf3dccd6c35"

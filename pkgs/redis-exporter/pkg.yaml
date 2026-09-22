@@ -1,0 +1,31 @@
+schema: 2
+name: redis-exporter
+description: Prometheus exporter for Redis and Valkey metrics
+homepage: https://github.com/oliver006/redis_exporter
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: oliver006/redis_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/oliver006/redis_exporter/releases/download/v{{.Version}}/redis_exporter-v{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "redis_exporter", dst: "bin/redis_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: redis_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.91.1
+    sha256:
+      darwin/arm64: "6e37b64f70919704bef2a3d55cf4afa608f0b383f749e891c2fe5c26dbe6e5d4"
+      darwin/amd64: "2f1d510814f244a5bac83ba6529ba8fffa38f594eaaba4f61821ed781b7259ab"
+      linux/arm64: "7ee124bd17733cce535b87da17e79f0346d3edb4a20759cf3bfca8b4e0d6886f"
+      linux/amd64: "4552451000b6345011bfc50d77fd3be625aa0be47ac07e98a40384038ecffaab"

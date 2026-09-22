@@ -1,0 +1,31 @@
+schema: 2
+name: hcledit
+description: Command line editor for HCL
+homepage: https://github.com/minamijoyo/hcledit
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: minamijoyo/hcledit
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/minamijoyo/hcledit/releases/download/v{{.Version}}/hcledit_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "hcledit", dst: "bin/hcledit", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: hcledit version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.2.18
+    sha256:
+      darwin/arm64: "164ccf392602b332116e7b3344b87ff25237a627144701d02c6d83e7c718049b"
+      darwin/amd64: "52f643e9c441747dfd343164516b3e2959a79241ce42a1ac887ff55451bbe055"
+      linux/arm64: "e3a3773836d911170ef69d0d3ff8a3be02a37aed2eeece82b68e13444811907d"
+      linux/amd64: "5974db4486a7e7ecbcbce8b96cb77051419575858d0fc97d73af536b18baabe7"

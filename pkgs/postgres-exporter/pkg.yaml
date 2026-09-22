@@ -1,0 +1,31 @@
+schema: 2
+name: postgres-exporter
+description: Prometheus exporter for PostgreSQL metrics
+homepage: https://github.com/prometheus-community/postgres_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus-community/postgres_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus-community/postgres_exporter/releases/download/v{{.Version}}/postgres_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "postgres_exporter", dst: "bin/postgres_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: postgres_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.20.1
+    sha256:
+      darwin/arm64: "4dd2b9e7ac658556dd2cb143ac472a87ff540ffc2b482d5311ff0ef47b11413c"
+      darwin/amd64: "5826ba6dcc1ddbded3c25680536776dfa5354e705e745ace12435350cb63f824"
+      linux/arm64: "d5d86fb98bb1f26b088d1a6fda07fd6b6f035cb5d40492f75ec3bfebb5ddfe9d"
+      linux/amd64: "89d4f7e7920cad48fdc3133f789556ef5253c330a9f5fdace3bdb6344c0a8b5a"

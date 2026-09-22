@@ -1,0 +1,31 @@
+schema: 2
+name: ping-exporter
+description: Prometheus exporter for ICMP echo requests
+homepage: https://github.com/czerwonk/ping_exporter
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: czerwonk/ping_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/czerwonk/ping_exporter/releases/download/v{{.Version}}/ping_exporter_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "ping_exporter", dst: "bin/ping_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: ping_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.2.3
+    sha256:
+      darwin/arm64: "baf96a976555676313003fb4e6398fcd1cc49d913d0976bc57c974d664154164"
+      darwin/amd64: "ce0671ace3e80077a8a9227f69501d305adf8a21bfbcf2aa49313a6fbd28fd2a"
+      linux/arm64: "d8be633ec50859a857801fca2762ca087a2f7a62d08b4c7f0fc38f0afb3a03e2"
+      linux/amd64: "b9877a3ffd4a9ea2e5d31f15464546d89c096da89f7e06e9fac6516322e92da6"

@@ -1,0 +1,32 @@
+schema: 2
+name: hoverfly
+description: API simulation and service virtualization
+homepage: https://hoverfly.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: SpectoLabs/hoverfly
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/SpectoLabs/hoverfly/releases/download/v{{.Version}}/hoverfly_bundle_{{replace .OS \"darwin\" \"OSX\"}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "hoverfly", dst: "bin/hoverfly", mode: 0o755}
+  - copy: {src: "hoverctl", dst: "bin/hoverctl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: hoverctl version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.12.15
+    sha256:
+      darwin/arm64: "8adbc9d82acfc4ddeee8eb265c68821ec7bc49d468dca306921bbfbf2cb419f5"
+      darwin/amd64: "63bc8d4b9e4352725178d2487186c385d10fa12a5571118f9475301705f70a19"
+      linux/arm64: "906a5567af4bb0ebdfa0bf431cda586dde088626141c49485e5105c424fdd35a"
+      linux/amd64: "5c8d6032a56edb33dcec68a36ded5b4fbdbff8beaf53d7e7ef9494f563f031d3"

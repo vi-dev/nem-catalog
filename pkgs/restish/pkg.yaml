@@ -1,0 +1,31 @@
+schema: 2
+name: restish
+description: CLI for interacting with REST-ish HTTP APIs
+homepage: https://rest.sh
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: danielgtaylor/restish
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/danielgtaylor/restish/releases/download/v{{.Version}}/restish-{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "restish", dst: "bin/restish", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: restish --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.3.0
+    sha256:
+      darwin/arm64: "5dc8d53c319e044fbef01954f90ea59b13ff1b570e8a1382102b0c62e7e702d2"
+      darwin/amd64: "fbd4bf1aa2e741c59a54dd916554454b94b9b9638a0f32db78111d5f0d4f0e02"
+      linux/arm64: "d55ae3ebd2a79e6fda8e0ea125eed2530eed60e27e61e3ffa243ae72ae973c91"
+      linux/amd64: "5de24353560597562ffc99799ea79a0cd22c5f3cabbb3ffba3ff5e9b97473357"

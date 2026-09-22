@@ -1,0 +1,31 @@
+schema: 2
+name: flowpipe
+description: Workflow automation for DevOps
+homepage: https://flowpipe.io
+license: AGPL-3.0
+
+versionDiscovery:
+  github:
+    repo: turbot/flowpipe
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/turbot/flowpipe/releases/download/v{{.Version}}/flowpipe.{{.OS}}.{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "flowpipe", dst: "bin/flowpipe", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: flowpipe --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.2.2
+    sha256:
+      darwin/arm64: "1691ea438aabedac3e9e5a1c17e5e5fabd019468c24c0aa925808723c29d6bc7"
+      darwin/amd64: "291f1d58db215255b48066da7d2884123e25fd44742b503eb674cfbbb367f4cc"
+      linux/arm64: "c9021574d16210f0ce0ceab1db968b34939020cdce47c90a6b4f86029a95ecdf"
+      linux/amd64: "b709b08bf400d32f4612adb2efce8a6ab8c6cd5cb4fc7f268f37a9183b612562"

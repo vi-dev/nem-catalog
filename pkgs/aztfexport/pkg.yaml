@@ -1,0 +1,31 @@
+schema: 2
+name: aztfexport
+description: Bring existing Azure resources under Terraform management
+homepage: https://azure.github.io/aztfexport/
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: Azure/aztfexport
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Azure/aztfexport/releases/download/v{{.Version}}/aztfexport_v{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "aztfexport", dst: "bin/aztfexport", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: aztfexport --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.20.0
+    sha256:
+      darwin/arm64: "233f93c70b3fa44d312015db87c7bcd1cb8bd6e5b15db5a99e7f1f6436a06a38"
+      darwin/amd64: "e1099a472b1aa9312698e4b1efaf733ba6c2b8996ef206392f186b326d9d2c4b"
+      linux/arm64: "2058131f2e8902d0e65915a931dce73752d17dd2bd4b94c96489895380c65309"
+      linux/amd64: "921ce998a070b8c5fc3abc5dc90d319e7b4e4d77a799c2d5e0c1d5c9f44c2a87"

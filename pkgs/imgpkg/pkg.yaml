@@ -1,0 +1,30 @@
+schema: 2
+name: imgpkg
+description: Store application configuration files in OCI registries
+homepage: https://carvel.dev/imgpkg
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: carvel-dev/imgpkg
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/carvel-dev/imgpkg/releases/download/v{{.Version}}/imgpkg-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/imgpkg", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: imgpkg version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.48.1
+    sha256:
+      darwin/arm64: "00635d53892afe1c36d134f8e67650e767d74e754cc460b68797977044582d7f"
+      darwin/amd64: "db80447d06804162ba141689e1ca50cbbb59bb6355c1017f0838320e775ee2c7"
+      linux/arm64: "ce7243af30411581474ab86051774626b34c5b95ff1d030b3ee979ebddaf795d"
+      linux/amd64: "6c7a1a2e6555e7827c3c97580be87c84d06778d0650d308f7dc67613aec7c7c8"

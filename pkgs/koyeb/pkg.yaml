@@ -1,0 +1,31 @@
+schema: 2
+name: koyeb
+description: Koyeb CLI
+homepage: https://github.com/koyeb/koyeb-cli
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: koyeb/koyeb-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/koyeb/koyeb-cli/releases/download/v{{.Version}}/koyeb-cli_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "koyeb", dst: "bin/koyeb", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: koyeb version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 5.12.0
+    sha256:
+      darwin/arm64: "97efa9aae5c7d8a39537bc3a77b65395de44955d1a81e368a8b4e3393b096f5a"
+      darwin/amd64: "a9962487a3fd5c02e150ea852d545d0d19040f5426a8eff8e7928f6a69a9264a"
+      linux/arm64: "225afe7d7d6bb837fb498f42e9a9d5016bb431258cf49349e6dccdc6d64ab757"
+      linux/amd64: "c39ce972e48c641368d4c09e98fbe6f3b7ae210687db2ed1de706299b7a8534a"

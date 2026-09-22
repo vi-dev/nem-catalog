@@ -1,0 +1,31 @@
+schema: 2
+name: chart-releaser
+description: Host Helm charts via GitHub Pages and Releases
+homepage: https://github.com/helm/chart-releaser
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: helm/chart-releaser
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/helm/chart-releaser/releases/download/v{{.Version}}/chart-releaser_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cr", dst: "bin/cr", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cr version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.8.1
+    sha256:
+      darwin/arm64: "d957e23f012650cf7ddf6c907688358d572e4a1b8e0e64b31f4b4c03472a0e4b"
+      darwin/amd64: "4209b5f28b309301fd7b4bfed5316b5c97f31c10969e6afb7a0eb9ab2d168244"
+      linux/arm64: "03811896f65f73faffa63aa24f54ac4fed73e088418d0582723917b69c2a280b"
+      linux/amd64: "834046b27b00cd6ba451326875c1937d4f2b671063c2053e031434ade73002b5"

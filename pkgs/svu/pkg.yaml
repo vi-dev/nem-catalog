@@ -1,0 +1,31 @@
+schema: 2
+name: svu
+description: Semantic version utility for git tags
+homepage: https://github.com/caarlos0/svu
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: caarlos0/svu
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/caarlos0/svu/releases/download/v{{.Version}}/svu_{{.Version}}_{{if eq .OS \"darwin\"}}darwin_all{{else}}linux_{{.Arch}}{{end}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "svu", dst: "bin/svu", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: svu --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.4.1
+    sha256:
+      darwin/arm64: "aeec0a735f12d6313c5b4f295ac2f86e00b56571d241abe5aa0306b41f43efd7"
+      darwin/amd64: "aeec0a735f12d6313c5b4f295ac2f86e00b56571d241abe5aa0306b41f43efd7"
+      linux/arm64: "801f310be2f91df86868a2de1f61fefaf06e3eb773431be7dde9765ecde4d21c"
+      linux/amd64: "7ee8c91998c15109130638dc661a912d5f426e2f8642f6f6c04e6502be920770"

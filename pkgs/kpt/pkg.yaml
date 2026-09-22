@@ -1,0 +1,33 @@
+schema: 2
+name: kpt
+description: Automate Kubernetes configuration editing
+homepage: https://kpt.dev
+license: Apache-2.0
+
+deps:
+  - git
+
+versionDiscovery:
+  github:
+    repo: kptdev/kpt
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kptdev/kpt/releases/download/v{{.Version}}/kpt_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kpt", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kpt version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.0.0
+    sha256:
+      darwin/arm64: "a1dfae3b5b7b28bf562137525c296ab89f12b69e1597ca312987977485a1cbb2"
+      darwin/amd64: "bed52ce33086d4e521d7aa27e62673d2238c4526b597dc499f86b5cd6a84f825"
+      linux/arm64: "c81198455e07840084321bec886a9053609973f35258f1f5c07e0129d4c1c6c1"
+      linux/amd64: "e199f8accb96af31ce931aad4e34e8c5f5957d7ed771ebee170ea628ab97bbd4"

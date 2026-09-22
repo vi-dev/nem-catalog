@@ -1,0 +1,31 @@
+schema: 2
+name: spacectl
+description: Spacelift CLI
+homepage: https://github.com/spacelift-io/spacectl
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: spacelift-io/spacectl
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/spacelift-io/spacectl/releases/download/v{{.Version}}/spacectl_{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "spacectl", dst: "bin/spacectl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: spacectl version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.26.0
+    sha256:
+      darwin/arm64: "c1b6d102ef3907012f2c12c6f6f24ddd8a4f81529c97c37ba8280722f403a970"
+      darwin/amd64: "49f31c1fcd0563fc73b214937f4cab44e8f02bdab03b8414da7fcea079777261"
+      linux/arm64: "3149296771650a5306634b06ab192a44c31585be759e47362b3b9d3c971c95a1"
+      linux/amd64: "88862d6115f4f7fbd29e9991d85f72d816ff8e3ee85a6b6d441d20bc5b217599"

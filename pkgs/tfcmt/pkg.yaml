@@ -1,0 +1,31 @@
+schema: 2
+name: tfcmt
+description: Post Terraform plan and apply results as pull request comments
+homepage: https://suzuki-shunsuke.github.io/tfcmt/
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: suzuki-shunsuke/tfcmt
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/suzuki-shunsuke/tfcmt/releases/download/v{{.Version}}/tfcmt_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tfcmt", dst: "bin/tfcmt", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tfcmt --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 4.14.19
+    sha256:
+      darwin/arm64: "05dbd97f9c69d27dd669e7a803e579b434b8d7320b442ecc42f666f0445cc2ee"
+      darwin/amd64: "947cf081ffabe3d3d537c924fc53778f6ebd6d3af225b54c59600de3366eeb98"
+      linux/arm64: "4945c80b176fd8a5d78e94adba99d6ac39e88943076748e8d25015e878699b03"
+      linux/amd64: "3f6b840542bd14a981b3ca881413b79ac82c1fd79acee05cd8a5e41904fa9785"

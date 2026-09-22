@@ -1,0 +1,31 @@
+schema: 2
+name: rumdl
+description: Fast Markdown linter and formatter
+homepage: https://github.com/rvben/rumdl
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: rvben/rumdl
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/rvben/rumdl/releases/download/v{{.Version}}/rumdl-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "rumdl", dst: "bin/rumdl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: rumdl --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.2.75
+    sha256:
+      darwin/arm64: "22771c73a49ab5fb3f426c287bd2f1cc88b5544edfc013eb66723a2789f96c62"
+      darwin/amd64: "f1a74c6c56dd578bc7e2c46aa0742451f20d850e1eae178fb717d5e80ad2032e"
+      linux/arm64: "2d22c15c13e5c8c8c89993670494bdf4d30c2ae95caeeca30ea6aae3e5466146"
+      linux/amd64: "e9be454f7726e23f91a7a4c91dc33eb17c87a7be67372de586d543c97b3297cc"

@@ -1,0 +1,30 @@
+schema: 2
+name: sshs
+description: Terminal user interface for SSH
+homepage: https://github.com/quantumsheep/sshs
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: quantumsheep/sshs
+    filter: '^\d+\.\d+\.\d+$'
+    prefix: ""
+
+artifact:
+  url: "https://github.com/quantumsheep/sshs/releases/download/{{.Version}}/sshs-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/sshs", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: sshs --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 4.8.0
+    sha256:
+      darwin/arm64: "457c41e2965807c64aaaf96fac4d8393fb3761b697f6c339bd21450835f22e05"
+      darwin/amd64: "50f7a43ccfca8f1d1ac8bc4d37bffbd5984ab5f03436572b31f4216e177ff13f"
+      linux/arm64: "5a9f1b2e832406f26966dc6c62a6367d509978d76a568be5a40d643c9340f1f8"
+      linux/amd64: "74afb1f7bbaf907c99c3bf0262e6c98a1084e8e1f939202917c5f35486afeab8"

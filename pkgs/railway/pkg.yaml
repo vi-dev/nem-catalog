@@ -1,0 +1,31 @@
+schema: 2
+name: railway
+description: Railway CLI
+homepage: https://railway.com
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: railwayapp/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/railwayapp/cli/releases/download/v{{.Version}}/railway-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "railway", dst: "bin/railway", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: railway --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 5.59.0
+    sha256:
+      darwin/arm64: "54b0799b0a8248bc1d913ddf216b451f157b2a88a58336916cfcc1cdd1b41bf0"
+      darwin/amd64: "70ca81d747ff470a21ee057c935d4735d37d5f9fab9b31c5c1f6b4400e996a8d"
+      linux/arm64: "ad3306f546eb83557cbdc584cfbd3b90206a49a26b0c4ad77a99139505d1c0f1"
+      linux/amd64: "d6dec28a178348b6feee350eae6d137e14e88948ea2d7289ee037991a33550b1"

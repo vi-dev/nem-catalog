@@ -1,0 +1,31 @@
+schema: 2
+name: dufs
+description: File server with static serving, upload, search and WebDAV
+homepage: https://github.com/sigoden/dufs
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: sigoden/dufs
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sigoden/dufs/releases/download/v{{.Version}}/dufs-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "dufs", dst: "bin/dufs", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: dufs --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.46.0
+    sha256:
+      darwin/arm64: "2c73fa330447c344111aea9159621af5e2d4460b9227562e09138e5c01d3becf"
+      darwin/amd64: "f494db0de9e95764199781754147c4a341227d4794b1bcf5dac862bd21c1216a"
+      linux/arm64: "1472123ae3aa07e49404d16b20305c2dec90c59883ebda9308717f7205e6511b"
+      linux/amd64: "817769f726613194bcff9d0e3e481eaccc86ac11208857614f36a8c02f410977"

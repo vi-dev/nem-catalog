@@ -1,0 +1,31 @@
+schema: 2
+name: nats-exporter
+description: Prometheus exporter for NATS metrics
+homepage: https://github.com/nats-io/prometheus-nats-exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: nats-io/prometheus-nats-exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/nats-io/prometheus-nats-exporter/releases/download/v{{.Version}}/prometheus-nats-exporter-v{{.Version}}-{{.OS}}-{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "prometheus-nats-exporter", dst: "bin/prometheus-nats-exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: prometheus-nats-exporter -version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.20.2
+    sha256:
+      darwin/arm64: "72cc5cb78f8d2d88d81ab544f1a491d770ae1c642c428a5e8fd6f72a3e5a9129"
+      darwin/amd64: "4f3b5086ccf53bf2c5a7db06199b1af8904a2cf502f425e78705d7bc75270827"
+      linux/arm64: "6858c1324550a2a4775204915b9bc036ee1000b802655389cce57e4950f9463a"
+      linux/amd64: "209c87410e74eb6e9f7705735f5518a8b0459dda77acfe9db8c15021b08383af"

@@ -1,0 +1,31 @@
+schema: 2
+name: tfschema
+description: Schema inspector for Terraform and OpenTofu providers
+homepage: https://github.com/minamijoyo/tfschema
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: minamijoyo/tfschema
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/minamijoyo/tfschema/releases/download/v{{.Version}}/tfschema_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tfschema", dst: "bin/tfschema", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tfschema --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.7.10
+    sha256:
+      darwin/arm64: "b9c21fc486c083041b97532526bcaa153f7b3282633279555b39d75b2afa310a"
+      darwin/amd64: "d7ca9b70138ccf0670cdc6a41dc744bf6d491081a021f904f59b5478292fc2a0"
+      linux/arm64: "6a170b51469199c8d05ec00726039648c7e4d4586989d16c2ef2e758e4ac46e8"
+      linux/amd64: "52b9316e6519859da76f0571611b7a319aa3f47c5cd43bf1519e9fae8fd27b8b"

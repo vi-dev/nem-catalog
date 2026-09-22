@@ -1,0 +1,31 @@
+schema: 2
+name: depot
+description: Depot CLI for cloud container builds
+homepage: https://depot.dev
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: depot/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/depot/cli/releases/download/v{{.Version}}/depot_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "depot", dst: "bin/depot", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: depot version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.102.9
+    sha256:
+      darwin/arm64: "8d9b6983eb54f3953139122d7487ba654de94599f95e5a2b8e9937cac87c7ea9"
+      darwin/amd64: "c3b20f26a0aa5b167819bd994d3c75631b9aa1d6c6f3aa2546345134cff1710f"
+      linux/arm64: "0b29c8548abe96ed4818ab97939fbbbb2c38a94c3543529f0e9ced90b86507c6"
+      linux/amd64: "007a909cb500a6b9ad74914b3f25f27fa9bda207ff7169b056a17a90f83d9b12"

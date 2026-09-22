@@ -1,0 +1,30 @@
+schema: 2
+name: kapp
+description: Deployment tool focused on the concept of a Kubernetes application
+homepage: https://carvel.dev/kapp
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: carvel-dev/kapp
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/carvel-dev/kapp/releases/download/v{{.Version}}/kapp-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kapp", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kapp version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.65.4
+    sha256:
+      darwin/arm64: "a7ecd6a2ac62fdce02bb40784f2701e2421539e4bae6c3cd58dc8e943170c666"
+      darwin/amd64: "d2f6a45c09703f2aff01422cc130f00f702094757c17804ab18de4dda2249ada"
+      linux/arm64: "e41693ac3d69e1143c7e5fe870712ca05ed810e1e0bc5b00f77ca22ba0f18ae1"
+      linux/amd64: "bf7df0647d7645572d45185bb8bf6a40dd1e631ff4ee1522bc8ce56db53bd243"

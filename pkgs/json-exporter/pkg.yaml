@@ -1,0 +1,31 @@
+schema: 2
+name: json-exporter
+description: Prometheus exporter that scrapes remote JSON by JSONPath
+homepage: https://github.com/prometheus-community/json_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus-community/json_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus-community/json_exporter/releases/download/v{{.Version}}/json_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "json_exporter", dst: "bin/json_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: json_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.8.0
+    sha256:
+      darwin/arm64: "e68793a49335017e27389791f205051514c66ba4c0a32ea6912f7412e8d62d49"
+      darwin/amd64: "ddeaa1e4d63aeaf3d2df0e8838e4a5c22c425f809dee1576dad5635cbc14e1f0"
+      linux/arm64: "69341074badc20963e4698f34d2c94b759bc278160f0bf4639b9e7ed15afd02e"
+      linux/amd64: "bd25fe58f62cec131b2ecbe859358990bb07f0266439ddcdef501fdd182a4fe1"

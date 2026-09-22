@@ -1,0 +1,31 @@
+schema: 2
+name: carapace
+description: Multi-shell command completion binary
+homepage: https://carapace.sh
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: carapace-sh/carapace-bin
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/carapace-sh/carapace-bin/releases/download/v{{.Version}}/carapace-bin_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "carapace", dst: "bin/carapace", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: carapace --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.7.3
+    sha256:
+      darwin/arm64: "a7e79d8787ffc63c26568e8d8256d12df91f5cda0d9dc83d50e90b8567028a9d"
+      darwin/amd64: "23649b6a52bd68d00e8b88e95afadac09e9450fa49b49a95fcabd81b387de4b6"
+      linux/arm64: "b2456cb09d77004db87de2567d6d7588a61ceb4724522c463e2b1c1f87b4d4b9"
+      linux/amd64: "35ab52bfe7bdd8296d90c3687660bde80497599badde840ab615d2f421f5f053"

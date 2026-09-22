@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-espflash
+description: Cargo subcommand for flashing Espressif SoCs
+homepage: https://github.com/esp-rs/espflash
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: esp-rs/espflash
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/esp-rs/espflash/releases/download/v{{.Version}}/cargo-espflash-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-espflash", dst: "bin/cargo-espflash", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-espflash --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 4.6.0
+    sha256:
+      darwin/arm64: "27bfed85cd48792c78d5cacda7119b444cbaf427ea1c367d8fd43dd4ea716dfa"
+      darwin/amd64: "401c92f5e8f31c41d24af5f46da93eb4dd8a200f96f822b3a7478dcbecb522b7"
+      linux/arm64: "e86038b2cf8bcbc5122ac06775a5efcd5f95d236473d31ee6149fe9306553517"
+      linux/amd64: "b0f3de9b4013738bcb953df77518ce4f604ab6e5d9bc9fe899415df7e517124d"

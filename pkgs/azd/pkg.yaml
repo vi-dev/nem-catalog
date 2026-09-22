@@ -1,0 +1,31 @@
+schema: 2
+name: azd
+description: Azure Developer CLI
+homepage: https://aka.ms/azd
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: Azure/azure-dev
+    filter: '^azure-dev-cli_\d+\.\d+\.\d+$'
+    prefix: "azure-dev-cli_"
+
+artifact:
+  url: "https://github.com/Azure/azure-dev/releases/download/azure-dev-cli_{{.Version}}/azd-{{.OS}}-{{.Arch}}.{{if eq .OS \"darwin\"}}zip{{else}}tar.gz{{end}}"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "azd-{{.OS}}-{{.Arch}}", dst: "bin/azd", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: azd version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.34.1
+    sha256:
+      darwin/arm64: "7e423f735bdd0f4de17a6e54bffd63845acd1b3d49b04a7ae53754cc8905774f"
+      darwin/amd64: "6c507c6857294bdf52157acd2ff147fac7c55b5456c977b3ac54b1d9be93a59d"
+      linux/arm64: "aa3ed3b246c90b1e118ba618fbdd03750f4e5dc6f31bd6a439c5f6f90c6e87e5"
+      linux/amd64: "a8f90d586bee1a693661b426227a171d2cf8b5c653eca7be931831a882e5b5a5"

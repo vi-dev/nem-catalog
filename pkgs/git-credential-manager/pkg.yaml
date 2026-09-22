@@ -1,0 +1,38 @@
+schema: 2
+name: git-credential-manager
+description: Cross-platform Git credential storage and authentication
+homepage: https://github.com/git-ecosystem/git-credential-manager
+license: MIT
+
+deps:
+  - git
+
+versionDiscovery:
+  github:
+    repo: git-ecosystem/git-credential-manager
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/git-ecosystem/git-credential-manager/releases/download/v{{.Version}}/gcm-{{replace .OS \"darwin\" \"osx\"}}-{{replace .Arch \"amd64\" \"x64\"}}-{{.Version}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+
+bins: ["."]
+
+env:
+  - name: DOTNET_SYSTEM_GLOBALIZATION_INVARIANT
+    value: "1"
+    platforms: [linux]
+
+test:
+  - run: git-credential-manager --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.9.1
+    sha256:
+      darwin/arm64: "2ac8f99258d04acb45cf592eb5b06ec0e0760c329bce40a4d18dabb5e0e37f68"
+      darwin/amd64: "326fc3e1c708ae792b010b2f9f701f3dc4dbaebdf40cafd036254ab0f148c034"
+      linux/arm64: "cf3806b7528b5a5af16bd4bd0683202fc432d9008dd91d20c4c6744b24a033b5"
+      linux/amd64: "31fc151c3b111ffe25616a4356bd9a50bdcdbd0922c5e11990fb220c6caf1ce1"

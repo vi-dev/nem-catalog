@@ -1,0 +1,31 @@
+schema: 2
+name: influxdb-exporter
+description: Prometheus exporter accepting InfluxDB line protocol metrics
+homepage: https://github.com/prometheus/influxdb_exporter
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/influxdb_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/influxdb_exporter/releases/download/v{{.Version}}/influxdb_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "influxdb_exporter", dst: "bin/influxdb_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: influxdb_exporter --help 2>&1 | grep -q -- --web.listen-address
+
+versions:
+  - version: 0.12.1
+    sha256:
+      darwin/arm64: "2569686b8065524d8d719db5f426c419913ebb445f07dddaa082725b4451c4fb"
+      darwin/amd64: "a07d547f55edb35f140ce1aad53305f30908804b6ae9afd36e23b2896881ff27"
+      linux/arm64: "f8c7ffe9d6cf9f949439900f32932957ea395e9e79561598b9b93baace69371d"
+      linux/amd64: "e460d0159e43180dfcf6e6ca6b8857d9fb763e158b84226aa4cd3ae9c2db8fe7"

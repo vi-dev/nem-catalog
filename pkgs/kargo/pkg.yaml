@@ -1,0 +1,30 @@
+schema: 2
+name: kargo
+description: Multi-stage application lifecycle orchestration for GitOps
+homepage: https://kargo.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: akuity/kargo
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/akuity/kargo/releases/download/v{{.Version}}/kargo-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kargo", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kargo version --client | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.11.4
+    sha256:
+      darwin/arm64: "5e16583af2be32d0b430219c0234d8018c98dc0f6f4a5425ba722e1e9a3dcad4"
+      darwin/amd64: "51f301ad109367f91d259cdace824c20b6fe9ea5d2018223349518d2f6ed0208"
+      linux/arm64: "961068976697c72086839d4325dedbdcea25807d949384660adc4f4d35336438"
+      linux/amd64: "41fb24232e963672ec8033be5c122400f04f0b2c6f3bd4eeb85aedbdf821dcd6"

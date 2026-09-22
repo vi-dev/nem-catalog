@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-about
+description: Generate a list of all licenses used by a Rust crate
+homepage: https://github.com/EmbarkStudios/cargo-about
+license: Apache-2.0
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: EmbarkStudios/cargo-about
+    filter: '^\d+\.\d+\.\d+$'
+    prefix: ""
+
+artifact:
+  url: "https://github.com/EmbarkStudios/cargo-about/releases/download/{{.Version}}/cargo-about-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-about", dst: "bin/cargo-about", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-about --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.9.2
+    sha256:
+      darwin/arm64: "ae72f0df0c399a1e96336f696fa55b1b28679fd725632eba8cf8e4568467cc3e"
+      linux/arm64: "af5169282fb6f84e13471493f405437e43ac517744c9ae12fbe2cdf0a6f0e5a8"
+      linux/amd64: "9099a59e820c38a68b9d65f300662a567d56562f9a10f6aa4c7e86c17c2566af"

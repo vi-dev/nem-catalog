@@ -1,0 +1,31 @@
+schema: 2
+name: sql-exporter
+description: Database-agnostic SQL exporter for Prometheus
+homepage: https://github.com/burningalchemist/sql_exporter
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: burningalchemist/sql_exporter
+    filter: '^\d+\.\d+\.\d+$'
+    prefix: ""
+
+artifact:
+  url: "https://github.com/burningalchemist/sql_exporter/releases/download/{{.Version}}/sql_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "sql_exporter", dst: "bin/sql_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: sql_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.24.8
+    sha256:
+      darwin/arm64: "195d4eecb1055fb760ab40ccdeaaac492b86d299b8343628465d97593c04dbe4"
+      darwin/amd64: "12e641fb242eaf2750775062260cd4945ca13947282e8c04ed26f4a4048ae29e"
+      linux/arm64: "8d016b233e90c2ecd281f33d370d6540f590abdc4ea847ed5ec0c6a9e586b2c9"
+      linux/amd64: "e7a23fb8613e4019e0166fa67da94e59882f4f9a34d953883f46f67c33e08053"

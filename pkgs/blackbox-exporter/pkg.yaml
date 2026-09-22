@@ -1,0 +1,31 @@
+schema: 2
+name: blackbox-exporter
+description: Prometheus blackbox prober exporter
+homepage: https://prometheus.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: prometheus/blackbox_exporter
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/prometheus/blackbox_exporter/releases/download/v{{.Version}}/blackbox_exporter-{{.Version}}.{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "blackbox_exporter", dst: "bin/blackbox_exporter", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: blackbox_exporter --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.28.0
+    sha256:
+      darwin/arm64: "ec6c70ccca92e209dd22be76a4fa244f4bd31afdae3ddb2bb082144100ec52bb"
+      darwin/amd64: "12d7a3010235862d073bbb111b997870a50070bcda3b912bca8f0095cfda23c6"
+      linux/arm64: "63312be0983d85e5109710a7dc93df3051157ae581853fa3655d171cc1b2806e"
+      linux/amd64: "caf5d242fb1cf6d5cb678f3f799f22703d4fafea26b03dcbbd7e1f1825e06329"

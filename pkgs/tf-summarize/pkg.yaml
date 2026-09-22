@@ -1,0 +1,31 @@
+schema: 2
+name: tf-summarize
+description: Print a summary of a Terraform plan
+homepage: https://github.com/dineshba/tf-summarize
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: dineshba/tf-summarize
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/dineshba/tf-summarize/releases/download/v{{.Version}}/tf-summarize_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tf-summarize", dst: "bin/tf-summarize", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tf-summarize -v | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.3.20
+    sha256:
+      darwin/arm64: "5ed7dd89adf37c93daec96d8c0ea9a05c1d8d27d1be87c4a2ceab69cbf81ca49"
+      darwin/amd64: "f3ac9c5b835b1a6a8465aa7d8f4e2e55f5062c8e7e46620b21f1804211e51389"
+      linux/arm64: "c2007ade5045f99571e30415f84dbf26279de6f35683177284b5543832151854"
+      linux/amd64: "6ab68aad6200586ee983e8112b67aa2050c61dc6e67182dbb287b30c7a97c9a8"

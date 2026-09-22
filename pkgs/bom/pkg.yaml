@@ -1,0 +1,30 @@
+schema: 2
+name: bom
+description: Generate SPDX bills of materials
+homepage: https://kubernetes-sigs.github.io/bom/
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kubernetes-sigs/bom
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kubernetes-sigs/bom/releases/download/v{{.Version}}/bom-{{.Arch}}-{{.OS}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/bom", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: bom version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.7.1
+    sha256:
+      darwin/arm64: "fdf3d04df4959819c5c181487219762f3c9942f5eeab7eb7dfb9b4180cb72ca3"
+      darwin/amd64: "549115f58f543955ca5201a7667b30ed3b8542aacecc8e8be7a448a0cbb322e1"
+      linux/arm64: "a1c57ade151c062bcbcfa3e752c3d990f0fbe91efd273e2e84551d7522884b68"
+      linux/amd64: "d8911412e137a6556d5f0260901ebe63ab26bd3e02844e464fa7c43bbef8681d"

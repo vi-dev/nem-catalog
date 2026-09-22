@@ -1,0 +1,30 @@
+schema: 2
+name: cyclonedx-cli
+description: CycloneDX SBOM analysis, merging, diffing and conversion
+homepage: https://cyclonedx.org
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: CycloneDX/cyclonedx-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/CycloneDX/cyclonedx-cli/releases/download/v{{.Version}}/cyclonedx-{{replace .OS \"darwin\" \"osx\"}}-{{replace .Arch \"amd64\" \"x64\"}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/cyclonedx", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cyclonedx --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.33.1
+    sha256:
+      darwin/arm64: "750c148780154833f6401f9067d08c5a4c31567b6ee3c26c062c3a95c62d741c"
+      darwin/amd64: "0ea92306fc7d7c30ed112a7463781a200585a3bf1cdaf77229181c5aabd1d4b6"
+      linux/arm64: "b2e9fdf9665ef49868a2ec012171c6e785dcd69745bc5869e53e4f4bfb096a5f"
+      linux/amd64: "bfc8b2538da86fe239bc53658bbb63c1c8c510a293c1e6891aa5bea5d3c58746"

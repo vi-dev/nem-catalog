@@ -1,0 +1,31 @@
+schema: 2
+name: tfplugindocs
+description: Generate and validate Terraform provider documentation
+homepage: https://github.com/hashicorp/terraform-plugin-docs
+license: MPL-2.0
+
+versionDiscovery:
+  github:
+    repo: hashicorp/terraform-plugin-docs
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/hashicorp/terraform-plugin-docs/releases/download/v{{.Version}}/tfplugindocs_{{.Version}}_{{.OS}}_{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tfplugindocs", dst: "bin/tfplugindocs", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tfplugindocs --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.25.0
+    sha256:
+      darwin/arm64: "b625927932640100dd7aea08f125dda7db3747f720de8d064a0af1717f9d239f"
+      darwin/amd64: "2c084bcc9098c1f7aaa9503d33bfadd208e493323a674d938cbfe1af39641336"
+      linux/arm64: "de1317d79f2783d68a7a090cbe06dea61dbab20c6376c52eadee42e9e8c7c169"
+      linux/amd64: "912bd663e2deafc9ebf54e932bd2adf91bf6b7fcf545d4d9a82dc9597255854c"

@@ -1,0 +1,31 @@
+schema: 2
+name: upctl
+description: UpCloud CLI
+homepage: https://upcloudltd.github.io/upcloud-cli/
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: UpCloudLtd/upcloud-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/UpCloudLtd/upcloud-cli/releases/download/v{{.Version}}/upcloud-cli_{{.Version}}_{{.OS}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "upctl", dst: "bin/upctl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: upctl version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 3.36.0
+    sha256:
+      darwin/arm64: "ae0d11eee0380d3d7d9129a889202dfb420aa0abf77a1965142fa110981ddd47"
+      darwin/amd64: "70f2d9e0971f99b5c81421d0b464fd5320a5cbcdb69904572a468f2eb1ddfc6f"
+      linux/arm64: "c075c8ab8513c4951625ddc769708178650b6c0e07043388c36ed0e99d79fe7f"
+      linux/amd64: "e759feb044ca18dec99d91e75d886f4102bbf30e8895c5c88e367db4949482e7"

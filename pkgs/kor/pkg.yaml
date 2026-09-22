@@ -1,0 +1,31 @@
+schema: 2
+name: kor
+description: Discover unused Kubernetes resources
+homepage: https://github.com/yonahd/kor
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: yonahd/kor
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/yonahd/kor/releases/download/v{{.Version}}/kor_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "kor", dst: "bin/kor", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kor version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.6.9
+    sha256:
+      darwin/arm64: "2e1a0c3cdbaf74fbe1aa03c5b26f5cef26ff97220dbfe5718cb4b15d327916c1"
+      darwin/amd64: "a2ee75d86d3355feb41161368eadd5d2682cbaeda044a41fa6e0882315e593fe"
+      linux/arm64: "f735868a033b01f259cff230e0fbc205467130d394ce4d72cdb163515ab67521"
+      linux/amd64: "6ca2c3f034a1cc16f12a42bb722028288c7a50a83131bd1662248b4c58f6d6a6"

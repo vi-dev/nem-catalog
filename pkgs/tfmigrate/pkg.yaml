@@ -1,0 +1,31 @@
+schema: 2
+name: tfmigrate
+description: Terraform and OpenTofu state migration tool for GitOps
+homepage: https://github.com/minamijoyo/tfmigrate
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: minamijoyo/tfmigrate
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/minamijoyo/tfmigrate/releases/download/v{{.Version}}/tfmigrate_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tfmigrate", dst: "bin/tfmigrate", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tfmigrate --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.4.5
+    sha256:
+      darwin/arm64: "8ee985ee9443940d1702d9069cbd81b05d8a4c039bf5aa2eaf49da04e790d263"
+      darwin/amd64: "351217e5faa1789187ed9dc209d063279817e8e54c4b6a2e7de22bfd9b2a6027"
+      linux/arm64: "030fa51a46ea1a37d5b65f89f2ee95c327e8e20b29448492b9bb2c3b5db2bce0"
+      linux/amd64: "91ceec5bcca1c927dcce53f1c99c1b62ee12d06ce7fce145aa552181e6929cab"

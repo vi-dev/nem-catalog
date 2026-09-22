@@ -1,0 +1,31 @@
+schema: 2
+name: kubecm
+description: Manage kubeconfig files more easily
+homepage: https://kubecm.cloud
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: sunny0826/kubecm
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/sunny0826/kubecm/releases/download/v{{.Version}}/kubecm_v{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "kubecm", dst: "bin/kubecm", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kubecm version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.35.1
+    sha256:
+      darwin/arm64: "35ea4876ae8d146536def212489056b08219b4a41ac82a7a7305072087b21aad"
+      darwin/amd64: "213c10d018741df1ddf13b0764543b5e1d722d7e7c9094132acbe2aeffc138ca"
+      linux/arm64: "d2c1397415a3753af9dea32c5c7c97da4d89d7b2790366fcf01c480184106126"
+      linux/amd64: "65dbe79901d95f68fc9ddbe38acb3ee34acdfa3d71e69ff326bd972fc0525a85"

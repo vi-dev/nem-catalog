@@ -1,0 +1,30 @@
+schema: 2
+name: pact
+description: Pact contract testing CLI, mock server and broker client
+homepage: https://pact.io
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: pact-foundation/pact-ruby-standalone
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v{{.Version}}/pact-{{.Version}}-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+test:
+  - run: pact-mock-service --help 2>&1 | grep -qi pact
+
+versions:
+  - version: 2.6.4
+    sha256:
+      darwin/arm64: "2d85da2bdfd3cca99fb98184e14b10fda8cf27bc12d124648d6502444e2fbc61"
+      darwin/amd64: "fe23549d3457037dace47727b4c6c4504dc726d342c8440571a24b0291949d42"
+      linux/arm64: "8b7541ef6a5d1742436144b945cf6f26ad5a6f82d9ab5a6ec5dfac548187b33d"
+      linux/amd64: "c0d77f4ad390ed8f56a1b46e9f56d4d656b0128202e95ea067a6dacc00b7cbbf"

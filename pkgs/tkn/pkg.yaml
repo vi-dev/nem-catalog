@@ -1,0 +1,31 @@
+schema: 2
+name: tkn
+description: Tekton Pipelines CLI
+homepage: https://tekton.dev
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: tektoncd/cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/tektoncd/cli/releases/download/v{{.Version}}/tkn_{{.Version}}_{{if eq .OS \"darwin\"}}Darwin_all{{else}}Linux_{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}{{end}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tkn", dst: "bin/tkn", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tkn version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.46.1
+    sha256:
+      darwin/arm64: "32f1ee337d75fe23a10246c54e050a0723d0943254e549afc6a418744b293eb8"
+      darwin/amd64: "32f1ee337d75fe23a10246c54e050a0723d0943254e549afc6a418744b293eb8"
+      linux/arm64: "85144fc34f40bc1b19be48434327044f306e66cc2814663d7abd2092845b0948"
+      linux/amd64: "bc9fe51595af87cee422ae19a62ab46c8cdcb0a74f7157ffa8b9a9ef39b3d390"

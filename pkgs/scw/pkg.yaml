@@ -1,0 +1,30 @@
+schema: 2
+name: scw
+description: Scaleway CLI
+homepage: https://cli.scaleway.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: scaleway/scaleway-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/scaleway/scaleway-cli/releases/download/v{{.Version}}/scaleway-cli_{{.Version}}_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/scw", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: scw version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.62.0
+    sha256:
+      darwin/arm64: "f77e7d3854cb59ea568a88bfc3877720bd819d38ff68d5563b3a2c8ad4207712"
+      darwin/amd64: "682325b356bd8a6dfa49754a6b5ab69d9971ca20eb0ae71fdf152e0b23bfce3c"
+      linux/arm64: "c15df24f287f2b458269700be70d5621677aefa31efa8a19917f96062da2c8d0"
+      linux/amd64: "7638c385c1a43a5d9022a63791769fd464e14314032a51411726f062f3053e67"

@@ -1,0 +1,31 @@
+schema: 2
+name: tfupdate
+description: Update version constraints in Terraform and OpenTofu configurations
+homepage: https://github.com/minamijoyo/tfupdate
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: minamijoyo/tfupdate
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/minamijoyo/tfupdate/releases/download/v{{.Version}}/tfupdate_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "tfupdate", dst: "bin/tfupdate", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: tfupdate --version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.10.2
+    sha256:
+      darwin/arm64: "a1403215422af47afdc47e94432bb53245888d772965621185ec3f762e9d2d00"
+      darwin/amd64: "47ec26be091d95210371d7954d37ae98bfd0398b9e6961b57e9ac7785706fe3c"
+      linux/arm64: "3ca3382ce16b37a248e95b38cf7d889a49412a19df3a6f3a7ad3db727de8eb12"
+      linux/amd64: "559bc7c6c15496682a3207cbdc4e6327de252f5f1a4348f5098027d6bcc4ebe2"

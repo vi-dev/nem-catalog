@@ -1,0 +1,30 @@
+schema: 2
+name: aws-sso-cli
+description: AWS Identity Center credentials for the CLI and console
+homepage: https://synfinatic.github.io/aws-sso-cli/latest/
+license: GPL-3.0
+
+versionDiscovery:
+  github:
+    repo: synfinatic/aws-sso-cli
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/synfinatic/aws-sso-cli/releases/download/v{{.Version}}/aws-sso-{{.Version}}-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/aws-sso", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: aws-sso version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.3.2
+    sha256:
+      darwin/arm64: "09a9c620c69afed20a24c53666b298b85da079be6210ac7822f325433e53e70f"
+      darwin/amd64: "1a13770fd7c65d44bba0ab81958b56d0af5359062ab3eef1385c664ce5a4d321"
+      linux/arm64: "c1c336a75e2ca82631a2a32b09c185b1d961d8efcaf949fd82baf4f82dd82fc3"
+      linux/amd64: "0347a91f65680db4ab5f6bde85afc4265e677389581ac920bb2536bd05a6f5de"

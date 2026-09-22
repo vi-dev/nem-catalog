@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-auditable
+description: Make production Rust binaries auditable
+homepage: https://github.com/rust-secure-code/cargo-auditable
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: rust-secure-code/cargo-auditable
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/rust-secure-code/cargo-auditable/releases/download/v{{.Version}}/cargo-auditable-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.xz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-auditable", dst: "bin/cargo-auditable", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-auditable 2>&1 | grep -q Cargo
+
+versions:
+  - version: 0.7.6
+    sha256:
+      darwin/arm64: "bf42fb077380f41a72ab9e217651bffcb6d46e641852a79ad1358bcc308323ff"
+      darwin/amd64: "d6c26ddedd034e149bf2cd3bb211ef7bf043a1840f58d64cbd8e84fb149034cb"
+      linux/arm64: "57265fbd87e9277fbd850c74177d17e5a6f51f15e2803643db65c187b0d4feda"
+      linux/amd64: "42b66c852fbb9074a9ca356279a92eb753f48dde16017b8c82f48dcd05d6c856"

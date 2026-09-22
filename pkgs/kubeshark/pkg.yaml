@@ -1,0 +1,30 @@
+schema: 2
+name: kubeshark
+description: Network observability and API traffic analyzer for Kubernetes
+homepage: https://kubeshark.com
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kubeshark/kubeshark
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kubeshark/kubeshark/releases/download/v{{.Version}}/kubeshark_{{.OS}}_{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kubeshark", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kubeshark version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 53.4.0
+    sha256:
+      darwin/arm64: "2dac606da8ee4267fc30c052736b6d5840a9f1e7575905b123fd2b4861137fed"
+      darwin/amd64: "84f746534a58db3253b9ed76b85ff7a9f63704c2b475f4c3376669324cc0cba3"
+      linux/arm64: "60916060b65375af5e28ca846dd3709986fc65f29beb0d20b62f772a8f6097e9"
+      linux/amd64: "ef604fe6733692371c879abe21b20f2fe5a4f4e27a0a76b5eacdf7fe9ab62bf2"

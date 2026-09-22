@@ -1,0 +1,31 @@
+schema: 2
+name: sonobuoy
+description: Kubernetes conformance testing and cluster diagnostics
+homepage: https://sonobuoy.io
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: vmware-tanzu/sonobuoy
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/vmware-tanzu/sonobuoy/releases/download/v{{.Version}}/sonobuoy_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "sonobuoy", dst: "bin/sonobuoy", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: sonobuoy version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.57.5
+    sha256:
+      darwin/arm64: "d889c4a4485f3899f8d860506ed4da5380372f23f91cd0113e52f036d842e978"
+      darwin/amd64: "4202d3a960a812e68b555829eefbe0cc25de8b2e5cb2fc8e5cc38dfc83515a9d"
+      linux/arm64: "ec482b5d1ec237f4c94b6fd7be5a69f95678a4331001b3edcb6ad7835ec40695"
+      linux/amd64: "7c5c2250e5103c98f4dad2bcab86baf954e319c57c419c113f28f5060e62f129"

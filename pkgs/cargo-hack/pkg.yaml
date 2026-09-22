@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-hack
+description: Cargo subcommand for feature-powerset testing and CI
+homepage: https://github.com/taiki-e/cargo-hack
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: taiki-e/cargo-hack
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/taiki-e/cargo-hack/releases/download/v{{.Version}}/cargo-hack-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-hack", dst: "bin/cargo-hack", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-hack hack --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.6.45
+    sha256:
+      darwin/arm64: "af0ab90e56aa716ae9f545a93e4338d4f36525e187d367b6519da71b60249b50"
+      darwin/amd64: "b1a65c2daaca37957a288a295cb25f5c3bf3f7945ec60b450ecdbb1159acbff4"
+      linux/arm64: "9ac71756f1da6e8798ac5afbfd222abecb95de9c10e672ed52c179b637d6444b"
+      linux/amd64: "b242dffcfd43317ac484dd2dbc3b9fc5f8a7eb3ba252af31b531503f0bad33d1"

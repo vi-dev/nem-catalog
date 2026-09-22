@@ -1,0 +1,31 @@
+schema: 2
+name: sqruff
+description: Fast SQL linter and formatter
+homepage: https://github.com/quarylabs/sqruff
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: quarylabs/sqruff
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/quarylabs/sqruff/releases/download/v{{.Version}}/sqruff-{{.OS}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}{{if eq .OS \"linux\"}}-musl{{end}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "sqruff", dst: "bin/sqruff", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: sqruff --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.40.0
+    sha256:
+      darwin/arm64: "b7ddf7a52d13023a6bdac6ef0999ca5d0f8ed3a5dd7f935da21d06dab2457ea2"
+      darwin/amd64: "56c75d61a668da1907e68ca92b200efe4f93fa24e6cdc02b7c5cbe286025555c"
+      linux/arm64: "b1e4ba8f1da96b9a626e8b6ce208e4d94ca13d44a755790a89cc8193f00ee138"
+      linux/amd64: "8a377bdfdfaf46483c33cce46d3b4eb46bcec4b9557f6d0106adc85cc926660e"

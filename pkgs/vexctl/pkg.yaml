@@ -1,0 +1,30 @@
+schema: 2
+name: vexctl
+description: Create, transform and attest OpenVEX metadata
+homepage: https://github.com/openvex/vexctl
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: openvex/vexctl
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/openvex/vexctl/releases/download/v{{.Version}}/vexctl-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/vexctl", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: vexctl version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.4.4
+    sha256:
+      darwin/arm64: "6d810a5022d7624a7cfe71dbdb973708d4fe4e8210d8f7bd99266f6e282b04f7"
+      darwin/amd64: "6e9631e7b5020b9e5f42d57fb6670dd5323156d8d68a608aab9a8ebea0544702"
+      linux/arm64: "2f37f2d6fd00d3d73dc2c657639d2f3b00060608aef517766fdd0e0dc07abe21"
+      linux/amd64: "d315e2778af88b999ad4bba30a08aa2677ed701638e16c341b6d57b43c1e064d"

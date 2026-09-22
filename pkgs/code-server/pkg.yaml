@@ -1,0 +1,30 @@
+schema: 2
+name: code-server
+description: VS Code in the browser
+homepage: https://coder.com
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: coder/code-server
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/coder/code-server/releases/download/v{{.Version}}/code-server-{{.Version}}-{{replace .OS \"darwin\" \"macos\"}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]
+
+test:
+  - run: code-server --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 4.138.0
+    sha256:
+      darwin/arm64: "1ecf699868e64bb9094a7d3ffcac50bb903354a32137dfc4017cb9479ef6b456"
+      darwin/amd64: "bd1a54d03e03d3b0ec75705f48c39c5f6b309a36a2c7ee878f746a6e5f9aa2ae"
+      linux/arm64: "fbebf4b18e97a5a48b7b105be0161d411e54ccfb53a1ffb1673c16518024fa30"
+      linux/amd64: "5d63f26c5dabc2acd29610b9b27f413b016aa67019e2cfcdf54031625e18f535"

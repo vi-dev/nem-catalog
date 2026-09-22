@@ -1,0 +1,30 @@
+schema: 2
+name: kbld
+description: Image building and pushing for Kubernetes deployment workflows
+homepage: https://carvel.dev/kbld
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: carvel-dev/kbld
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/carvel-dev/kbld/releases/download/v{{.Version}}/kbld-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kbld", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kbld version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.49.1
+    sha256:
+      darwin/arm64: "8b7c93828b96065d7fcdb51989e59462af443f59c8a88beeb421c5f5ff0ef65e"
+      darwin/amd64: "d6c6dd4af41bea5cb3c8914e9b43536fc3c606592ddaaa98dda08b8517400969"
+      linux/arm64: "b3f5277ff4819de189d1ebd6e455b3390308ca43b122b5bb3c40a7bb9e6f30c4"
+      linux/amd64: "437d38d3e59d01dd0d1ad75b4eb67fbd04fe51ed3de1ed55c3f7b3b7d5ec7546"

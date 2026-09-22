@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-msrv
+description: Find the minimum supported Rust version of a project
+homepage: https://foresterre.github.io/cargo-msrv
+license: Apache-2.0
+platforms: [darwin/arm64, darwin/amd64, linux/amd64]
+
+versionDiscovery:
+  github:
+    repo: foresterre/cargo-msrv
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/foresterre/cargo-msrv/releases/download/v{{.Version}}/cargo-msrv-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}-v{{.Version}}.tgz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-msrv", dst: "bin/cargo-msrv", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-msrv --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.19.3
+    sha256:
+      darwin/arm64: "bf42f653b5a7c426972f728b38a3756529a105b6598c2fdc89bc25ac056726f1"
+      darwin/amd64: "2427399177872d74b822b46a2f52817bfab5fb1ff6d8e5e6faaafc82a66f2351"
+      linux/amd64: "6f9a0011ca8ad959d304185b9090390fd1ad87e2d764007fbb0abe043afa9ff5"

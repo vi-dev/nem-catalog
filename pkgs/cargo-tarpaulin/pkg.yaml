@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-tarpaulin
+description: Code coverage tool for Rust projects
+homepage: https://github.com/xd009642/tarpaulin
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: xd009642/tarpaulin
+    filter: '^\d+\.\d+\.\d+$'
+    prefix: ""
+
+artifact:
+  url: "https://github.com/xd009642/tarpaulin/releases/download/{{.Version}}/cargo-tarpaulin-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-tarpaulin", dst: "bin/cargo-tarpaulin", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-tarpaulin --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.37.4
+    sha256:
+      darwin/arm64: "49c6cbcfc3033e71f2972568f3c6e4014424953788df245cecdadac54e4577e6"
+      darwin/amd64: "022a12cfba4aebbf6e9e7356990475dc42ccba27da1d15b89ed20481df8b6fe6"
+      linux/arm64: "4f833fdb070e80f85d482d194dab20cc63c0faafc544b8802bdb02953d9041f1"
+      linux/amd64: "21c6c5a8e3e0aa18fd1ef5e6960c424b882d09bcd96061de96011b120b98f750"

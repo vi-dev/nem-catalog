@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-release
+description: Cargo subcommand for releasing Rust crates
+homepage: https://github.com/crate-ci/cargo-release
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: crate-ci/cargo-release
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/crate-ci/cargo-release/releases/download/v{{.Version}}/cargo-release-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "cargo-release", dst: "bin/cargo-release", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-release release --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.1.6
+    sha256:
+      darwin/arm64: "2f41e0d9f9538108f943f498af9f923cd6efd7e3ecdd69c7f78516bb29f32c53"
+      darwin/amd64: "f1a5544f7b9464bc308caac45ed0a10d4839b6a38d7f83af27cfb72e68efe501"
+      linux/arm64: "a74a3dc62204ed1c10e3da644fa6b5dc0abead13d1936e1a21f0decfaf26b983"
+      linux/amd64: "d82672b9f26b9a11f1b080eedeb74ffa3dd02d96ae9fb3cbc180e4a10d5417db"

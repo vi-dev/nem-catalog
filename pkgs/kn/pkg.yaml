@@ -1,0 +1,30 @@
+schema: 2
+name: kn
+description: Knative CLI
+homepage: https://knative.dev
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: knative/client
+    filter: '^knative-v\d+\.\d+\.\d+$'
+    prefix: "knative-v"
+
+artifact:
+  url: "https://github.com/knative/client/releases/download/knative-v{{.Version}}/kn-{{.OS}}-{{.Arch}}"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/kn", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kn version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 1.23.0
+    sha256:
+      darwin/arm64: "d24679ebbd9d8ac472d3b18922df192573a72e06aac96784ae5b661478f24789"
+      darwin/amd64: "10b07f5e94f28a774dd6eebfca8a974d6a9166d3bdc7fd77058bab8cb06b80a7"
+      linux/arm64: "bc4006ffa297e1769d91add96f1cdad512b43090c21a3f5c2bef17180fcf9ee1"
+      linux/amd64: "852a3229e3e36e69a7f006da882f7841138fc39047051589841f24336d8f37b2"

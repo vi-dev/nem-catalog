@@ -1,0 +1,31 @@
+schema: 2
+name: sbomqs
+description: SBOM quality and compliance scoring
+homepage: https://github.com/interlynk-io/sbomqs
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: interlynk-io/sbomqs
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/interlynk-io/sbomqs/releases/download/v{{.Version}}/sbomqs_{{.Version}}_{{replace (replace .OS \"darwin\" \"Darwin\") \"linux\" \"Linux\"}}_{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "sbomqs", dst: "bin/sbomqs", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: sbomqs version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.1.2
+    sha256:
+      darwin/arm64: "cef45fcbdf12954cde0ff87c3740a0681d05e90d8c0cbee2e48e5e62b05d1c20"
+      darwin/amd64: "669315b2e008ec935ca9d04c980ac05f747e0a7bd1acf3c767ab017fe47a70d3"
+      linux/arm64: "5aec2aec04610a76347301f6ce837c71e82001b26c27d9cd05c47f72a0ed9aa1"
+      linux/amd64: "451c800019c81059f86eac2c1344c57572b3436e7e0ffeaa076459d195a39ab8"

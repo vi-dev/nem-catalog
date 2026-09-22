@@ -1,0 +1,31 @@
+schema: 2
+name: kube-burner
+description: Kubernetes performance and scale test orchestration
+homepage: https://kube-burner.github.io/kube-burner/
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: kube-burner/kube-burner
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/kube-burner/kube-burner/releases/download/v{{.Version}}/kube-burner-V{{.Version}}-{{.OS}}-{{replace .Arch \"amd64\" \"x86_64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "kube-burner", dst: "bin/kube-burner", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: kube-burner version | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 2.8.5
+    sha256:
+      darwin/arm64: "a82faab84c5f331a7ca37918b75490d1824212142f7ee6739ab645c61fbd5f64"
+      darwin/amd64: "ae075584d97a890a9939ae01f938535cba1f5446a79b447193ce8c600853d4c7"
+      linux/arm64: "68c54829b37ec1f53bf203bd1172297e2bf5440291e20ff12d21c043120292e1"
+      linux/amd64: "56c5b91a573782c9b6dbcdcb14e0c859403652129c1516efdf247825ec08d766"

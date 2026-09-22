@@ -1,0 +1,31 @@
+schema: 2
+name: cargo-leptos
+description: Build tool for Leptos web applications
+homepage: https://github.com/leptos-rs/cargo-leptos
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: leptos-rs/cargo-leptos
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/leptos-rs/cargo-leptos/releases/download/v{{.Version}}/cargo-leptos-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "cargo-leptos", dst: "bin/cargo-leptos", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: cargo-leptos --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.3.9
+    sha256:
+      darwin/arm64: "eb740a4d502b9cee79c4a13e4f4de6e2037f39be1bb8d4ec066238ba232c5c14"
+      darwin/amd64: "7b9b5f5edf1e9ad4bdf3fc3c685c0185fb32fe0587acf8ee3d558fe760216964"
+      linux/arm64: "e7f660a522cfb78fcb7227f8d5e8192af83b62ef4f8f46911c7305e95b4d8d95"
+      linux/amd64: "17698a797b07f9992b7f8c5cd6b50a0c4dd808f2910fb71c9488b442b16693b8"

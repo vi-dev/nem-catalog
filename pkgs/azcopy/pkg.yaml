@@ -1,0 +1,31 @@
+schema: 2
+name: azcopy
+description: Azure Storage data transfer utility
+homepage: https://github.com/Azure/azure-storage-azcopy
+license: MIT
+
+versionDiscovery:
+  github:
+    repo: Azure/azure-storage-azcopy
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/Azure/azure-storage-azcopy/releases/download/v{{.Version}}/azcopy_{{.OS}}_{{.Arch}}_{{.Version}}.{{if eq .OS \"darwin\"}}zip{{else}}tar.gz{{end}}"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "azcopy", dst: "bin/azcopy", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: azcopy --version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 10.32.8
+    sha256:
+      darwin/arm64: "d17c2a7df11425f2dbc9df397af41495b32a38009e1a230e3c21892cc7a2c8c1"
+      darwin/amd64: "2caddd8ca13cea744847929428f5f4777be1b5ca2c872e368a6158ff8b8d97df"
+      linux/arm64: "50e6e58a109f2afd64376b5b003973ff213fbfdec795fe81a95b208982061d9b"
+      linux/amd64: "a95277dbc265912cefdddbaf251aa99ec648cb18ba657e8788066357a9022dc3"

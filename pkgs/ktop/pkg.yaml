@@ -1,0 +1,31 @@
+schema: 2
+name: ktop
+description: Top-like tool for Kubernetes cluster metrics
+homepage: https://ktop.app
+license: Apache-2.0
+
+versionDiscovery:
+  github:
+    repo: vladimirvivien/ktop
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/vladimirvivien/ktop/releases/download/v{{.Version}}/ktop_v{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "ktop", dst: "bin/ktop", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: ktop --help | grep -q -- --all-namespaces
+
+versions:
+  - version: 0.5.3
+    sha256:
+      darwin/arm64: "fa8688b99974c55080d27abb1fb4a1796af5deb59c3c735d482720384c43f456"
+      darwin/amd64: "bb658e1c79b070e36c39c48f173a9a1b063e2c2b84b3afd581211b8419c0a054"
+      linux/arm64: "448e574bead68b3bfeb745493a031015dfd7b3135af6e1a38eadf07c94d087be"
+      linux/amd64: "f8104e5d09bb764da014ba87e5f75c73f55a26b907e9699f43176848a33dbea6"

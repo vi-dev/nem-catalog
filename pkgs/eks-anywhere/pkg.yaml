@@ -1,0 +1,34 @@
+schema: 2
+name: eks-anywhere
+description: Run Amazon EKS on your own infrastructure
+homepage: https://anywhere.eks.amazonaws.com
+license: Apache-2.0
+
+deps:
+  - eksctl
+
+versionDiscovery:
+  github:
+    repo: aws/eks-anywhere
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  url: "https://github.com/aws/eks-anywhere/releases/download/v{{.Version}}/eksctl-anywhere-v{{.Version}}-{{.OS}}-{{.Arch}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "eksctl-anywhere", dst: "bin/eksctl-anywhere", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: eksctl anywhere version 2>&1 | grep -q "$NEM_VERSION"
+
+versions:
+  - version: 0.26.2
+    sha256:
+      darwin/arm64: "d4fdd1efe851ea66162c17959ceadb4f733bdc437985e0563b302791822a4241"
+      darwin/amd64: "c1056360c4c56929c809777abfcdf843d668a44282de307f2573660d1aba77b9"
+      linux/arm64: "39756db014654e8a425b3f6f4dcf95e18c95e9cb21b7bd6d649621049c519dd1"
+      linux/amd64: "0cd56d6273a69daba84e33880d7ca0f5fa9761c4e3595dbad96e949f175f4a93"
