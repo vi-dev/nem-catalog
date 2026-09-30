@@ -60,7 +60,9 @@ build:
         make install DESTDIR="$NEM_OUTPUT"
     # crun re-execs itself through /proc/self/exe, where $ORIGIN resolves to
     # /proc/self and its libraries fall off the search path; the wrapper
-    # restates that path so the second image inherits it.
+    # restates that path so the second image inherits it. The rpaths are
+    # anchored at libexec/, so $ORIGIN/ maps to the package root's
+    # .nem-link-dependencies via $d/../ rather than the wrapper's own bin/.
     - run: |
         set -e
         mkdir -p "$NEM_OUTPUT/libexec"
@@ -68,7 +70,7 @@ build:
         rp=$(readelf -d "$NEM_OUTPUT/libexec/crun" | sed -n 's/.*R\(UN\)\?PATH.*\[\(.*\)\]/\2/p')
         [ -n "$rp" ]
         printf '#!/bin/sh\nd=$(cd "$(dirname "$0")" && pwd)\nLD_LIBRARY_PATH="%s${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"\nexport LD_LIBRARY_PATH\nexec "$d/../libexec/crun" "$@"\n' \
-          "$(printf %s "$rp" | sed 's|[$]ORIGIN|$d|g')" > "$NEM_OUTPUT/bin/crun"
+          "$(printf %s "$rp" | sed 's|[$]ORIGIN/|$d/../|g')" > "$NEM_OUTPUT/bin/crun"
         chmod 0755 "$NEM_OUTPUT/bin/crun"
 
 test:
