@@ -25,6 +25,12 @@ test:
   - run: kpt version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.0.1
+    sha256:
+      darwin/arm64: "8bc629c66db0c3ec4683bb8d4d3e3321ed1da9492d7a68b6ac67abc554da19aa"
+      darwin/amd64: "ba1a004dc7b73da1a8e33207e0025f2fb9e0284cee71400a2fe5ac3a485765e9"
+      linux/arm64: "0387fb31e1edb985f1f43ff32895c19abbca1994efa1458318d8751df15a3148"
+      linux/amd64: "cee5bc57289329d7924eec9b9c187b6a78b6fea0a95878250f36d9b5ba678e49"
   - version: 1.0.0
     sha256:
       darwin/arm64: "a1dfae3b5b7b28bf562137525c296ab89f12b69e1597ca312987977485a1cbb2"

@@ -23,6 +23,12 @@ test:
   - run: cargo-shear --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.14.0
+    sha256:
+      darwin/arm64: "e50b9375b1e93d2293c803819c118337f1e8fce519e4188a93bb0f5e08041ca3"
+      darwin/amd64: "ea0df899fecd1ae8116d588c97ebdeef8c1ed487ac7df2701ab39d05063a7930"
+      linux/arm64: "d83f7c5b02c4c237d0454697c12df041df0bd83ffecc1aba46c6e06315fd47e1"
+      linux/amd64: "9004df4eb031a456026c4326ae0d0ce545321527a67be90f4524c1be729dc40e"
   - version: 1.13.5
     sha256:
       darwin/arm64: "0cc3491855c9091f1c9924730221e335f43c9db5801c04b425a0a717cfafafdb"

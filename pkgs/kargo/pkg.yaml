@@ -22,6 +22,24 @@ test:
   - run: kargo version --client | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.12.0
+    sha256:
+      darwin/arm64: "65aa8654725fe701fe9424e284357eac99edc8f5ea2d23a82121e8a6de5a33fe"
+      darwin/amd64: "1c2ac9122faf8bd2566e359ef133dbcb8772f6e510e7583e59152ef9e8018df5"
+      linux/arm64: "29f4ca45198d1e1559bfbc699653603d4ebb58fbf6716a24ff862c0d10b15e7e"
+      linux/amd64: "c5cbd208759a8f23b2acbed52d46d047e8383b7b395d9c40c094e62181310dc4"
+  - version: 1.11.6
+    sha256:
+      darwin/arm64: "96c504cfe9d0dfdad8ace84b9d5b10bfd70794280f2bf041da6767056cc73b6d"
+      darwin/amd64: "5f7b6e73e55c72cde021f25ac2e11cf6efbfff702debbb72db62266c53d914e9"
+      linux/arm64: "6daef233ff8ea505f005127d9d0628114a58866c99950d3d27d980786c289d9f"
+      linux/amd64: "05b143882e82936cc5f02835ab2f535f0b44ea9cdd3eba5f7168676d3abaf594"
+  - version: 1.11.5
+    sha256:
+      darwin/arm64: "61cf84ac9eeec7d14cc502c138f58ec5a6e2c609c717f893091687f361177417"
+      darwin/amd64: "8a716309a9656faae121fae2cf0d882f81f67f09955b852ac21467aada00bdd2"
+      linux/arm64: "f292fd2b34d578bf73700069837bd00775e0391bdfbbb45df0cd6a24c1ffb9c0"
+      linux/amd64: "4449f537e66913345fc1649275b17a309d7dffefcb497d68b64cb735852520b8"
   - version: 1.11.4
     sha256:
       darwin/arm64: "5e16583af2be32d0b430219c0234d8018c98dc0f6f4a5425ba722e1e9a3dcad4"

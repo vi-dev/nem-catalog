@@ -23,6 +23,24 @@ test:
   - run: redis_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.93.0
+    sha256:
+      darwin/arm64: "c942054d0c0e45435fdfed9991e9067e2d21139adee70dc924581914d376a4de"
+      darwin/amd64: "81a340551a233e533cc6820d0ba97377a045dd46b7b44b7c751eef57c02080a5"
+      linux/arm64: "c41f29c98ed45964f0588c8644f74b06bae703f696244536691f09ecf7b081a1"
+      linux/amd64: "ed2e531fa68ca2b8604544e19d1088fe409d0592b9ab4f3093fba0783c764972"
+  - version: 1.92.1
+    sha256:
+      darwin/arm64: "4e3e8b8931a0c374bd216d585b49d9c31e1e82403e03fefb912ea9d6d9bda5b4"
+      darwin/amd64: "01020b7563afcee634d704d144beff0019761c9b260798e48f7e1abf1441fa78"
+      linux/arm64: "9aecfb030b173516266773e7d88256bedf414e6a552afc385cbb1ecd49f26832"
+      linux/amd64: "60e9819172ec1c954bad9b44ba0b15ef064e8551bd74461d0ed1a7585bb2c6ad"
+  - version: 1.92.0
+    sha256:
+      darwin/arm64: "a79eafc02f920debd2806d16a22117c58026c77b5bc3b08e5e32f25e578801fa"
+      darwin/amd64: "d4c1446f674a3680d8b690fbccaa4c968fe8a52fe6512bf8d9bcd4fd21d79fff"
+      linux/arm64: "00ce9ba1fc0e6474e69d05e743e2b9b2ddeb89e35b23bf7c999a0667a737fd75"
+      linux/amd64: "028736b15004c1f5c25508235a361d80f1989c577a458cc0dc97279c5269f709"
   - version: 1.91.1
     sha256:
       darwin/arm64: "6e37b64f70919704bef2a3d55cf4afa608f0b383f749e891c2fe5c26dbe6e5d4"

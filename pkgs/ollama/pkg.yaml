@@ -24,6 +24,36 @@ install:
 bins: ["bin", "."]
 
 versions:
+  - version: 0.35.0
+    sha256:
+      darwin/arm64: "2608dbb0a0f0136a198db9d48b4f74ece55f452314a39452fca35b7cf20c2589"
+      darwin/amd64: "2608dbb0a0f0136a198db9d48b4f74ece55f452314a39452fca35b7cf20c2589"
+      linux/arm64: "cb627d332b1fe5055bd5485ca10d595da8429e447648209e375390ec3bd09374"
+      linux/amd64: "1c114a6b220c5efca2ef2b1e5f01d1e535e26f6cd6d1678c8489325d2835e525"
+  - version: 0.34.4
+    sha256:
+      darwin/arm64: "e9c8fddaab5f48f47f2c4ae3d23d0732f5182417125353faeed2188e34a22799"
+      darwin/amd64: "e9c8fddaab5f48f47f2c4ae3d23d0732f5182417125353faeed2188e34a22799"
+      linux/arm64: "96f50a1192133028cf4e010d8c333f8af14b1505db6be7b2034c11487e7fd7e6"
+      linux/amd64: "c238986e61d40c0cc5f4a9b9e40b9eea104350b77efa34741fc134e105cb9533"
+  - version: 0.34.3
+    sha256:
+      darwin/arm64: "2c45865f94bce0d4d1d2567603dd2fdacaf375585220a175aa4800105193d36e"
+      darwin/amd64: "2c45865f94bce0d4d1d2567603dd2fdacaf375585220a175aa4800105193d36e"
+      linux/arm64: "cb1d3c178d48b302dbe42b4fb0ce25ef6282e02eac25496cfc07f5333e2264dd"
+      linux/amd64: "e83a089fd0cd2f79ee2933cca2085846a2065f497adbc6467c402177c68423f9"
+  - version: 0.34.2
+    sha256:
+      darwin/arm64: "f33b2a5aa59bc6c961ed3ec23ba9dc646ca6d99ced8d2a0d46eb3a522167dd3f"
+      darwin/amd64: "f33b2a5aa59bc6c961ed3ec23ba9dc646ca6d99ced8d2a0d46eb3a522167dd3f"
+      linux/arm64: "8edcfe99eb7546d9422cfa8297d341dcd50e090e192ce1a8092a6ab6d182867b"
+      linux/amd64: "e155b83589986d2c581fdbf1381ea3ebdb16549883679cd5a0627f7cdc05b12b"
+  - version: 0.34.1
+    sha256:
+      darwin/arm64: "f18fba83fb1eb415e143fb0c24372ebc4388fd7206f4927d4899932653e8c11d"
+      darwin/amd64: "f18fba83fb1eb415e143fb0c24372ebc4388fd7206f4927d4899932653e8c11d"
+      linux/arm64: "b4bdbbbf5faf2fc15f9f6d775c984a33d5c6fee7b4fdeb3fb56612e58a172db9"
+      linux/amd64: "f361dc3992ec07e4ad429f4bb2d10d4663ba2c295f9a9a688c7d52f4ba650034"
   - version: 0.34.0
     sha256:
       darwin/arm64: "dd12b00bcce2d6551178e67ada90d5af9f75bdb54a118b96655250fa3e8ef734"

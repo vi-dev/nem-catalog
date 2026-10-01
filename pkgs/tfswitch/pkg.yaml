@@ -23,6 +23,12 @@ test:
   - run: tfswitch --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.20.0
+    sha256:
+      darwin/arm64: "20c69987dd2aa7d201d54af4a8eb2526074cc2873ed96fdacf1b01431b5e3da0"
+      darwin/amd64: "5d6574d97e00c68875ab302640b6517724e43043ea8fefe1120f45f72f314be7"
+      linux/arm64: "6343ad29a08e8cc3ca1d6fea8f102645cf58540ed3b0953cfe032328c2bc44ca"
+      linux/amd64: "a15b3d5201dfb0f1e17f3346297c0f594ba66240d245367520d1ca70164dda12"
   - version: 1.19.0
     sha256:
       darwin/arm64: "e84e1cb04f995cf286d46b2a5488fb7cb6acdc29b8942178c0816dcc605bd2e3"

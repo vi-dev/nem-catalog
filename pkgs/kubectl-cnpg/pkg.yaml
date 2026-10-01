@@ -23,6 +23,12 @@ test:
   - run: kubectl-cnpg version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.30.1
+    sha256:
+      darwin/arm64: "74836f530b54f060126fc8cf5fd5c27e77801a6d36f61b66f4457218aa11383f"
+      darwin/amd64: "165a49352b8a60ba2eb7bf2b56e5388ff678ac5af36dc03129cedeaf3a37aee3"
+      linux/arm64: "6ffad753bbbf5d353576967233063f2ba0adb843a4e7ef5ff4cb7384b2716d5e"
+      linux/amd64: "784bc46f176b24a150d5de84d0691f10ff613b59456af86b1a4868e1bacb9953"
   - version: 1.30.0
     sha256:
       darwin/arm64: "88bb6da8ca5b63b5a4e60dae88b320bdcba3a8843536ad86e0fe077765ff2bbc"

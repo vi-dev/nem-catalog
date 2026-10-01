@@ -22,6 +22,12 @@ test:
   - run: ggshield --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.55.0
+    sha256:
+      darwin/arm64: "abea1cf009be013172372085de43cf6783242fd1d74f7688944367204bbde113"
+      darwin/amd64: "a7ddaa4da29e3b7f6610be7391384c410fd3f7d364fed1c47c587933f073249f"
+      linux/arm64: "67f0b5ca22f365bf58f7008d9b79798d3fb600477d808d9419c634db2d08f936"
+      linux/amd64: "e12007d9ab2a87d7b8d85c00111123428eb80b8a79d4ab1e8e71f7daf7c21e80"
   - version: 1.54.0
     sha256:
       darwin/arm64: "b39aa5632f6defdafbfaba4c7d98c96b7332bd19d88c20d9f50436838b55da0d"

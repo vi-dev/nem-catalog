@@ -22,6 +22,12 @@ test:
   - run: kubeshark version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 72.3.83
+    sha256:
+      darwin/arm64: "ae1ea4ead46d404600844d2abb48b542f60b33ad0f33427322e0e179aa293932"
+      darwin/amd64: "6c23f87209b1e6bd490daf67a2496f2a9fb5fefef6b8140db1a9d2b5c934d989"
+      linux/arm64: "65612dc7ee8ec3eafd1f74646ad7799ce74771916629064a3abdb46da6d7674f"
+      linux/amd64: "80db6566754093e606d85928a509d209ead4a1b159fab28374fdbd42d4b7f594"
   - version: 53.4.0
     sha256:
       darwin/arm64: "2dac606da8ee4267fc30c052736b6d5840a9f1e7575905b123fd2b4861137fed"

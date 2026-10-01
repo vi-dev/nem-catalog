@@ -66,6 +66,10 @@ install:
   - extract: {strip: 0}
 
 versions:
+  - version: 2.5.24
+    sourceSha256: "bf149d01a2b9fcc0e4589b8ae8697d3d5c557ea48ed95a3fa55dd3b1187e6039"
+  - version: 2.5.23
+    sourceSha256: "97ebba329ed0aa1ed24395b6a485a3626680f4c19232c62a0c0f0433c726e2bd"
   - version: 2.5.22
     sourceSha256: "96e27b020ad26510388e06f5f07f3f70a4ed8916ee995f1b72b7a024e6d9d87e"
   - version: 2.5.21

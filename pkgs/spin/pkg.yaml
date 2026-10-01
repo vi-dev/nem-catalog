@@ -20,6 +20,18 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 4.2.1
+    sha256:
+      darwin/arm64: "e3d1358039f8397efc0aaf0839be66d3ad856e4ba1cae2dc4068e6700bd7bb3a"
+      darwin/amd64: "82d7f7af4f5f51e03d96aabea66855816b28030870dea330b257d6c07433b8d6"
+      linux/arm64: "199f55510c534cd71aaf589dcd010f19162614696830ddbdb938739c39d71b39"
+      linux/amd64: "60cb9f78312acc577a1b839740dc932f2647f438461734bb96a1e374bcf6a3d1"
+  - version: 4.2.0
+    sha256:
+      darwin/arm64: "cca4aa322bfc3c57bd5e968a3bafcfd533d23b2dabedcf9b319988ceda7e313d"
+      darwin/amd64: "accffc576ee087a864dbe179c0af27983a17bb97f144cf802f9730507853ceb9"
+      linux/arm64: "4fb55e287256284094e193745338e695f7e84874f866014e9a32d879efaabbfe"
+      linux/amd64: "6982fbefa60cb95d290e122b175263d42cad41f2d56b69e3df51d98d594aed81"
   - version: 4.1.0
     sha256:
       darwin/arm64: "04d9b5331acd33a065820b1a0d497a9d18611cc53d2e88d962d60aa0b90d155d"

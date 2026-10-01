@@ -23,6 +23,12 @@ test:
   - run: ping_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.3.0
+    sha256:
+      darwin/arm64: "843631a252604ea3dce66bfd4ee9e0fb605842ad806ba871f89e4926523389bd"
+      darwin/amd64: "fca5ca8bf0b71911d1e8fd4f65471dc98449b16a4e210e4352607395f28232e7"
+      linux/arm64: "282584622a999f2611cce4249f1c70181c2519aeaeb360ef0b727fee3a7f5fdb"
+      linux/amd64: "e10a2e7440c7f488d20ac512e1961e35d4e6956ee92e1f7350689fbf9d9aad10"
   - version: 1.2.3
     sha256:
       darwin/arm64: "baf96a976555676313003fb4e6398fcd1cc49d913d0976bc57c974d664154164"
