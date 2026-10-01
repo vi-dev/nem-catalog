@@ -23,6 +23,12 @@ test:
   - run: carapace --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.8.0
+    sha256:
+      darwin/arm64: "91b4dbce26c4a53dd9a4e5a78259d0c6cd25744d8efa84a2419724f64f33597a"
+      darwin/amd64: "edb9b0d5b472bd13ca8b3460c3bf0a5bdaa19759c5172b3d9894b73c96a6dd4c"
+      linux/arm64: "d501dfb17f3d1fe32d71e2a3704ef92572fc407f90fa9684d07c64f50d9d2fe4"
+      linux/amd64: "6883bb61fe88a8f56c7b74bc9ff68445791ee22697f705b59a063443d8ffc8ad"
   - version: 1.7.3
     sha256:
       darwin/arm64: "a7e79d8787ffc63c26568e8d8256d12df91f5cda0d9dc83d50e90b8567028a9d"

@@ -20,6 +20,42 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 3.11.26
+    sha256:
+      darwin/arm64: "5a20fb30efcdd012e729f142fc1e566647ce578e8e7816cc3935b0a7ee976d18"
+      darwin/amd64: "073ff0c5a7c5067c892c9fdc2f02135689b9b6ee3edd7a7e7740fed5da367795"
+      linux/arm64: "25e531cbcf081f3cd944d633341b4a513996c80017ffec01bb6d1e3eb656acb2"
+      linux/amd64: "8b48912691a6a695ca0f81e899fbe2f752d0294e85b346312d2f9fb5827dce9e"
+  - version: 3.11.25
+    sha256:
+      darwin/arm64: "de90906bfd95851fda752b3b21d02bdcc468324e917fed713d056df740b94128"
+      darwin/amd64: "fb81196b08cd03041bdcc0481807630254d62eaf0891affe7e645875df3e469f"
+      linux/arm64: "f27118574f16a91f50b12940deb6876223e323ac585988a7eb9b7d9b5ec764a5"
+      linux/amd64: "b4c5592f8c598cf6e0acd48a337c0de116f0af5f470e705258d908b1ac79ed3e"
+  - version: 3.11.24
+    sha256:
+      darwin/arm64: "2f4a6d2fa090c82f9f5f0825a45d90ad8a2daaee50a4624573bf44bc146e8cbe"
+      darwin/amd64: "fb590ba6428a223f5fcc8ea5843793ecf773ce228ff11a1f214f1a73b9307472"
+      linux/arm64: "406d4359e0a0b2e4aa9b246749af8f9a83a66b84efab6aabda4a4c3d18b74e58"
+      linux/amd64: "3501af322b92fd00ab8959aff3ee74a029eb590acb4ff9d88aad8a287cbbe51a"
+  - version: 3.11.23
+    sha256:
+      darwin/arm64: "a0b00972269684f4046b41d52a452d60a43b4392e659c6e2d41f73af52170f4f"
+      darwin/amd64: "5026cc3628256b5f894539e455f3b7c42e33611cb3ba40910a32590f31c49c4f"
+      linux/arm64: "b103c0a94dc12cb6112856427b9224b10f912415337efbef4969885b3a423d96"
+      linux/amd64: "c648d86a2f3d66aa6285626173409cba5f7cbb4b4e890ef1040a1330c87a1a2b"
+  - version: 3.11.22
+    sha256:
+      darwin/arm64: "8440d65b4e71d4b3c865c6ad89141802d203ace131bfed37d49c03473b48f9bb"
+      darwin/amd64: "17e3f7506f94567195697a32e4b9f9d68ddf4ee9e0cb2f4adbbd0917b2fc1ce9"
+      linux/arm64: "b40e32ac4e3dd68925289adeb408cd520f33f5c2f16d888991319ff3579aeb8c"
+      linux/amd64: "d6a77d4411556a4a05aaf790615047c85c4151957fc49bd9ce4b76e725a1b28b"
+  - version: 3.11.21
+    sha256:
+      darwin/arm64: "bdfbabd1954df20d15d520aabeae0802028c6fe553e91327d5a6ece0c0cd9d4e"
+      darwin/amd64: "f9807d474de1863b8dc74a586d4a21f2a24f0e62ca9493da338ef2e20f39330c"
+      linux/arm64: "74132d321e2a19d8e1ab3c103eda631abf314770ba87c9dfc0acf2c994c39bfc"
+      linux/amd64: "98c78e48c4688e5e11c34c8c17748147093e691828c51bf153527ff71998dcab"
   - version: 3.11.20
     sha256:
       darwin/arm64: "7b7163ff04db0c8bf1ce19ee90c6db71edad994ffa2d3797ea5d88e6bd2aa4f8"

@@ -30,6 +30,12 @@ test:
   - run: git-credential-manager --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.0.0
+    sha256:
+      darwin/arm64: "4f7b01435a8c5b7ce5638cba87ccfd72b4aefc8b1eb3529439e979b1aa336b0d"
+      darwin/amd64: "e8fc088bb7cf065b1676487ab336d4cbd03fc672defaf6589b3a92a6a339c41d"
+      linux/arm64: "1a0893c15fdfef0008eba586380517475084022e442a7c65eda081723393e075"
+      linux/amd64: "cca9ba949162a83347135a0b94320ccaaf67d1340499fa234d707ec561a4dbb9"
   - version: 2.9.1
     sha256:
       darwin/arm64: "2ac8f99258d04acb45cf592eb5b06ec0e0760c329bce40a4d18dabb5e0e37f68"

@@ -29,6 +29,8 @@ install:
   - extract: {strip: 0}
 
 versions:
+  - version: 2.42.4
+    sourceSha256: "af3241e7776964dcb6bb9a811ca7b0d93000b563e2ae2a8df8f80a7cd6e04d56"
   - version: 2.42.2
     sourceSha256: "e73fe91d9b536c6e3548132c1e327843b0bac3c94be9f158ce112eb989d25fc7"
 

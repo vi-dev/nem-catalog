@@ -22,6 +22,12 @@ test:
   - run: code-server --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 4.139.1
+    sha256:
+      darwin/arm64: "be45844038d9c48f012e8a716765dc189432100b6fff801c93ab75ef36dbe8e6"
+      darwin/amd64: "7b3e644460cdc08027d5d305f04117bffd554b6e7983eca568fe3e8048917670"
+      linux/arm64: "0edb4b60d9c4744b2dd14b0911e3c2e6dd8c6f3c13bd58bda23ae744e59e7df1"
+      linux/amd64: "53029be6c5781b7bca49b815fcc9a2a3fc111813ad8c9965b2c0f0d2985a0674"
   - version: 4.138.0
     sha256:
       darwin/arm64: "1ecf699868e64bb9094a7d3ffcac50bb903354a32137dfc4017cb9479ef6b456"

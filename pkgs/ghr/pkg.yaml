@@ -23,6 +23,12 @@ test:
   - run: ghr --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.18.5
+    sha256:
+      darwin/arm64: "9eb07c42f80f55c66d47b6d6a6738a349164cc80a5b411e75bee74edaf2d190b"
+      darwin/amd64: "40d824088605f1f9c2b8537d2360de6130c18c232f0599cc36c4cdd06400deb4"
+      linux/arm64: "0dbf110f488a5b63026dd0d892b32c8ff967de01410b3fd8d15f64b6c82f062e"
+      linux/amd64: "6a3837f5674fe84a82eb78d701721254ce5d031896ac5bb48d039a059571701b"
   - version: 0.18.4
     sha256:
       darwin/arm64: "65dab14a0acafbad37da3f50279c01c8c13be3bf029cb59d90ddbb1f1f5f0ba6"

@@ -23,6 +23,12 @@ test:
   - run: cargo-leptos --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.3.10
+    sha256:
+      darwin/arm64: "eb86b6d4016bf0b9f7d66fa8cb62e1b49ca0667758357ab85778d11bee6975d2"
+      darwin/amd64: "90c18c4eab97b1823c10f9703f1a6a892a024617894d40c080b34195423f9c8f"
+      linux/arm64: "695e84644e02a42a3635cb782c4ec31897324d4219371efff9ff86d4d87cee28"
+      linux/amd64: "ab0197f4308321c222cc5537947404f7bd3dfd7f50ee877d9daa06f8ca73049c"
   - version: 0.3.9
     sha256:
       darwin/arm64: "eb740a4d502b9cee79c4a13e4f4de6e2037f39be1bb8d4ec066238ba232c5c14"

@@ -26,6 +26,30 @@ test:
   - run: rqlited -version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 10.4.0
+    sha256:
+      linux/arm64: "f8ece5a9778ebff09f0e055cc08f2270c7bba86b32f23b8404e0e5bed1a9b3c7"
+      linux/amd64: "a9de16c18e7eadf466aacfd1cb66791fd4283cf60db58c15b9fd52ab2e80512b"
+  - version: 10.3.7
+    sha256:
+      linux/arm64: "9ef667f0b75f5287b4c2709aabcbd6e9afb01750df90c8e255a221d138025bda"
+      linux/amd64: "58492120954fcf48182b3b31080c09132daef5f397b3f88ea4243eb6a1bd6db3"
+  - version: 10.3.6
+    sha256:
+      linux/arm64: "55d6189a6544361cb3ee357f652534adf14a22af665c5784e22fe83c45c523e1"
+      linux/amd64: "17df480e697e135641fc66aac6c2e7d938c021311e1a8500070e730ccdfa8aa0"
+  - version: 10.3.5
+    sha256:
+      linux/arm64: "23d5d09d34a9e2db54b2c21469aacb3b6563166e3d0d3901f4f4fb44990db99b"
+      linux/amd64: "edaef7580cd60f7f9d558cde2fb95011f6e356ff64da7167fb659ab4b6882014"
+  - version: 10.3.4
+    sha256:
+      linux/arm64: "477bcf6e3e562fb2949ac006e522a80c48deab697d3821d03e4acbc80bb77951"
+      linux/amd64: "b8939991deb982da53907fda2a178d31a7732af595fcd06c2023617926f9c4eb"
+  - version: 10.3.3
+    sha256:
+      linux/arm64: "83472476d3b3254b28fe62a30bcaaed642908f481181e06b44320fdf6f5a3c8b"
+      linux/amd64: "9e22f1efce478f2f0ae1bf7199fa55b073b548a195d7eb0cb4e10af8834bb549"
   - version: 10.3.2
     sha256:
       linux/arm64: "2cfeaad8fad0feaa086e2f8c2e1cf50ae2b11ae2c64c2a76122ba72d63040f89"

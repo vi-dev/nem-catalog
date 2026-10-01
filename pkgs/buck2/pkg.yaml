@@ -22,6 +22,12 @@ test:
   - run: buck2 --version 2>&1 | grep -q buck2
 
 versions:
+  - version: 2026-10-01
+    sha256:
+      darwin/arm64: "cf670f779c2a8a50d1ee27ecedd8b6adc008833febf174c616a6a5cf057f5673"
+      darwin/amd64: "f01718efb66c83ca21126af39083aa2506a27b35f93714aa7534e9613571ac9d"
+      linux/arm64: "acd5cd11c29e2277a04a5a5e7454c0405d63400e06584e015cbb2ece11557434"
+      linux/amd64: "11b92ca53712ee36d95cf48b85d3c8c7c804556abc4d2cb25e0c5b9a37d59f11"
   - version: 2026-09-15
     sha256:
       darwin/arm64: "aacdf7cabe34b9b5dc74866b8dcf7410cdbae3ad2dccef45b7ee9851cb781528"

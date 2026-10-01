@@ -23,6 +23,24 @@ test:
   - run: rumdl --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.2.78
+    sha256:
+      darwin/arm64: "450f00cdbf1da3bc3fbdf56c52dc9e6b2ab08bfd1ee6a26b44848e52a180dba5"
+      darwin/amd64: "0cb4eecf286798e770c1f9e85fbf532ee135becc248a25fab388355c998543f9"
+      linux/arm64: "83afca5be68f8710cf5e3faef103927af8ef8dec3b19bd33ceebef348f3e546e"
+      linux/amd64: "507d2243ca3582094588c0610c2ee5c3bcd0a50a8564149dcce4268cdf50de82"
+  - version: 0.2.77
+    sha256:
+      darwin/arm64: "52744729012b44514b3b4de1431839035d7018464899c5b09627204eebfb73bb"
+      darwin/amd64: "0951dbddfa6a28274d202581f136884474fc7225349519f7ad0eb6038c4dc8ab"
+      linux/arm64: "cd7e0cd23697c4c0e915fb65b3566f71b4a2a0e90a392b193c418971e9ed399f"
+      linux/amd64: "0a516c0590dfd2f3cb0abfc42580464c7fadb9e631cbdffbcc5c2546ae885ad0"
+  - version: 0.2.76
+    sha256:
+      darwin/arm64: "10ec95ee46e1d3f67560250db97725681a5fa4bc488f383615cc54b06c4bdbc7"
+      darwin/amd64: "415df77d4c5d11f336733c9570a72cd0a188d8e6a7460a76134c4c033ec5ece7"
+      linux/arm64: "ef4f1a707dad07f2fcfe207959ed03f2de6e0e0ff9e0c236dd64e89d88d75758"
+      linux/amd64: "0fe0c75a72849e877a779538d550cbefb2b4656911de188dac54067995a6ae2f"
   - version: 0.2.75
     sha256:
       darwin/arm64: "22771c73a49ab5fb3f426c287bd2f1cc88b5544edfc013eb66723a2789f96c62"

@@ -26,6 +26,12 @@ test:
   - run: atlas --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.59.0
+    sha256:
+      darwin/arm64: "c31d0a0628d4ac02239d435aeed1dbc5b1a7ac622834b960431e72630f15bec2"
+      darwin/amd64: "fac114dbdeaa36a57f8685caf4d2b725eab9a9d57eb3fd499a368e8f9d9ef11e"
+      linux/arm64: "30be3c02e09c7aef6e17bfa59c2b4745fa4bd78a8e2efca071f9e7cc7773d9fa"
+      linux/amd64: "c1d248fd506ab24f1362d2c8bc25f654445d056d586d062a91164970e9b85697"
   - version: 1.58.3
     sha256:
       darwin/arm64: "9b1ff92cd01d5801c6b5163c40a014627e034b948f5e3c596c626e425b1a39f3"
