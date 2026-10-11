@@ -36,11 +36,11 @@ nem use kubectl
 To add this catalog under a different name, run:
 
 ```sh
-nem catalog add <name> ghcr.io/vi-dev/nem-catalog:v2
+nem catalog add <name> ghcr.io/vi-dev/nem-catalog:v3
 ```
 
 > [!TIP]
-> The `:v2` tag moves with every release. For reproducible setups, pin the
+> The `:v3` tag moves with every release. For reproducible setups, pin the
 > catalog to a digest instead:
 >
 > ```sh
