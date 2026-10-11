@@ -14,7 +14,7 @@ artifact:
   url: "https://github.com/crazy-max/diun/releases/download/v{{.Version}}/diun_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
 
 install:
-  - extract: {strip: 1}
+  - extract: {strip: 0}
   - copy: {src: "diun", dst: "bin/diun", mode: 0o755}
 
 bins: ["bin"]

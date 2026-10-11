@@ -4,8 +4,6 @@ description: Git repository information tool for the terminal
 homepage: https://onefetch.dev
 license: MIT
 
-# Upstream ships one asset per OS: the macOS tarball is arm64-only and the
-# Linux tarball is x86_64-only, so the other two targets have no artifact.
 platforms: [darwin/arm64, linux/amd64]
 
 versionDiscovery:
@@ -17,7 +15,7 @@ artifact:
   url: "https://github.com/o2sh/onefetch/releases/download/{{.Version}}/onefetch-{{if eq .OS \"darwin\"}}mac{{else}}linux{{end}}.tar.gz"
 
 install:
-  - extract: {strip: 1}
+  - extract: {strip: 0}
   - copy: {src: "onefetch", dst: "bin/onefetch", mode: 0o755}
 
 bins: ["bin"]

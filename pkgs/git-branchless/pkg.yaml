@@ -16,8 +16,7 @@ artifact:
   url: "https://github.com/arxanas/git-branchless/releases/download/v{{.Version}}/git-branchless-v{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
 
 install:
-  # Tar entries are prefixed "./", so the root level costs one strip component.
-  - extract: {strip: 1}
+  - extract: {strip: 0}
   - copy: {src: "git-branchless", dst: "bin/git-branchless", mode: 0o755}
 
 bins: ["bin"]

@@ -14,7 +14,7 @@ artifact:
   url: "https://github.com/yorukot/superfile/releases/download/v{{.Version}}/superfile-{{.OS}}-v{{.Version}}-{{.Arch}}.tar.gz"
 
 install:
-  - extract: {strip: 3}
+  - extract: {strip: 2}
   - copy: {src: "spf", dst: "bin/spf", mode: 0o755}
 
 bins: ["bin"]

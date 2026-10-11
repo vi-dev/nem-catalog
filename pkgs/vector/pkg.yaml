@@ -12,15 +12,11 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
-# macOS assets use the Go arch spelling (arm64-apple-darwin), Linux ones the
-# Rust target triple.
 artifact:
   url: "https://github.com/vectordotdev/vector/releases/download/v{{.Version}}/vector-{{.Version}}-{{if eq .OS \"darwin\"}}arm64-apple-darwin{{else}}{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-unknown-linux-musl{{end}}.tar.gz"
 
-# Tar entries are prefixed "./", so the target-triple dir is the second
-# component and stripping it leaves bin/vector at the root.
 install:
-  - extract: {strip: 2}
+  - extract: {strip: 1}
 
 bins: ["bin"]
 

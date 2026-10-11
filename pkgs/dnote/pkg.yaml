@@ -14,7 +14,7 @@ artifact:
   url: "https://github.com/dnote/dnote/releases/download/cli-v{{.Version}}/dnote_{{.Version}}_{{.OS}}_{{.Arch}}.tar.gz"
 
 install:
-  - extract: {strip: 1}
+  - extract: {strip: 0}
   - copy: {src: "dnote", dst: "bin/dnote", mode: 0o755}
 
 bins: ["bin"]
