@@ -1,0 +1,10 @@
+deps:
+  - node
+
+artifact:
+  url: "https://github.com/yarnpkg/yarn/releases/download/v{{.Version}}/yarn-v{{.Version}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+
+bins: ["bin"]

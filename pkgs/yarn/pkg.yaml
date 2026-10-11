@@ -1,0 +1,79 @@
+schema: 3
+name: yarn
+description: Yarn package manager for Node.js
+homepage: https://yarnpkg.com
+license: BSD-2-Clause
+
+versionDiscovery:
+  github:
+    repo: yarnpkg/berry
+    filter: '^@yarnpkg/cli/\d+\.\d+\.\d+$'
+    prefix: "@yarnpkg/cli/"
+
+deps:
+  - node
+
+artifact:
+  url: "https://repo.yarnpkg.com/{{.Version}}/packages/yarnpkg-cli/bin/yarn.js"
+
+install:
+  - copy: {src: "{{.Artifact}}", dst: "bin/yarn", mode: 0o755}
+  - copy: {src: "{{.Artifact}}", dst: "bin/yarnpkg", mode: 0o755}
+
+bins: ["bin"]
+
+versions:
+  - version: 4.18.1
+    sha256:
+      darwin/arm64: "a28ad591febb769f939c11f82f89bacad0b0fac0c884d3b78fa2aaaee970907e"
+      darwin/amd64: "a28ad591febb769f939c11f82f89bacad0b0fac0c884d3b78fa2aaaee970907e"
+      linux/arm64: "a28ad591febb769f939c11f82f89bacad0b0fac0c884d3b78fa2aaaee970907e"
+      linux/amd64: "a28ad591febb769f939c11f82f89bacad0b0fac0c884d3b78fa2aaaee970907e"
+  - version: 4.18.0
+    sha256:
+      darwin/arm64: "fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5"
+      darwin/amd64: "fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5"
+      linux/arm64: "fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5"
+      linux/amd64: "fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5"
+  - version: 4.17.1
+    sha256:
+      darwin/arm64: "471ffb15e0523663865bbf46a69e7d157ecf532412eb436c48dfab6e3f2abe88"
+      darwin/amd64: "471ffb15e0523663865bbf46a69e7d157ecf532412eb436c48dfab6e3f2abe88"
+      linux/arm64: "471ffb15e0523663865bbf46a69e7d157ecf532412eb436c48dfab6e3f2abe88"
+      linux/amd64: "471ffb15e0523663865bbf46a69e7d157ecf532412eb436c48dfab6e3f2abe88"
+  - version: 3.8.7
+    sha256:
+      darwin/arm64: "81bf69deb72c6cfebaca4389444e034c914cc1a90ea40e4ac55a5e2a1d7063d2"
+      darwin/amd64: "81bf69deb72c6cfebaca4389444e034c914cc1a90ea40e4ac55a5e2a1d7063d2"
+      linux/arm64: "81bf69deb72c6cfebaca4389444e034c914cc1a90ea40e4ac55a5e2a1d7063d2"
+      linux/amd64: "81bf69deb72c6cfebaca4389444e034c914cc1a90ea40e4ac55a5e2a1d7063d2"
+  - version: 3.8.6
+    sha256:
+      darwin/arm64: "c1aaceda3fc48bd03adc661df752171f9299e01ff0d90a3c6b9507063d378c4a"
+      darwin/amd64: "c1aaceda3fc48bd03adc661df752171f9299e01ff0d90a3c6b9507063d378c4a"
+      linux/arm64: "c1aaceda3fc48bd03adc661df752171f9299e01ff0d90a3c6b9507063d378c4a"
+      linux/amd64: "c1aaceda3fc48bd03adc661df752171f9299e01ff0d90a3c6b9507063d378c4a"
+  - version: 2.4.3
+    sha256:
+      darwin/arm64: "8c1575156cfa42112242cc5cfbbd1049da9448ffcdb5c55ce996883610ea983f"
+      darwin/amd64: "8c1575156cfa42112242cc5cfbbd1049da9448ffcdb5c55ce996883610ea983f"
+      linux/arm64: "8c1575156cfa42112242cc5cfbbd1049da9448ffcdb5c55ce996883610ea983f"
+      linux/amd64: "8c1575156cfa42112242cc5cfbbd1049da9448ffcdb5c55ce996883610ea983f"
+  - version: 2.4.2
+    sha256:
+      darwin/arm64: "3ceae9c55cc9f52b474922a5c9bdfb32ada8fa003a3e071064e157fc156cfad0"
+      darwin/amd64: "3ceae9c55cc9f52b474922a5c9bdfb32ada8fa003a3e071064e157fc156cfad0"
+      linux/arm64: "3ceae9c55cc9f52b474922a5c9bdfb32ada8fa003a3e071064e157fc156cfad0"
+      linux/amd64: "3ceae9c55cc9f52b474922a5c9bdfb32ada8fa003a3e071064e157fc156cfad0"
+  - version: 1.22.22
+    sha256:
+      darwin/arm64: "88268464199d1611fcf73ce9c0a6c4d44c7d5363682720d8506f6508addf36a0"
+      darwin/amd64: "88268464199d1611fcf73ce9c0a6c4d44c7d5363682720d8506f6508addf36a0"
+      linux/arm64: "88268464199d1611fcf73ce9c0a6c4d44c7d5363682720d8506f6508addf36a0"
+      linux/amd64: "88268464199d1611fcf73ce9c0a6c4d44c7d5363682720d8506f6508addf36a0"
+  - version: 1.22.21
+    sha256:
+      darwin/arm64: "a55bb4e85405f5dfd6e7154a444e7e33ad305d7ca858bad8546e932a6688df08"
+      darwin/amd64: "a55bb4e85405f5dfd6e7154a444e7e33ad305d7ca858bad8546e932a6688df08"
+      linux/arm64: "a55bb4e85405f5dfd6e7154a444e7e33ad305d7ca858bad8546e932a6688df08"
+      linux/amd64: "a55bb4e85405f5dfd6e7154a444e7e33ad305d7ca858bad8546e932a6688df08"
