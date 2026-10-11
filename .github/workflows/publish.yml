@@ -42,13 +42,13 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: ./.github/actions/setup-nem
-      - run: nem catalog publish ghcr.io/vi-dev/nem-catalog . --tag v2-staging
+      - run: nem catalog publish ghcr.io/vi-dev/nem-catalog . --tag v3-staging
 
   archives:
     needs: stage
     uses: ./.github/workflows/build-archives.yml
     with:
-      catalog: ghcr.io/vi-dev/nem-catalog:v2-staging
+      catalog: ghcr.io/vi-dev/nem-catalog:v3-staging
       missing: true
       push: true
 
@@ -60,7 +60,7 @@ jobs:
       packages: read
     uses: ./.github/workflows/test-packages.yml
     with:
-      catalog: ghcr.io/vi-dev/nem-catalog:v2-staging
+      catalog: ghcr.io/vi-dev/nem-catalog:v3-staging
       entries: ${{ needs.changes.outputs.smoke }}
 
   promote:
@@ -70,10 +70,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: oras-project/setup-oras@1d808f7d7f6995cc68b7bf507bfe5c5446e1dc9d
-      - name: Promote v2-staging to v2
+      - name: Promote v3-staging to v3
         shell: bash
         env:
           GHCR_TOKEN: ${{ github.token }}
         run: |
           echo "$GHCR_TOKEN" | oras login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
-          oras tag ghcr.io/vi-dev/nem-catalog:v2-staging v2
+          oras tag ghcr.io/vi-dev/nem-catalog:v3-staging v3

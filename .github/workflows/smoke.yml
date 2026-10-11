@@ -13,6 +13,6 @@ jobs:
   smoke:
     uses: ./.github/workflows/test-packages.yml
     with:
-      catalog: ghcr.io/vi-dev/nem-catalog:v2
+      catalog: ghcr.io/vi-dev/nem-catalog:v3
       all: true
       timeout-minutes: 180
