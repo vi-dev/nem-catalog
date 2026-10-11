@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: atlas
 description: Database schema management as code
 homepage: https://atlasgo.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-klock
 description: Watch Kubernetes resources in a live table
 homepage: https://github.com/applejag/kubectl-klock

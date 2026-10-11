@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: fossa-cli
 description: Dependency, license and vulnerability analysis for any codebase
 homepage: https://fossa.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: flux
 description: Flux CD GitOps command-line tool
 homepage: https://fluxcd.io

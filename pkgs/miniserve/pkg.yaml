@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: miniserve
 description: Serve files and directories over HTTP from the command line
 homepage: https://github.com/svenstaro/miniserve

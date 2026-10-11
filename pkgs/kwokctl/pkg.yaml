@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kwokctl
 description: Simulate Kubernetes clusters with KWOK
 homepage: https://kwok.sigs.k8s.io

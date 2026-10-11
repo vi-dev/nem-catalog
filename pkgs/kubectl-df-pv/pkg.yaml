@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-df-pv
 description: Show disk usage of persistent volumes
 homepage: https://github.com/yashbhutwala/kubectl-df-pv

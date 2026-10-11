@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: runme
 description: Run commands and workflows defined in markdown documents
 homepage: https://runme.dev

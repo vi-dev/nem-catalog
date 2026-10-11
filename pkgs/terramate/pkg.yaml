@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: terramate
 description: Orchestration and code generation for Terraform
 homepage: https://terramate.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gau
 description: Fetch known URLs from Wayback Machine, OTX, and Common Crawl
 homepage: https://github.com/lc/gau

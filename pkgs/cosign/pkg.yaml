@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cosign
 description: Container signing, verification, and storage in an OCI registry
 homepage: https://www.sigstore.dev

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libcap
 description: POSIX capabilities library and the capsh, getcap, setcap tools

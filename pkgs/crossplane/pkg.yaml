@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: crossplane
 description: Crossplane command-line tool
 homepage: https://www.crossplane.io

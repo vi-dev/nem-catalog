@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: binaryen
 description: Optimizer and compiler toolchain library for WebAssembly
 homepage: https://github.com/WebAssembly/binaryen

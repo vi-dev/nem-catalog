@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vivid
 description: Themeable LS_COLORS generator with a filetype database
 homepage: https://github.com/sharkdp/vivid

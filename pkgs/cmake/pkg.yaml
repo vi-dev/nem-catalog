@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cmake
 description: Cross-platform build system generator
 homepage: https://cmake.org

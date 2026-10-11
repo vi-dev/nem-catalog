@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jdk21
 description: Eclipse Temurin JDK 21 (LTS)
 homepage: https://adoptium.net

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: postgresql
 description: The PostgreSQL database server and client tools
 homepage: https://www.postgresql.org

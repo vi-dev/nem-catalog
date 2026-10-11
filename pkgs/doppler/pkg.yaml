@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: doppler
 description: Doppler secrets management CLI
 homepage: https://www.doppler.com

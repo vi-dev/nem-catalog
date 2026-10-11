@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-lambda
 description: Cargo subcommand for AWS Lambda functions in Rust
 homepage: https://www.cargo-lambda.info

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: manifest-tool
 description: Create and inspect multi-platform OCI image manifests
 homepage: https://github.com/estesp/manifest-tool

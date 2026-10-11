@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-lfs
 description: Git extension for versioning large files
 homepage: https://git-lfs.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kapp
 description: Deployment tool focused on the concept of a Kubernetes application
 homepage: https://carvel.dev/kapp

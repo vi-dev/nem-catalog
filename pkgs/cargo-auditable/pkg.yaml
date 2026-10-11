@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-auditable
 description: Make production Rust binaries auditable
 homepage: https://github.com/rust-secure-code/cargo-auditable

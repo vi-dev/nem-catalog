@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libngtcp2
 description: QUIC protocol C library from the ngtcp2 project

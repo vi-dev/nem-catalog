@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bore
 description: TCP tunnel exposing local ports to a remote server
 homepage: https://github.com/ekzhang/bore

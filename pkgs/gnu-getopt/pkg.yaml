@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: gnu-getopt
 description: GNU getopt from util-linux, for platforms whose system getopt lacks long options

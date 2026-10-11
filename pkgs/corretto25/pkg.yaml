@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: corretto25
 description: Amazon Corretto JDK 25 (LTS)
 homepage: https://aws.amazon.com/corretto/

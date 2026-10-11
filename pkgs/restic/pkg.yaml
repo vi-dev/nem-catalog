@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: restic
 description: Fast, secure, deduplicating backup program
 homepage: https://restic.net

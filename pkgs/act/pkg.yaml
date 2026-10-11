@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: act
 description: Run GitHub Actions locally
 homepage: https://nektosact.com

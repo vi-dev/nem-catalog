@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dockerize
 description: Utility to simplify running applications in Docker containers
 homepage: https://github.com/jwilder/dockerize

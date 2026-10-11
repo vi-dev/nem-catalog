@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: buildah
 description: Tool for building OCI container images

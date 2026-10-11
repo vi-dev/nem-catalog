@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ghz
 description: gRPC benchmarking and load testing tool
 homepage: https://ghz.sh

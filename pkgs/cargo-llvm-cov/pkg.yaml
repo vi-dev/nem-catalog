@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-llvm-cov
 description: Cargo subcommand for LLVM source-based code coverage
 homepage: https://github.com/taiki-e/cargo-llvm-cov

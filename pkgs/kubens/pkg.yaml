@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubens
 description: Fast kubectl namespace switcher
 homepage: https://github.com/ahmetb/kubectx

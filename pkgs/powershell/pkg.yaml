@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: powershell
 description: Cross-platform automation shell and scripting language
 homepage: https://github.com/PowerShell/PowerShell

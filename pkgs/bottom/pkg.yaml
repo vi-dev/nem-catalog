@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bottom
 description: Graphical system monitor (btm)
 homepage: https://github.com/ClementTsang/bottom

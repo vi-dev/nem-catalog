@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hl
 description: Log viewer that renders JSON and logfmt logs as human-readable text
 homepage: https://github.com/pamburus/hl

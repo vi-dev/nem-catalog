@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: firebase-tools
 description: Command line interface for Firebase projects
 homepage: https://firebase.google.com/docs/cli

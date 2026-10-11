@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jdk11
 description: Eclipse Temurin JDK 11 (LTS)
 homepage: https://adoptium.net

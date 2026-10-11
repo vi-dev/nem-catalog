@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: json-exporter
 description: Prometheus exporter that scrapes remote JSON by JSONPath
 homepage: https://github.com/prometheus-community/json_exporter

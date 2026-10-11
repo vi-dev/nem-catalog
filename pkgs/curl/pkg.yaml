@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: curl
 description: Command-line tool and library for transferring data with URLs

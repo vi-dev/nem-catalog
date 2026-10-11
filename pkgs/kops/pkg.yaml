@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kops
 description: Production-grade Kubernetes cluster installation and management
 homepage: https://kops.sigs.k8s.io

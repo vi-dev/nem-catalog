@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: minisign
 description: Sign files and verify digital signatures
 homepage: https://jedisct1.github.io/minisign/

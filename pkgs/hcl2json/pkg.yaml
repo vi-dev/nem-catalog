@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hcl2json
 description: Convert HCL to JSON
 homepage: https://github.com/tmccombs/hcl2json

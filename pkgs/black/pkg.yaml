@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: black
 description: Opinionated Python code formatter
 homepage: https://github.com/psf/black

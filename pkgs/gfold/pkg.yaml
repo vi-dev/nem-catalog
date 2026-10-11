@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gfold
 description: Track the status of multiple Git repositories at once
 homepage: https://github.com/nickgerace/gfold

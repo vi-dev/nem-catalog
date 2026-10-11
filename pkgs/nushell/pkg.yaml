@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nushell
 description: Shell with structured data pipelines
 homepage: https://www.nushell.sh

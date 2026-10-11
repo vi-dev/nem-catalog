@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: zlib
 description: The zlib general-purpose compression library

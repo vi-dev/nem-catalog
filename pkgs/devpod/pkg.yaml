@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: devpod
 description: Client-only tool for devcontainer-based development environments
 homepage: https://devpod.sh

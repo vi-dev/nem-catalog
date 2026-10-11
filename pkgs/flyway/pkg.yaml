@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: flyway
 description: Database schema migration tool
 homepage: https://flywaydb.org

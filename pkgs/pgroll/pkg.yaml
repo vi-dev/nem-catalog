@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pgroll
 description: Zero-downtime, reversible schema migrations for Postgres
 homepage: https://pgroll.com

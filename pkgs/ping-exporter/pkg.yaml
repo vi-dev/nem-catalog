@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ping-exporter
 description: Prometheus exporter for ICMP echo requests
 homepage: https://github.com/czerwonk/ping_exporter

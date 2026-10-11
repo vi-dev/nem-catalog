@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pluto
 description: Detect deprecated Kubernetes API versions
 homepage: https://github.com/FairwindsOps/pluto

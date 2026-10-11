@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sesh
 description: Smart session manager for tmux
 homepage: https://github.com/joshmedeski/sesh

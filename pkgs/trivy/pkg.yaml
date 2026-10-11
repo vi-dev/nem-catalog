@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: trivy
 description: Vulnerability and misconfiguration scanner for containers and other artifacts
 homepage: https://trivy.dev

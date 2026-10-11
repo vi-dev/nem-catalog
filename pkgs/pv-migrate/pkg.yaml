@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pv-migrate
 description: Migrate data between Kubernetes persistent volume claims
 homepage: https://github.com/utkuozdemir/pv-migrate

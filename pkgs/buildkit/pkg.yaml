@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: buildkit
 description: BuildKit build daemon and its buildctl client
 homepage: https://github.com/moby/buildkit

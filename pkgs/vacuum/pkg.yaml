@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vacuum
 description: OpenAPI, AsyncAPI and JSON Schema linter
 homepage: https://quobix.com/vacuum

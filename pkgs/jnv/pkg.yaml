@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jnv
 description: Interactive JSON filter using jq
 homepage: https://github.com/ynqa/jnv

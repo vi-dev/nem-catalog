@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vault
 description: Secrets management and data protection tool
 homepage: https://developer.hashicorp.com/vault

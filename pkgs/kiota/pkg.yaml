@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kiota
 description: OpenAPI-based HTTP client code generator
 homepage: https://github.com/microsoft/kiota

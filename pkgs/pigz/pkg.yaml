@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: pigz
 description: A parallel implementation of gzip

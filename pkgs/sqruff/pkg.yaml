@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sqruff
 description: Fast SQL linter and formatter
 homepage: https://github.com/quarylabs/sqruff

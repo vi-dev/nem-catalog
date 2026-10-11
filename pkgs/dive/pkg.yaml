@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dive
 description: Explore layers and wasted space in container images
 homepage: https://github.com/wagoodman/dive

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ghr
 description: Upload artifacts to GitHub Releases in parallel
 homepage: https://github.com/tcnksm/ghr

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ruff
 description: Extremely fast Python linter and code formatter
 homepage: https://docs.astral.sh/ruff/

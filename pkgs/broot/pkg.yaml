@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: broot
 description: Interactive tree view, file navigator, and fuzzy search
 homepage: https://dystroy.org/broot

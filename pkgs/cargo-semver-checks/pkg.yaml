@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-semver-checks
 description: Scan a Rust crate for semver violations
 homepage: https://github.com/obi1kenobi/cargo-semver-checks

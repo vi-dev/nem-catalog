@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: victoriametrics
 description: Time series database and monitoring solution
 homepage: https://victoriametrics.com

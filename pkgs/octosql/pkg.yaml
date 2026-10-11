@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: octosql
 description: Query multiple data sources with SQL from the command line
 homepage: https://github.com/cube2222/octosql

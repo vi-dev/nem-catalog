@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: imgpkg
 description: Store application configuration files in OCI registries
 homepage: https://carvel.dev/imgpkg

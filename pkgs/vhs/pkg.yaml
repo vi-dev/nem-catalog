@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vhs
 description: Terminal GIF recorder driven by a script file
 homepage: https://github.com/charmbracelet/vhs

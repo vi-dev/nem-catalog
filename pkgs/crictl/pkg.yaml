@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: crictl
 description: CLI for Kubernetes CRI-compatible container runtimes
 homepage: https://github.com/kubernetes-sigs/cri-tools

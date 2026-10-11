@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: temporal
 description: Temporal workflow platform CLI and dev server
 homepage: https://temporal.io

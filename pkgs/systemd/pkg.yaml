@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: systemd
 description: systemd system and service manager, including libsystemd and libudev

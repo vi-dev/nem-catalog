@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-blame
 description: Annotate Kubernetes fields with their last manager
 homepage: https://github.com/knight42/kubectl-blame

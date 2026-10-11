@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-foreach
 description: Run kubectl against multiple contexts at once
 homepage: https://github.com/ahmetb/kubectl-foreach

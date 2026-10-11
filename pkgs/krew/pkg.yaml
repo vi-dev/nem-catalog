@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: krew
 description: Kubectl plugin manager
 homepage: https://krew.sigs.k8s.io

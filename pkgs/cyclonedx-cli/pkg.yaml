@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cyclonedx-cli
 description: CycloneDX SBOM analysis, merging, diffing and conversion
 homepage: https://cyclonedx.org

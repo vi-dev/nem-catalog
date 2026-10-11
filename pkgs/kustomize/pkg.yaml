@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kustomize
 description: Kubernetes native configuration management
 homepage: https://kustomize.io

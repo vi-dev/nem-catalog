@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: atuin
 description: Shell history with sync and search
 homepage: https://atuin.sh

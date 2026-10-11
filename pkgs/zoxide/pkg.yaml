@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zoxide
 description: Smarter cd command that learns your habits
 homepage: https://github.com/ajeetdsouza/zoxide

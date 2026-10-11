@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-machete
 description: Remove unused Rust dependencies
 homepage: https://github.com/bnjbvr/cargo-machete

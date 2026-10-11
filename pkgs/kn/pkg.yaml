@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kn
 description: Knative CLI
 homepage: https://knative.dev

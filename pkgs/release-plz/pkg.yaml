@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: release-plz
 description: Publish Rust crates from CI with a release PR
 homepage: https://release-plz.dev

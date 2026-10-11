@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mongodb-atlas-cli
 description: Manage MongoDB Atlas from the command line
 homepage: https://www.mongodb.com/docs/atlas/cli/stable/

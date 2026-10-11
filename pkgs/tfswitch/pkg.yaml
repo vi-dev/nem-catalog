@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tfswitch
 description: Switch between Terraform versions
 homepage: https://tfswitch.warrensbox.com

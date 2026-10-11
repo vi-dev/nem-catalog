@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: portr
 description: Expose local http, tcp or websocket connections to the internet
 homepage: https://github.com/amalshaji/portr

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gptcommit
 description: Git prepare-commit-msg hook that writes commit messages with an LLM
 homepage: https://github.com/zurawiki/gptcommit

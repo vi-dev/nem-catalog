@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: valkey
 description: Valkey in-memory data store — server, CLI, and benchmark tools

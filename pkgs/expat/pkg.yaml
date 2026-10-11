@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: expat
 description: Stream-oriented XML parser library and xmlwf tool

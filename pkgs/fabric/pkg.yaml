@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: fabric
 description: Open-source framework for augmenting humans using AI
 homepage: https://github.com/danielmiessler/fabric

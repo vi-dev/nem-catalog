@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nfpm
 description: Builds deb, rpm, apk, ipk, and Arch Linux packages
 homepage: https://nfpm.goreleaser.com

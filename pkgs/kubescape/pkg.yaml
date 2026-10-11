@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubescape
 description: Kubernetes security, compliance, and misconfiguration scanner
 homepage: https://kubescape.io

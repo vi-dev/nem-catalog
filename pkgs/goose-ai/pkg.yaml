@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: goose-ai
 description: Extensible AI agent that runs and edits code locally
 homepage: https://goose-docs.ai

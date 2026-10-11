@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jreleaser
 description: Release projects to many targets from one config
 homepage: https://jreleaser.org

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gofumpt
 description: Stricter gofmt with additional formatting rules
 homepage: https://github.com/mvdan/gofumpt

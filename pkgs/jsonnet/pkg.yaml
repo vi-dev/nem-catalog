@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jsonnet
 description: Jsonnet configuration language interpreter and tools
 homepage: https://jsonnet.org

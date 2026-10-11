@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: lua
 description: The Lua programming language — interpreter and compiler

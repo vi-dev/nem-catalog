@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hadolint
 description: Dockerfile linter
 homepage: https://github.com/hadolint/hadolint

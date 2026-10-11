@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: copa
 description: Patch container image vulnerabilities directly
 homepage: https://project-copacetic.github.io/copacetic/

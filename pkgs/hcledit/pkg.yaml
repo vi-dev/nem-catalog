@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hcledit
 description: Command line editor for HCL
 homepage: https://github.com/minamijoyo/hcledit

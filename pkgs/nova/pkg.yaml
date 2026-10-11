@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nova
 description: Find outdated or deprecated Helm charts in a cluster
 homepage: https://nova.docs.fairwinds.com

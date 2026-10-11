@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nextest
 description: Next-generation test runner for Rust
 homepage: https://nexte.st

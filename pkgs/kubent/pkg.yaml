@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubent
 description: Checks Kubernetes clusters for deprecated API usage
 homepage: https://github.com/doitintl/kube-no-trouble

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libgomp
 description: GNU OpenMP runtime library from GCC

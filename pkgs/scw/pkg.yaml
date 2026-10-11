@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: scw
 description: Scaleway CLI
 homepage: https://cli.scaleway.com

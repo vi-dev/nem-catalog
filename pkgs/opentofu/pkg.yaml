@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: opentofu
 description: Open source infrastructure as code tool
 homepage: https://opentofu.org

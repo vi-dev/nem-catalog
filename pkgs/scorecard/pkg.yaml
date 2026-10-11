@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: scorecard
 description: Security health metrics for open source projects
 homepage: https://github.com/ossf/scorecard

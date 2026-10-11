@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: k0s
 description: Kubernetes distribution shipped as a single binary
 homepage: https://k0sproject.io

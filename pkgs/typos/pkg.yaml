@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: typos
 description: Source code spell checker
 homepage: https://github.com/crate-ci/typos

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: protoc-gen-go
 description: protoc plugin generating Go code from Protocol Buffers
 homepage: https://github.com/protocolbuffers/protobuf-go

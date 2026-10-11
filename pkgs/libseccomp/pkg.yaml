@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libseccomp
 description: Interface to the Linux kernel syscall filtering mechanism

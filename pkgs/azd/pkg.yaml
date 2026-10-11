@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: azd
 description: Azure Developer CLI
 homepage: https://aka.ms/azd

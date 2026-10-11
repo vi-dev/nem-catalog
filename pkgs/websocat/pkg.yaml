@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: websocat
 description: Command-line client for WebSockets, like netcat for ws://
 homepage: https://github.com/vi/websocat

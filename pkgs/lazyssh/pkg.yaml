@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lazyssh
 description: Terminal UI SSH connection manager
 homepage: https://github.com/Adembc/lazyssh

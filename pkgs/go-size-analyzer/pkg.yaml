@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: go-size-analyzer
 description: Analyzes the size composition of compiled Go binaries
 homepage: https://github.com/Zxilly/go-size-analyzer

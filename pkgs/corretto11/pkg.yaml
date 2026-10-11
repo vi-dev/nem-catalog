@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: corretto11
 description: Amazon Corretto JDK 11 (LTS)
 homepage: https://aws.amazon.com/corretto/

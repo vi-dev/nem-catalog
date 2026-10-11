@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: lz4
 description: LZ4 extremely fast compression CLI and liblz4

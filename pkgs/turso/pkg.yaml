@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: turso
 description: Command-line interface for the Turso database platform
 homepage: https://turso.tech

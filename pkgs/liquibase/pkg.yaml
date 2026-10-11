@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: liquibase
 description: Database change management and versioning
 homepage: https://www.liquibase.com

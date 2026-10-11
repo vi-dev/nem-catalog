@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: xcodegen
 description: Generates Xcode projects from a YAML spec
 homepage: https://github.com/yonaskolb/XcodeGen

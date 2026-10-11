@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubebuilder
 description: SDK for building Kubernetes APIs and controllers
 homepage: https://kubebuilder.io

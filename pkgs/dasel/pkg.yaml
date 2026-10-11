@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dasel
 description: Query and modify JSON, YAML, TOML, XML, and CSV
 homepage: https://github.com/TomWright/dasel

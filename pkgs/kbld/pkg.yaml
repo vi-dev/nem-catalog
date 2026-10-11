@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kbld
 description: Image building and pushing for Kubernetes deployment workflows
 homepage: https://carvel.dev/kbld

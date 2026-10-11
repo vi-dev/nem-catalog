@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gitlab-ci-local
 description: Run GitLab CI pipelines locally
 homepage: https://github.com/firecow/gitlab-ci-local

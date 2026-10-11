@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jless
 description: Command-line JSON viewer
 homepage: https://jless.io

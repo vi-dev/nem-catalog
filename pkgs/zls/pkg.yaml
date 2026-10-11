@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zls
 description: Language server for Zig
 homepage: https://zigtools.org

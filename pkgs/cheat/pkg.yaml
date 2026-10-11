@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cheat
 description: Create and view interactive cheatsheets on the command line
 homepage: https://github.com/cheat/cheat

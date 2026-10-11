@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tgpt
 description: Terminal AI chatbot client that needs no API keys
 homepage: https://github.com/aandrew-me/tgpt

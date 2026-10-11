@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: goreman
 description: Foreman clone that runs Procfile-based process groups
 homepage: https://github.com/mattn/goreman

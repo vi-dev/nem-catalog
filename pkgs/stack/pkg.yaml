@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: stack
 description: Build tool for Haskell projects
 homepage: https://haskellstack.org

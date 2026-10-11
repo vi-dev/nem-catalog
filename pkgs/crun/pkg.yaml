@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: crun
 description: Fast OCI container runtime written in C

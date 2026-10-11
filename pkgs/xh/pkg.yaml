@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: xh
 description: Friendly and fast HTTP client
 homepage: https://github.com/ducaale/xh

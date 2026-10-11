@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubetail
 description: Real-time logging dashboard for Kubernetes
 homepage: https://www.kubetail.com

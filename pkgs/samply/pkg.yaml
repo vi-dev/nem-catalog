@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: samply
 description: Command-line sampling profiler
 homepage: https://github.com/mstange/samply

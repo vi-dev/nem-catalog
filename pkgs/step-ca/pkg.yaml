@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: step-ca
 description: Private certificate authority and ACME server
 homepage: https://smallstep.com/docs/step-ca

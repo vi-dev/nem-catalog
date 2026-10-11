@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: krb5
 description: MIT Kerberos 5 network authentication libraries and tools

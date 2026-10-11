@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vector
 description: High-performance observability data pipeline
 homepage: https://vector.dev

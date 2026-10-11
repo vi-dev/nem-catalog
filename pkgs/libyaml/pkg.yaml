@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libyaml
 description: C library for YAML 1.1 parsing and emitting

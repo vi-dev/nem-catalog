@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zk
 description: Plain text note-taking assistant
 homepage: https://github.com/zk-org/zk

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kafka
 description: Distributed event streaming platform
 homepage: https://kafka.apache.org

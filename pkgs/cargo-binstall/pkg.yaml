@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-binstall
 description: Install Rust binaries from prebuilt release artifacts
 homepage: https://github.com/cargo-bins/cargo-binstall

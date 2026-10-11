@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-slice
 description: Split multi-document Kubernetes YAML into files
 homepage: https://github.com/patrickdappollonio/kubectl-slice

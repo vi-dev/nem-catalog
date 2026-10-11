@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jdk25
 description: Eclipse Temurin JDK 25 (LTS)
 homepage: https://adoptium.net

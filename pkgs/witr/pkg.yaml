@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: witr
 description: Trace a process, port, container, or file to its origin
 homepage: https://pranshuparmar.github.io/witr/

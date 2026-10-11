@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: goreleaser
 description: Release automation for Go projects
 homepage: https://goreleaser.com

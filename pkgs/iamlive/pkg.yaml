@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: iamlive
 description: Generate AWS IAM policies from observed API calls
 homepage: https://github.com/iann0036/iamlive

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lazydocker
 description: Terminal UI for docker and docker-compose
 homepage: https://github.com/jesseduffield/lazydocker

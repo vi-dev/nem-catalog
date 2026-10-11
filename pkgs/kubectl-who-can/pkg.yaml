@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-who-can
 description: Show which subjects have RBAC permissions
 homepage: https://github.com/aquasecurity/kubectl-who-can

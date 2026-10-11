@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rage
 description: Rust implementation of the age file encryption format
 homepage: https://github.com/str4d/rage

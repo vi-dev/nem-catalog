@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: saml2aws
 description: Get AWS credentials via SAML identity providers
 homepage: https://github.com/Versent/saml2aws

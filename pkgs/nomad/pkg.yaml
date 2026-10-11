@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nomad
 description: Workload orchestration and scheduling tool
 homepage: https://developer.hashicorp.com/nomad

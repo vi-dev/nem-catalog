@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hcloud
 description: Command-line interface for Hetzner Cloud
 homepage: https://github.com/hetznercloud/cli

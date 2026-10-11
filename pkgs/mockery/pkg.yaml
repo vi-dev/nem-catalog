@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mockery
 description: Mock code generator for Go interfaces
 homepage: https://vektra.github.io/mockery/

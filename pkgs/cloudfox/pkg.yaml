@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cloudfox
 description: Situational awareness tool for cloud penetration tests
 homepage: https://github.com/BishopFox/cloudfox

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dolt
 description: SQL database with Git-style version control
 homepage: https://github.com/dolthub/dolt

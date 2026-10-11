@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sonobuoy
 description: Kubernetes conformance testing and cluster diagnostics
 homepage: https://sonobuoy.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: upctl
 description: UpCloud CLI
 homepage: https://upcloudltd.github.io/upcloud-cli/

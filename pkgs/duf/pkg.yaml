@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: duf
 description: Disk usage viewer with a friendly UI
 homepage: https://github.com/muesli/duf

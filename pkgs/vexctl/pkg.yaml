@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vexctl
 description: Create, transform and attest OpenVEX metadata
 homepage: https://github.com/openvex/vexctl

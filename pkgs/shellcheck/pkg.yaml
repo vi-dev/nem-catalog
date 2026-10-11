@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: shellcheck
 description: Static analysis tool for shell scripts
 homepage: https://www.shellcheck.net

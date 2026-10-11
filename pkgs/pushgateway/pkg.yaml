@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pushgateway
 description: Prometheus push acceptor for ephemeral and batch jobs
 homepage: https://prometheus.io

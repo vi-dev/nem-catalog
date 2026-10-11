@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: copilot-cli
 description: GitHub Copilot coding agent for the terminal
 homepage: https://github.com/github/copilot-cli

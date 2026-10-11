@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: terrascan
 description: Static code analyzer for infrastructure as code
 homepage: https://runterrascan.io

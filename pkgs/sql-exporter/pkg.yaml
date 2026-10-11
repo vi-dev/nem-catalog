@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sql-exporter
 description: Database-agnostic SQL exporter for Prometheus
 homepage: https://github.com/burningalchemist/sql_exporter

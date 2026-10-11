@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: graphite-exporter
 description: Prometheus exporter accepting Graphite protocol metrics
 homepage: https://github.com/prometheus/graphite_exporter

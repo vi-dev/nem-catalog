@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: taskwarrior-tui
 description: Terminal user interface for taskwarrior
 homepage: https://kdheepak.com/taskwarrior-tui

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dufs
 description: File server with static serving, upload, search and WebDAV
 homepage: https://github.com/sigoden/dufs

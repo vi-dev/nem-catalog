@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ko
 description: Container image builder for Go applications
 homepage: https://ko.build

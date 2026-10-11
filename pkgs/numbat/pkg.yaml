@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: numbat
 description: Calculator language with first-class physical units
 homepage: https://numbat.dev

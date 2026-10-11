@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-node-shell
 description: Open a root shell on a Kubernetes node
 homepage: https://github.com/kvaps/kubectl-node-shell

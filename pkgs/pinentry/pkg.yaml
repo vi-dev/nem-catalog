@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: pinentry
 description: GnuPG passphrase entry dialog (tty variant)

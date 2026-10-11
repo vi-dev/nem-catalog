@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kcl
 description: Command line interface for the KCL configuration language
 homepage: https://kcl-lang.io

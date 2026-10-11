@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: telepresence
 description: Local development against a remote Kubernetes cluster
 homepage: https://www.telepresence.io

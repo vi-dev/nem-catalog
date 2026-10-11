@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jc
 description: Convert command output and common file formats to JSON
 homepage: https://github.com/kellyjonbrazil/jc

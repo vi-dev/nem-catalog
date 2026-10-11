@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dagger
 description: Programmable CI/CD engine running pipelines in containers
 homepage: https://dagger.io

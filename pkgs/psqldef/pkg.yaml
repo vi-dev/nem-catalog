@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: psqldef
 description: Idempotent schema management for PostgreSQL
 homepage: https://sqldef.github.io

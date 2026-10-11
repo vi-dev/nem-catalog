@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: node-exporter
 description: Prometheus exporter for machine metrics
 homepage: https://prometheus.io

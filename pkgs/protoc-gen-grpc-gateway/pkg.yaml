@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: protoc-gen-grpc-gateway
 description: protoc plugin generating a RESTful reverse proxy for gRPC
 homepage: https://grpc-ecosystem.github.io/grpc-gateway/

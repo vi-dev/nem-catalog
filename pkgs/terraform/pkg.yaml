@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: terraform
 description: Infrastructure as code provisioning tool
 homepage: https://developer.hashicorp.com/terraform

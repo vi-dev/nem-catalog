@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: notation
 description: Sign and verify OCI artifacts with Notary Project
 homepage: https://notaryproject.dev

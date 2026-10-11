@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kyverno-cli
 description: Apply and test Kyverno policies outside a cluster
 homepage: https://kyverno.io

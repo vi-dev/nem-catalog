@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: navi
 description: Interactive cheatsheet tool for the command line
 homepage: https://github.com/denisidoro/navi

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sbt
 description: Build tool for Scala and Java
 homepage: https://www.scala-sbt.org

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libssh2
 description: Client-side SSH2 protocol library

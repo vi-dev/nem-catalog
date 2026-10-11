@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vale
 description: Syntax-aware prose linter
 homepage: https://vale.sh

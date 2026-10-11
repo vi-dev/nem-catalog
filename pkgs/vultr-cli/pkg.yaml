@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vultr-cli
 description: Vultr CLI
 homepage: https://github.com/vultr/vultr-cli

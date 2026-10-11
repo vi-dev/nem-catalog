@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gopass
 description: Command-line password manager for teams
 homepage: https://www.gopass.pw/

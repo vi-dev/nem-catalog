@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-branchless
 description: Git workflow tools for stacked commits and history rewriting
 homepage: https://github.com/arxanas/git-branchless

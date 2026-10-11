@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: presenterm
 description: Markdown terminal slideshow tool
 homepage: https://github.com/mfontanini/presenterm

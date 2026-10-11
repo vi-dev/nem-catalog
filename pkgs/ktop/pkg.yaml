@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ktop
 description: Top-like tool for Kubernetes cluster metrics
 homepage: https://ktop.app

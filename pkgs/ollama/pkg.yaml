@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ollama
 description: Run large language models locally
 homepage: https://ollama.com

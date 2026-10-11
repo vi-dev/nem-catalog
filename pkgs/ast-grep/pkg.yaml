@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ast-grep
 description: Structural search, lint, and rewrite tool for code
 homepage: https://ast-grep.github.io

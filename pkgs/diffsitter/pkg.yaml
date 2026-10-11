@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: diffsitter
 description: Tree-sitter based AST difftool
 homepage: https://github.com/afnanenayet/diffsitter

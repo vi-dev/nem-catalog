@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: m4
 description: GNU macro processor, the engine behind autoconf

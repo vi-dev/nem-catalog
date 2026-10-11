@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: zstd
 description: Zstandard fast lossless compression — CLI and libzstd

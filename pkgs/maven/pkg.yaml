@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: maven
 description: Apache Maven build tool for Java
 homepage: https://maven.apache.org

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tini
 description: Minimal init process for containers
 homepage: https://github.com/krallin/tini

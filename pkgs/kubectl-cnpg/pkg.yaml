@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-cnpg
 description: Kubectl plugin for the CloudNativePG operator
 homepage: https://cloudnative-pg.io

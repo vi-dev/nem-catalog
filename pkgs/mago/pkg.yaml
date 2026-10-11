@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mago
 description: PHP toolchain with formatter, linter, and static analyzer
 homepage: https://mago.carthage.software

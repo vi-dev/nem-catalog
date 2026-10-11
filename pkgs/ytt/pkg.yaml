@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ytt
 description: Carvel YAML templating and overlay tool
 homepage: https://carvel.dev/ytt

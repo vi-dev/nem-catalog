@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: meson
 description: Fast build system generator, driving ninja

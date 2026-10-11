@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: age
 description: Simple, modern, and secure file encryption tool
 homepage: https://filippo.io/age

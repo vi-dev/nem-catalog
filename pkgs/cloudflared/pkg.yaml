@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cloudflared
 description: Cloudflare Tunnel client
 homepage: https://github.com/cloudflare/cloudflared

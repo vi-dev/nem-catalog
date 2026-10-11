@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: vfkit
 description: Virtualization.framework command line front end, used by podman machine

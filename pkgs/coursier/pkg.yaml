@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: coursier
 description: Scala application and artifact manager
 homepage: https://get-coursier.io

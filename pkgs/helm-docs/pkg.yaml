@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: helm-docs
 description: Generate documentation for Helm charts
 homepage: https://github.com/norwoodj/helm-docs

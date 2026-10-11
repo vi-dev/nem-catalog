@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: easeprobe
 description: Standalone health and status checking tool with notifications
 homepage: https://github.com/megaease/easeprobe

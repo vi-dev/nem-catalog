@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mcp-grafana
 description: MCP server for Grafana dashboards, datasources, and alerts
 homepage: https://github.com/grafana/mcp-grafana

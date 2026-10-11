@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: subfinder
 description: Passive subdomain discovery tool
 homepage: https://github.com/projectdiscovery/subfinder

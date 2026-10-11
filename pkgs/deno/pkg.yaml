@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: deno
 description: Secure JavaScript and TypeScript runtime
 homepage: https://deno.com

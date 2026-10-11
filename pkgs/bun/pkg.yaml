@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bun
 description: All-in-one JavaScript runtime, bundler, and package manager
 homepage: https://bun.com

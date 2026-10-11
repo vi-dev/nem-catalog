@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: prometheus
 description: Monitoring system and time series database
 homepage: https://prometheus.io

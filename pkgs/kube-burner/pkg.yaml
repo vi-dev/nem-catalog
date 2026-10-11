@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kube-burner
 description: Kubernetes performance and scale test orchestration
 homepage: https://kube-burner.github.io/kube-burner/

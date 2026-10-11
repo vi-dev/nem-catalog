@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libidn2
 description: GNU IDNA2008/TR46 internationalized domain name library and idn2 CLI

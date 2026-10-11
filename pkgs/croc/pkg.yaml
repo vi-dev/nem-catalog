@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: croc
 description: Send files between computers over an encrypted relay
 homepage: https://github.com/schollz/croc

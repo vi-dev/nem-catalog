@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: addlicense
 description: Add license headers to source files
 homepage: https://github.com/google/addlicense

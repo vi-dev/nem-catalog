@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: meilisearch
 description: Lightning-fast search engine API
 homepage: https://www.meilisearch.com

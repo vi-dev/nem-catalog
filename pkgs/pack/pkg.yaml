@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pack
 description: CLI for building apps with Cloud Native Buildpacks
 homepage: https://buildpacks.io

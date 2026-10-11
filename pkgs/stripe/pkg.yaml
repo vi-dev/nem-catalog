@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: stripe
 description: Command-line tool for the Stripe API
 homepage: https://github.com/stripe/stripe-cli

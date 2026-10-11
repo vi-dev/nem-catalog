@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wasmer
 description: WebAssembly runtime supporting WASI and Emscripten
 homepage: https://wasmer.io

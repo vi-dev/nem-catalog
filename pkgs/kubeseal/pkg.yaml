@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubeseal
 description: CLI for encrypting Kubernetes secrets into SealedSecrets
 homepage: https://sealed-secrets.netlify.app

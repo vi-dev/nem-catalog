@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wabt
 description: WebAssembly binary toolkit
 homepage: https://github.com/WebAssembly/wabt

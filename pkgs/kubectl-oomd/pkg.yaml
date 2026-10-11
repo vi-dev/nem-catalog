@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-oomd
 description: Show recently OOMKilled pods and containers
 homepage: https://github.com/jdockerty/kubectl-oomd

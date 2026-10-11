@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rclone
 description: Sync files to and from cloud storage providers
 homepage: https://rclone.org

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: skate
 description: Personal key-value store for the command line, by Charm
 homepage: https://github.com/charmbracelet/skate

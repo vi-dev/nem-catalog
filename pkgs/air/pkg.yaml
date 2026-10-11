@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: air
 description: Live reload for Go applications
 homepage: https://github.com/air-verse/air

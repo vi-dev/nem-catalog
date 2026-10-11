@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: containerd
 description: Container runtime daemon with shim and ctr client
 homepage: https://containerd.io

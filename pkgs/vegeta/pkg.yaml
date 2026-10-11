@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vegeta
 description: HTTP load testing tool and library
 homepage: https://github.com/tsenart/vegeta

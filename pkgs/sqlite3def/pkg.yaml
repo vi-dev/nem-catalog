@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sqlite3def
 description: Idempotent schema management for SQLite
 homepage: https://github.com/sqldef/sqldef

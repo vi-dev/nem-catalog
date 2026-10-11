@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libselinux
 description: SELinux runtime library for security contexts and file labeling

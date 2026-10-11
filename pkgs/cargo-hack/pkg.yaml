@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-hack
 description: Cargo subcommand for feature-powerset testing and CI
 homepage: https://github.com/taiki-e/cargo-hack

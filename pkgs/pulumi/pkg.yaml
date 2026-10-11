@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pulumi
 description: Infrastructure as code in general-purpose languages
 homepage: https://www.pulumi.com

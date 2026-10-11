@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: influxdb-exporter
 description: Prometheus exporter accepting InfluxDB line protocol metrics
 homepage: https://github.com/prometheus/influxdb_exporter

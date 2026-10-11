@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: buildx
 description: Docker CLI plugin for extended build capabilities
 homepage: https://github.com/docker/buildx

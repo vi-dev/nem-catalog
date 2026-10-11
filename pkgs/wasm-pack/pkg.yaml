@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wasm-pack
 description: Build, test, and publish Rust-generated WebAssembly
 homepage: https://rustwasm.github.io/wasm-pack/

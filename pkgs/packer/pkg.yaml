@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: packer
 description: Automated machine image builder
 homepage: https://developer.hashicorp.com/packer

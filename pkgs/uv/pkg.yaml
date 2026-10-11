@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: uv
 description: Fast Python package and project manager
 homepage: https://docs.astral.sh/uv

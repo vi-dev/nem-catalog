@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bicep
 description: Declarative language for deploying Azure resources
 homepage: https://github.com/Azure/bicep

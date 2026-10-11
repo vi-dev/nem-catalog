@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: json-c
 description: JSON parsing and serialization library for C

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gum
 description: Glamorous shell script building blocks
 homepage: https://github.com/charmbracelet/gum

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pact
 description: Pact contract testing CLI, mock server and broker client
 homepage: https://pact.io

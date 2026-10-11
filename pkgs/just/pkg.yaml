@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: just
 description: A command runner for project-specific tasks
 homepage: https://just.systems

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: chezmoi
 description: Manage your dotfiles across multiple machines
 homepage: https://chezmoi.io

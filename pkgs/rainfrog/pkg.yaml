@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rainfrog
 description: Terminal UI for managing and querying Postgres databases
 homepage: https://github.com/achristmascarl/rainfrog

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tenv
 description: Version manager for OpenTofu, Terraform, Terragrunt and Atmos
 homepage: https://tofuutils.github.io/tenv/

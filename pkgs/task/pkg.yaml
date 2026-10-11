@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: task
 description: Task runner and simpler Make alternative
 homepage: https://taskfile.dev

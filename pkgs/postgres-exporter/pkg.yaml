@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: postgres-exporter
 description: Prometheus exporter for PostgreSQL metrics
 homepage: https://github.com/prometheus-community/postgres_exporter

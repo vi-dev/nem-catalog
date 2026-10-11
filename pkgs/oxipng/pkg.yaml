@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: oxipng
 description: Multithreaded PNG optimizer
 homepage: https://github.com/oxipng/oxipng

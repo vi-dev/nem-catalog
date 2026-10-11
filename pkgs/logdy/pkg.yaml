@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: logdy
 description: Realtime log viewer with a web UI
 homepage: https://logdy.dev

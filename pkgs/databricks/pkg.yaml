@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: databricks
 description: Databricks CLI
 homepage: https://github.com/databricks/cli

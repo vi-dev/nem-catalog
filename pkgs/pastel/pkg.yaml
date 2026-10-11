@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pastel
 description: Generate, analyze, convert and manipulate colors
 homepage: https://github.com/sharkdp/pastel

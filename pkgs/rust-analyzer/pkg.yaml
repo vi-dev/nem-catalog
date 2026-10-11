@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rust-analyzer
 description: Rust compiler front-end for IDEs
 homepage: https://rust-analyzer.github.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sbomqs
 description: SBOM quality and compliance scoring
 homepage: https://github.com/interlynk-io/sbomqs

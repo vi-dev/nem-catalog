@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: openbao
 description: Secrets and identity management server, a fork of Vault
 homepage: https://openbao.org

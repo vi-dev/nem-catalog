@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-dist
 description: Builds and packages shippable artifacts for Rust projects
 homepage: https://opensource.axo.dev/cargo-dist

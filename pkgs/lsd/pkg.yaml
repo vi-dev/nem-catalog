@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lsd
 description: ls alternative with colors, icons, and tree view
 homepage: https://github.com/lsd-rs/lsd

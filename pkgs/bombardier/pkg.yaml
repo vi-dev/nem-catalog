@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bombardier
 description: HTTP benchmarking tool
 homepage: https://github.com/codesenberg/bombardier

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: ncurses
 description: Terminal control library (wide-character) with tic, tput, and infocmp

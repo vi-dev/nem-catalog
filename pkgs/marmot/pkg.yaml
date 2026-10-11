@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: marmot
 description: Multi-writer replication layer for SQLite over NATS JetStream
 homepage: https://github.com/maxpert/marmot

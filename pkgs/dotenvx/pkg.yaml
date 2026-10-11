@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dotenvx
 description: Encrypted .env loader and secrets manager
 homepage: https://dotenvx.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vcluster
 description: Create virtual Kubernetes clusters
 homepage: https://www.vcluster.com

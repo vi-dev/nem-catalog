@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: revive
 description: Configurable and extensible linter for Go
 homepage: https://revive.run

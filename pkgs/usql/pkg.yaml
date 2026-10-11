@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: usql
 description: Universal SQL client for many databases
 homepage: https://github.com/xo/usql

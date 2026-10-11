@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gotestsum
 description: go test runner with summarized output and JUnit XML
 homepage: https://github.com/gotestyourself/gotestsum

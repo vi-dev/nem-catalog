@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tailscale
 description: WireGuard-based mesh VPN client and daemon
 homepage: https://tailscale.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lazyjournal
 description: TUI for reading logs from journalctl, Docker, and files
 homepage: https://github.com/Lifailon/lazyjournal

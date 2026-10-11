@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: chamber
 description: Manage secrets in AWS SSM Parameter Store and Secrets Manager
 homepage: https://github.com/segmentio/chamber

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: aptly
 description: Debian repository management tool
 homepage: https://www.aptly.info

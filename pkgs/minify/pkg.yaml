@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: minify
 description: Minifier for HTML, CSS, JS, JSON, SVG, and XML
 homepage: https://github.com/tdewolff/minify

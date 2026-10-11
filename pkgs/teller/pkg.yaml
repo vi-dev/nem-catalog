@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: teller
 description: Secrets manager for developer environments
 homepage: https://github.com/tellerops/teller

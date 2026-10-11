@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gitui
 description: Terminal UI for git
 homepage: https://github.com/gitui-org/gitui

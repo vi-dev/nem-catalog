@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sqlc
 description: Generate type-safe code from SQL
 homepage: https://sqlc.dev

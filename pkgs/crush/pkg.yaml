@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: crush
 description: Terminal AI coding agent with multi-model support
 homepage: https://github.com/charmbracelet/crush

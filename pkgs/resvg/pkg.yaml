@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: resvg
 description: Render SVG files to PNG
 homepage: https://github.com/linebender/resvg

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: plumber
 description: CLI for reading and writing messages to Kafka, RabbitMQ, and more
 homepage: https://github.com/streamdal/plumber

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: regctl
 description: Registry client for inspecting and copying OCI images
 homepage: https://github.com/regclient/regclient

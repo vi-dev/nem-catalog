@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: argocd
 description: Declarative GitOps continuous delivery CLI for Kubernetes
 homepage: https://argo-cd.readthedocs.io

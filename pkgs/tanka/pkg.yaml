@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tanka
 description: Jsonnet-based configuration utility for Kubernetes
 homepage: https://tanka.dev

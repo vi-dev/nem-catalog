@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: soft-serve
 description: Self-hostable Git server for the command line, by Charm
 homepage: https://github.com/charmbracelet/soft-serve

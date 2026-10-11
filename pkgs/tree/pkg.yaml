@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: tree
 description: Recursive directory listing in a tree-like format

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mysqldef
 description: Idempotent schema management for MySQL
 homepage: https://github.com/sqldef/sqldef

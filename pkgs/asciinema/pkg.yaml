@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: asciinema
 description: Terminal session recorder, streamer and player
 homepage: https://asciinema.org

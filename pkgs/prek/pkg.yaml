@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: prek
 description: Drop-in pre-commit replacement written in Rust
 homepage: https://prek.j178.dev

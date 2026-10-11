@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: snmp-exporter
 description: Prometheus exporter for SNMP
 homepage: https://github.com/prometheus/snmp_exporter

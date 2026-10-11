@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gomplate
 description: Command line template renderer with local and remote datasources
 homepage: https://gomplate.ca

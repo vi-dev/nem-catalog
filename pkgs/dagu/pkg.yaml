@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dagu
 description: Self-hosted workflow engine for YAML-defined job pipelines
 homepage: https://github.com/dagucloud/dagu

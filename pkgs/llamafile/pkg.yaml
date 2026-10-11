@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: llamafile
 description: Distribute and run LLMs with a single portable executable
 homepage: https://github.com/Mozilla-Ocho/llamafile

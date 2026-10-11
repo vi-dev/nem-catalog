@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tfplugindocs
 description: Generate and validate Terraform provider documentation
 homepage: https://github.com/hashicorp/terraform-plugin-docs

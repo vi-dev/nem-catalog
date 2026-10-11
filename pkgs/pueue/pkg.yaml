@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pueue
 description: CLI client for the pueue command queue daemon
 homepage: https://github.com/Nukesor/pueue

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: trdsql
 description: Run SQL queries against CSV, LTSV, JSON, and TBLN files
 homepage: https://noborus.github.io/trdsql/

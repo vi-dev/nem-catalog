@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nats
 description: CLI for the NATS messaging system
 homepage: https://nats.io

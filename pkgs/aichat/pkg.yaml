@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: aichat
 description: Terminal LLM client with shell assistant and RAG
 homepage: https://github.com/sigoden/aichat

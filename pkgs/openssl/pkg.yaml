@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: openssl
 description: Cryptography and TLS toolkit — libcrypto/libssl plus the openssl CLI

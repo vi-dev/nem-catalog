@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: feroxbuster
 description: Fast, recursive content discovery tool
 homepage: https://github.com/epi052/feroxbuster

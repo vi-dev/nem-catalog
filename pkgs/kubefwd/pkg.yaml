@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubefwd
 description: Bulk port forwarding for Kubernetes services
 homepage: https://kubefwd.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cyclonedx-gomod
 description: Generate CycloneDX SBOMs from Go modules
 homepage: https://cyclonedx.org

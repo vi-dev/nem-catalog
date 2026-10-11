@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ali
 description: HTTP load generator with real-time terminal plots
 homepage: https://github.com/nakabonne/ali

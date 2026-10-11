@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: starship
 description: Minimal, fast, customizable shell prompt
 homepage: https://starship.rs

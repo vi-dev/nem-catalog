@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gojq
 description: Pure Go implementation of jq
 homepage: https://github.com/itchyny/gojq

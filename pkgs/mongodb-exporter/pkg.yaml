@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mongodb-exporter
 description: Prometheus exporter for MongoDB
 homepage: https://github.com/percona/mongodb_exporter

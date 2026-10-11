@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ripgrep
 description: Recursively search directories with a regex, respecting gitignore
 homepage: https://github.com/BurntSushi/ripgrep

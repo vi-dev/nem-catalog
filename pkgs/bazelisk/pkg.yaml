@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bazelisk
 description: User-friendly launcher for the Bazel build system
 homepage: https://github.com/bazelbuild/bazelisk

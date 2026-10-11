@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: github-mcp-server
 description: MCP server for GitHub repositories, issues, and pull requests
 homepage: https://github.com/github/github-mcp-server

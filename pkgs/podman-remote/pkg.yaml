@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: podman-remote
 description: Podman remote client for managing OCI containers and pods
 homepage: https://podman.io

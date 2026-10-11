@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dotnet
 description: The .NET SDK and runtime
 homepage: https://dotnet.microsoft.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: slsa-verifier
 description: Verify SLSA provenance of artifacts
 homepage: https://github.com/slsa-framework/slsa-verifier

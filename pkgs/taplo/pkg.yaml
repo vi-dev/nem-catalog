@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: taplo
 description: TOML toolkit with formatter, linter, and language server
 homepage: https://taplo.tamasfe.dev

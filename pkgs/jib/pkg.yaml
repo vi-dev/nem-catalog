@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jib
 description: Build container images for Java applications without a Docker daemon
 homepage: https://github.com/GoogleContainerTools/jib

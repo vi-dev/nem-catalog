@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: whalebrew
 description: Install Docker images as command-line tools
 homepage: https://github.com/whalebrew/whalebrew

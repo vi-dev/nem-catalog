@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: okta-aws-cli
 description: Okta as the identity provider for AWS CLI credentials
 homepage: https://github.com/okta/okta-aws-cli

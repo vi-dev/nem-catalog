@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pnpm
 description: Fast, disk space efficient package manager for Node.js
 homepage: https://pnpm.io

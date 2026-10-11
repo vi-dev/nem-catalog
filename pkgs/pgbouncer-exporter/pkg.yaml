@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pgbouncer-exporter
 description: Prometheus exporter for PgBouncer
 homepage: https://github.com/prometheus-community/pgbouncer_exporter

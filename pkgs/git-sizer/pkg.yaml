@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-sizer
 description: Compute size metrics for a Git repository
 homepage: https://github.com/github/git-sizer

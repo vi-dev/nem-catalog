@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: distribution
 description: Registry server for storing and distributing container images
 homepage: https://distribution.github.io/distribution

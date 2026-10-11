@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-bug
 description: Distributed, offline-first bug tracker embedded in git
 homepage: https://github.com/git-bug/git-bug

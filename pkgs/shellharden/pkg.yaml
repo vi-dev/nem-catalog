@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: shellharden
 description: Corrective syntax highlighter and rewriter for bash
 homepage: https://github.com/anordal/shellharden

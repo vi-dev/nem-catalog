@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: util-linux
 description: util-linux libraries — libmount, libblkid, and libuuid

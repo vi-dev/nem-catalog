@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: grafana
 description: Observability and data visualization platform
 homepage: https://grafana.com

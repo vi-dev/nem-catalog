@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libgpg-error
 description: Error codes and runtime support shared by the GnuPG components

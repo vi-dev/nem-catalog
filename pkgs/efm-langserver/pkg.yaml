@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: efm-langserver
 description: General-purpose language server configured with external tools
 homepage: https://github.com/mattn/efm-langserver

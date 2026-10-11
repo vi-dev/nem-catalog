@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lego
 description: ACME client and library for Let's Encrypt certificates
 homepage: https://go-acme.github.io/lego/

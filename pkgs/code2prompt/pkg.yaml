@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: code2prompt
 description: Convert a codebase into a single LLM prompt
 homepage: https://code2prompt.dev

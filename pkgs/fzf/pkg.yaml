@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: fzf
 description: Command-line fuzzy finder
 homepage: https://github.com/junegunn/fzf

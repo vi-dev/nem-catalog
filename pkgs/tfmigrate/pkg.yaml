@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tfmigrate
 description: Terraform and OpenTofu state migration tool for GitOps
 homepage: https://github.com/minamijoyo/tfmigrate

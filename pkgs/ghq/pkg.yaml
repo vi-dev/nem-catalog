@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ghq
 description: Remote repository management and local clone organizer
 homepage: https://github.com/x-motemen/ghq

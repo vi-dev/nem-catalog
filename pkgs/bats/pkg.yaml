@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bats
 description: Bash automated testing system
 homepage: https://github.com/bats-core/bats-core

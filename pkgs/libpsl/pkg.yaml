@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libpsl
 description: Public Suffix List library and psl CLI

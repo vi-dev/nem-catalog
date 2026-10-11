@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kctrl
 description: CLI for kapp-controller package management on Kubernetes
 homepage: https://carvel.dev/kapp-controller

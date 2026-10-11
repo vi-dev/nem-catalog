@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tldr
 description: Simplified, community-driven man pages (tlrc client)
 homepage: https://tldr.sh

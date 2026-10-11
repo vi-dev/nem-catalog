@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: fnm
 description: Node.js version manager written in Rust
 homepage: https://github.com/Schniz/fnm

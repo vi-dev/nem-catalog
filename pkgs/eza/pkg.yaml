@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: eza
 description: Replacement for ls with colors and git status
 homepage: https://eza.rocks

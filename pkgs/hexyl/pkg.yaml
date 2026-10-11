@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hexyl
 description: Command-line hex viewer
 homepage: https://github.com/sharkdp/hexyl

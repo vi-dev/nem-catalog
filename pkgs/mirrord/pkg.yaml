@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mirrord
 description: Run local processes in the context of a Kubernetes cluster
 homepage: https://mirrord.dev

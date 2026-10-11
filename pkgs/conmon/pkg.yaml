@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: conmon
 description: OCI container monitor, the per-container supervisor podman spawns

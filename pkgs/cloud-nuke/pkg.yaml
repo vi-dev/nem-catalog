@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cloud-nuke
 description: Delete all resources in a cloud account
 homepage: https://gruntwork.io

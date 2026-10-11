@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: render
 description: Render CLI
 homepage: https://render.com/docs/cli

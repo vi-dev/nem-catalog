@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: biome
 description: Fast formatter and linter for JavaScript, TypeScript, and web languages
 homepage: https://biomejs.dev

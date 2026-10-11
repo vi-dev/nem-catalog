@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dart-sass
 description: Reference implementation of the Sass compiler
 homepage: https://sass-lang.com

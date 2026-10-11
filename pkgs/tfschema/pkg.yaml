@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tfschema
 description: Schema inspector for Terraform and OpenTofu providers
 homepage: https://github.com/minamijoyo/tfschema

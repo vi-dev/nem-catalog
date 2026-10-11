@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: bzip2
 description: bzip2 block-sorting compression CLI and static libbz2

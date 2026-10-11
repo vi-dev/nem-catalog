@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tuios
 description: Terminal multiplexer with a windowed interface
 homepage: https://tuios.gaurav.zip

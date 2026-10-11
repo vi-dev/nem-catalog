@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: process-compose
 description: Scheduler and orchestrator for non-containerized processes
 homepage: https://github.com/F1bonacc1/process-compose

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: okteto
 description: Develop applications directly in a Kubernetes cluster
 homepage: https://okteto.com

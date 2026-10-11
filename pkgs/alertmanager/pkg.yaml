@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: alertmanager
 description: Alert routing and notification handler for Prometheus
 homepage: https://prometheus.io/docs/alerting/latest/alertmanager/

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: katana
 description: Web crawling and spidering framework
 homepage: https://github.com/projectdiscovery/katana

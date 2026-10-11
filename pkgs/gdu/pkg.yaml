@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gdu
 description: Fast disk usage analyzer with a console interface
 homepage: https://github.com/dundee/gdu

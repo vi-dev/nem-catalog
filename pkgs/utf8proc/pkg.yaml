@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: utf8proc
 description: Unicode processing library

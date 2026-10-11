@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: harper-ls
 description: Language server for the Harper grammar checker
 homepage: https://writewithharper.com

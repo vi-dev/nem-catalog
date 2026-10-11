@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: htmlq
 description: Extract content from HTML using CSS selectors
 homepage: https://github.com/mgdm/htmlq

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gh-ost
 description: Online schema migration tool for MySQL
 homepage: https://github.com/github/gh-ost

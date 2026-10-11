@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: golangci-lint
 description: Fast linters runner for Go
 homepage: https://golangci-lint.run

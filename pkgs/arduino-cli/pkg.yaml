@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: arduino-cli
 description: Command line interface for Arduino boards and sketches
 homepage: https://arduino.github.io/arduino-cli/

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-count
 description: Count Kubernetes resources by kind
 homepage: https://github.com/chenjiandongx/kubectl-count

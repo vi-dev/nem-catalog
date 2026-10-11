@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: skim
 description: Fuzzy finder for the terminal
 homepage: https://github.com/skim-rs/skim

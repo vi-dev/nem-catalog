@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: steampipe
 description: Query cloud APIs with SQL
 homepage: https://steampipe.io

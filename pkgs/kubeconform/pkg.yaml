@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubeconform
 description: Kubernetes manifest validator
 homepage: https://github.com/yannh/kubeconform

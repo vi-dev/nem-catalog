@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: btop
 description: Resource monitor for CPU, memory, disks, and network
 homepage: https://github.com/aristocratos/btop

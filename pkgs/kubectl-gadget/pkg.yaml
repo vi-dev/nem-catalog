@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-gadget
 description: kubectl plugin for the Inspektor Gadget eBPF debugging tools
 homepage: https://inspektor-gadget.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sshs
 description: Terminal user interface for SSH
 homepage: https://github.com/quantumsheep/sshs

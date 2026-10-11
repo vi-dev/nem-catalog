@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libnghttp3
 description: HTTP/3 C library from the nghttp3 project

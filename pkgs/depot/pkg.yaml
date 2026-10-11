@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: depot
 description: Depot CLI for cloud container builds
 homepage: https://depot.dev

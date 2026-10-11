@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: topgrade
 description: Upgrade everything on your system with one command
 homepage: https://github.com/topgrade-rs/topgrade

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: headscale
 description: Self-hosted implementation of the Tailscale control server
 homepage: https://headscale.net

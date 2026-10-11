@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: glib
 description: GLib core application building blocks — GObject, GIO, and utilities

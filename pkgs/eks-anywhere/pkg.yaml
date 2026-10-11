@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: eks-anywhere
 description: Run Amazon EKS on your own infrastructure
 homepage: https://anywhere.eks.amazonaws.com

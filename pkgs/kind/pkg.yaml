@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kind
 description: Run local Kubernetes clusters in Docker containers
 homepage: https://kind.sigs.k8s.io

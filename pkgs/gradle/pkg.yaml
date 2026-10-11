@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gradle
 description: Gradle build automation tool
 homepage: https://gradle.org

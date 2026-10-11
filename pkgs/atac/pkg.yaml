@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: atac
 description: Terminal API client inspired by Postman
 homepage: https://atac.julien-cpsn.com

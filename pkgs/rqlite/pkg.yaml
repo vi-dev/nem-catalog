@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rqlite
 description: Lightweight distributed database built on SQLite
 homepage: https://rqlite.io

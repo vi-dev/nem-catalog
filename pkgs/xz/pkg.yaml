@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: xz
 description: XZ Utils — LZMA compression CLI and liblzma

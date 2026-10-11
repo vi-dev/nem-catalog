@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: upx
 description: Executable packer that compresses binaries in place
 homepage: https://upx.github.io

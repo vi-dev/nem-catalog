@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: markdown-oxide
 description: Markdown language server for personal knowledge management
 homepage: https://oxide.md

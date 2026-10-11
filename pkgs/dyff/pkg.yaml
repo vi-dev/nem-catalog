@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dyff
 description: Diff tool for YAML files, and sometimes JSON
 homepage: https://github.com/homeport/dyff

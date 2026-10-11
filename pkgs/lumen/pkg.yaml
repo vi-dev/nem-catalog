@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lumen
 description: Git diff viewer and AI commit generator
 homepage: https://github.com/jnsahaj/lumen

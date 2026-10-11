@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dry
 description: Terminal UI for managing Docker containers and images
 homepage: https://moncho.github.io/dry/

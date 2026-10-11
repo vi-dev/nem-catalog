@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libgcrypt
 description: GnuPG cryptographic library

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: netavark
 description: Container network stack for podman, configuring bridges and firewalls

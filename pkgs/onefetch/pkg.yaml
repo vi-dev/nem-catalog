@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: onefetch
 description: Git repository information tool for the terminal
 homepage: https://onefetch.dev

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dust
 description: More intuitive du, showing disk usage as a tree
 homepage: https://github.com/bootandy/dust

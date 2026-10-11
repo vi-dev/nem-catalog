@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mkcert
 description: Locally-trusted development TLS certificates
 homepage: https://mkcert.dev

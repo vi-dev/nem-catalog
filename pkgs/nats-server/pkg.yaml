@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nats-server
 description: High-performance server for the NATS messaging system
 homepage: https://nats.io

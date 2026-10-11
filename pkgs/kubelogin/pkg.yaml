@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubelogin
 description: kubectl plugin for Kubernetes OpenID Connect authentication
 homepage: https://github.com/int128/kubelogin

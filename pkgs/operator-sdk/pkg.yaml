@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: operator-sdk
 description: SDK for building Kubernetes operators
 homepage: https://sdk.operatorframework.io

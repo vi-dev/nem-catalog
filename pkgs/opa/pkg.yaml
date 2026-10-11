@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: opa
 description: Open Policy Agent, a general-purpose policy engine
 homepage: https://www.openpolicyagent.org

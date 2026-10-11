@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubeshark
 description: Network observability and API traffic analyzer for Kubernetes
 homepage: https://kubeshark.com

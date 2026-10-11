@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: oh-my-posh
 description: Cross-shell prompt renderer
 homepage: https://ohmyposh.dev

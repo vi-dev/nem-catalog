@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kube-linter
 description: Static analysis for Kubernetes YAML and Helm charts
 homepage: https://github.com/stackrox/kube-linter

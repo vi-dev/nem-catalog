@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: plow
 description: HTTP benchmarking tool with terminal and web UI
 homepage: https://github.com/six-ddc/plow

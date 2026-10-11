@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubecm
 description: Manage kubeconfig files more easily
 homepage: https://kubecm.cloud

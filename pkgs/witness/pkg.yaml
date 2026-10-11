@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: witness
 description: Attest and verify software supply chain provenance
 homepage: https://witness.dev

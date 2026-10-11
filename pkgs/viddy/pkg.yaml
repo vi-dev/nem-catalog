@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: viddy
 description: Watch command with time machine and pager
 homepage: https://github.com/sachaos/viddy

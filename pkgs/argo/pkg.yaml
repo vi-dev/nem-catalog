@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: argo
 description: Command-line interface for Argo Workflows
 homepage: https://argo-workflows.readthedocs.io

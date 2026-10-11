@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: apache-exporter
 description: Prometheus exporter for Apache httpd
 homepage: https://github.com/Lusitaniae/apache_exporter

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: werf
 description: GitOps delivery tool gluing Git, Helm, and Kubernetes
 homepage: https://werf.io

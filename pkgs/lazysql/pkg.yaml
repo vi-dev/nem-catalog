@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lazysql
 description: Terminal UI for managing SQL databases
 homepage: https://github.com/jorgerojas26/lazysql

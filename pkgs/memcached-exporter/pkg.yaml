@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: memcached-exporter
 description: Prometheus exporter for memcached metrics
 homepage: https://github.com/prometheus/memcached_exporter

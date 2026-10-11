@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: velero
 description: Backup and restore Kubernetes cluster resources and volumes
 homepage: https://velero.io

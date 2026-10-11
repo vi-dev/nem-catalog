@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: buf
 description: CLI for working with Protocol Buffers
 homepage: https://buf.build

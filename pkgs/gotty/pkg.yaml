@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gotty
 description: Share a terminal as a web application
 homepage: https://github.com/sorenisanerd/gotty

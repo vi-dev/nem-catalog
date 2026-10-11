@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: earthly
 description: Build automation with repeatable containerized builds
 homepage: https://earthly.dev

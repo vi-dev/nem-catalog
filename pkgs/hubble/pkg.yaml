@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hubble
 description: CLI for Cilium Hubble network observability
 homepage: https://github.com/cilium/hubble

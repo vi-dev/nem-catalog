@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: scc
 description: Fast code counter with complexity and COCOMO estimates
 homepage: https://github.com/boyter/scc

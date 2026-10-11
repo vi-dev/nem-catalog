@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: glab
 description: GitLab command-line tool
 homepage: https://gitlab.com/gitlab-org/cli

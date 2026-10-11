@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: alloy
 description: OpenTelemetry Collector distribution with programmable pipelines
 homepage: https://grafana.com/oss/alloy

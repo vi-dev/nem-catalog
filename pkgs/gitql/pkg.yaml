@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gitql
 description: Query git repositories with an SQL-like language
 homepage: https://github.com/filhodanuvem/gitql

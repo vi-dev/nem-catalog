@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-release
 description: Cargo subcommand for releasing Rust crates
 homepage: https://github.com/crate-ci/cargo-release

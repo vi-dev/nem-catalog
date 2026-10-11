@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: terragrunt
 description: Orchestration tool for Terraform and OpenTofu
 homepage: https://terragrunt.gruntwork.io

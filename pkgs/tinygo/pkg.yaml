@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tinygo
 description: Go compiler for microcontrollers, WebAssembly, and small binaries
 homepage: https://tinygo.org

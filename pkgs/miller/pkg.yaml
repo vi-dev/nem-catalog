@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: miller
 description: Query and transform CSV, TSV, and JSON with mlr
 homepage: https://miller.readthedocs.io

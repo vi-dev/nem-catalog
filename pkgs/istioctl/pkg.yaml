@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: istioctl
 description: Istio service mesh command-line tool
 homepage: https://istio.io

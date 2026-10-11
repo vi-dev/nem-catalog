@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: litestream
 description: Streaming replication for SQLite
 homepage: https://litestream.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubespy
 description: Observe Kubernetes resources in real time
 homepage: https://github.com/pulumi/kubespy

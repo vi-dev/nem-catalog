@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-shear
 description: Remove unused dependencies from a Rust project
 homepage: https://github.com/Boshen/cargo-shear

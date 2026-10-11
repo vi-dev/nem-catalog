@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: logcli
 description: Command-line client for querying Grafana Loki
 homepage: https://grafana.com/docs/loki/latest/query/logcli/

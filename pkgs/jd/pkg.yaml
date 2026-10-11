@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jd
 description: Diff and patch tool for JSON and YAML
 homepage: https://github.com/josephburnett/jd

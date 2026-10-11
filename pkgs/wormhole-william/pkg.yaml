@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wormhole-william
 description: End-to-end encrypted file transfer, magic-wormhole compatible
 homepage: https://github.com/psanford/wormhole-william

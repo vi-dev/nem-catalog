@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: k3sup
 description: Bootstrap k3s clusters over SSH
 homepage: https://github.com/alexellis/k3sup

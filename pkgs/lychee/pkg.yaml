@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lychee
 description: Fast link checker for Markdown, HTML, and more
 homepage: https://lychee.cli.rs

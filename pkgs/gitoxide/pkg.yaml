@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gitoxide
 description: Pure Rust implementation of Git with the gix and ein CLIs
 homepage: https://github.com/GitoxideLabs/gitoxide

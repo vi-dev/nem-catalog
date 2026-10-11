@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pkl
 description: Configuration language with rich validation and tooling
 homepage: https://pkl-lang.org

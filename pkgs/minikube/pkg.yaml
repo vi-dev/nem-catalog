@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: minikube
 description: Run a local Kubernetes cluster
 homepage: https://minikube.sigs.k8s.io

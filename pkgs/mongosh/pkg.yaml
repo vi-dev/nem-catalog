@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mongosh
 description: MongoDB Shell
 homepage: https://www.mongodb.com/docs/mongodb-shell/

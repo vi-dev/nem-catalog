@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: talosctl
 description: CLI for Talos Linux Kubernetes clusters
 homepage: https://www.talos.dev

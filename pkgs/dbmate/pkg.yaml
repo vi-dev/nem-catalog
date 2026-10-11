@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dbmate
 description: Framework-agnostic database migration tool
 homepage: https://github.com/amacneil/dbmate

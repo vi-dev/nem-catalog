@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jj
 description: Git-compatible version control system (Jujutsu)
 homepage: https://github.com/jj-vcs/jj

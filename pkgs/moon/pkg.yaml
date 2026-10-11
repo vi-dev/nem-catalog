@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: moon
 description: Build system and monorepo management tool
 homepage: https://moonrepo.dev

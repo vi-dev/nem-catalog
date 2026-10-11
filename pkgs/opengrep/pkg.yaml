@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: opengrep
 description: Static code analysis engine for finding security issues
 homepage: https://github.com/opengrep/opengrep

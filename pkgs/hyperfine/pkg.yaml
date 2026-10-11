@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hyperfine
 description: Command-line benchmarking tool
 homepage: https://github.com/sharkdp/hyperfine

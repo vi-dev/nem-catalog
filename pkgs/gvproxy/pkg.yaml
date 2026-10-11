@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: gvproxy
 description: User-mode networking for podman machine, from gvisor-tap-vsock

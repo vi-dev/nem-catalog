@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: syft
 description: SBOM generator for container images and filesystems
 homepage: https://github.com/anchore/syft

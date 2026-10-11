@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: freeze
 description: Generate images of code and terminal output
 homepage: https://github.com/charmbracelet/freeze

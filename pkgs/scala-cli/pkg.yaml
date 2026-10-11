@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: scala-cli
 description: Command-line tool to interact with the Scala language
 homepage: https://scala-cli.virtuslab.org

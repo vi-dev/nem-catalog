@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: proxify
 description: Proxy for capturing, manipulating, and replaying HTTP traffic
 homepage: https://github.com/projectdiscovery/proxify

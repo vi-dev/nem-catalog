@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: qsv
 description: Blazing-fast CSV data-wrangling toolkit
 homepage: https://github.com/dathere/qsv

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-view-secret
 description: Decode Kubernetes secrets
 homepage: https://github.com/elsesiy/kubectl-view-secret

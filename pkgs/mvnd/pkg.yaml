@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mvnd
 description: Maven daemon that keeps a JVM warm between builds
 homepage: https://github.com/apache/maven-mvnd

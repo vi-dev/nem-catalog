@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-tree
 description: Show hierarchies of Kubernetes objects
 homepage: https://github.com/ahmetb/kubectl-tree

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gost
 description: Tunnel and proxy server speaking many protocols
 homepage: https://gost.run

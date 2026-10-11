@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: direnv
 description: Load and unload environment variables per directory
 homepage: https://direnv.net

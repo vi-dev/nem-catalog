@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: evans
 description: Expressive gRPC client with REPL
 homepage: https://github.com/ktr0731/evans

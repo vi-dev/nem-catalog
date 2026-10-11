@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: step
 description: CLI for X509, SSH, JWT and OAuth credentials
 homepage: https://smallstep.com/docs/step-cli

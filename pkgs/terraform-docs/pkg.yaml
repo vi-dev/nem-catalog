@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: terraform-docs
 description: Generate documentation from Terraform modules
 homepage: https://terraform-docs.io

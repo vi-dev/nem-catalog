@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rumdl
 description: Fast Markdown linter and formatter
 homepage: https://github.com/rvben/rumdl

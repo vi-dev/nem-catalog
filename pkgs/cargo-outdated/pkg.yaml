@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-outdated
 description: Show out-of-date Rust dependencies
 homepage: https://github.com/kbknapp/cargo-outdated

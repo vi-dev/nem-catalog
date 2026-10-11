@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: docker-compose
 description: Define and run multi-container applications with Docker
 homepage: https://docs.docker.com/compose/

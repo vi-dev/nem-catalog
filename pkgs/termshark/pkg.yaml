@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: termshark
 description: Terminal UI for tshark packet capture
 homepage: https://termshark.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: oha
 description: HTTP load generator with a live TUI
 homepage: https://github.com/hatoo/oha

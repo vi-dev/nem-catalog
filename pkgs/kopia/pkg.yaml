@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kopia
 description: Encrypted, deduplicating backup tool
 homepage: https://kopia.io

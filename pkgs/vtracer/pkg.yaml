@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vtracer
 description: Convert raster images to vector graphics
 homepage: https://github.com/visioncortex/vtracer

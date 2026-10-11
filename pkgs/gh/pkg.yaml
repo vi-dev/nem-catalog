@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gh
 description: GitHub command-line tool
 homepage: https://cli.github.com

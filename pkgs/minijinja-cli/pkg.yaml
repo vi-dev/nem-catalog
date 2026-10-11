@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: minijinja-cli
 description: Command line renderer for Jinja2 templates
 homepage: https://github.com/mitsuhiko/minijinja

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: gnupg
 description: GNU Privacy Guard — OpenPGP encryption and signing suite

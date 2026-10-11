@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: fq
 description: Query and decode binary formats with a jq-like language
 homepage: https://github.com/wader/fq

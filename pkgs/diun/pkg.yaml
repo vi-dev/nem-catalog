@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: diun
 description: Notifications when an image is updated on a container registry
 homepage: https://crazymax.dev/diun/

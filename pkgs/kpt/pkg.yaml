@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kpt
 description: Automate Kubernetes configuration editing
 homepage: https://kpt.dev

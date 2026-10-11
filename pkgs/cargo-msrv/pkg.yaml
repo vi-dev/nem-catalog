@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-msrv
 description: Find the minimum supported Rust version of a project
 homepage: https://foresterre.github.io/cargo-msrv

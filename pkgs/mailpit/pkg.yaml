@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mailpit
 description: SMTP testing server with a web UI and API
 homepage: https://mailpit.axllent.org

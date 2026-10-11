@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gleam
 description: Type-safe language for the Erlang and JavaScript runtimes
 homepage: https://gleam.run

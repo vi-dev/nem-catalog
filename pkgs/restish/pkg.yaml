@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: restish
 description: CLI for interacting with REST-ish HTTP APIs
 homepage: https://rest.sh

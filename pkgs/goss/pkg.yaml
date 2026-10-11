@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: goss
 description: YAML-based server validation and testing tool
 homepage: https://github.com/goss-org/goss

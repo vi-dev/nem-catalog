@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lnav
 description: Log file navigator for the terminal
 homepage: https://lnav.org

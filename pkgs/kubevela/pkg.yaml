@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubevela
 description: CLI for the KubeVela application delivery platform
 homepage: https://kubevela.io

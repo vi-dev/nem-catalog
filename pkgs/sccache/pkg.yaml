@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sccache
 description: Compiler cache with local and cloud storage backends
 homepage: https://github.com/mozilla/sccache

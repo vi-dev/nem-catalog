@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: moq
 description: Generates interface mock implementations for go generate
 homepage: https://github.com/matryer/moq

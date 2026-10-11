@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: llama-cpp
 description: LLM inference in C/C++ with the llama.cpp toolset
 homepage: https://github.com/ggml-org/llama.cpp

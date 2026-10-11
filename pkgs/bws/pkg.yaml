@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bws
 description: Bitwarden Secrets Manager CLI
 homepage: https://bitwarden.com/products/secrets-manager

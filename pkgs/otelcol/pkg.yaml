@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: otelcol
 description: OpenTelemetry Collector (core distribution)
 homepage: https://opentelemetry.io/docs/collector/

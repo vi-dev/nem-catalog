@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: melange
 description: Build apk packages from declarative pipelines
 homepage: https://github.com/chainguard-dev/melange

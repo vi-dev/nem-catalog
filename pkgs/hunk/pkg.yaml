@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hunk
 description: Terminal diff viewer built around code review
 homepage: https://github.com/modem-dev/hunk

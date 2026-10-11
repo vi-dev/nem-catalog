@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hugo
 description: Hugo static site generator (extended, withdeploy)
 homepage: https://gohugo.io

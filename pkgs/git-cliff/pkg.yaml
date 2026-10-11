@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-cliff
 description: Changelog generator from conventional commits
 homepage: https://git-cliff.org

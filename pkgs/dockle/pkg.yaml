@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dockle
 description: Container image linter for security and best practices
 homepage: https://github.com/goodwithtech/dockle

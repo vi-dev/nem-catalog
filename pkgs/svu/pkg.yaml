@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: svu
 description: Semantic version utility for git tags
 homepage: https://github.com/caarlos0/svu

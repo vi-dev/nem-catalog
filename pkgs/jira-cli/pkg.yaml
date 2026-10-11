@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jira-cli
 description: Interactive command line client for Jira
 homepage: https://github.com/ankitpokhrel/jira-cli

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pike
 description: Determine the IAM permissions required by infrastructure-as-code
 homepage: https://github.com/JamesWoolfenden/pike

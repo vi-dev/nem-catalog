@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: linkerd
 description: Linkerd service mesh CLI (edge release channel)
 homepage: https://linkerd.io

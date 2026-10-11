@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: brotli
 description: Brotli lossless compression — CLI and libbrotli

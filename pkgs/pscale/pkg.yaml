@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pscale
 description: PlanetScale CLI
 homepage: https://planetscale.com/cli

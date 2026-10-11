@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dprint
 description: Pluggable code formatting platform
 homepage: https://dprint.dev

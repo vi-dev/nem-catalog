@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kube-bench
 description: Checks Kubernetes against the CIS Kubernetes Benchmark
 homepage: https://github.com/aquasecurity/kube-bench

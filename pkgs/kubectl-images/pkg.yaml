@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-images
 description: Show container images used in a cluster
 homepage: https://github.com/chenjiandongx/kubectl-images

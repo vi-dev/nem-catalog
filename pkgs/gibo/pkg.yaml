@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gibo
 description: Fetch gitignore boilerplates from GitHub
 homepage: https://github.com/simonwhitaker/gibo

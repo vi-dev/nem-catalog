@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: civo
 description: Civo CLI
 homepage: https://github.com/civo/cli

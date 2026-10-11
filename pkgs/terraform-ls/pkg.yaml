@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: terraform-ls
 description: Terraform language server
 homepage: https://github.com/hashicorp/terraform-ls

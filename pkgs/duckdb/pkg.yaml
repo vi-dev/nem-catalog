@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: duckdb
 description: In-process analytical SQL database CLI
 homepage: https://duckdb.org

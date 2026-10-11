@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kaf
 description: Command-line client for Apache Kafka
 homepage: https://github.com/birdayz/kaf

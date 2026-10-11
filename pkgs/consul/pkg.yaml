@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: consul
 description: Service networking and service discovery tool
 homepage: https://developer.hashicorp.com/consul

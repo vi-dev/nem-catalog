@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: s5cmd
 description: Fast and parallel S3 client
 homepage: https://github.com/peak/s5cmd

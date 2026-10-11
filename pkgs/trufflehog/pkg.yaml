@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: trufflehog
 description: Find and verify leaked credentials
 homepage: https://github.com/trufflesecurity/trufflehog

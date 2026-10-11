@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: go-blueprint
 description: Scaffolds Go projects with a chosen web framework
 homepage: https://github.com/Melkeydev/go-blueprint

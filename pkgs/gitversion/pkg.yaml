@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gitversion
 description: Semantic version calculator driven by git history
 homepage: https://gitversion.net

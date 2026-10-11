@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: clickhouse
 description: Fast open-source OLAP database (single-binary CLI and server)
 homepage: https://clickhouse.com

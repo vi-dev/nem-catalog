@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: skopeo
 description: Command-line utility for working with container images and registries

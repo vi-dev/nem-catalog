@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: k8sgpt
 description: Scans Kubernetes clusters and explains issues in plain language
 homepage: https://k8sgpt.ai

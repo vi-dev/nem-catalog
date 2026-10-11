@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vendir
 description: Declaratively vendor git repos, releases, charts and images
 homepage: https://carvel.dev/vendir

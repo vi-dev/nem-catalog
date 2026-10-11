@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: marp
 description: Command line converter for Marp and Marpit slide decks
 homepage: https://marp.app

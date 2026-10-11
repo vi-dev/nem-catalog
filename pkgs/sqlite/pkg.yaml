@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: sqlite
 description: SQLite database engine — sqlite3 CLI and libsqlite3

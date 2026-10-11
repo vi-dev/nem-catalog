@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: assh
 description: Advanced SSH config manager and gateway
 homepage: https://manfred.life/assh

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ntfy
 description: Send push notifications to phone or desktop using PUT/POST
 homepage: https://ntfy.sh

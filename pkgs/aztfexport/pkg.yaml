@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: aztfexport
 description: Bring existing Azure resources under Terraform management
 homepage: https://azure.github.io/aztfexport/

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: osv-scanner
 description: Vulnerability scanner using the OSV database
 homepage: https://google.github.io/osv-scanner/

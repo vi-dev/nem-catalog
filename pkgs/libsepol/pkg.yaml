@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libsepol
 description: SELinux binary policy manipulation library

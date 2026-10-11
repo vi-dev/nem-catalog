@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lima
 description: Linux virtual machines, with macOS integration
 homepage: https://lima-vm.io

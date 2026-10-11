@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: reviewdog
 description: Post code analysis results as pull request review comments
 homepage: https://github.com/reviewdog/reviewdog

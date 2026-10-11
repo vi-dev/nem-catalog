@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: redis-exporter
 description: Prometheus exporter for Redis and Valkey metrics
 homepage: https://github.com/oliver006/redis_exporter

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: regal
 description: Linter and language server for Rego
 homepage: https://github.com/open-policy-agent/regal

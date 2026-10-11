@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: vals
 description: Resolve secret references in configuration values
 homepage: https://github.com/helmfile/vals

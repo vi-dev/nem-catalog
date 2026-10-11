@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wishlist
 description: SSH directory and multiplexer, by Charm
 homepage: https://github.com/charmbracelet/wishlist

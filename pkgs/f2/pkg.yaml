@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: f2
 description: Batch rename files and directories from the command line
 homepage: https://github.com/ayoisaiah/f2

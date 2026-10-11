@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-ai
 description: AI agent for operating Kubernetes clusters
 homepage: https://github.com/GoogleCloudPlatform/kubectl-ai

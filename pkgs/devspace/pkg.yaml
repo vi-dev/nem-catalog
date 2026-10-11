@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: devspace
 description: Develop and deploy applications directly inside Kubernetes
 homepage: https://devspace.sh

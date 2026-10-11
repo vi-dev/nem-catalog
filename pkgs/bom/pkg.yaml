@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bom
 description: Generate SPDX bills of materials
 homepage: https://kubernetes-sigs.github.io/bom/

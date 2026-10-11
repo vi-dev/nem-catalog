@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ghorg
 description: Clone every repository of a GitHub, GitLab, or Bitbucket org
 homepage: https://github.com/gabrie30/ghorg

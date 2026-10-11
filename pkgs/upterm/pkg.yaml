@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: upterm
 description: Instant terminal sharing over SSH
 homepage: https://upterm.dev

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: bearer
 description: Static code security scanner for risks and privacy issues
 homepage: https://docs.bearer.com

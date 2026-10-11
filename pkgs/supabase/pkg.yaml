@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: supabase
 description: CLI for developing and deploying Supabase projects
 homepage: https://github.com/supabase/cli

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: choose
 description: Human-friendly alternative to cut and awk
 homepage: https://github.com/theryangeary/choose

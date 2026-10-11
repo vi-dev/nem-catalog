@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: yazi
 description: Terminal file manager with async I/O
 homepage: https://yazi-rs.github.io

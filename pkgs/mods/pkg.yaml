@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mods
 description: AI on the command line, by Charm
 homepage: https://github.com/charmbracelet/mods

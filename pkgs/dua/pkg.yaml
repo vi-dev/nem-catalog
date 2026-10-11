@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dua
 description: Disk usage analyzer with interactive deletion
 homepage: https://github.com/Byron/dua-cli

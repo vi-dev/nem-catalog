@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: clusterctl
 description: CLI for Cluster API lifecycle management
 homepage: https://cluster-api.sigs.k8s.io

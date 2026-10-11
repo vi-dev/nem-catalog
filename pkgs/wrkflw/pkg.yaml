@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wrkflw
 description: Validate and run GitHub Actions workflows locally
 homepage: https://github.com/bahdotsh/wrkflw

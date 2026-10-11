@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nuclei
 description: Vulnerability scanner driven by YAML templates
 homepage: https://github.com/projectdiscovery/nuclei

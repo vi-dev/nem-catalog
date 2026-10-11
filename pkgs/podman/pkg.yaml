@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: podman
 description: Daemonless container engine for OCI containers and pods

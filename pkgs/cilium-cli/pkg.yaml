@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cilium-cli
 description: CLI for installing and managing Cilium on Kubernetes
 homepage: https://github.com/cilium/cilium-cli

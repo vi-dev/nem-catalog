@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: stylua
 description: Code formatter for Lua
 homepage: https://github.com/JohnnyMorganz/StyLua

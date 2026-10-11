@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gron
 description: Make JSON greppable
 homepage: https://github.com/tomnomnom/gron

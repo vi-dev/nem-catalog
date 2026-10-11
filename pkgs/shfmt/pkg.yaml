@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: shfmt
 description: Shell script formatter
 homepage: https://github.com/mvdan/sh

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: colima
 description: Container runtimes on macOS and Linux via Lima
 homepage: https://github.com/abiosoft/colima

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: jemalloc
 description: General-purpose scalable concurrent malloc implementation

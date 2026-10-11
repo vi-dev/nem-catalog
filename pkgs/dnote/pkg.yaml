@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dnote
 description: Command line notebook for capturing notes
 homepage: https://github.com/dnote/dnote

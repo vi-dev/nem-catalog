@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: static-web-server
 description: Cross-platform asynchronous web server for static file serving
 homepage: https://static-web-server.net

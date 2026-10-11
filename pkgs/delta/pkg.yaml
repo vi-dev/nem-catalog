@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: delta
 description: Syntax-highlighting pager for git, diff, and grep output
 homepage: https://github.com/dandavison/delta

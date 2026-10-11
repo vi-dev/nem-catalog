@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hurl
 description: Run and test HTTP requests defined in plain text
 homepage: https://hurl.dev

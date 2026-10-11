@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libassuan
 description: IPC library used by the GnuPG components to talk to their helpers

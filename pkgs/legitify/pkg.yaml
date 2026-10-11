@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: legitify
 description: Detect and remediate misconfigurations in GitHub and GitLab
 homepage: https://github.com/Legit-Labs/legitify

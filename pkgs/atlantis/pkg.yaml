@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: atlantis
 description: Terraform pull request automation server
 homepage: https://www.runatlantis.io

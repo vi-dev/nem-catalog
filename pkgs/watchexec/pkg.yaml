@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: watchexec
 description: Runs commands in response to file changes
 homepage: https://watchexec.github.io

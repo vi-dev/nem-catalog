@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-leptos
 description: Build tool for Leptos web applications
 homepage: https://github.com/leptos-rs/cargo-leptos

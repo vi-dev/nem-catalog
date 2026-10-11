@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: netbird
 description: WireGuard-based overlay network client
 homepage: https://netbird.io

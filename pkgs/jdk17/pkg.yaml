@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jdk17
 description: Eclipse Temurin JDK 17 (LTS)
 homepage: https://adoptium.net

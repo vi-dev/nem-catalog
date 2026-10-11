@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: woodpecker-cli
 description: Command-line client for the Woodpecker CI engine
 homepage: https://woodpecker-ci.org

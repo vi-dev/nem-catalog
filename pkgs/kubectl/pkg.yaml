@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl
 description: The Kubernetes command-line tool
 homepage: https://kubernetes.io/docs/reference/kubectl/

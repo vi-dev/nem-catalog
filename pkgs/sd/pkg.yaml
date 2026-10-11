@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sd
 description: Intuitive find-and-replace, a sed alternative
 homepage: https://github.com/chmln/sd

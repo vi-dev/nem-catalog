@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zot
 description: OCI-native container image and artifact registry
 homepage: https://zotregistry.dev

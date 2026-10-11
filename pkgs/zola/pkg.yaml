@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zola
 description: Fast static site generator
 homepage: https://www.getzola.org

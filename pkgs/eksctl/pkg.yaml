@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: eksctl
 description: CLI for creating and managing Amazon EKS clusters
 homepage: https://eksctl.io

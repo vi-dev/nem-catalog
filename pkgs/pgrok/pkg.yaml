@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pgrok
 description: Multi-tenant HTTP/TCP reverse tunnel over SSH remote port forwarding
 homepage: https://github.com/pgrok/pgrok

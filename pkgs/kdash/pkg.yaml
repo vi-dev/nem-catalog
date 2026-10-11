@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kdash
 description: Terminal dashboard for Kubernetes clusters
 homepage: https://github.com/kdash-rs/kdash

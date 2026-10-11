@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tree-sitter
 description: Incremental parsing system for programming tools
 homepage: https://tree-sitter.github.io

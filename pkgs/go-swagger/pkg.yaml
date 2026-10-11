@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: go-swagger
 description: Swagger 2.0 toolkit for Go APIs
 homepage: https://goswagger.io

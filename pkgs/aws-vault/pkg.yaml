@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: aws-vault
 description: Securely store and access AWS credentials
 homepage: https://github.com/99designs/aws-vault

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-secretdata
 description: View decoded secret data across namespaces
 homepage: https://github.com/keisku/kubectl-secretdata

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-view-utilization
 description: Show cluster resource utilization (script plugin)
 homepage: https://github.com/etopeter/kubectl-view-utilization

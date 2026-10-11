@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: docker-cli
 description: Docker command-line client
 homepage: https://www.docker.com

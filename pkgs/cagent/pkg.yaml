@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cagent
 description: Declarative builder and runtime for multi-agent AI systems
 homepage: https://github.com/docker/cagent

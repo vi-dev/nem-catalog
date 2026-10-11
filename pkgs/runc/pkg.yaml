@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: runc
 description: CLI for spawning and running containers per the OCI spec
 homepage: https://github.com/opencontainers/runc

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gauge
 description: Cross-platform test automation runner
 homepage: https://gauge.org

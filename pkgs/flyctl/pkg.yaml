@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: flyctl
 description: Command-line tool for the Fly.io platform
 homepage: https://fly.io

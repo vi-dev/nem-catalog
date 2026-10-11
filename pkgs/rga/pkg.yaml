@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rga
 description: ripgrep wrapper that also searches PDFs, e-books, and archives
 homepage: https://github.com/phiresky/ripgrep-all

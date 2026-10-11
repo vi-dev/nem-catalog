@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mcfly
 description: Context-aware shell history search
 homepage: https://github.com/cantino/mcfly

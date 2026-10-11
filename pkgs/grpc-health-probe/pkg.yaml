@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: grpc-health-probe
 description: Health checks for gRPC applications
 homepage: https://github.com/grpc-ecosystem/grpc-health-probe

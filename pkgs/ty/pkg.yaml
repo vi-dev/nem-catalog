@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ty
 description: Python type checker and language server
 homepage: https://github.com/astral-sh/ty

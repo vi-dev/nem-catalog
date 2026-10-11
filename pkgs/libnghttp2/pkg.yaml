@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libnghttp2
 description: HTTP/2 C library from the nghttp2 project

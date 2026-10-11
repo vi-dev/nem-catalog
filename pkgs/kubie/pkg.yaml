@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubie
 description: Context and namespace switcher for kubectl using subshells
 homepage: https://github.com/kubie-org/kubie

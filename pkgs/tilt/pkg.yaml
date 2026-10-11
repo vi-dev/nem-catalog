@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tilt
 description: Local Kubernetes development environment with live updates
 homepage: https://tilt.dev

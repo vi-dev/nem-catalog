@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-neat
 description: Clean Kubernetes manifests for readability
 homepage: https://github.com/itaysk/kubectl-neat

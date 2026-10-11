@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: container-structure-test
 description: Validate the structure of container images
 homepage: https://github.com/GoogleContainerTools/container-structure-test

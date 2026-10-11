@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: surrealdb
 description: Multi-model database with SQL-like query language
 homepage: https://surrealdb.com

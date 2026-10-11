@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: statsd-exporter
 description: StatsD to Prometheus metrics exporter
 homepage: https://github.com/prometheus/statsd_exporter

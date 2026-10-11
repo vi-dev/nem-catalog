@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: marksman
 description: Language server for Markdown
 homepage: https://github.com/artempyanykh/marksman

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: gpgme
 description: GnuPG Made Easy — high-level crypto API library over the GnuPG engine

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-credential-oauth
 description: Git credential helper using OAuth for GitHub, GitLab and Bitbucket
 homepage: https://github.com/hickford/git-credential-oauth

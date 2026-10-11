@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: yt-dlp
 description: Feature-rich audio/video downloader
 homepage: https://github.com/yt-dlp/yt-dlp

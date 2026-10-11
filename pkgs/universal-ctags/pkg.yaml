@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: universal-ctags
 description: Maintained ctags implementation generating source code tag files

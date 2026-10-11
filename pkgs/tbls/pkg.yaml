@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tbls
 description: CI-friendly tool for documenting a database schema
 homepage: https://github.com/k1LoW/tbls

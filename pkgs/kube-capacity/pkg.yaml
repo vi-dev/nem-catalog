@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kube-capacity
 description: Overview of cluster resource requests, limits, and usage
 homepage: https://github.com/robscott/kube-capacity

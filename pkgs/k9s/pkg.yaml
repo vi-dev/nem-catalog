@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: k9s
 description: Kubernetes cluster terminal UI
 homepage: https://k9scli.io

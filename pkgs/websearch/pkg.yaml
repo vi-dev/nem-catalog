@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: websearch
 description: Open a web search from the terminal
 homepage: https://github.com/zquestz/s

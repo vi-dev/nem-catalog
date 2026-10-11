@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cloudquery
 description: Data integration platform syncing sources into destinations
 homepage: https://www.cloudquery.io

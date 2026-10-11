@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: oxlint
 description: Linter for JavaScript and TypeScript written in Rust
 homepage: https://oxc.rs

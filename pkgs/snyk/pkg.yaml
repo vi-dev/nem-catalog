@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: snyk
 description: Security scanner for code, dependencies, and containers
 homepage: https://docs.snyk.io/snyk-cli

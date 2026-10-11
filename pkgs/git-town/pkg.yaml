@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-town
 description: Git workflow automation for branch-based development
 homepage: https://www.git-town.com

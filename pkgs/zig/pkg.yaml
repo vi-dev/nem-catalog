@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zig
 description: Zig programming language toolchain
 homepage: https://ziglang.org

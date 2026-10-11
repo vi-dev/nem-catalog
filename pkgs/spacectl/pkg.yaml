@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: spacectl
 description: Spacelift CLI
 homepage: https://github.com/spacelift-io/spacectl

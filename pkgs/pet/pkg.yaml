@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pet
 description: Command-line snippet manager
 homepage: https://github.com/knqyf263/pet

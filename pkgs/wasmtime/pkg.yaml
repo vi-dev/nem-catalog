@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: wasmtime
 description: Standalone runtime for WebAssembly and WASI
 homepage: https://wasmtime.dev

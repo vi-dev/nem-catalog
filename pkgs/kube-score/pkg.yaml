@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kube-score
 description: Static analysis of Kubernetes object definitions
 homepage: https://kube-score.com

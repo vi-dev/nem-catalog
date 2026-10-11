@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: grype
 description: Vulnerability scanner for container images and filesystems
 homepage: https://github.com/anchore/grype

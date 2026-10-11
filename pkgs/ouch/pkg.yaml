@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ouch
 description: Compress and decompress archives from the command line
 homepage: https://github.com/ouch-org/ouch

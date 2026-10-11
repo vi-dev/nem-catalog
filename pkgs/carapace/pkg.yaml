@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: carapace
 description: Multi-shell command completion binary
 homepage: https://carapace.sh

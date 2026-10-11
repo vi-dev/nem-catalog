@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tinymist
 description: Language server for Typst
 homepage: https://myriad-dreamin.github.io/tinymist

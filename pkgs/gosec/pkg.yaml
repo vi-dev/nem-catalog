@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gosec
 description: Static analyzer for security problems in Go source
 homepage: https://github.com/securego/gosec

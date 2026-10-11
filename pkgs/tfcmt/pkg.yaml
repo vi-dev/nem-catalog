@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tfcmt
 description: Post Terraform plan and apply results as pull request comments
 homepage: https://suzuki-shunsuke.github.io/tfcmt/

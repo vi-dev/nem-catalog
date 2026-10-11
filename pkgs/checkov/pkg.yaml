@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: checkov
 description: Static analysis for infrastructure as code
 homepage: https://www.checkov.io

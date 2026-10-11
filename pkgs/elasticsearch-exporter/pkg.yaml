@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: elasticsearch-exporter
 description: Prometheus exporter for Elasticsearch stats
 homepage: https://github.com/prometheus-community/elasticsearch_exporter

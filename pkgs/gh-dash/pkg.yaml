@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gh-dash
 description: Terminal UI dashboard for GitHub pull requests and issues
 homepage: https://gh-dash.dev

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mergiraf
 description: Syntax-aware Git merge driver for structured conflicts
 homepage: https://mergiraf.org

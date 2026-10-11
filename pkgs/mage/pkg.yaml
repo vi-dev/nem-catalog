@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mage
 description: Make-like build tool using Go
 homepage: https://magefile.org

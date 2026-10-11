@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zenith
 description: Terminal system monitor with zoomable CPU, disk, and network charts
 homepage: https://github.com/bvaisvil/zenith

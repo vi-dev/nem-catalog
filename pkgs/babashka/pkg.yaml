@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: babashka
 description: Native, fast-starting Clojure interpreter for scripting
 homepage: https://babashka.org

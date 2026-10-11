@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: helm
 description: The Kubernetes package manager
 homepage: https://helm.sh

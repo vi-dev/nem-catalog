@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: helmfile
 description: Declarative spec for deploying Helm charts
 homepage: https://helmfile.readthedocs.io

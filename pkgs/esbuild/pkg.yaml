@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: esbuild
 description: Extremely fast bundler and minifier for JavaScript and CSS
 homepage: https://esbuild.github.io

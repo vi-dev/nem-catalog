@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: poutine
 description: Supply chain vulnerability scanner for build pipelines
 homepage: https://github.com/boostsecurityio/poutine

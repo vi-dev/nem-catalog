@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jjui
 description: Terminal UI for the Jujutsu version control system
 homepage: https://github.com/idursun/jjui

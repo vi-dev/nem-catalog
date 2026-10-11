@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kargo
 description: Multi-stage application lifecycle orchestration for GitOps
 homepage: https://kargo.io

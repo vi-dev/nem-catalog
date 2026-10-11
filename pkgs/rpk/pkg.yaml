@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rpk
 description: Redpanda CLI (Kafka-compatible)
 homepage: https://github.com/redpanda-data/redpanda

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: swag
 description: Swagger 2.0 documentation generator for annotated Go code
 homepage: https://github.com/swaggo/swag

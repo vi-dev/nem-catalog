@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sq
 description: Query and wrangle SQL databases and document formats
 homepage: https://sq.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ovhcloud
 description: OVHcloud CLI
 homepage: https://github.com/ovh/ovhcloud-cli

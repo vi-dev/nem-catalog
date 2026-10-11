@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cfssl
 description: PKI and TLS toolkit with a certificate authority server
 homepage: https://github.com/cloudflare/cfssl

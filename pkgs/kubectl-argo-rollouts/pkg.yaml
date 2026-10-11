@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-argo-rollouts
 description: Kubectl plugin and CLI for Argo Rollouts
 homepage: https://argoproj.github.io/rollouts/

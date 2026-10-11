@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: skaffold
 description: Continuous development workflow for Kubernetes applications
 homepage: https://skaffold.dev

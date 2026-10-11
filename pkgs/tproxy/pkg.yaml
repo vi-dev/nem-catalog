@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tproxy
 description: Proxy that inspects and analyzes TCP connections
 homepage: https://github.com/kevwan/tproxy

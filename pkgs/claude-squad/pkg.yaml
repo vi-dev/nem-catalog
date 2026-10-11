@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: claude-squad
 description: Terminal manager for multiple AI coding agent sessions
 homepage: https://github.com/smtg-ai/claude-squad

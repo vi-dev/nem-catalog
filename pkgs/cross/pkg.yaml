@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cross
 description: Zero-setup cross compilation and cross testing of Rust crates
 homepage: https://github.com/cross-rs/cross

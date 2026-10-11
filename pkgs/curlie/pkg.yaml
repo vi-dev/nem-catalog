@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: curlie
 description: Curl frontend with httpie-style output
 homepage: https://rs.github.io/curlie

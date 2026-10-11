@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubecolor
 description: Colorize kubectl output
 homepage: https://kubecolor.github.io

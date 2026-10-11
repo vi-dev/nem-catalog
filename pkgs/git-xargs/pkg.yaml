@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-xargs
 description: Run a command across many GitHub repositories and open pull requests
 homepage: https://github.com/gruntwork-io/git-xargs

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: chart-testing
 description: Lint and test Helm charts (ct)
 homepage: https://github.com/helm/chart-testing

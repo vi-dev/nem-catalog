@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: aws-nuke
 description: Remove all resources from an AWS account
 homepage: https://aws-nuke.ekristen.dev

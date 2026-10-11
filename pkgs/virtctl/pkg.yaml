@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: virtctl
 description: KubeVirt CLI for managing virtual machines on Kubernetes
 homepage: https://kubevirt.io

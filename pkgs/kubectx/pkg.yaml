@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectx
 description: Fast kubectl context switcher
 homepage: https://github.com/ahmetb/kubectx

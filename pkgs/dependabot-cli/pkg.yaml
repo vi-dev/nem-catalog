@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dependabot-cli
 description: Run Dependabot update jobs locally
 homepage: https://github.com/dependabot/cli

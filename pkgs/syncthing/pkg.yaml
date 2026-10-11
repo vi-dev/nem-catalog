@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: syncthing
 description: Continuous file synchronization between devices
 homepage: https://syncthing.net

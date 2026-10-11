@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: toxiproxy
 description: TCP proxy for simulating network and system conditions
 homepage: https://github.com/Shopify/toxiproxy

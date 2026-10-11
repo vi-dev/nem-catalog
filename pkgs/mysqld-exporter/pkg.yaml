@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mysqld-exporter
 description: Prometheus exporter for MySQL server metrics
 homepage: https://github.com/prometheus/mysqld_exporter

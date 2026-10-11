@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jq
 description: Command-line JSON processor
 homepage: https://jqlang.org

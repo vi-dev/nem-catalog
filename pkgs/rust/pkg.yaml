@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: rust
 description: Rust toolchain — rustc, cargo, and the standard library

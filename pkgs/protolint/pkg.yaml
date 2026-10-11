@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: protolint
 description: Pluggable linter and fixer for Protocol Buffers
 homepage: https://github.com/yoheimuta/protolint

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kompose
 description: Convert docker-compose files to Kubernetes manifests
 homepage: https://kompose.io

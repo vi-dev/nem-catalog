@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: readline
 description: GNU readline line-editing library

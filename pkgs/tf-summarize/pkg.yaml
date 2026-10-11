@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tf-summarize
 description: Print a summary of a Terraform plan
 homepage: https://github.com/dineshba/tf-summarize

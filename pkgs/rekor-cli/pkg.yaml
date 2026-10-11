@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rekor-cli
 description: CLI for the Rekor transparency log
 homepage: https://sigstore.dev

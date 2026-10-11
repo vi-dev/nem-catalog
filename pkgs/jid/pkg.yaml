@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jid
 description: Incremental JSON digger
 homepage: https://github.com/simeji/jid

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-tarpaulin
 description: Code coverage tool for Rust projects
 homepage: https://github.com/xd009642/tarpaulin

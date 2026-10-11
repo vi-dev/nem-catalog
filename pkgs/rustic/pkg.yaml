@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: rustic
 description: Fast, encrypted, deduplicated backups
 homepage: https://rustic.cli.rs

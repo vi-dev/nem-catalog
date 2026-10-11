@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: mdbook
 description: Create books from Markdown
 homepage: https://rust-lang.github.io/mdBook/

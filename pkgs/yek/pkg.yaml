@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: yek
 description: Serialize a repository into chunks for LLM consumption
 homepage: https://github.com/bodo-run/yek

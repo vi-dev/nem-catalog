@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: buck2
 description: Fast multi-language build system by Meta
 homepage: https://buck2.build

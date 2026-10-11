@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-espflash
 description: Cargo subcommand for flashing Espressif SoCs
 homepage: https://github.com/esp-rs/espflash

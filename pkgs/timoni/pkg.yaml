@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: timoni
 description: Package manager for Kubernetes powered by CUE
 homepage: https://timoni.sh

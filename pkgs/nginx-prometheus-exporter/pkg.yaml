@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nginx-prometheus-exporter
 description: Prometheus exporter for NGINX and NGINX Plus
 homepage: https://github.com/nginx/nginx-prometheus-exporter

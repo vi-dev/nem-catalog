@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: httpx
 description: Multi-purpose HTTP toolkit for probing web servers
 homepage: https://github.com/projectdiscovery/httpx

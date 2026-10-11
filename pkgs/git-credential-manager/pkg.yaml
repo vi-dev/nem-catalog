@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-credential-manager
 description: Cross-platform Git credential storage and authentication
 homepage: https://github.com/git-ecosystem/git-credential-manager

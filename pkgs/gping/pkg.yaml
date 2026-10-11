@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gping
 description: Ping with a graph in the terminal
 homepage: https://github.com/orf/gping

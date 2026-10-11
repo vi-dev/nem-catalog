@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: goose
 description: Database migration tool with embedded support
 homepage: https://github.com/pressly/goose

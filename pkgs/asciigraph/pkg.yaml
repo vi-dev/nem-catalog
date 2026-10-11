@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: asciigraph
 description: Draw ASCII line graphs from data in the terminal
 homepage: https://github.com/guptarohit/asciigraph

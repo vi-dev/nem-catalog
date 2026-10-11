@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: lefthook
 description: Git hooks manager for polyglot projects
 homepage: https://lefthook.dev

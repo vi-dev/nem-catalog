@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ferretdb
 description: Open-source MongoDB alternative backed by PostgreSQL
 homepage: https://www.ferretdb.com

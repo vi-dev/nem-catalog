@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zizmor
 description: Static analysis for GitHub Actions workflows
 homepage: https://github.com/zizmorcore/zizmor

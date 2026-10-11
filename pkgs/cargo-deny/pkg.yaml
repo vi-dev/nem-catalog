@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-deny
 description: Cargo plugin for linting dependencies, licenses, and advisories
 homepage: https://github.com/EmbarkStudios/cargo-deny

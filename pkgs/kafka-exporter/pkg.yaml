@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kafka-exporter
 description: Prometheus exporter for Kafka
 homepage: https://github.com/danielqsj/kafka_exporter

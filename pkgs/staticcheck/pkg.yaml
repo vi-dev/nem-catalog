@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: staticcheck
 description: Static analysis linter for Go
 homepage: https://staticcheck.dev

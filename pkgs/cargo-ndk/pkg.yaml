@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-ndk
 description: Compile Rust projects with the Android NDK
 homepage: https://github.com/bbqsrc/cargo-ndk

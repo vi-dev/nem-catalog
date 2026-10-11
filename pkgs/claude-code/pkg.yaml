@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: claude-code
 description: Agentic coding tool that runs in the terminal
 homepage: https://code.claude.com/docs/en/overview

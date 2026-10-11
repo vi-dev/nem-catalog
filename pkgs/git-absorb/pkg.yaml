@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-absorb
 description: Automatic git commit fixups
 homepage: https://github.com/tummychow/git-absorb

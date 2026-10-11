@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: frp
 description: Reverse proxy exposing local servers behind NAT or a firewall
 homepage: https://github.com/fatedier/frp

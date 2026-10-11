@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: jqp
 description: TUI playground to experiment with jq
 homepage: https://github.com/noahgorstein/jqp

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: zellij
 description: Terminal workspace and multiplexer
 homepage: https://zellij.dev

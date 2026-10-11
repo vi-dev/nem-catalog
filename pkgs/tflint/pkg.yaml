@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tflint
 description: Pluggable Terraform linter
 homepage: https://github.com/terraform-linters/tflint

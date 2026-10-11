@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: nats-exporter
 description: Prometheus exporter for NATS metrics
 homepage: https://github.com/nats-io/prometheus-nats-exporter

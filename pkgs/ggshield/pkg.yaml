@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: ggshield
 description: Detect hardcoded secrets with GitGuardian
 homepage: https://gitguardian.com

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-about
 description: Generate a list of all licenses used by a Rust crate
 homepage: https://github.com/EmbarkStudios/cargo-about

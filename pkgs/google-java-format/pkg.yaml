@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: google-java-format
 description: Reformats Java source to Google Java Style
 homepage: https://github.com/google/google-java-format

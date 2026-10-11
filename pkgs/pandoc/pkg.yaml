@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pandoc
 description: Universal markup document converter
 homepage: https://pandoc.org

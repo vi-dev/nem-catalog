@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dotenv-linter
 description: Linter for .env files
 homepage: https://dotenv-linter.github.io

@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: yaegi
 description: Go interpreter and REPL
 homepage: https://github.com/traefik/yaegi

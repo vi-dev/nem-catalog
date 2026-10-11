@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: templ
 description: HTML templating language for Go with a code generator
 homepage: https://templ.guide

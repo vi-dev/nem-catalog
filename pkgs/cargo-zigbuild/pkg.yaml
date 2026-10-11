@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-zigbuild
 description: Compiles Cargo projects using zig as the linker
 homepage: https://github.com/rust-cross/cargo-zigbuild

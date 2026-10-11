@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: polaris
 description: Best-practices validation for Kubernetes configuration
 homepage: https://polaris.docs.fairwinds.com

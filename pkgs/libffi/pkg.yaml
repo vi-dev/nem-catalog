@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 
 name: libffi
 description: Foreign function interface library for calling code across languages

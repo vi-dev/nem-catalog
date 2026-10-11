@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: procs
 description: Modern replacement for ps written in Rust
 homepage: https://github.com/dalance/procs

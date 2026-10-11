@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gobuster
 description: Directory, DNS, and vhost brute-forcing tool
 homepage: https://github.com/OJ/gobuster

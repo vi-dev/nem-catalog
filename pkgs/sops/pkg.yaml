@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: sops
 description: Editor of encrypted files supporting age, KMS, and PGP
 homepage: https://getsops.io

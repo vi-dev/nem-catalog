@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kubectl-pod-lens
 description: Show pod-related resources at a glance
 homepage: https://github.com/sunny0826/kubectl-pod-lens

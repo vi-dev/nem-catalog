@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kotlin-language-server
 description: Language server for Kotlin
 homepage: https://github.com/fwcd/kotlin-language-server

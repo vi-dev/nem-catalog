@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: spectral
 description: JSON/YAML linter for OpenAPI, AsyncAPI, and Arazzo
 homepage: https://stoplight.io/spectral

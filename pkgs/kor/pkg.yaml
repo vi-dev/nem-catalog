@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: kor
 description: Discover unused Kubernetes resources
 homepage: https://github.com/yonahd/kor

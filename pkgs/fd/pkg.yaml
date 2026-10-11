@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: fd
 description: Simple, fast and user-friendly alternative to find
 homepage: https://github.com/sharkdp/fd

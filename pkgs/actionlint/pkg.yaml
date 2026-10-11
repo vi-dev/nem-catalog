@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: actionlint
 description: Static checker for GitHub Actions workflow files
 homepage: https://rhysd.github.io/actionlint/

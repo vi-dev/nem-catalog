@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gokey
 description: Vaultless password manager deriving passwords on demand
 homepage: https://github.com/cloudflare/gokey

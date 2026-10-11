@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: hoverfly
 description: API simulation and service virtualization
 homepage: https://hoverfly.io

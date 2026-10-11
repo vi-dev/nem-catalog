@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: cargo-generate
 description: Generate a new Rust project from a template
 homepage: https://cargo-generate.github.io/cargo-generate

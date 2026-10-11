@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: aws-iam-authenticator
 description: Authenticate to Kubernetes clusters with AWS IAM credentials
 homepage: https://github.com/kubernetes-sigs/aws-iam-authenticator

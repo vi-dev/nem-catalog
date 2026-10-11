@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: difftastic
 description: Structural diff that understands syntax (difft)
 homepage: https://difftastic.wilfred.me.uk

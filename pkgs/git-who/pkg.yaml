@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: git-who
 description: Git blame for file trees
 homepage: https://github.com/sinclairtarget/git-who

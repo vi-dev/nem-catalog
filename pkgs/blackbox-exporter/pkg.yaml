@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: blackbox-exporter
 description: Prometheus blackbox prober exporter
 homepage: https://prometheus.io

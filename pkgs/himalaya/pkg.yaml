@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: himalaya
 description: CLI to manage emails over IMAP, Maildir, and JMAP
 homepage: https://github.com/pimalaya/himalaya

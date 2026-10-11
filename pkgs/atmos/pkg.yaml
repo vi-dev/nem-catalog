@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: atmos
 description: Orchestrate Terraform and Helmfile stacks
 homepage: https://atmos.tools

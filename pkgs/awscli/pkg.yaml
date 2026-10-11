@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: awscli
 description: Official Amazon AWS command-line interface
 homepage: https://aws.amazon.com/cli/

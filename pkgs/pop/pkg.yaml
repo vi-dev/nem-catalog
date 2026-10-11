@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: pop
 description: Send emails from the command line, by Charm
 homepage: https://github.com/charmbracelet/pop

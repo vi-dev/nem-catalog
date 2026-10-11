@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: tfupdate
 description: Update version constraints in Terraform and OpenTofu configurations
 homepage: https://github.com/minamijoyo/tfupdate

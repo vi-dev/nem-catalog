@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: dblab
 description: Terminal UI database client for Postgres, MySQL, SQLite, and more
 homepage: https://github.com/danvergara/dblab

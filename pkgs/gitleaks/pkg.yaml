@@ -1,4 +1,4 @@
-schema: 2
+schema: 3
 name: gitleaks
 description: Secret scanner for git repositories, files, and directories
 homepage: https://gitleaks.io
