@@ -23,6 +23,12 @@ test:
   - run: rumdl --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.2.79
+    sha256:
+      darwin/arm64: "8c0ecf93a61bf612df5f6c6f22813d066a6f51a5680f3c12da49b93ed892aebb"
+      darwin/amd64: "09cca63968f9a3f35faab71ac8d09bda1a96ba4e0e38cac54bfb7b544523075f"
+      linux/arm64: "f2ccb236a6b62b9980711a2f54c1e0d8d91ceaea5d7313d0b1a615237b3130bf"
+      linux/amd64: "a85ae77c6880616118e10dda1e36292df59815bcfbf767201736ff6971213cf3"
   - version: 0.2.78
     sha256:
       darwin/arm64: "450f00cdbf1da3bc3fbdf56c52dc9e6b2ab08bfd1ee6a26b44848e52a180dba5"

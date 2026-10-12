@@ -21,6 +21,36 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 0.162.1
+    sha256:
+      darwin/arm64: "88e37ccddf5a0f4ea9dc1be13c66a2a94f9c2d1a04f3ace9053d71b3939e885d"
+      darwin/amd64: "894ac20afe819d4fa2a4be8cd27c54fd606338b86036e8ed9b6c9978c2dc7aed"
+      linux/arm64: "53a9ce0b94beb27a63fdeb2f7704d95199e17b3898aa33b60461a1a93ac0d88b"
+      linux/amd64: "a676f5722aae0d86cbe3764332f08eab1fdd89dc0a300b3ad4ffbf48611fa3e3"
+  - version: 0.162.0
+    sha256:
+      darwin/arm64: "5809ee90a9c3b59d438bb2663aefa0b43d86f825438b65d4504b31f82343628b"
+      darwin/amd64: "928b421103f339683d0d9f8a648f7b591ae4be907cbd8a5418dda319ff2bbd3c"
+      linux/arm64: "d47a5fa21e037a1b85729b88c238ff3da8a956fc9fb5ad3976714428e7fb2bda"
+      linux/amd64: "4f573944c1d2059109d75a2f4d0cc9c03697288224a5e407717a9de98fc010c5"
+  - version: 0.161.0
+    sha256:
+      darwin/arm64: "f0feee8537daf8dd6b4e0a36e764549ad14afdbb419d8775aeab9feb20182313"
+      darwin/amd64: "53f7c9081ab83684a3d4fb35dbc4b05d3ebb204beb2eab000626c15f0b15e738"
+      linux/arm64: "3c02e2ae34be0d06e62557e98fc5c0a783bec5a2fed406fe00e565803bf84ee8"
+      linux/amd64: "04d8ab9dbcb9df0edf3c67dca5072a374babfdf762a9bc4ae649ae140b8e2cf0"
+  - version: 0.160.1
+    sha256:
+      darwin/arm64: "f73527ee09c6db869acbb37b709866b339ea74ef91d2de255e9c74ec960c6314"
+      darwin/amd64: "a98f330c9b1652cef2edc7bc2ee4c47a0fe19fa098b686381be3c8842abf0ac0"
+      linux/arm64: "dff0954438fa455c2197ddb1f421d8d68625d98de610f76bedb6e5bc837ea35b"
+      linux/amd64: "340801565906a7028f6baaa9ab6853addaef221f0016a1417a7c1ffdd96c21f0"
+  - version: 0.160.0
+    sha256:
+      darwin/arm64: "007df41b607dbbc8d204b9746ce7fed2d4ce6c813f44c32ceee54175ca796525"
+      darwin/amd64: "4d50514b2d8acd81ca8cfee55b667b3dc4f7681b65bf3299ff06b11a064f8861"
+      linux/arm64: "7f0fe42ff22ecfa3a47bc4a34f5b22c4218b431a4ec0aba51c7d98299f07900c"
+      linux/amd64: "4fcc47ab57f52ff75363951a8761146cd10c8288bd86fed45487dbb204a16b71"
   - version: 0.159.3
     sha256:
       darwin/arm64: "fad57a5681cabcef21d322af5aec938975cfb711b5f25d4ce4907e6561616d07"

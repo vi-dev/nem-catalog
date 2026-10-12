@@ -23,6 +23,12 @@ test:
   - run: dependabot --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.94.0
+    sha256:
+      darwin/arm64: "1f89c02a7d7520910f5ea2b6e8471ddf7f1256153071ed74af0fb62715ea7325"
+      darwin/amd64: "56f429e6f6f8bc8751e6e4dd1110916c6b9558e0ce46d97d0631c92de3ba056b"
+      linux/arm64: "a43fa7277c61f91104ea7cfa3b42a80f77efd6d103e90db6517d531218426775"
+      linux/amd64: "fd2a31f03fe4ca5c1240de70f067a18a93b1dbb62f2f790fcbcb937827d5553c"
   - version: 1.93.0
     sha256:
       darwin/arm64: "267ccd81888f41c9b1522a2c105590e5582b99e4965d57f9e498912bce2c73b5"

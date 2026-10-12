@@ -23,6 +23,12 @@ test:
   - run: cargo-auditable 2>&1 | grep -q Cargo
 
 versions:
+  - version: 0.7.7
+    sha256:
+      darwin/arm64: "a66ad6392861ca1abfe0b02b522622d91edf63e5d7b60f4d3088b5c23d240c72"
+      darwin/amd64: "4b87f06ea13d32466bbc68b1f5715ac11753a052d9935245380bddce8a3f0e50"
+      linux/arm64: "c324af56990601354bbf40080f582ba46f8ec8b807a1388e25bb7e429d285c18"
+      linux/amd64: "7676443367c5e33d9fb22acef63cccb5e9202de12dae1b0579995eb3e2bc7a18"
   - version: 0.7.6
     sha256:
       darwin/arm64: "bf42fb077380f41a72ab9e217651bffcb6d46e641852a79ad1358bcc308323ff"

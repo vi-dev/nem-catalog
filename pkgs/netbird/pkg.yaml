@@ -23,6 +23,12 @@ test:
   - run: netbird version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.80.0
+    sha256:
+      darwin/arm64: "a6aba5c5f3b028b11c19cad3c17f547bcd190089e9ace094ed6e30853e520613"
+      darwin/amd64: "ce35e797c6e9259da7d9489e06a13ef70fcf62f47c0d53ed900cc399d96c7a6b"
+      linux/arm64: "8cbd99fa068a7b0f3968b2d31dc341acc17dd1e97c3053e61ed5905dbdae7341"
+      linux/amd64: "47ffaba4fc3929f31795bd6c5232d6c29744d3169e2c93e6d9c84624f0ef6405"
   - version: 0.79.0
     sha256:
       darwin/arm64: "e677c20e26331679607263898c515d51a84c51c20ddd2a100404cd3fb22795fe"

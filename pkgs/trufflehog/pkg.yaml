@@ -20,6 +20,36 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 3.99.2
+    sha256:
+      darwin/arm64: "b612143d840b4c75d41fe40436c5932efead001951283f18c87013c4145e1675"
+      darwin/amd64: "c23a1b10522b8b84cfd04dc88a3a8819d3dc23b20f15e23540ba442b4b2fbeed"
+      linux/arm64: "929b81efffca752eafd58bf6f17bf725d354f338636a7bbbee65c086d2f9ddf3"
+      linux/amd64: "3c7b0d1dc4278294269bfdd7594bca8bb28c78da0a4a06ad202ded37b48deca4"
+  - version: 3.99.1
+    sha256:
+      darwin/arm64: "e9044b23d6bc11694af7a97771fe7630d693b67308c3276ac3260b5967e075d8"
+      darwin/amd64: "c0fbb724fd4a7c6c115b4789b9264e9cc425e9bafa189408481e8b3db33fc197"
+      linux/arm64: "a333b6f798cafe72cf1fe4795d9dcf7e21ea82d6b09fcb175b3baa4616bd023d"
+      linux/amd64: "a15492ba041e4574ed604ba52a6a49b5f628ff0f13833c18e3cb617021c37d86"
+  - version: 3.99.0
+    sha256:
+      darwin/arm64: "9f33b39458d3e3dba69867cd85bcd1df9a6a52083495ed770eb9f42b4e2a63a9"
+      darwin/amd64: "96eea7bda1969c51e3eb8fa0e7659a9cc1ffa975393a7732498d2e8d20c63060"
+      linux/arm64: "ad6fb802f0e6f097829c1eee659b97fc0533a08fa34633cde15bc8fc3258dfb7"
+      linux/amd64: "e35ae3fd1e4b7a0c1699d0fda1814282bf906d03379bd4337b092b3a84c6740b"
+  - version: 3.98.1
+    sha256:
+      darwin/arm64: "4bea89798ab97d3840530034161ea57a6f4acf78301eb9247e366166d1dbff73"
+      darwin/amd64: "80cfbd6bd46e9a0e8dfa7ac3e33fb87e98eb06921512dafd8f3d3a8b8047d46e"
+      linux/arm64: "891bb28ae08e749a28e98be8fc660ff5368de4f368d8b71ef01184d8f0ecd4d2"
+      linux/amd64: "b65ed23b33e25b3841125e62697d902b7a90d83ee21bdf692d610dc15a631c17"
+  - version: 3.98.0
+    sha256:
+      darwin/arm64: "82a671eb48c7d13efc6af3759facb61c80ab8ba81e1939e4865a196ac63c9b6e"
+      darwin/amd64: "83124e742daf8b49cffae2e9a16872d585a40fcfcc99f9eb645d8092839db772"
+      linux/arm64: "49d38516c6a5ec4633fc31502b79978a01bbafdf892381e511d4bd6e74865563"
+      linux/amd64: "05920d08aa23c233d410eefe5c73ae9db86dc7e766b64d6a9368678912daeda7"
   - version: 3.97.9
     sha256:
       darwin/arm64: "3d25c178fe1a2563687b22547adcaebcf08cc8a607315c6741fe396c597951f7"

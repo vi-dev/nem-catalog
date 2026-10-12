@@ -23,6 +23,12 @@ test:
   - run: cargo-semver-checks --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.51.0
+    sha256:
+      darwin/arm64: "3cec5da41eee9a3336d75ad43d1f30a5c9680818f4ba209024786f452cabab5b"
+      darwin/amd64: "542f9518fd5360f46c1027a6ac2c9e9ee7431518c42495346df84922a050ce5b"
+      linux/arm64: "a7355f6d36edab9f76ea3fe565b9f5727394ca64f6ad751b8be24ac65a902136"
+      linux/amd64: "396c8508d973c83de52660943a057e971b586f7511c3ba695762373452b43d5b"
   - version: 0.50.0
     sha256:
       darwin/arm64: "f99f928d67501c29e8410026f27a54cf799fb13611c3b4a6a58f2772cf7e3799"

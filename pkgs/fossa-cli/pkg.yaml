@@ -23,6 +23,12 @@ test:
   - run: fossa --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.20.1
+    sha256:
+      darwin/arm64: "f048144f12a20823742c4f666948216400249557bdb61baeea4d51c203c57fd7"
+      darwin/amd64: "41968c6b35ab9c461257b4079a231d0f539f6030e96d48b5a363d9bf3cb76f8c"
+      linux/arm64: "0e74d8f362070d354314989eeca332162c49d7d86cb6af7b57bb79ab38c7c133"
+      linux/amd64: "3bacb95e0efb1ff7b340b7b54949eb95f99bd1e70b467b9d8f99a31354420559"
   - version: 3.20.0
     sha256:
       darwin/arm64: "3042f3aeae2f1726c2fcd7ce4e703c9b149741b01aa27758a12d43ae93284889"

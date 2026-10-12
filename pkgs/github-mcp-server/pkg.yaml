@@ -20,6 +20,36 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 2.0.2
+    sha256:
+      darwin/arm64: "5d9b38511bffc84d2272eb6189129eb721c8900e45784d8ea7eaf25f8d3dd835"
+      darwin/amd64: "7ac4d549e0bf37ad9efee7be7913cae4ad50cea8d9d5be1afa9a6dbcee9d1f2c"
+      linux/arm64: "73f5e76c6a3b5e0d731e1134a7c38575df6ec96c646192095a3be2d4d0d6c1fc"
+      linux/amd64: "815e27d931c796af0c97f24fd211e14f8a4607d4528377719a5ad2352086b0b0"
+  - version: 2.0.1
+    sha256:
+      darwin/arm64: "6a1507a139a22166ba0792ee353cac6bec771fe491a9c4bc24dd5ef70b3ac39e"
+      darwin/amd64: "29e41519148fa2a78abb260f3f9534bdbaecd48103a479630f47ecbd123d13cb"
+      linux/arm64: "f7efcb41853153e2bf45df92a0a18b585b0bc21fcbf9c00bf667f48ff9743c87"
+      linux/amd64: "f39c3cf56e9b2883b64e30215a48a120d911e4ed0cd6a83dddae1260279b02e6"
+  - version: 2.0.0
+    sha256:
+      darwin/arm64: "89f6b2e9ea94233996bde92e8369cf7706bb70a9208e1ebd5d7bd4908638c713"
+      darwin/amd64: "02bc66fbc9939695000d51749a1618dc426433b54e116288a20f0efb92987d5c"
+      linux/arm64: "17a14f32a46524e2d9711685534b5f4cb21a9315e394e3e4bcfdfb35f76a9243"
+      linux/amd64: "85eefe765c78a065bbd528dd6b680784d69f7f4bb84d89f258801968c83d7ff8"
+  - version: 1.14.0
+    sha256:
+      darwin/arm64: "e3baa88424ecc24ae504a1c98c128823fc2c2edbe9dd64e1456f39edea701140"
+      darwin/amd64: "82c84d005eaef04755295e1bf0118766f59ef39196bf8142e58b5aca9e16c6ac"
+      linux/arm64: "dd06beb81e62c42afa2d4217d86be79ca588a083f63da38ca3cbef0b7785e88d"
+      linux/amd64: "2fcad56bb164b6c4918fdd9f1d5572257bf4e1f14b7eb1119d015b079818fd38"
+  - version: 1.13.0
+    sha256:
+      darwin/arm64: "e1fe3c89d5de8672955f94df12928b0023ce4ea20e0a78e6c3017b36fede04b2"
+      darwin/amd64: "b41711566a348b0c81514e2ae57dc3740d349159bd3f4257091b93ae16f85a0d"
+      linux/arm64: "0fa71b182cfc9c192369f7d97d6ae81c3a8c1b725f19cc6d3358ba477eec2e14"
+      linux/amd64: "9cea00809d11c0ff5d0ad9497d6f7a0af690a3d2873068b88bf8bb2985bf5112"
   - version: 1.12.2
     sha256:
       darwin/arm64: "7e6c5aec43f26b82d3580e77a4ee26872bcd34b48c9a08d0eaef48b5d0563904"

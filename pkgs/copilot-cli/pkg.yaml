@@ -20,6 +20,36 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 1.0.95
+    sha256:
+      darwin/arm64: "de8fe8f8451247f03e0d5dfd0e0f8bafb1b38649e33e79997dc1ee76ec66df8f"
+      darwin/amd64: "4fbe697463e028bf9927722a0bdc26dee4494ce60ce3a83bdb8689313566794b"
+      linux/arm64: "4cae94d3abd15699d6a479103a9a39fb3c1dcd85a6ce191882f1902340f10f44"
+      linux/amd64: "c91a8874f3b2bdc905c2452f9d9fc923013924feb431e256eb769ff792719d7f"
+  - version: 1.0.94
+    sha256:
+      darwin/arm64: "76b3d412d7fe18d6798c26e3c9a42de9d7b39c800788e9bb9352b619517cbac6"
+      darwin/amd64: "92df4fe029c7f8beca6fdffc03776e3dbf2c243b4179e8b1d20103e6ed4f812c"
+      linux/arm64: "8d763b46fa5f30151ad03b94aefee513e9312ecfa2d485b02e356ff1a3955e61"
+      linux/amd64: "0acaff842900357f4734c768b8933b1c5c8ce65e1bf74f15573f5cedd650b240"
+  - version: 1.0.93
+    sha256:
+      darwin/arm64: "a003408e5b0aaa91c108fe911f4ba2cd5f052bbe34dd20e31c08b12a21ba6627"
+      darwin/amd64: "f2885541970a656ef5dbf87043c9dc49d8e9203142ee015abc0f3d2ba6e2eae2"
+      linux/arm64: "d01fd18ba2489e7878d9ddcf46de9817a1a2f803b474c0283e2cfd8f837b5d22"
+      linux/amd64: "23208bc3534d157031a3db3421e239169b2a67b98655862c0e1daa6d91afcea2"
+  - version: 1.0.92
+    sha256:
+      darwin/arm64: "6aa2af1d0436b23c92810f11ea35a3d1c2b36b716d3e6d7c44299d199f905c5b"
+      darwin/amd64: "7527cdd1c254d1daeb3e3fbd042deec3ba1f283cce86c83dced2bea8b63cc28b"
+      linux/arm64: "634d5200d96c17f01357637a166bb303744e8ca965550d6bbcb72b52b5e3c6a4"
+      linux/amd64: "1d8daedb9cdb200061471cabe9f924f80293689cb9c42489344864c044f33ea9"
+  - version: 1.0.91
+    sha256:
+      darwin/arm64: "b29e3a9e4176f2e6417504916714328d030f04ac934ff1a2a6ddcad9235c847b"
+      darwin/amd64: "ff6217eb716be23ad70cc4d39b4191325568e757645036e07ad32f67aef72a4c"
+      linux/arm64: "26a42491bec497a921f198d550a614e0a8989f1c2418f5bb1dd2150f09e6eac0"
+      linux/amd64: "0e7a0e85290228afecce4d4eed42fda80c0f5b9c86f433deb246cde1d5eec8e5"
   - version: 1.0.90
     sha256:
       darwin/arm64: "d9baf683fcc830bbf95bfa7a45be4515b98613ccf86ea13ee194f1d49b33da18"

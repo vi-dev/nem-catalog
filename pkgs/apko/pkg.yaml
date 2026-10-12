@@ -20,6 +20,36 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 1.4.11
+    sha256:
+      darwin/arm64: "d8c050ed05d887c5327c9a5affe31df5a855ddf963bc3fb45744a18ee42f8e9b"
+      darwin/amd64: "49b8fdecac939f6cabf47c00d25f47d76ffca9c3d7d4f44241fee1b5723eb442"
+      linux/arm64: "a001e0555aed9dd6ba86e4fe310c6d3792b6769821a6fa2b237525e829068849"
+      linux/amd64: "5445ea2467a4ab0db3e31d9f795133128d0564c7afdaa46fcdaa1ee3cf92c757"
+  - version: 1.4.10
+    sha256:
+      darwin/arm64: "c5ec2c6cd3739fa0dc1bee12842a0ad47c62d8f1cca0dc43e5885dd9b0a19b17"
+      darwin/amd64: "a17f36efc9e89b59bf60ae0e8e46c374c3c492c8cf4139adfb743e8a9ae0ca2e"
+      linux/arm64: "78780544e3cb32c94109db66ebb852aec15e68eeb4b2df538d9b01c3add0e3eb"
+      linux/amd64: "c5254f80e8d06d423616f6df6ea900bf95164ff08d7ce69c7f677a1a41eadd88"
+  - version: 1.4.9
+    sha256:
+      darwin/arm64: "a2255fea9b45d696e5b26ca19ff7bad83f0ecfe770a12febd56030412fa44d61"
+      darwin/amd64: "3c3ae9f4a2edb5e12b762ae1aada64ee8090e3cbd0904415941d50a4f7d0739c"
+      linux/arm64: "1cda4314eb6c47b7007ac38142609b072096dad7a6fb604c0dbe02bb339e12df"
+      linux/amd64: "d63755d2a5fa3ae55cc3cd1b786a3b6c9e6c5d71b3001dd94abd8545ddf76d14"
+  - version: 1.4.8
+    sha256:
+      darwin/arm64: "a6676c6b80eede63a1bbc7e1920d67eaa14039a0d2b8f1a076503cf772d0a331"
+      darwin/amd64: "8bd3ef36cc0d7bb1174aabf58337b9fbff26a9a580de6295897d39abfb61e286"
+      linux/arm64: "7cc6ddd6a5023d32aedf62611432b451ba782585df3c4de64442e3289fdaf248"
+      linux/amd64: "3a90aa8b86df51e25db9e29a8b87b468ed716eef0de251fc9d8b1e6d0bf71c8e"
+  - version: 1.4.7
+    sha256:
+      darwin/arm64: "9b534fd4afbf823f2e82989dde8ca20f391eac6c939dbef8afe2260068f22aa4"
+      darwin/amd64: "76de628d8a798b09a7b51150fb305b21a9b8e44a025167418baaaa437789259e"
+      linux/arm64: "47589594363fc3603c0f2d5674987cdb7069416c0984cf7a1303b54a278f37b0"
+      linux/amd64: "bb7db3a9fc25b0187390e5248eb42bb5ed4333d3c2879c39245fd987dd870683"
   - version: 1.4.6
     sha256:
       darwin/arm64: "c6bc6a949665702d179ae8aa0d94669e7fc6883a6b9e2f053470adae9b723b81"

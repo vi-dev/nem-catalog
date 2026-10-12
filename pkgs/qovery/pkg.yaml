@@ -23,6 +23,24 @@ test:
   - run: qovery version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.172.0
+    sha256:
+      darwin/arm64: "d7c349aad8c04789319a4b5bacdc685aa5378349c6f2ea47e2aed52da6f3570b"
+      darwin/amd64: "c09744759a8502b654659b18e9b4103d9991d28544aab19e6740b44e0380b2ab"
+      linux/arm64: "9b5a696d9d7649000b168e53c6280239ff223d1f5e9189bfd3379643190c5a98"
+      linux/amd64: "58e651e2314d43a2445148e7b8b78dc0f81a1223a3edfe2d02b92143d337fb82"
+  - version: 1.171.6
+    sha256:
+      darwin/arm64: "ab72c276236184c8eb71a1c3c392cfd163d4c37d094dea581d4d09c65fc54798"
+      darwin/amd64: "5543b6cf7f84ef9fffc82a4312e35b2134beb226189f0785cd3caa0b8f36bfd0"
+      linux/arm64: "d9ae6840736667ae7b02c96755e55888d4b0357905987fbead06a6033503cbe4"
+      linux/amd64: "147c064d8b730800f30352c4c2aa3c3a24b2ed3118837db3020058e4a6c9b008"
+  - version: 1.171.5
+    sha256:
+      darwin/arm64: "cb4e28c44eac1569c3c68e1e1424c11f9732fb9217138ba4a0c4d82a938b3423"
+      darwin/amd64: "710874f4c3c5b2d51c8c17da538fefaf13c83f25f46d4bbe11d630d9721bab7b"
+      linux/arm64: "6c8f3c8c2a8710b98734f534918b5aee9d1984349eda9ebda04a4b6a4d6c74a0"
+      linux/amd64: "ddb22390af55ef4873d86207c7a537f20c555b8e795cc36720bbfabc0f8cef21"
   - version: 1.171.4
     sha256:
       darwin/arm64: "b9a6ebba856dd32cbd940a23a3139918e5c7339e981ba34a04c00542a62e6785"

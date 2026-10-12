@@ -23,6 +23,12 @@ test:
   - run: spacectl version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.27.0
+    sha256:
+      darwin/arm64: "fd6d1acd33c0cb313624d31ce30cc21aab5d3277a3017b5c03a03cb672c3347b"
+      darwin/amd64: "76c13cf636d8f95270b2b553740ad5f5f6052022fb71532c737b36168586268c"
+      linux/arm64: "a053b33077e8776eaa639ac9d73238dcf90aa4d6ddbf58c60d18ecded8c24d3d"
+      linux/amd64: "ed52817e81d55cca51b03e580b62238f1f4902163581a339b6414bdb47a35671"
   - version: 1.26.0
     sha256:
       darwin/arm64: "c1b6d102ef3907012f2c12c6f6f24ddd8a4f81529c97c37ba8280722f403a970"

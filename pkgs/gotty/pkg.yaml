@@ -23,6 +23,18 @@ test:
   - run: gotty --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.10.0
+    sha256:
+      darwin/arm64: "7a3527bb80ca71796e84b4f075c8716cf9154e94ca8c988f45cded3925da4f16"
+      darwin/amd64: "bfa117429f037396ac1d9f4143509fc65b74500e1825fe405892820ae79f639b"
+      linux/arm64: "3265a24ebdbe7e8cdef6a0f61e270b5bc861694a713295ac5734b5472ff2e5bc"
+      linux/amd64: "6d5111d1dcb4d2c3d6e11e95c0de935905685f6669a4d998a49f31b6241e9edb"
+  - version: 1.9.0
+    sha256:
+      darwin/arm64: "6c1e1c7e3702683619709df5f05c4ed8956309a5be5cc1b050b043ad12dd4cfb"
+      darwin/amd64: "e1d054a8c0f9360d65c33f08727d5bba1134fda4c57e67c720406977bd15a653"
+      linux/arm64: "c0e73e1a392cde1d5a4c2dc89f59728f00de9285007a3629053d3004a4a883ca"
+      linux/amd64: "15a7e0efcf748906afc178d5e7d9187aae130d7299b72738bbd12185e88b5e35"
   - version: 1.8.0
     sha256:
       darwin/arm64: "e771f0f604acba752195410b5854bb06ae38fb91886d262b8e45874c60f8a4a2"

@@ -31,6 +31,8 @@ install:
   - extract: {strip: 0}
 
 versions:
+  - version: 3.54.0
+    sourceSha256: "9ab31e2b1064e8147ccbaf5ae8f4d679d5ed894a35ba7ac1cc21025ee02cf61f"
   - version: 3.53.4
     sourceSha256: "16bc1b2027ba2653e3d262e740376be23f67cad77865db814493267494326c3c"
 

@@ -20,6 +20,36 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 2.34.2
+    sha256:
+      darwin/arm64: "d5fd1b9cb722eb2a73f8358cf6aa9c56f0c78544d106a4c954b419bcfbeafb7b"
+      darwin/amd64: "39830c81df645d93652fecc77613d579447e910a5df06c65fb37a9b56be10b69"
+      linux/arm64: "da075d7b946c502902868522091cdd9b31c868ad1c46a46cea271f9f05c0d129"
+      linux/amd64: "fe9010a94517e28a536f30630232c41eac8e07bc145cd7d194ddaa14b6c7f9b7"
+  - version: 2.34.1
+    sha256:
+      darwin/arm64: "3386309982f52c5dbdbc03de9726de831e08140f4f8e54bd95d7da026b05640d"
+      darwin/amd64: "8549c1eb858f498a1a83aab82e15fa5e33096ee0af8c5cd62e4e55cfab9c5b22"
+      linux/arm64: "91119d862b98568c67eeac501f82b1076a702e24898bae88ebf1a13b7548e453"
+      linux/amd64: "273adea3f6ddc11730c7e310cf9ac4d43883f2539e89cf8bd8f5a6d5144d8094"
+  - version: 2.34.0
+    sha256:
+      darwin/arm64: "4318a163abb43f35f81418951c23708cf96ce0e846b8adb104abb43619fb17e4"
+      darwin/amd64: "9e7a0612a03fbc71372f7b939c5943d8cfad2773df72840557f2b14902f49ca1"
+      linux/arm64: "0ca3c6c1ff938dbf501aba5fd43263e90ac1d45252d34b544acb7d0804ba3aee"
+      linux/amd64: "62c6983cd839df4ba0054ba2af5c0a50d9ebf3d7b01eb346aab8222c949ae418"
+  - version: 2.33.0
+    sha256:
+      darwin/arm64: "83d60e39014f223fcabbf53f673b1747ed9cebabf69c0723aef3e565352f62bc"
+      darwin/amd64: "64bb1430040fd9dc9d29bcc34efed775273a0263f7cbabf410dbf3a33045a4fd"
+      linux/arm64: "e75dea840fe409fbd16c9958bfb9927cfb6176ed72bea98c2308fc018c384455"
+      linux/amd64: "a216db3b230ab97b29e564944e6f70646a843c5ee2c81d6fa7dddedcd950da39"
+  - version: 2.32.4
+    sha256:
+      darwin/arm64: "b7b338993bdf74ba19965d5f0eb6362886cf3057f1a659012a9af331fcecf8e5"
+      darwin/amd64: "4180d0f1d66a178908aec08d54106faf9235b2b4598bef022e294fa4c5ed7f6c"
+      linux/arm64: "6c9126cebaf7895cca91e5902eed05e310d619c157735ae17b2b96d6d05f3a57"
+      linux/amd64: "8b0978c11a62dead3da4c48579f24c0f824eca7d563726199a094013206b9cfd"
   - version: 2.32.3
     sha256:
       darwin/arm64: "8f04248deb66fa29dbd0c78512fd336c31e35f8692022312f67f69ed615b418d"

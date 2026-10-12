@@ -23,6 +23,12 @@ test:
   - run: aws-nuke version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.68.3
+    sha256:
+      darwin/arm64: "3fbc97250dfe7772f75970c8da97e596b279c1db61353ab82a93cbfa1f32c2b1"
+      darwin/amd64: "f3539a88a440fa9256b4b463edd28c72cb01f363ca8fe0179728672bb6e44e4a"
+      linux/arm64: "fb00dd0649a112be4ce1ce2802f14c0177e2a00887b3ab57f7d978e3d69f4b12"
+      linux/amd64: "ec43c22b2a433a3f6da87006b281451d8cd5bab5eb25047f7a671dfbeebc15a4"
   - version: 3.68.2
     sha256:
       darwin/arm64: "352c44866904f35dd1733618f2a7e96095873ec55f1760d8ce8ce20979393ffe"
