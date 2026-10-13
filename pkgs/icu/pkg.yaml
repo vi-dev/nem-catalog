@@ -1,0 +1,46 @@
+schema: 3
+
+name: icu
+description: International Components for Unicode (ICU4C)
+homepage: https://icu.unicode.org
+license: Unicode-3.0
+
+platforms: [linux/arm64, linux/amd64]
+
+bins: [bin]
+libs: [lib]
+
+versionDiscovery:
+  github:
+    repo: unicode-org/icu
+    filter: '^release-\d+\.\d+$'
+    prefix: "release-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 78.3
+    sourceSha256: "3a2e7a47604ba702f345878308e6fefeca612ee895cf4a5f222e7955fabfe0c0"
+
+build:
+  source:
+    url: 'https://github.com/unicode-org/icu/releases/download/release-{{.Version}}/icu4c-{{.Version}}-sources.tgz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        cd source
+        ./configure --prefix=/ --disable-samples --disable-tests
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/icu-uc.pc"
+      ls "$NEM_PREFIX"/lib/libicuuc.so.* >/dev/null
+      [ "$(printf 'x' | uconv -f utf-8 -t utf-16be | od -An -tx1 | tr -d ' \n')" = 0078 ]

@@ -1,0 +1,29 @@
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+build:
+  source:
+    url: 'https://ftp.gnu.org/gnu/gcc/gcc-{{.Version}}/gcc-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        find . -exec touch -t 202001010000 {} +
+        mkdir -p build && cd build
+        ../libatomic/configure --prefix=/ --disable-werror --disable-multilib
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      [ -x "$NEM_PREFIX/lib/libatomic.so.1" ]
+      ldd "$NEM_PREFIX/lib/libatomic.so.1" > /dev/null
+      ! ldd "$NEM_PREFIX/lib/libatomic.so.1" | grep -q "not found"

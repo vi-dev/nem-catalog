@@ -1,0 +1,51 @@
+schema: 3
+
+name: libatomic
+description: GNU atomic operations runtime library from GCC
+homepage: https://gcc.gnu.org/
+license: GPL-3.0-or-later WITH GCC-exception-3.1
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://ftp.gnu.org/gnu/gcc/
+    filter: 'gcc-(\d+\.\d+\.\d+)/'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 16.2.0
+    sourceSha256: "e6738e29597f733270731aa90600f37ffdc045079dfc27ec7e8192cc81085c3e"
+  - version: 15.3.0
+    sourceSha256: "fa59c1beef8995f27c4d71c1df227587189315d3e6faff1bb4306e61b0c530eb"
+  - version: 14.4.0
+    sourceSha256: "752b6f567beac83159c77a7680b1316bdd784738bff9a9d070112c09da90f6d9"
+
+build:
+  source:
+    url: 'https://ftp.gnu.org/gnu/gcc/gcc-{{.Version}}/gcc-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        find . -exec touch -t 202001010000 {} +
+        sed -i 's/ -fno-link-libatomic"$/"/' libatomic/configure
+        sed -i 's/-Wc,-fno-link-libatomic //' libatomic/Makefile.in
+        mkdir -p build/gcc-objdir && cd build
+        CC=gcc CFLAGS=-O2 ../libatomic/configure --prefix=/ --disable-werror --disable-multilib
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" gcc_objdir="$PWD/gcc-objdir"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      [ -x "$NEM_PREFIX/lib/libatomic.so.1" ]
+      ldd "$NEM_PREFIX/lib/libatomic.so.1" > /dev/null
+      ! ldd "$NEM_PREFIX/lib/libatomic.so.1" | grep -q "not found"
