@@ -67,3 +67,6 @@ versions:
       darwin/amd64: "79cf2c93e7891d9a8cace2f5f8f96a739119a9e0e0744646ab4c6395bf08530e"
       linux/arm64: "fa4f340767ab4080c1e3606e7306799488ce23a53230bfeffb4c4db4c61f21dc"
       linux/amd64: "7dea111ca81b17208abc68b092732adc1a45b19fcc4cff2579f1851fe148c9dd"
+
+test:
+  - run: atmos --version | grep -q "$NEM_VERSION"

@@ -53,3 +53,6 @@ versions:
       darwin/amd64: "a92a68c61a6833ff67748f532cbebc7b8e49ba30de062ab463b221211ee6368f"
       linux/arm64: "702f03769ac8bcb0e47839c82243cc614ae995633599a98c63062e13ea85f829"
       linux/amd64: "a99bbc7ae0d8d897b07c4c497a9b62f222558804715ef219d1af05a7e417bc80"
+
+test:
+  - run: goreleaser --version | grep -q "$NEM_VERSION"

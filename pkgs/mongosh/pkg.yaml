@@ -43,3 +43,6 @@ versions:
       darwin/amd64: "8080bf32dc01a141f3286558435901a2d4b3df9dff61aa09ece53a3739195fce"
       linux/arm64: "585da7587d862a2fc54f38e4db1d5bc17823cf29a51d3d73e5838b86778cb98a"
       linux/amd64: "42034ba0fc9a48fd65ddcc5150b2e9d8a777965019220744baee42ee9669d543"
+
+test:
+  - run: mongosh --version | grep -q "$NEM_VERSION"

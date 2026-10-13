@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "45521ba59a6604785543406bf8e398ce7d565d54c09657176afba795dd28f191"
       linux/arm64: "711a69576a2ff473fb01a90ffafb571c2ed019e55479d7ae71b12c2eadeb7011"
       linux/amd64: "66f8dd3a0394761556339117f8bb5123bddefd44e087af2a72ec22b0bd08d514"
+
+test:
+  - run: websocat --version | grep -q "$NEM_VERSION"

@@ -34,3 +34,6 @@ versions:
       darwin/amd64: "80ffca22aed9e8b9713a232f3394fd81d7f20322df75efdb2b047dbd3e3a23bb"
       linux/arm64: "80ffca22aed9e8b9713a232f3394fd81d7f20322df75efdb2b047dbd3e3a23bb"
       linux/amd64: "80ffca22aed9e8b9713a232f3394fd81d7f20322df75efdb2b047dbd3e3a23bb"
+
+test:
+  - run: mvn --version | grep -q "$NEM_VERSION"

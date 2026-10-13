@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "03c1ff9857173d2139e8e8ee192c9c545489983bc1ebeffd3fe00190a67e74d0"
       linux/arm64: "9fa44482ee09e86ae1d6e8ed11632eab0048ae920b40a9ddfdf03b246adb731d"
       linux/amd64: "6783abeb2d38870e3992b7e88fd62c85e9a7ec022ff5101477c7f38dea8beefe"
+
+test:
+  - run: kubectl-df_pv version | grep -q "$NEM_VERSION"

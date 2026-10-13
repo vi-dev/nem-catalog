@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "003df151f7cb6e4a9a2ef9a30f662cc16686187fd00f2cdad51eb7b9cb95d301"
       linux/arm64: "41776b61e55c19dbbc4b9e5c54e5e49e60536f8aaab525cd172f6bafb9e869f8"
       linux/amd64: "ff9b5b7ed85624cb111fa6ede732b242e44dba8719b52b97af32d61545e40c3c"
+
+test:
+  - run: scala-cli --version | grep -q "$NEM_VERSION"

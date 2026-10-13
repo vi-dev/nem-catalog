@@ -32,3 +32,6 @@ versions:
       darwin/arm64: "f282d567e1bdb2c3e54d9502671b8011c0d4e3700b2616cf72778602f8ee0371"
       linux/arm64: "027e9f540567cd0e9ba00335ab9be0275a414b14608e10d49dc2d6a2633aa546"
       linux/amd64: "9d146d1da2af005a77920afff5da96d2ae0771ee25450b0954b27de95e7f0f57"
+
+test:
+  - run: lnav --version | grep -q "$NEM_VERSION"

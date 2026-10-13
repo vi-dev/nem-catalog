@@ -42,3 +42,6 @@ versions:
       darwin/amd64: "800fc86838e913fff969b499886c80baeb4ccfd00f0e39906b34aa334f39ab6c"
       linux/arm64: "9ca1aadb4451c5dcbdc67f9b4aff42dab52abbaebd8db9e2900026502dbed671"
       linux/amd64: "3ada9a3f5d8a85413579bdd0ea6aa8e8da86efdd6d15c91a1afa517f2021956c"
+
+test:
+  - run: ccmake --version | grep -q "$NEM_VERSION"

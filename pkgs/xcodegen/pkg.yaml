@@ -26,3 +26,6 @@ versions:
     sha256:
       darwin/arm64: "4d9e34b62172d645eed6457cac13fc222569974098ef4ee9c3368bedf0196806"
       darwin/amd64: "4d9e34b62172d645eed6457cac13fc222569974098ef4ee9c3368bedf0196806"
+
+test:
+  - run: xcodegen --version | grep -q "$NEM_VERSION"

@@ -68,3 +68,6 @@ versions:
       darwin/amd64: "4cecbf653a9fc45f023abf57f4e2e2f6b138c2d2387b09289beacdd3f0ea7bfd"
       linux/arm64: "85c8b87b22a0fb1da130cd4d495e0beba7f1225eb580933184509e146ec4c509"
       linux/amd64: "48bd2d58e02ce713b8c0f1aa239e68ee4f7d8c551013135806e6aed3938d9e10"
+
+test:
+  - run: typos --version | grep -q "$NEM_VERSION"

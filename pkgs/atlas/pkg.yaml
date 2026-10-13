@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "4b4d8621332eabc3e6e7554d799a98ceef6376c4d8bbad6ed7832b49655e3480"
       linux/arm64: "d2cfb1c71e58170bb4ddbe62107a38da4490f516ffa53a13abf57583819b6a40"
       linux/amd64: "cfc773e5b4e845bc01d680390c174648938a7f88bf30e5a2c83ae85217c21587"
+
+test:
+  - run: atlas version | grep -q "$NEM_VERSION"

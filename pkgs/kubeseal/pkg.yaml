@@ -45,3 +45,6 @@ versions:
       darwin/amd64: "209cb21da63f546f785499d04199dd5d39e8ef4934626207d8445c7ec3664f20"
       linux/arm64: "bcc40ac15e29a21c270e2be8c62af29d4b01b9111ae667723e4b6d8e4009228b"
       linux/amd64: "ab5ae808b0efcb167a825b6cf7f3a7c0034bd99a6301d78db2012da651a8c0b9"
+
+test:
+  - run: kubeseal --version | grep -q "$NEM_VERSION"

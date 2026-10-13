@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "3866fecad2bc4486209e5b79f605831bd6446f55ee6f863364d520f8e0204753"
       linux/arm64: "bb9c945c678ab473952e85d0baee04b7b69027db623f8a92b01fd927ee221140"
       linux/amd64: "d519f118bbf2db1156df186f4162ef10d317d906af941ee6945300f777963776"
+
+test:
+  - run: terramate --version | grep -q "$NEM_VERSION"

@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "3e2e35c4b2472b95627bb52a431fcdd30d946fa94d17eb6a0c5e418a7ab39b72"
       linux/arm64: "c09b580cd8c1f8a3e90928e02608f3ead02c87656368261f7f0514f724507b93"
       linux/amd64: "3a295da503fc2113620c723f2be26f1322818f53575cf85c31a605d76e97f585"
+
+test:
+  - run: goreman version | grep -q "$NEM_VERSION"

@@ -28,3 +28,6 @@ versions:
       darwin/amd64: "3082737fe8a98afda11cba7d9a20b6e56fe80c6153464beda04bec630758770b"
       linux/arm64: "ebb69208007484ac36b8a6ba72a797189b0daa88f8b31bc2b563e82b9c91cb70"
       linux/amd64: "54ea35f4847815d0a1445dbc2bc3dd6469518a38a9e960449e96b044d248d00d"
+
+test:
+  - run: colima --version | grep -q "$NEM_VERSION"

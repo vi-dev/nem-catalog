@@ -29,3 +29,6 @@ versions:
     sha256:
       linux/arm64: "ca70e7dbd6616ca782a59b5d3ac86909123fdaa9fa3f89dcf29051c70eee7ce9"
       linux/amd64: "177df879d50c913eb205e898d5c1c05a18f574053c0ce5524c471208eaf06f6f"
+
+test:
+  - run: runc --version | grep -q "$NEM_VERSION"

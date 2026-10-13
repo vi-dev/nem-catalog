@@ -56,3 +56,6 @@ versions:
       darwin/amd64: "7568c5960074f4250781fcddd1d8bac0178b3cf2cf22f76377dcc63121bf7e81"
       linux/arm64: "3b68248d4b6c4b05042f1ba7579502cc6a62fbe903be3871b54f3fd99fd5c98d"
       linux/amd64: "897e1f394c696c5be81670f95fb457c89ee35e898aa3100f95b7abf1563bf329"
+
+test:
+  - run: dua --version | grep -q "$NEM_VERSION"

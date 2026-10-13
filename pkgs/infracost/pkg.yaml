@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "b2202262267b704b95e786acfeb09c1f86e384e896ea42edb4de3f91a338a637"
       linux/arm64: "b9946cf42b9ed58184bd646484f63e0ecf430caca5978e0611302a1545c36262"
       linux/amd64: "e2f527d8391a87ac00bfc55237ff875107861715e234bbbeb9b6015aba576c77"
+
+test:
+  - run: infracost --version | grep -q "$NEM_VERSION"

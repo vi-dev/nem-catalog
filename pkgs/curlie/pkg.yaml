@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "2c3493a39a0e07beed52a97db643995f32511fd3bab4a831e27ca8cbb1f06ad7"
       linux/arm64: "570d505ad08e51ffe98e2ee39ee969cb340e846bc17a10ed2e4ba7a5e9d64c1a"
       linux/amd64: "033d39a06d7a4320f923c49b488b89ec415c1901413ae85d26b9f7a09b38f1a1"
+
+test:
+  - run: curlie version | grep -q "$NEM_VERSION"

@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "e010d5d1792fa9b368c846f0aa297982322aa5739e784608d3cea653d297e0f4"
       linux/arm64: "2fea2455c0f3f07cc3f4b98471c951ad1a716059574b20b6416bd1e9058751c5"
       linux/amd64: "2ac648fbd1b127b69ab5a7b33cf96212178f71e22379fc50573630c6f4c7ce18"
+
+test:
+  - run: migrate --version 2>&1 | grep -q "$NEM_VERSION"

@@ -30,3 +30,6 @@ versions:
     sha256:
       darwin/arm64: "d6cb0aa7a2f5f1ef306fc9e37bcb54dc9a26facc8f7784ac0c3dd3eccf5c6ba6"
       darwin/amd64: "d6cb0aa7a2f5f1ef306fc9e37bcb54dc9a26facc8f7784ac0c3dd3eccf5c6ba6"
+
+test:
+  - run: swiftlint --version | grep -q "$NEM_VERSION"

@@ -33,3 +33,6 @@ versions:
       darwin/amd64: "b8fe86028a9730ab6c6fbdf2ef292596b1a0037c3c1accbd0dd00a8724935ff7"
       linux/arm64: "13a2ba4a049fa8f3f64ed602a56bad1378eec253d36a977799ff51e694e47c77"
       linux/amd64: "2ebd3c93e4b325b735dbc4851a033e4d7830e88a79c47c8d087ea75c061cec67"
+
+test:
+  - run: regal version | grep -q "$NEM_VERSION"

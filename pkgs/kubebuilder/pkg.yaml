@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "c1e2fd86b7e2e392cd26b77a72bb9665511435ecdeefb16712820ba5da3e666b"
       linux/arm64: "bd99723fc106502f64a3541b9c5b7079bc68961a76df4f465893e311b594d295"
       linux/amd64: "9632ba818c35e10d9664f19090972ee5d667bdffbf4b83c34e8374c5e846afa2"
+
+test:
+  - run: kubebuilder version | grep -q "$NEM_VERSION"

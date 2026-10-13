@@ -103,3 +103,6 @@ versions:
       darwin/amd64: "0ea1cf4577dfac855b3ae15b02326b9ba27c0d020373938f59cd4a662bce2e08"
       linux/arm64: "efc09714a11d74aa7dfcbbb35d849e068839bb77f2420816a51559c33bb08dd7"
       linux/amd64: "a3a8fe9c4ece8236630a426e747981a480a1e79a90dc9b27bb149f69b9a56a2f"
+
+test:
+  - run: ty --version | grep -q "$NEM_VERSION"

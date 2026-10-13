@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "1744a164cb4a2c028dde6bebc7e35290459b9cbbe0aefb115a6f1322c6b7125c"
       linux/arm64: "b7b1b42d5ded8d805ee4ba7e2cf9146989a6ec9d27e94266644d9948e102ed10"
       linux/amd64: "707aec6c708b7e90c1aeba71d9f7ce8050a03a84c6c146227d8c050e8155a7bc"
+
+test:
+  - run: kubescape version | grep -q "$NEM_VERSION"

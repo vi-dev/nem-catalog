@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "f2da18688a8054351516e5b118985407ed45763f900b82e86923fdacb6f156d6"
       linux/arm64: "f3d16f6d2ec0a8ab61b96e999f377ab0e5fe7130ac2f45aacfc520307c9775e4"
       linux/amd64: "982717601ecabffed4599de64108bcea91eceae589e31c5627ae22d86fc8a466"
+
+test:
+  - run: swagger version | grep -q "$NEM_VERSION"

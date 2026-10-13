@@ -68,3 +68,6 @@ versions:
       darwin/amd64: "bb74bf33286ff7f31dd8e763e017fbc0418360d88baefd35bc57d662d28394e2"
       linux/arm64: "c073887583d502fa0b393a8b847bb4460a111b3b0a199d1f70dafd5d89e71a2f"
       linux/amd64: "9efabd08de720c1ee7e57b487fe11904f0966828e76146e2b5ea5deee90626be"
+
+test:
+  - run: watchexec --version | grep -q "$NEM_VERSION"

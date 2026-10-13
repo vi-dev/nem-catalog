@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "bd5017621ad5b7509568d5d004a2c1d5fb8f70e7555b1abdb62f35908c0ee1b6"
       linux/arm64: "ea08a64846677f36da7f2e9163c4393dd9a9dee814d13a8fb28fbe7dcbf32f6d"
       linux/amd64: "4955a38c2e8c99457458e2471472ccd5ee3c45bd7637a315ce33bccf0dd75d9e"
+
+test:
+  - run: gleam --version | grep -q "$NEM_VERSION"

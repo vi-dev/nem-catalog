@@ -67,3 +67,6 @@ versions:
       darwin/amd64: "6bfc751bfff3429888c527d2bb1fe632808769d2f5849579ed8cf71e5fe25c8b"
       linux/arm64: "3f2be9f1f68dca8e0b96d2a9212b408f15dc2668203b2c42cfb78a2894cc966b"
       linux/amd64: "17abac7ef72e7a1aaccd89892f7e2e62c9919d27473defe772be04ad78400ac2"
+
+test:
+  - run: biome --version | grep -q "$NEM_VERSION"

@@ -29,3 +29,6 @@ versions:
       darwin/amd64: "a3fd620207d5c40da6ca789b95e7f823c54e854b7fade7f613e91096a3706d75"
       linux/arm64: "a3fd620207d5c40da6ca789b95e7f823c54e854b7fade7f613e91096a3706d75"
       linux/amd64: "a3fd620207d5c40da6ca789b95e7f823c54e854b7fade7f613e91096a3706d75"
+
+test:
+  - run: ktlint --version | grep -q "$NEM_VERSION"

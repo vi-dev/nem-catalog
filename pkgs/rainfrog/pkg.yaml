@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "f7de36aa710608ba2c77831f21a57e24c5c500a7e87929fd221f86c97d2915e2"
       linux/arm64: "8984b1d671529b9912233f36ed4bd178c6f5ca8b002897a61938b39c0d431f14"
       linux/amd64: "84b7e39178cbefe6ce341830bf7c075e89ac2217d2be31e9ad88173b3db55ea8"
+
+test:
+  - run: rainfrog --version | grep -q "$NEM_VERSION"

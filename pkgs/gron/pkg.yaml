@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "59034d4aa883c5815784b290567d104669a51f20eaf97f1d8baa4f74e22047d6"
       linux/arm64: "5d1d4764723a0f768d9ddef0685a052f564c8bbf5e475382342faf4224a07d80"
       linux/amd64: "ca0335826b02b044fa05d7e951521e45c6ced1c381a73ed5803450088e18bf22"
+
+test:
+  - run: printf '{"a":1}' | gron | grep -qx "json.a = 1;"

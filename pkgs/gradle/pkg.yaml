@@ -46,3 +46,6 @@ versions:
       darwin/amd64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"
       linux/arm64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"
       linux/amd64: "84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae"
+
+test:
+  - run: gradle --version | grep -q "$NEM_VERSION"

@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "aeb684d8c24c18dce28fd1f7326636e4782b573108e244a93d4b1c4a5ec50f48"
       linux/arm64: "ac7156f93a21e903f7ad606c792f3560f17e0cd0e36365634701b1e7cc4e4eca"
       linux/amd64: "9ce999f8d2de03fc03968b29d743077a58783e545e5eaa53917ca177352d0e59"
+
+test:
+  - run: oras version | grep -q "$NEM_VERSION"

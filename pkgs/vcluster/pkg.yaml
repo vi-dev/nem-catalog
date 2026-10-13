@@ -55,3 +55,6 @@ versions:
       darwin/amd64: "9e7aad7b9e76665aceb73e9d8e99811e8e1ac3ef823250e19919fdec8193e705"
       linux/arm64: "42c977a91b33a9f930107d32bd58d05416a2f09b681d70773ca49c0848dd2152"
       linux/amd64: "3bb32e0aa90ecbc4ae88d8a0db7728263a6c911a488f64c53dc07ef5abd2789e"
+
+test:
+  - run: vcluster --version | grep -q "$NEM_VERSION"

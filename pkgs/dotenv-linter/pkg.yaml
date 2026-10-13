@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "143361bcd3c859cac0b16a6eaa51f3f69f270f17a55431e2e44d76722a7f0271"
       linux/arm64: "c4113aafd35e5f9095b2f757061d07cc8eb5cc0bcd755249877af08b7ffafb9a"
       linux/amd64: "9e2f1f6eb88a71ac15ef209f78f5a68644db82f132d2677112b4f80ec2bd2127"
+
+test:
+  - run: dotenv-linter --version | grep -q "$NEM_VERSION"

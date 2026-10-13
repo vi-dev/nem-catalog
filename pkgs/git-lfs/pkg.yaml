@@ -33,3 +33,6 @@ versions:
       darwin/amd64: "b5b1b641c0648c83661fa9eda991cd3eff945264dabc2cdf411a80dfe7ec0970"
       linux/arm64: "73a9c90eeb4312133a63c3eaee0c38c019ea7bfa0953d174809d25b18588dd8d"
       linux/amd64: "1c0b6ee5200ca708c5cebebb18fdeb0e1c98f1af5c1a9cba205a4c0ab5a5ec08"
+
+test:
+  - run: git-lfs --version | grep -q "$NEM_VERSION"

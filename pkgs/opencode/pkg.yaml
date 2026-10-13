@@ -129,3 +129,6 @@ versions:
       darwin/amd64: "ee495d7c30263c2cecb81a4558a9c4d29ac7b27c1df822e9d344a69cb56a75c3"
       linux/arm64: "506f98a1f618551f1f6fc5dcf591f824bef9d6819d40b27928ad7febcb7c363b"
       linux/amd64: "7bb35487c55f9957f5d91ae60be6fa49fc8f74629c210c1719ed75fdbf7e2bd9"
+
+test:
+  - run: opencode --version | grep -q "$NEM_VERSION"

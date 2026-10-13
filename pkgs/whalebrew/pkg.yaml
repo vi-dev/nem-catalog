@@ -24,3 +24,6 @@ versions:
       darwin/amd64: "f86930f0a130524b9e3e5ef4a6c1e4050fbf0cc55b44442c47602f7e962ca030"
       linux/arm64: "74a6f5880e7b72d0b5f8533245552aefc6f1a1d35f6dcf5635c2ff52f89c2e20"
       linux/amd64: "bedce7a77e2be2051728cb9c32f976ce3f754b9f7ec06775f2f4b20103a7db99"
+
+test:
+  - run: whalebrew version | grep -q "^Whalebrew "

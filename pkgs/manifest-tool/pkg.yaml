@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "bdca525326694849594ab3ba63638fdb664690c9384df947bd3cff943d14736b"
       linux/arm64: "bdca525326694849594ab3ba63638fdb664690c9384df947bd3cff943d14736b"
       linux/amd64: "bdca525326694849594ab3ba63638fdb664690c9384df947bd3cff943d14736b"
+
+test:
+  - run: manifest-tool --version | grep -q "$NEM_VERSION"

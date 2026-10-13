@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "929c855efd66eee1bbb25132be24bb94d65ae9a79523c94e457b3b4c130cbe7f"
       linux/arm64: "fdaf5f04d74dbc293a7c4895b1430a40ffeb3ee6f84d0998d33dd4bee1aa5954"
       linux/amd64: "b90ac8da7b804d04052b9db8d4ea5028d29fba9bc69b02dc85d46e5fcc476452"
+
+test:
+  - run: spectral --version | grep -q "$NEM_VERSION"

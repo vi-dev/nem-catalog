@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "b7d5749caff9c467ec03376b03772aaee2135aaf55f970a8a8fcbc341daf1a42"
       linux/arm64: "2ae3bfe43206e47454c2634dace1427bd35794f616619e8f34ce23ce5b811dfd"
       linux/amd64: "065dd6b40c9ea5fc71e49900d5c924cc0bec7f58375922ddbde6b402f292347e"
+
+test:
+  - run: crossplane version --client | grep -q "$NEM_VERSION"

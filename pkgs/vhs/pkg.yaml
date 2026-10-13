@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "dd5c86c1cec1cf9ebd5ac6cf8119efcb731f055bbe7c7010408c741ee7770f64"
       linux/arm64: "af782cddbf844a377df6ea41c0e72339393fa021be3f6cb70a2f47d48675d92b"
       linux/amd64: "99cb634587eaae0473c1ea377db80c3a048c27f99fe0a7febb1a1e8cb7ee5009"
+
+test:
+  - run: vhs --version | grep -q "$NEM_VERSION"

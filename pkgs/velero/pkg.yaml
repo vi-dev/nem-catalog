@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "3527350999bb90f56caa1b7ef82f8f8c0de8318ce8a27d787fc003139d2374fe"
       linux/arm64: "d5ca8652502a58b270d73cbea4e3ac8be91733edddbd6d2c09a6ef0f3a3d1308"
       linux/amd64: "f483cf07b0fa09f33d91f264528492f362e031afa85546b47cbfdf9f77662067"
+
+test:
+  - run: velero version --client-only | grep -q "$NEM_VERSION"

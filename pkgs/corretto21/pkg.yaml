@@ -46,3 +46,11 @@ versions:
       darwin/amd64: "a018ae6221babf065f770479b1bf0ab0d23bea78ed18f236c40bb5d4736612ff"
       linux/arm64: "fd94500b0d3d7e6e040a9dc1b34cbe25046454e5e3047b68c1842fa6894e9bbc"
       linux/amd64: "75faed442d38a89c27f920e45ab24f9f71ff8ca6b732bfea90cdb500decd3c6b"
+
+test:
+  - run: java --version | grep -q "Corretto-$NEM_VERSION"
+  - run: |
+      set -e
+      [ -x "$JAVA_HOME/bin/java" ]
+      printf 'public class P { public static void main(String[] a) { System.out.print("ok"); } }\n' > P.java
+      [ "$(java P.java)" = ok ]

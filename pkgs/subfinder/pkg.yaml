@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "c9f51b0adfa77fd7f0452b7cec7cb0ac71aa6e745920a829d7b5498cb942786c"
       linux/arm64: "73a5fe3ee55205e8bf6fee57c7af29048f664c0d2b2f69d592b6b5c22bfc1f5a"
       linux/amd64: "ce7372c58f25facbbb036c821a6336df2b4017891257f1455cd8d00d704d5862"
+
+test:
+  - run: subfinder --version 2>&1 | grep -q "$NEM_VERSION"

@@ -46,3 +46,6 @@ versions:
       darwin/amd64: "37102afe56fbcc6975c9f8e76a7bfbd383f28484e9a34e3acfeaf280a7f8c8c9"
       linux/arm64: "be970bfad7b557ffc62b1a7b4c92341a9c6e16d619e9880e43f07c4a4e6eb52a"
       linux/amd64: "c33ace12fa7a94d09c97054da621bf7a6a3159f765b1839a898232de283d641d"
+
+test:
+  - run: tree-sitter --version | grep -q "$NEM_VERSION"

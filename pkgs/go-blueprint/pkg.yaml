@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "d51746a70814fd4e45bd6c7df20ff9f8d9987afba42784d99df6c646dfa198a0"
       linux/arm64: "07e8674e7fa962938ffe730fe4e1644c055d0f681f1c211394b4ae950a03bb2b"
       linux/amd64: "9d8462928921ec74b773d4b09912630309093d76ed49d7987a23241208ae9e43"
+
+test:
+  - run: go-blueprint version | grep -q "$NEM_VERSION"

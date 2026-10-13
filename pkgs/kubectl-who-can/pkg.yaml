@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "87d13dce52322d2e2fb075e0a26a0ceabbbe97bcb270f033b20ab66b20b10161"
       linux/arm64: "dd889ca24159c59622c3465627513bb4004704cbac54f7907e80ec8a07e62760"
       linux/amd64: "3ba4a529e2f759b13030e5fc803639fda6e13fd05ed0d8bda1c722459a298f32"
+
+test:
+  - run: kubectl-who_can --help | grep -q "Shows which users, groups and service accounts"

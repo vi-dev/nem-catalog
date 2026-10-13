@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "f0d755292c2602d772d63d658a3498b23eca8b5620d4b92a991bd035d5abed16"
       linux/arm64: "cbd05ad4f491d12dd139ada61485ca1d24db9f981cbe1658632a083cd0ac1a71"
       linux/amd64: "9290ba0c90e224d6d212836dff5491407c1718bcb72f80b2b5a4a01816df5e40"
+
+test:
+  - run: vtracer --version | grep -q "$NEM_VERSION"

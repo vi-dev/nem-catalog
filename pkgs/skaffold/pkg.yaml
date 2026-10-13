@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "2a10d49399eaa87794af73a1f0687d6501d72a15ece60de2c3b712248fe583e4"
       linux/arm64: "d7905e255319c250302cf52285abe68e59699a91534a5e2be06613186d1916dd"
       linux/amd64: "c44fb83ec88a9ed2945f3326a6d6b78bb957354535f0efcf653413bcd0e9510d"
+
+test:
+  - run: skaffold version | grep -q "$NEM_VERSION"

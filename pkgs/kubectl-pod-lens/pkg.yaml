@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "3e95f78bfff4307c9fc6d89706907c8079e4a38ff29d424e89879475e99e0ef6"
       linux/arm64: "7e001e759ad950603298195223cd2037b9ea4439344a0579d9517350601a5b6c"
       linux/amd64: "dc6a6545421c750d3b63f15b7229411d43f83ab5c5f0336c5b1c53be931d6b2c"
+
+test:
+  - run: kubectl-pod_lens --help | grep -q "kubectl pod-lens \[pod name\]"

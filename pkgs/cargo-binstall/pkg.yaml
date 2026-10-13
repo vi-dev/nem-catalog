@@ -68,3 +68,6 @@ versions:
       darwin/amd64: "73894951a5c5343476e703b9f2ccea9e829396147ee33bded6a5e94c09298d81"
       linux/arm64: "1dc2979f3c83aade9a1b4344589d14fafa63459b759222528d11419f5cca9cc2"
       linux/amd64: "630c8f8803a686aa6779497f0f0fb51d49822fb5fc3c514d8ced33b34e338e6e"
+
+test:
+  - run: cargo-binstall -V | grep -q "$NEM_VERSION"

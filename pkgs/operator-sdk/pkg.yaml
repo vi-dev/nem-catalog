@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "7cb0f24bb63b6383a117291ee4c808953c5dd789d5877da98051aa68b41f40ac"
       linux/arm64: "6db93cd821b429f0bb514cea4bbb5553827d273fc8aa211f13e14798599d31cd"
       linux/amd64: "887a3bb0d63ccc4ca47a522d0c8ffac56d9d5246f6a2bd886b4ed23eb2e2672f"
+
+test:
+  - run: operator-sdk version | grep -q "$NEM_VERSION"

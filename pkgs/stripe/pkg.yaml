@@ -110,3 +110,6 @@ versions:
       darwin/amd64: "0143c4ae333a6cc89915403c00a27bf8e2b91d00fcd48fa9a652a411acbeaffd"
       linux/arm64: "390bfb9bdcc851a0abf96dd82887bbcd78aedc2d66c4c2a943d975957916a3b9"
       linux/amd64: "4fda0794278c04f6594565d114ed145735bef7cfc91ddc1d2c18b1d83dec9ac9"
+
+test:
+  - run: stripe --version | grep -q "$NEM_VERSION"

@@ -175,3 +175,6 @@ versions:
       darwin/amd64: "6b59fa1d6ce9bc8367f11b6c87fe9c0c35f8e8dce1574227d9fd68baf4e8c8fc"
       linux/arm64: "414c88a0155ea10a4a4bcfd3faa0390007cda6813c2208e7a288edf40cc23395"
       linux/amd64: "c7db909c7ed08462c5ca8e4f128369a95653ad7da47a917872b9ce6686bdb5b4"
+
+test:
+  - run: mirrord --version | grep -q "$NEM_VERSION"

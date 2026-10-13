@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "5a66836229ff4a73779b19644b6db28fd574a6b995c15fc333469b2f93ee2acd"
       linux/arm64: "78abf2e15c86250a1553ae6f53aba96be6b2a8126f160b1534959add3467ad76"
       linux/amd64: "154dfe4cd70554bdd82b98e4cd4acf191d43d01ead6f00a73477aa44c4ac42ef"
+
+test:
+  - run: sops --version | grep -q "$NEM_VERSION"

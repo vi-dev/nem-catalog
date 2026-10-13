@@ -33,3 +33,6 @@ versions:
       darwin/amd64: "a14307b9726e66cadb81be9a544732623af26dabeb7702c987aa9c3c062ada34"
       linux/arm64: "077f3781ab7245dc04c9a3c9b78ba120fc8e41aa0dc97489b0af67247e50ba83"
       linux/amd64: "f665c6da19eb7ba399c915d30c7d9793c9b417bf8a749b504bc470678631478d"
+
+test:
+  - run: prometheus --version | grep -q "$NEM_VERSION"

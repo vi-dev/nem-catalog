@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "0c0b1bace57542574584d4e76d097fb81d003c07380469d96bacc1f8eb640042"
       linux/arm64: "d813c8bff6f4410332fac97b368235504ecabfcc2baa1aae38bcc868280850e0"
       linux/amd64: "beabfa250fb91f1a9687586448a24c24fd4f95324fa905d157241d0c9efcfeb0"
+
+test:
+  - run: govc version | grep -q "$NEM_VERSION"

@@ -122,3 +122,6 @@ versions:
       darwin/amd64: "fb7ffa42686eaf5985a69da599b10abe3459d7ad37e5076338c0547fd6fb0ff9"
       linux/arm64: "54f6b1d252189a89c5468acdddc5c266a8156931179ae5ba4a9e16a2764d9290"
       linux/amd64: "e4a35eb45a71d373f5e2470c1a8ba29fdf7bf1e5e79dc4d54b25ab5524fe0797"
+
+test:
+  - run: croc --version | grep -q "$NEM_VERSION"

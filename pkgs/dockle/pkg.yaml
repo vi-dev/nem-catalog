@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "e6b68aca0e7776d857d7f5f226c6dae9b74d8905376636ac4ad93355ec84892d"
       linux/arm64: "14c2fbcd675afaa0f1717e97ab71eee178dabdef676066189f49bad0f53b8762"
       linux/amd64: "8bfc9183d1d3d67800edb45bea4bb63ddf1d28bec5f89944075a07007d79caad"
+
+test:
+  - run: dockle --version | grep -q "$NEM_VERSION"

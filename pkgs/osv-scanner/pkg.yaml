@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "9f89beb6c3d784893cb1cae0a3d56c529bfe91075418c2f9440c45b79654198b"
       linux/arm64: "3d0f5aa5a6baa8eb32bcef247388e149ef6030a6634ccae6fa0d62681fb27a6d"
       linux/amd64: "f9f25499a2c8cc367b3af45df2ea7eeca7fbccceab9c35079968f4b3652194be"
+
+test:
+  - run: osv-scanner --version | grep -q "$NEM_VERSION"

@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "756091fc3fd6f4148c44c4cd8dfce8d872b7b3e924b7511ab3da619c07e19b2d"
       linux/arm64: "6baa11f4e7cab19861b6ed9dfd07d3556e406b393e19c1dbe9b1639bbf241531"
       linux/amd64: "8541e3cfae39c236e65b90a205a00ac6b6195f1d511e09bc9be197582b53a1b4"
+
+test:
+  - run: k8sgpt version | grep -q "$NEM_VERSION"

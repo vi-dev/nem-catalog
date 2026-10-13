@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "5d098949161d0e50103b34536e31be442a1b9ca3c8af6443b3c48a3e4b4a593a"
       linux/arm64: "ba334c13b0f96b082649210fe643e40e0c4a242c14de6633e71eb7ab015e0029"
       linux/amd64: "f03bcf0ef81ddd2f2a73e7f6f3542f0e0e14ad3213cbdab725dd55dd1c8766ea"
+
+test:
+  - run: pluto version | grep -q "$NEM_VERSION"

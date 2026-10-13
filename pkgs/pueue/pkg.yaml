@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "c5b89a2f9f9d355b33880735a1f12a8b8d09002f95cc7d2e5f3294e313fb8540"
       linux/arm64: "759bf5100a51024997111c6913aaf3330a0cdfd893ff552dcf429ae9b5e01e09"
       linux/amd64: "c1b10d7e4e62211075ddd0e1dc3e8cbfc5a43d662cb3be7402a28504e23fcb51"
+
+test:
+  - run: pueue --version | grep -q "$NEM_VERSION"

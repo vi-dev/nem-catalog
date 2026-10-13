@@ -32,3 +32,6 @@ versions:
       darwin/arm64: "4176e093e55b83d37281cd5ab02ae0f0ad42e2bf540e9709d98c6ba91d5cacff"
       darwin/amd64: "c94eef03df87c01a7d3833dac41bd09702720fc4524376ad6613ec675c77b942"
       linux/amd64: "21db474333f3c7875f919b32c10f298674d3adfd4b6828933357f0decb64043d"
+
+test:
+  - run: gptcommit --version | grep -q "$NEM_VERSION"

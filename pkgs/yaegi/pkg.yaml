@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "824946d3205b69e7d1aa790d9ba72cb700af9c0381da7f9334696629445cd5b6"
       linux/arm64: "8bdde9618d063b16c7f9f43a7895935c589e741d7428fcabed1e7870dbb28038"
       linux/amd64: "396e30227c21172324147a3c603a044a0cc0ed8bbda490fd34831905ff977f96"
+
+test:
+  - run: yaegi version | grep -q "$NEM_VERSION"

@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "090d96a5a9728171ecebba42a15ab2c7835d3b63fb4fdc6d76e615ea0b7fb7e1"
       linux/arm64: "04644e43378f74a09cf60a081759e8b8bbe8281924c0dc20dab31e9d00ab0f37"
       linux/amd64: "dad8f7d257e17e0a382f139bd756cdb437268d77973ad8ba3c55b346ce5bdd92"
+
+test:
+  - run: kubectl-view_secret --help | grep -q "Decode a kubernetes secret"

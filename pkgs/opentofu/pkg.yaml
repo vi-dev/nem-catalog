@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "1012d8f3d4567bcbcd1f2c7d766feca39a30bced32fb8be47e1887fbbee2456d"
       linux/arm64: "e67e9da2b1ddf5050ebee62a584cb826eafe1dfd3827d7ec20899ac62791ed1a"
       linux/amd64: "a6894d45ae7a17ce83189cce8fe04b5a65f68cefceb62455b5a6a89fa53ab38f"
+
+test:
+  - run: tofu --version | grep -q "$NEM_VERSION"

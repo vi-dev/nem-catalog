@@ -57,3 +57,6 @@ versions:
       darwin/amd64: "0ef10f633c72ea14be92ccd2905af1a92472dfc1e7518e04e887bfca0b45b851"
       linux/arm64: "02d2dfddf41fb6d03d2f1baf6e0c63b32ecc8c4dfddcbe63f9b11aecd2a9111c"
       linux/amd64: "ff099608ce758b625532ef03a61f4c9520b995e94ff6cd5480dc0428cad64cb3"
+
+test:
+  - run: supabase --version | grep -q "$NEM_VERSION"

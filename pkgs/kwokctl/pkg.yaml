@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "16bccb569c36ac6b124b2521cfe71c4e4133cf22159c82d4698a3412646e9789"
       linux/arm64: "5a642b27d3e975f36040d215640cd90fb4a63cb6fca0ad5865a61bcd9c81051b"
       linux/amd64: "d5743166c657283d6e827c7c4c20cacfd9009fd94830f06718ca7b2c7099461f"
+
+test:
+  - run: kwokctl --version | grep -q "$NEM_VERSION"

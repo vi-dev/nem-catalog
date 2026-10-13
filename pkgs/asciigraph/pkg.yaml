@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "f41baf36496fa25865746b010b278792a30cdba6c5c604551a849088cc6108ac"
       linux/arm64: "ca5772034c8a831b491b7fd09a931377e7e1b0820b51335603051fcabab95bd1"
       linux/amd64: "c5ab53fa975a6c843b183ec401f322e20908ca502400f9726c3b07ca48f05b85"
+
+test:
+  - run: printf '1\n2\n3\n' | asciigraph | grep -q "3.00"

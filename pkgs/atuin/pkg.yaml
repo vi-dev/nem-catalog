@@ -56,3 +56,6 @@ versions:
       darwin/amd64: "63bc85c87be38b8876de6935370b29978848c2b52575f4ace79e565c6a7206a1"
       linux/arm64: "cb4a00c042178814114e7188505100ad7ac2f43c573d0578e764d309c038aa96"
       linux/amd64: "a2cd1f7bba0e45cf620683833a6414b9dd74a0c446e4d819258b6717109bc0fd"
+
+test:
+  - run: atuin --version | grep -q "$NEM_VERSION"

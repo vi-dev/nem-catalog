@@ -146,3 +146,6 @@ versions:
       darwin/amd64: "25a1524165092dd511a148993d86aebbec15d49b0fd99cd1d3a690ab9c8ea95b"
       linux/arm64: "e792a42973766943d29ecb152ff17ea9ddb0fdd0c1ca9217c9c0f78b2b9aad13"
       linux/amd64: "3afb7ff95c56dd7e7837478a431d92ec35ca567558123c051946469e7a1bc458"
+
+test:
+  - run: apko version | grep -q "$NEM_VERSION"

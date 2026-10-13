@@ -49,3 +49,6 @@ versions:
       darwin/amd64: "59a5ee270389b5ad9ef827c1b155b7ff247aed00b08d640ea1f3705ab1de0ed9"
       linux/arm64: "e0b437ec604a813df2cdc3c1f4dfb409d6ddce10079ae59df6bd463399b12a93"
       linux/amd64: "7d657367ab702d6fca03a1db626559435a10debc621fab5259d277e2822ed53e"
+
+test:
+  - run: istioctl version --remote=false | grep -q "$NEM_VERSION"

@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "e7eceb12047064c9e93eb37ad8ef93110527f39bd0eb01adb71cea77aec94089"
       linux/arm64: "e40a00cd9d6ee5d529e3bbff0638d49df644cb3cc4b41841ca3fe7fc2970f392"
       linux/amd64: "6f3fa62bbc3820dbe1f1cffe4beef62c466a8fb1058837781d20d36233dcfa12"
+
+test:
+  - run: minikube version | grep -q "$NEM_VERSION"

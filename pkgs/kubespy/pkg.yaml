@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "dad45380fd487c7dff63d06ed5860ff66e497832fd67d28f02500d1f639b81d8"
       linux/arm64: "f5ce81c121637b6bbf090f1b62641cb906d7284444ba1bd9e66ab8942717c5d0"
       linux/amd64: "a1e9a38fd9afddeaec6c5c992aee8cb9ddaeabf9d6f122241754426a79d9b86e"
+
+test:
+  - run: kubespy version | grep -q "$NEM_VERSION"

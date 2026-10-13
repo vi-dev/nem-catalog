@@ -43,3 +43,6 @@ versions:
       darwin/amd64: "a62293c8336c47d0abb774ae0e4c866d385695ca4a34cce3baa32a2065416f6e"
       linux/arm64: "78303f126d48b0356d3cbfb61acafcb961ee5792147b8593bd08bb9acb32efe0"
       linux/amd64: "919ec7acb93ebdec9cde46727a1ddb8810ce55dd9ceef2d416ab65b6783bb58a"
+
+test:
+  - run: clusterctl version | grep -q "$NEM_VERSION"

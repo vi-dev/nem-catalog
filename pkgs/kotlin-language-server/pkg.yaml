@@ -27,3 +27,7 @@ versions:
       darwin/amd64: "4fe7d71d087b307c7869036171bd9d8c6a4284cd7c25b89098b0a24eb2d9b6d2"
       linux/arm64: "4fe7d71d087b307c7869036171bd9d8c6a4284cd7c25b89098b0a24eb2d9b6d2"
       linux/amd64: "4fe7d71d087b307c7869036171bd9d8c6a4284cd7c25b89098b0a24eb2d9b6d2"
+
+test:
+  - run: |
+      [ -f "$NEM_PREFIX/lib/server-$NEM_VERSION.jar" ]

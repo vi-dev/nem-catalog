@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "bcdd9925d13ff3837f61336269f9d45e338ca14df2f8174120bd571217d99918"
       linux/arm64: "bcdd9925d13ff3837f61336269f9d45e338ca14df2f8174120bd571217d99918"
       linux/amd64: "bcdd9925d13ff3837f61336269f9d45e338ca14df2f8174120bd571217d99918"
+
+test:
+  - run: grep -q "PLUGIN_VERSION=\"v$NEM_VERSION\"" "$(command -v kubectl-view_utilization)"

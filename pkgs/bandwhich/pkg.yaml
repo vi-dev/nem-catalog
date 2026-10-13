@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "d4c8f25b997c3f1ad807f251db1d3a0ac53cfcc4d98757d6932360316789ff29"
       linux/arm64: "6bbf084e5280a1a10833b8f466728ff428a7d637282c0487d6fcda0c4781357a"
       linux/amd64: "fec93e01c393cd3ef8aa168a675dffb8fa4841d5fd93390b5d14f238ae29e59c"
+
+test:
+  - run: bandwhich --version | grep -q "$NEM_VERSION"

@@ -50,3 +50,6 @@ versions:
       darwin/amd64: "e411230c45b9befcb832fc64d77d6a3610bd31a04142eb17e5721d43f2dd2970"
       linux/arm64: "efc88bd12d02f193d1ff4ddf9e5cd88811872a19c1122a8d8c8292ff74abaf2d"
       linux/amd64: "bbf4ba83ed307cfdd1aaf3aa7bdc3bb748a9584cd1cb12c1a293c8a34be33ef3"
+
+test:
+  - run: kubectl-gadget version --help | grep -q "Show version"

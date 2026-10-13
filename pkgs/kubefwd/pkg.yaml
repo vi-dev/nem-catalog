@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "905a3dd8a70d5acfcfe2a03f41feec264ac0c11cf7e5633b489716d719b64a6b"
       linux/arm64: "e01ade02d919be2c7e306543f0a65de2e629c254ef16b51ecb45830b0044a3e8"
       linux/amd64: "07275cad05b2427069071160125b8cb29e94dd44582f685ce6d966fa9e7fb7d7"
+
+test:
+  - run: kubefwd --version | grep -q "$NEM_VERSION"

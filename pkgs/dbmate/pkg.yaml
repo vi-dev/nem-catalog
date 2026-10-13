@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "c66be2cb5865b2003362ab34b4f92decd3ff52b43d22580dcc39c7518e879d8d"
       linux/arm64: "9aac97323334c252bc1ea7d49f3fcb67ae54636b4af6f9045b8d229027c564d6"
       linux/amd64: "f60fd6c6dbed316de116a701945a3fb21d365a25a7e6a9b28ba3a50f49818d8f"
+
+test:
+  - run: dbmate --version | grep -q "$NEM_VERSION"

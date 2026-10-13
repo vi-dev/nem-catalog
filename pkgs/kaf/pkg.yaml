@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "8dd36860fd2ffa1b6c33d016070f1b0a2b211b7752fd1cabc92f8167e1fcfd4f"
       linux/arm64: "8bcb6738652088f1b3d59ff4d244f5e5ce5ae0ae29c6e7caa6b255abd828d97d"
       linux/amd64: "c2cc6e412d31f979242e3c7ca38f8474402c3722ef0ced22f842fe2a74818889"
+
+test:
+  - run: kaf --version | grep -q "$NEM_VERSION"

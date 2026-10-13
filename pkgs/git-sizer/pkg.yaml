@@ -27,3 +27,6 @@ versions:
       darwin/arm64: "7d1e8a6e1218d4640eebcca54c78b855055eb387eac34647b4928f072ffb8805"
       darwin/amd64: "f491edfb6e6552ecec401cd6a2b57b6790c9110b34286a01a0d315f65530de50"
       linux/amd64: "a166f7692a02ba68239cb014386f0263ec15525a36928784482644423aae2395"
+
+test:
+  - run: git-sizer --version | grep -q "$NEM_VERSION"

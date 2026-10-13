@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "25d46ae4aa84c8e898a1f3cb6315e5a0c7f4e2962835c5510102e56cfe1303a4"
       linux/arm64: "df33920a792cd8ee5573cec3632a710cd2178d7bc4fc3892c6be78f35e7cbcc6"
       linux/amd64: "5006ee3a4239ab6a3edb1bf5c932874d814f7c276117ca677352697a4f547799"
+
+test:
+  - run: dasel version | grep -q "$NEM_VERSION"

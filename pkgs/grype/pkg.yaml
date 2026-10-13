@@ -50,3 +50,6 @@ versions:
       darwin/amd64: "312ed375dcda6d8893b4ca5d517371fef1a50062ebb0b0dbe6bdb4ac2fb57c57"
       linux/arm64: "935f628bdf9331ffdd946931ea5fdb50045d3970ba52670cbeb44a88f127291b"
       linux/amd64: "38525dab1e06f162ebaa02f94d82d1f807076b011a44180cf2777edf1a7b9c26"
+
+test:
+  - run: grype --version | grep -q "$NEM_VERSION"

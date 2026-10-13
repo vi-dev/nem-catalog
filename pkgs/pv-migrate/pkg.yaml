@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "caf2a3e4faa0b78241e5648ad645e6f2d152bc8dac1d7eec8cf7e8d9c90177bc"
       linux/arm64: "9ab436961fe5b5b0f49f032c064f0a6f16577ea42ba57f69ba87e2c822fef933"
       linux/amd64: "eeb2e88d0ebea7c3705db0e534c056c1cd4ec2fd8c8ba3e18a74f485dc8c26b2"
+
+test:
+  - run: pv-migrate --version | grep -q "$NEM_VERSION"

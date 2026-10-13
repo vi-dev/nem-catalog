@@ -49,3 +49,6 @@ versions:
       darwin/amd64: "d95c23de14751da84917dba89f4fb7fbb3aa9431d2e16c40d9a412f698327db8"
       linux/arm64: "61246367258d32e6568d784f862731646ca8d23b7712049028e306470ee5e469"
       linux/amd64: "f06ce9b831c7ed03dc50df72d7824cf1a7b158a06a1f0347f5409c9b6fe1dc06"
+
+test:
+  - run: gitlab-ci-local --version | grep -q "$NEM_VERSION"

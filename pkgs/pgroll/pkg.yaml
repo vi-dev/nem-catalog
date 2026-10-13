@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "26cd2d297d02f377f9be2731647f63e66fe2d7df2bdf629a65f6d202a795996f"
       linux/arm64: "08d00bf6ce267ade1e5e5b4f614de704e9c0d616f2e150aeeba50703a92a5262"
       linux/amd64: "454ab2f6a9ddb36ad1d245121452bf26bf393065b38b4e0b1e155b67656cbd04"
+
+test:
+  - run: pgroll --version | grep -q "$NEM_VERSION"

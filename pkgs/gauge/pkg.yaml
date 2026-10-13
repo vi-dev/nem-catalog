@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "235cd620b353553a6a09aaf016e28b10f36fc10e24ba5cef6f43bc14897c350e"
       linux/arm64: "1e34a9d686ca95c34a00a28a79eda7c3c5edba239226fb546fd8d110b4eb099a"
       linux/amd64: "6d23292d876f884b43479ff0e50de85132d55579b1f89e2711047cc702d8ed88"
+
+test:
+  - run: gauge --version | grep -q "$NEM_VERSION"

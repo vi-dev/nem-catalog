@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "0c1d7acaa459073e73f2754812dada5f4eb97c057a9929de52c81c8d37b726be"
       linux/arm64: "64500561f5fcaa3f86fe951ed26bbfc28f7bbf3d2eac13843abfd2924955d10b"
       linux/amd64: "82dbc7e598740dc9344d41f8ad0b8210d57c4c00bdb2c5f1d8a69a2b98baddcf"
+
+test:
+  - run: kube-bench version | grep -q "$NEM_VERSION"

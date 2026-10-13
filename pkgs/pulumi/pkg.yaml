@@ -80,3 +80,6 @@ versions:
       darwin/amd64: "eaca4c3b8277bfa3ab061fa3b270d1c66358a0b2e613da8c5587a04b7226c534"
       linux/arm64: "edc8327463a72160bb36cf82cf5062da9c8a244290a706d9980988e7bf486853"
       linux/amd64: "94ba357acac23d01474084c4b00098dc0f7bc70ce13f34c777459254a5f718e5"
+
+test:
+  - run: PULUMI_SKIP_UPDATE_CHECK=true pulumi version | grep -q "$NEM_VERSION"

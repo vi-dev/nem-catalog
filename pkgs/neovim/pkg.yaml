@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "03fe16f8dd9f1e9eaf52d5e294913a39917b9e2faea30d7fb0fb385fbd36fe59"
       linux/arm64: "ceb7e88c6b681f0515d135dcdfad54f5eb4373b25ce6172197cd9a69c758063f"
       linux/amd64: "012bf3fcac5ade43914df3f174668bf64d05e049a4f032a388c027b1ebd78628"
+
+test:
+  - run: nvim --version | grep -q "$NEM_VERSION"

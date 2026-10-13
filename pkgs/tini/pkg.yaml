@@ -25,3 +25,6 @@ versions:
     sha256:
       linux/arm64: "eae1d3aa50c48fb23b8cbdf4e369d0910dfc538566bfd09df89a774aa84a48b9"
       linux/amd64: "c5b0666b4cb676901f90dfcb37106783c5fe2077b04590973b885950611b30ee"
+
+test:
+  - run: tini --version | grep -q "$NEM_VERSION"

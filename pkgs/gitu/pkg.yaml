@@ -27,3 +27,6 @@ versions:
       darwin/arm64: "19fa3fbaf79736f07eefc1fd9b163a47f40111ba4f6fe256796006cc62cdd70f"
       darwin/amd64: "abf5ae48f991c3d8ae1dc98ba03bb8d5827b954ff56352008cf90b1c5eeac6d0"
       linux/amd64: "52c39e94e232d126d1ed37943de943b7e91df5f3749a2f86253e467d226d3741"
+
+test:
+  - run: gitu --version | grep -q "$NEM_VERSION"

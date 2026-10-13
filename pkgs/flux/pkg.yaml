@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "162e11dd0fd44d1d87f3b8308b74e8ef8fedd0a550b8501f0365f329efc476f8"
       linux/arm64: "dcab945f8d8658662fa1db93e150a602ba1f91da367a82e099bd65595fc7c62c"
       linux/amd64: "c2c397a52930f52d2005c01d276116b059d062de379386d58e98115380a766a2"
+
+test:
+  - run: flux --version | grep -q "$NEM_VERSION"

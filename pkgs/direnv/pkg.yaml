@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "24fb9ce48b563d7e9fbdd3a4e3e836941654a31ce3e67eba9eaafc3dcd8ae73b"
       linux/arm64: "2a9cef8d73521d6a3ec3f2871c4b747b8c4cc038628c1b57a7efa42b393a2d82"
       linux/amd64: "1f1b93dd6f38523fde26dfac96151ef9d31a374e3005cd3345fb93555ae0c9b5"
+
+test:
+  - run: direnv --version | grep -q "$NEM_VERSION"

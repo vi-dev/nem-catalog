@@ -30,3 +30,6 @@ versions:
       darwin/arm64: "e5269d6bbe05dfeb179e4f21111b3a641d6ccaa38b0b21d472ae5c65f8c4ff5d"
       linux/arm64: "5e35416ee8725dc7cc0572e4392a8117cbf008b0e34c0db65c75506b0299cdbf"
       linux/amd64: "83f8122e924745fcd70636e3594bc01c4c47f2d4c8f3c63b5d70d3f83a482677"
+
+test:
+  - run: spectest-interp --version | grep -q "$NEM_VERSION"

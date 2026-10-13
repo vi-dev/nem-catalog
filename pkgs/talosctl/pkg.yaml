@@ -49,3 +49,6 @@ versions:
       darwin/amd64: "55902fec33e93d11b64e5e01ddd9dde7ae50679328b8f3556e6d86a51dbce866"
       linux/arm64: "51caed158eda73d2888cbf2df2d67551f9c9f8229aa42d3725e481d073e76f0b"
       linux/amd64: "7e1d4b7d5846964bdcf63a794e3c8161bb6ef2983d5ace58ea5322f3bf32a27e"
+
+test:
+  - run: talosctl version --client | grep -q "$NEM_VERSION"

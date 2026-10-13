@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "3c3f7f18f908457fd1209cbe341418f7f6bae78c08126cfbe8de0d1b06aa8781"
       linux/arm64: "d12bd7b73c1fc9c64efc79f8157dd713dabd559f1ecf3cfc0f42e32279a155fd"
       linux/amd64: "9005daf969de0b50134493a2c00078b49f5f5b39d021cda7c89bf4d4f3d776d3"
+
+test:
+  - run: terraform-docs --version | grep -q "$NEM_VERSION"

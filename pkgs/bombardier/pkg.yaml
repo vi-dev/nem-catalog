@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "27def2847d80cdeec9c3a7fd21ef6be13fc5657c4ee9f61bdb86e307413d8d56"
       linux/arm64: "258025ea4dc183bbe3f4ccc7772de1faf2c73700e9f81aa5b84e0c1799d7323c"
       linux/amd64: "d3dc4a9ecec3f8bd43f8c196ad533cb4b79ca55b11fc74c3184231e00a95bc0b"
+
+test:
+  - run: bombardier --help 2>&1 | grep -q 'usage. bombardier'

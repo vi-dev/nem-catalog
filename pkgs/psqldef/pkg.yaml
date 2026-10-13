@@ -62,3 +62,6 @@ versions:
       darwin/amd64: "5fa7d23cc67390b1a41e8e7be1ac039c90e87c701315bd34c054652e1d37c723"
       linux/arm64: "b9174e318c82037af377d153ee028f5007d0e2072b16bec291844668a3d60606"
       linux/amd64: "c796aa577562d9fd1b68b3b852ab39661da753e2197ab3fca231bb07fe1d8807"
+
+test:
+  - run: psqldef --version | grep -q "$NEM_VERSION"

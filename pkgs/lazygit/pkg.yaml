@@ -50,3 +50,6 @@ versions:
       darwin/amd64: "f727fdf2efa46f78d102639eafe085cef437928da1e9ec79ec8e203b8a12f2a2"
       linux/arm64: "8b7ca3b344e60340ad1f89f29b9868ee39bcaba5bb92ee818bbe65476bb8b6e7"
       linux/amd64: "f8ea237c41f194cd799b48505518bfdaae4edf5a2ad6bd3d898e939785ee4532"
+
+test:
+  - run: lazygit --version | grep -q "$NEM_VERSION"

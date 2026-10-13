@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "ffe9bb18b23d5ed1eae50237aecdbb523d016e96da0bd4e7aa432040acfc3fde"
       linux/arm64: "f6198ef8090f404dbb771abfee086eb8c48ac177f30da7fd3510aca35b344b5d"
       linux/amd64: "c7187db94eeeeca956519a6af171adc31453941a1e777961f6e680f697c8c507"
+
+test:
+  - run: hadolint --version | grep -q "$NEM_VERSION"

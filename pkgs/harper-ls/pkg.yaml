@@ -50,3 +50,6 @@ versions:
       darwin/amd64: "6fd18f3e7de08c518afdfbb7c49362159e6f938801955aad9e55008c945d684a"
       linux/arm64: "57069a5f239f290cb4d293137af6997bd48b919ba2add3ff8401059a3388ff9b"
       linux/amd64: "07cd5b5d603b95bc2148fcec4434d39061b777aa518bbff024fa4bbfa3ae77c5"
+
+test:
+  - run: harper-ls --version | grep -q "$NEM_VERSION"

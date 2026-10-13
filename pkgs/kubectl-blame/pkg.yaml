@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "fd7539ee3c471f5ca3facf0b05787dd56e03da2b2b624a62cee84475834ca60a"
       linux/arm64: "03f78d59ff898e2daace6ef1b232a3df77990cdacd440c11557a435257c5bf75"
       linux/amd64: "e20fad89ac3faa4e7032aead252dc0666bccdf2033fd6964eda4b6803ac5a2d0"
+
+test:
+  - run: kubectl-blame --help | grep -q managedFields

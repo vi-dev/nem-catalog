@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "cee45b7452984d6b8b3c0fbc4a6cef40698e65aa43948f0468a2b054657aacbb"
       linux/arm64: "c1502297738af4054507cc0675b54db1ebec67cedc32498028ba889906386462"
       linux/amd64: "54428b2be68ce297c5c743feed65a2fa2ed2a671881ff70fb6560e560bb18eaf"
+
+test:
+  - run: kubectl-oidc_login --version | grep -q "^kubelogin version"

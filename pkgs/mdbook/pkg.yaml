@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "a47d7bf0d5d670cff9ee6cce95537cbeb62dc10704d9e7131ffbd13e2b59a5de"
       linux/arm64: "753e5c5c363ee8a56972344dcf91466f005a51db84a7aeffe427ae3ef83d6d44"
       linux/amd64: "5222beabd3e37dc5be0d18ff99b79058469354db5c220153a1b92db5ba12be89"
+
+test:
+  - run: mdbook --version | grep -q "$NEM_VERSION"

@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "91aed312160fd56aba19869c0f7b3f30badcada00b1cd26630fcc0d71eda6946"
       linux/arm64: "fad03e3558a4ea518f0c1ad885ca9525fd9005470fbb15e4b75e2cfd18fa9de0"
       linux/amd64: "115b0c7eda6928b65262acf5a820014443f0e4272790296d353d31be6de7f6a4"
+
+test:
+  - run: tproxy -h 2>&1 | grep -q "Usage of tproxy"

@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "d9c9fff2c12cf283cea92146b477dd1b3b4f4453c770706faa2c796a4caaa8a9"
       linux/arm64: "a59aadf13ffaf2795893119424ad5991155f993515238b29aedebb1f225ba435"
       linux/amd64: "812d1e81f98b6a8b6e7c5f1d8ef8e451d6ea75a14bd8a72c1c2334d7c78d9305"
+
+test:
+  - run: trdsql --version | grep -q "$NEM_VERSION"

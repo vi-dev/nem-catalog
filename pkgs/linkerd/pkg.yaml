@@ -69,3 +69,6 @@ versions:
       darwin/amd64: "c1d5e26a99b41f29e4199ae657cced844a198682516b743eba6eb7d34d4464ca"
       linux/arm64: "d4cb27f7e5d71310cdf368dc1eeb846d2135d6206e9e6f35773c43b90ddac1f2"
       linux/amd64: "e3afa455ea1dab2fcde64edca8936b4b147f285b1667633646633a05e4098b23"
+
+test:
+  - run: linkerd version --client | grep -q "$NEM_VERSION"

@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "80097893b478c55be51ffe826c172f0fd5095d23cca02adbcbcabc412700a689"
       linux/arm64: "1dac2072216689e773325cb7587b858ea7415706ebcf04e23bf80e7e70555340"
       linux/amd64: "08e031c54fbffb3f100e904e4eae94bba2730fedf4869921fda79e4d7a8f5d4c"
+
+test:
+  - run: kubectx --version | grep -q "$NEM_VERSION"

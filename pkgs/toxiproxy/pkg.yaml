@@ -27,3 +27,6 @@ versions:
       darwin/amd64: "52ac1f99d7204b4b523f910b791bc86318b50ef94822c79a6157606704003ced"
       linux/arm64: "ab417dafc77ae8b54ec8461cc5da5180d0465a61dcbda86c72da72ee4ab843b7"
       linux/amd64: "65e042d3fc2290c099527bc506446a6fd863a09f113b8944b636ece70221c2b3"
+
+test:
+  - run: toxiproxy-server --version | grep -q "$NEM_VERSION"

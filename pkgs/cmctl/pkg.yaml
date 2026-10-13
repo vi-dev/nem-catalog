@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "7a462c354e00d0e382e4fca28d38db94a4f4e61ce7c34290110a60c38159ed85"
       linux/arm64: "c46bca0ca061844f973612c15abeb7fbe65621ee9255524f3d17bf0cb3779b09"
       linux/amd64: "e2dfdf1032e3a442a24b03b996fadb0b8cfeb08ec532c8d724e0178e7e90c7ab"
+
+test:
+  - run: cmctl version --client | grep -q "$NEM_VERSION"

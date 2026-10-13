@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "41592507b6c6373ab0cfe6ce337dc00d087937c2b7ad691a378442c4067386e9"
       linux/arm64: "58bc06b1be215746246c5370ec29652af94e76fb63fcd0ab8e3e8ce2177e9cb9"
       linux/amd64: "97507163287b0de2e246624a4f6dba2fc79290d2b003c9c711d2c73343a2f3d6"
+
+test:
+  - run: kdash --version | grep -q "$NEM_VERSION"

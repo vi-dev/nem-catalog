@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "9f31528eb3e1745d5fc1b99c8ec7420ff47e1b00ec637ced3e92dd82f5541816"
       linux/arm64: "9a6885fe9fda850129b110e0f079d42529b0693dd81b59c316f04084935300f0"
       linux/amd64: "fe1142d92f418549338ea46d67a472124878482e225d279e9a42700c75d76a4d"
+
+test:
+  - run: katana --version 2>&1 | grep -q "$NEM_VERSION"

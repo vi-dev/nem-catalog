@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "1212551121b2d41ea61ea1f11703e486c34915145d3894c718e613d31e472305"
       linux/arm64: "44f4f5dc0668430cadc5f4cc52e4ae1bf0a3f2f60320af6b3b2edd3c826402b5"
       linux/amd64: "466d93ccf767e975691359c6c9bb6750696e54c336d28ccd4d39e0f0519e8bf6"
+
+test:
+  - run: kubectl-argo-rollouts version | grep -q "$NEM_VERSION"

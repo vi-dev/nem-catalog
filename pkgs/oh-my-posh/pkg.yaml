@@ -133,3 +133,6 @@ versions:
       darwin/amd64: "0d1a8d67848a2368d7961741fd148cf77f1cd5a34f97b5130d456dc3a47727f9"
       linux/arm64: "34d81d2871cd2b211878d3e31bb7c8d7c5e70088170ee526be222a2e6b843c4d"
       linux/amd64: "079febf68932744a6c8d05179a2798bca083613275eca6de41b1efe9c82e15c8"
+
+test:
+  - run: oh-my-posh --version | grep -q "$NEM_VERSION"

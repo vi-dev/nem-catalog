@@ -38,3 +38,11 @@ versions:
       darwin/amd64: "e4c30df263e3ebb4b2b5df52c736fbd0b16df5ae6b9a6789460a784620ba1319"
       linux/arm64: "66a7d4af3572d920b0f1b01710ffa79888d4ddd1b784632e33a3d711aa7d1e63"
       linux/amd64: "5906e0339e9322a688b2375eaf40666e00a16e008b0067b0a9f9e4b6c5033720"
+
+test:
+  - run: java --version | grep -q "Temurin-$(printf '%s' "$NEM_VERSION" | tr _ +)"
+  - run: |
+      set -e
+      [ -x "$JAVA_HOME/bin/java" ]
+      printf 'public class P { public static void main(String[] a) { System.out.print("ok"); } }\n' > P.java
+      [ "$(java P.java)" = ok ]

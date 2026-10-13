@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "70a3100f093147a3dfe360505bee1eed89c66924410298b5560c62b7e7d51591"
       linux/arm64: "8455bc6f9f9164d4469b286bcb58921887e2fe9390e50195fa2f4ea45d85d235"
       linux/amd64: "49963463c2dc515bedd7e9d77e0e75a394532102ce878caa097250a8260aa815"
+
+test:
+  - run: octosql --version | grep -q "$NEM_VERSION"

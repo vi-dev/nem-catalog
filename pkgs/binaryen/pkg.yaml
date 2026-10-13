@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "40c3de90bb3766bd0282a895e139a6f50253dba49b4f5bb89e66faca162d832e"
       linux/arm64: "c58562417836c5d0493d89bdefc434933bdc097db641b483df86bcfa557a107f"
       linux/amd64: "195ddc94f9bc89f45abdabb0b9eea86023d727ba90eac8b35b80f2544fc30572"
+
+test:
+  - run: wasm-as --version | grep -q "$NEM_VERSION"

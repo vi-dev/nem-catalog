@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "1c0a0cc90653b15267d9f6a52e2ff52ee2a442af18235f9dbf5ca5cc30ba137e"
       linux/arm64: "15387186bc8fde347dd931490afafe462ccc391db049e9e19c80a48dd060a8c9"
       linux/amd64: "f07c92607e5745268b576bd325ceef3a582aada253bb64db8d92a8a85303d958"
+
+test:
+  - run: zola --version | grep -q "$NEM_VERSION"

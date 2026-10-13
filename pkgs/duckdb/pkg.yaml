@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "36e35ae59f417fb0b7e6c5e0b962f887e2b73ad52efc694b76e71fc57bd35b0a"
       linux/arm64: "377f03fb9f17ab5a78f28f829cbfcb5333da8ab3c2d0788f27694f81df77ed29"
       linux/amd64: "1f2fa724fb054b3dbe1a9cbd13de5b76997d850e7087ec762ba88db04e0180cf"
+
+test:
+  - run: duckdb --version | grep -q "$NEM_VERSION"

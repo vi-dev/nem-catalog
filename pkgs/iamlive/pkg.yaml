@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "968183496c285838c1a66fd2fb86fd3a117bfe70cdf579e082bb321e03950184"
       linux/arm64: "1cf213838f4e6bdc9091e3ae1e516643d11bb011e64ec6480f3a3b6dd3bb15ff"
       linux/amd64: "aef1d41d27c5b9a513f0b96b9ff5ed0fc9c076cea5b024d50311e6a76aae13f7"
+
+test:
+  - run: iamlive -h 2>&1 | grep -q "Usage of iamlive"

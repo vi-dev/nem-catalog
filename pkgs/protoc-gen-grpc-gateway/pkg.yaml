@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "595a2943b3da556523f72f574e4752eda4607625514af8ff62d051b281cb2f74"
       linux/arm64: "0f74b7795bafc429b6fbae59d8d5d5600aae6dcd9bd25477a728e4bb67c75aaf"
       linux/amd64: "3451a430e9dfaa43d199825426e96382348f69c4a42402a5b3f06fdd917c18ca"
+
+test:
+  - run: protoc-gen-grpc-gateway --version | grep -q "$NEM_VERSION"

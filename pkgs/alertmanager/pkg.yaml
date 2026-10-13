@@ -33,3 +33,6 @@ versions:
       darwin/amd64: "2c76c6bb30f030296cbfbf803bfd99494987197fcb8743f73ef5f351d568ce97"
       linux/arm64: "a96ef16598ddc58e84d28167b3352b30e3205698d76c56ef467e4504d7664da4"
       linux/amd64: "19c75a11d8c03dc4ade7abdbddfb3a8f28c9e7b000d0849cda0cd71dffd74a03"
+
+test:
+  - run: alertmanager --version | grep -q "$NEM_VERSION"

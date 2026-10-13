@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "95ea25517e283397009ffb512b0d72b65e11aa7fc18cc0c4558f09d29224caf9"
       linux/arm64: "b62424836c8ebd41dca312f3385a7ed552b48dafd4c49d47f62bbef428633255"
       linux/amd64: "891f7d0eb89bb3000aca72f70ef244ea5f24894f33b24143203caa528555ad7f"
+
+test:
+  - run: saml2aws --version 2>&1 | grep -q "$NEM_VERSION"

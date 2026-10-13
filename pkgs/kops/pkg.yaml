@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "94c022b42e43cf9c09e2f7cbc2a78ae509f547799597111dd75a9d4f28df40da"
       linux/arm64: "a76472e9b4ca549202fda98bd706d593be550c203eb5b02c9fbbfd8c20dc5419"
       linux/amd64: "0a497df3665569f07c76c31a245ab2cc69e1d327faf7805b83358fde5a4b8da1"
+
+test:
+  - run: kops version | grep -q "$NEM_VERSION"

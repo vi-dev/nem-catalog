@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "c2144cafbfe3d22e34ae637f9974ce53613543ac19477fdb287df22ea3668261"
       linux/arm64: "821a86343191aa1cbab74bd42f9e93c9a63bf85e4742945f40d3ae84193c1c77"
       linux/amd64: "67c4a96dd237c1f518f6b36083f270f9976d516f1e57fce891755ea782e50006"
+
+test:
+  - run: sccache --version | grep -q "$NEM_VERSION"

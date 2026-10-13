@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "63a99448bf7c450f1264a1af313646df30251bdbc3284b8f4d2d55cee2b98c55"
       linux/arm64: "732b1d5b30a3903580cee9ca24b2ff04ba2a5c78fa1ba6579dc5154fc431b40a"
       linux/amd64: "c630ee030d5d9d83c88c5cc72f43ae215b0c214d64fd7afc92244fe369af2964"
+
+test:
+  - run: miniserve --version | grep -q "$NEM_VERSION"

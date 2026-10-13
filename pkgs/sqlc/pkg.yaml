@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "c5af76772e3785d21663a62697056b383f07629979b1bd25b93872e73dbd519b"
       linux/arm64: "b7cae247740d0c51a1e657479e5b2d21e6fef428f596682a01bc55bf4ab8a23d"
       linux/amd64: "497ae4fcdfa64c5b0c311ffe4c2bd991e43991e82e5367792ed78bc2dca27354"
+
+test:
+  - run: sqlc version | grep -q "$NEM_VERSION"

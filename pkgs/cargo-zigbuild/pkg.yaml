@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "f8c746d12dfae79ac0704c5aa13631a05b24c3e4ee7216eb40f70943bd8ca7b1"
       linux/arm64: "5917d5416884cba0f23c2653016f7f2df2ec04e74eb6b259598fecc066f8c429"
       linux/amd64: "c636e4f72b6f40a40ddf0414c8c6056f78b87eea3be0edf01f08d65fa028a373"
+
+test:
+  - run: cargo-zigbuild --version | grep -q "$NEM_VERSION"

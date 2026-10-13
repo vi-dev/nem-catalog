@@ -39,3 +39,6 @@ versions:
       darwin/amd64: "2e23051ba93cb2013fa2acb656a4edc73db37cd9f4bfd1fa45cf712197c21065"
       linux/arm64: "da314d9791185583dddceb14dffe991caa6997eaff8dbe0445331a2fa70c6fd9"
       linux/amd64: "e7cdb240597d0783c9943e9c89aad3c96c59b67e75c644d62f33ae558e69d09e"
+
+test:
+  - run: nebula --version | grep -q "$NEM_VERSION"

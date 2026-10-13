@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "5d977de53c171cfd4fa07ea281ceb89e424c8d643bd9e3263be22820f15ce84b"
       linux/arm64: "21fe21d9f61db9b381d71200f6f59c7949e0bb455446edcb33dda6ad6a8fcf8f"
       linux/amd64: "2ff97f2201972ce582a424455d50a3719a380eef0cd1f3144f7779348e122a2c"
+
+test:
+  - run: wgcf --help | grep -q "Cloudflare Warp"

@@ -46,3 +46,6 @@ versions:
       darwin/amd64: "c1e230aec90b79d6a70c28a24f7b13a0427596f95110427ae906621d9011838d"
       linux/arm64: "9e8f46bf309ec0ab262967be5538a4dbe06be756a82621f98253933bac5dcf92"
       linux/amd64: "2975d0f651ad96ba8b80b9992ae1f9a964f4408569af5b6dc36544165c3926af"
+
+test:
+  - run: buildctl --version | grep -q "$NEM_VERSION"

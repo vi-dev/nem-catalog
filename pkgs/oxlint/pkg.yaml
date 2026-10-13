@@ -58,3 +58,6 @@ versions:
       darwin/amd64: "debd377ff3e7929743c440c6f23546a99658f7b0271725718c45197ace49bc5a"
       linux/arm64: "f3d9d662cc686c4f774663121da89dba4af10a5248bfbb6cf98db49cc27546e7"
       linux/amd64: "cdecc9297885c2e88c510c52d32f880cdd3e7372041d654fde2525be5235492a"
+
+test:
+  - run: oxlint --version | grep -q "$NEM_VERSION"

@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "f1e09e06b21fd1af64b6b8e693b59702c23505bdebc61428a54b9460ef53bfa8"
       linux/arm64: "27b10998e652619ed15dd796dfb6ce41b01a533803a56d444cd7bda2c0227fec"
       linux/amd64: "5160d48afb02fbc9d4858e6bb3633f59c781f91f3482fa14d5a847ed1059ecc1"
+
+test:
+  - run: tgpt --version | grep -q "$NEM_VERSION"

@@ -43,3 +43,6 @@ versions:
       darwin/amd64: "0f4d44d11ce6e6c43bec1e3ebed6b7e7553f4ec40e64a10b05165e980b98c6a4"
       linux/arm64: "5e9b388402ab7075e907e8d8511662e2a828008129746e4e5e23de04c7b78ef4"
       linux/amd64: "d5da6a66741f4ee752aa3b502b57e47fd6d5c178942861b2507f14f083e7606e"
+
+test:
+  - run: terragrunt --version | grep -q "$NEM_VERSION"

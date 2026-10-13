@@ -33,3 +33,6 @@ versions:
       darwin/amd64: "4cc582287781c171f5ac2d216dc15ab1c40bc83bff59803211a68b66e0c762cb"
       linux/arm64: "2145e9e686c95ee47c1181f83f272f0ff95820e52d7736fdcd9eeb106fd6456a"
       linux/amd64: "9ed00ab5330c94386f3273eda99a1fb0e8f37cfd6cb5270e4ad2fe3527da3546"
+
+test:
+  - run: esbuild --version | grep -q "$NEM_VERSION"

@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "ef0ba7ef0526a4ad414d9a3e8507b2eaa6e08edb6dd67ffff0ee244222c84cd4"
       linux/arm64: "967d8014a43a7ad6cf9760b7cb70f79dc423c2b550ec934ad71b0513fbad9427"
       linux/amd64: "0ed4936f010b42db2ef573e4b2abd951289f4980d95b8236a619429e2501cbc7"
+
+test:
+  - run: git-town --version | grep -q "$NEM_VERSION"

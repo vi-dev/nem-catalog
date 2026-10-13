@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "60feb0d73b2e29e4ecf6b36bf34b23c230d8233c778893b0b56811036d16d17e"
       linux/arm64: "ccad89d6f4c67a9bf595df0aa8a550e0a9e3d6a6f9356356ba1e164e311335e4"
       linux/amd64: "78bd9b221e223d7a954d41f51e9eca98bdd94b401618367ba0f3887abebd44fc"
+
+test:
+  - run: usql --version | grep -q "$NEM_VERSION"

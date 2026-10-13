@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "4d4804625ccb5c4780f5971a3c3c108f4442085ff6548ab166316690a9c20c5e"
       linux/arm64: "85f4a8a154c703737fd603906b6a5c5408a2dbd917814cdeab79784f091ba149"
       linux/amd64: "75304e336ae5e7b6a0002b2076d2c77acdd08be599246df8d28666621e95698d"
+
+test:
+  - run: easeprobe -v | grep -q "$NEM_VERSION"

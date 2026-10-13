@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "9ad7b1c7c3ebce71570a43568e64df6f241c3a022cd8ade46fa9aae4542a23f2"
       linux/arm64: "3b68e4ad8c857088dd9bd071b97f32a8d20c84c88e470031fc11c97381d63984"
       linux/amd64: "64d4db266f308ea7136fe8060a5061bc8a4eea3be5e36350f94a4fcea45309d2"
+
+test:
+  - run: muffet --version | grep -q "$NEM_VERSION"

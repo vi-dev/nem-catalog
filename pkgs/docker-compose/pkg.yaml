@@ -37,3 +37,6 @@ versions:
       darwin/amd64: "d0f0c867fd740953899a63d6d1a291dc60200b0961de9612a01bcc560e6e29a6"
       linux/arm64: "ff42489f5a9b879d5d117c5ffea6defc27390b3286da8ad52cbc9c6ab5df590e"
       linux/amd64: "c57ab918abd5b05ca7e7d0f275875dd1330a695074f309dc9eab1b49efafcd4b"
+
+test:
+  - run: docker-compose --version | grep -q "$NEM_VERSION"

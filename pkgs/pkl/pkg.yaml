@@ -24,3 +24,6 @@ versions:
       darwin/amd64: "5b74b903234047960144f66f2cebdd12d267d9b98e8155ed91d2ae5ed27e2d1f"
       linux/arm64: "a76d2dd47da435a8f911b0347373f47c7e59ea54fb75ff846d20b8df10dba058"
       linux/amd64: "3180b62da95c0cad1d904e9bb6c5f4a8f9032413c21e53194bb91ff1ee5f3211"
+
+test:
+  - run: pkl --version | grep -q "$NEM_VERSION"

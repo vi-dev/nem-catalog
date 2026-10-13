@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "4759befe3fa951fd2ba05551306023df7e8c7fc9eff57bb823481803cb44b215"
       linux/arm64: "cd0df4885f2050082932b4abc5a6aad9a733f6aa4e7d8474740558517ffec4af"
       linux/amd64: "53e226c7da8fb75171e58c35759d736d961ce8b3a12db0baa7b7107954fccc5a"
+
+test:
+  - run: dagger version | grep -q "$NEM_VERSION"

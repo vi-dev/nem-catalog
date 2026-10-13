@@ -127,3 +127,6 @@ versions:
       darwin/amd64: "aded37851135104faa54c69b7552bf33835b857458400da1d6550322270120d2"
       linux/arm64: "4c08a63b92807cac6beaad00b54f3eaf07772ea2e62d2a691b601feed308acd1"
       linux/amd64: "37cc8edbc5bad4abdaeafb88b7840d4877c4379a69d53f78a1a85121a923312b"
+
+test:
+  - run: mago --version | grep -q "$NEM_VERSION"

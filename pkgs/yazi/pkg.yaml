@@ -33,3 +33,6 @@ versions:
       darwin/amd64: "70bb2bcf57d8af862a54e2d12f2fddceefb9aa4ba3783e9a4dcbf2a8e64aacb3"
       linux/arm64: "dfaafadd3a80a18ccbd24c32be4888178202ea96f784a9b1021d526c908cab4b"
       linux/amd64: "a6702034790afcdbb546b73b288c9b184a751fa3f2f17f0ad4d26fc302fb8d45"
+
+test:
+  - run: yazi --version | grep -q "$NEM_VERSION"

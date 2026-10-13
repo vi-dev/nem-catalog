@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "d75106761979571f719cc1de11b41bd685e0785ef25a53c1dd3aa957b39bd62a"
       linux/arm64: "9b4f4200c0b120e92a84210d82cc89c4a4c7d7cb5c6a6a69f466ba89f644e544"
       linux/amd64: "ec66f4d10a7a3ebd276573f60bbe20ade0559d6a9a4f04a736bb3125a4d5cd7f"
+
+test:
+  - run: vela version | grep -q "$NEM_VERSION"

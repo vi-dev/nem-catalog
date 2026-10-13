@@ -25,3 +25,6 @@ versions:
       darwin/amd64: "318b1317f9180f07926e12f1337c09c6c3a583e9b5f63efa716fc8a7b3242535"
       linux/arm64: "318b1317f9180f07926e12f1337c09c6c3a583e9b5f63efa716fc8a7b3242535"
       linux/amd64: "318b1317f9180f07926e12f1337c09c6c3a583e9b5f63efa716fc8a7b3242535"
+
+test:
+  - run: kubectl-node_shell --version | grep -q "$NEM_VERSION"

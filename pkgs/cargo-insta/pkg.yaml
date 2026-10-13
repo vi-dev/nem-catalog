@@ -31,3 +31,6 @@ versions:
       darwin/arm64: "26f081f5bf62d1dc03aae9c4137188d66a2debe6bcaf2884f2153fcb6eda27cb"
       darwin/amd64: "e2d6d6fa4bcb30f7d4834f6254a6da7f2982a9e9a3882695aca5e83d64231267"
       linux/amd64: "703aa7d151ae59cac0bf8e7c2c27da4aca8070f3cb178f624ae10621ef77f5f5"
+
+test:
+  - run: cargo-insta --version | grep -q "$NEM_VERSION"

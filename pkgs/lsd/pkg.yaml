@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "00d3c50551b270bbdf7da97816e5ba7f5fd10294cd310165f7f8b5523e738b9c"
       linux/arm64: "642ecb1a763b9f790a99c83a1445c117a6813ed4edb5d498d4420423c6353eb8"
       linux/amd64: "77849da1210336534258551a581401ba19ae6b8d7b66a2a1feff148ad41e3814"
+
+test:
+  - run: lsd --version | grep -q "$NEM_VERSION"

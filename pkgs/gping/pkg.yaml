@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "b39e8ed591117ca4366502d68ad59e7ade46cdd789853ea78a705ff5f7053d55"
       linux/arm64: "a912b76238bf73d4ae6a4a2ada7f6dd42c25da37e8f0044f72543323656f7631"
       linux/amd64: "91dbcc0a2e279f7c91d9155f846fa5ad2626406f3306138ed2495744aaa9bc84"
+
+test:
+  - run: gping --version | grep -q "$NEM_VERSION"

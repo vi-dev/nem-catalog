@@ -80,3 +80,6 @@ versions:
       darwin/amd64: "ea6e86baea583c6c5b55cce071c1c19253009a90f1e987788cb5eb228fcd9556"
       linux/arm64: "c51dc6cf192c35a328b9f71696d42c38a9a3ba3c2ffe010da836bed071d1ac8a"
       linux/amd64: "c2629e850a344275cfc5a1590acdfd8c11476a44b688812d460163768e05572d"
+
+test:
+  - run: github-mcp-server --version | grep -q "$NEM_VERSION"

@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "8edea5adc6bdb121ec907014790ca780c97aac3766e0c27327227ccc0748c7e4"
       linux/arm64: "aa56015817bdfe8a8944169e5b18108235fb5bca671f89fa52613b4379bf1f66"
       linux/amd64: "ded167eb2d94145cc46e4ccb52db24e85a865858353014514a85cb59c649d2fe"
+
+test:
+  - run: kubecolor --kubecolor-version | grep -q "$NEM_VERSION"

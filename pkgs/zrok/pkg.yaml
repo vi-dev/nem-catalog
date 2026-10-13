@@ -51,3 +51,6 @@ versions:
       darwin/amd64: "d0d0882d84768081c7cbd45c03490bd13e305d19861eaf4811a11e6eb1db5924"
       linux/arm64: "71a08d11058959a0b90e8f59d4a33612b5fc010fced8c65883995cf64e5502cc"
       linux/amd64: "1877981b9050c9d69c61bc12c0b92c2da7330e3fbb374faa78ffdbfa37f8a8e3"
+
+test:
+  - run: zrok version | grep -q "$NEM_VERSION"

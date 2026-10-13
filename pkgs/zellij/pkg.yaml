@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "59f803faa32cd4e5f316f0dc2d3b7a5530a72553e38ad939286471848a418eeb"
       linux/arm64: "15e6534d42644d66973d136c590c49739dcfd6a1a2a0d3d917973f16c81b45fb"
       linux/amd64: "0f7c346788627f506c0a28296517768633cff24fc822a739f8264b640ecad751"
+
+test:
+  - run: zellij --version | grep -q "$NEM_VERSION"

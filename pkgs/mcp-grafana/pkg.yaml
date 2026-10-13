@@ -110,3 +110,6 @@ versions:
       darwin/amd64: "060a71a78d13e9e9f7181b1fa3b3b56c8ed80936a5d254cabafdc2f5e866e715"
       linux/arm64: "23074b93313a7ae2ee7770b4cb5b4859f2acf1830e56f39e0cf49ce48a49e8ae"
       linux/amd64: "8468b1e159412eb1ab738786cf0d2755a1ea0a44103ca8c0040849a227746e07"
+
+test:
+  - run: mcp-grafana --version | grep -q "$NEM_VERSION"

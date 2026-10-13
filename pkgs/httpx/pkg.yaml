@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "10cf5787279d5e2560732417ac2ed347eca73513aee107e6f79f3f79ff85bbe5"
       linux/arm64: "7f3eaf5a6839504f5e2ce29c3ce94aa2ddeeaa7619d9a497e017232c6dc49b1c"
       linux/amd64: "63eac4dcd6e5c9867c94765fdaaf66e7b4eeae3474a1f06e600e266a1c81a53e"
+
+test:
+  - run: httpx --version 2>&1 | grep -q "$NEM_VERSION"

@@ -43,3 +43,6 @@ versions:
       darwin/amd64: "83ce16949e4428176f7fbbf5975c4d668f6142685f088d26752572b682a08896"
       linux/arm64: "99901c2ce8bb4e7d324fd3133463d90a162b56f47c3419e4fa7e5bfb07c17fe2"
       linux/amd64: "d512fa457d9d02b9fdda2a6e353bafadc6eaf6b6af749c1be33c67c1a96b1e9f"
+
+test:
+  - run: telepresence version | grep -q "$NEM_VERSION"

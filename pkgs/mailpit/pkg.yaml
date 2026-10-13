@@ -62,3 +62,6 @@ versions:
       darwin/amd64: "0eb300122c21f533ddd9f0b85201fe9e06ccd7602e6d56f389d4f808fdb8bbd7"
       linux/arm64: "12c736a73d122c55d3531ac2fc92cad96dbde283af661b6701fe32892bd438c5"
       linux/amd64: "a35c053509441b95fb96da6479b3a26b3eb309e223232aced28255c011d29efc"
+
+test:
+  - run: mailpit version | grep -q "$NEM_VERSION"

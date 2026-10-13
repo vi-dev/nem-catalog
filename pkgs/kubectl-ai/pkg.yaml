@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "7dc5f921063b74122f935e8f730cbe763bf868495b7cea03017f404ce7dd4de0"
       linux/arm64: "c2eb7fb99bf5217968a505ab38b0a230d86d1581957ccdda66167020b114d90d"
       linux/amd64: "872ef891232b01772c46a54b1866b383e043100e3806835158187c603eb490d1"
+
+test:
+  - run: kubectl-ai version | grep -q "$NEM_VERSION"

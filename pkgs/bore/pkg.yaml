@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "206db723a382bbc18d2893fc8472868e0b5f41de35975269aab7891ecc8659cc"
       linux/arm64: "ffc4515f3617420b243758cf36ed6a63208d7dba76b2ec3e90d1f476a9742951"
       linux/amd64: "e484d1e3acba77169b773f31a5bfb34192d4b660f44a094a658a2522cd2270f7"
+
+test:
+  - run: bore --version | grep -q "$NEM_VERSION"

@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "23fb23b422d015c3dadd034548f81646cde1bbd3e13057741f9cd95c0d877a76"
       linux/arm64: "abbc017a7aa90cce15bb73f52e620561f604052154c5068c407550204c93e859"
       linux/amd64: "d3700db2fcdf7a2d392ee015a74c8c70edc2fd148505343aea251c353d6c1790"
+
+test:
+  - run: gitql --version | grep -q "$NEM_VERSION"

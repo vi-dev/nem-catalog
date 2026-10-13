@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "484708863fa0fa39fbfe1a46d99c3671f46c72862dff724da2b480cdc79ced1b"
       linux/arm64: "e9d6bd0b05dea441028eb4e690249ab585d711b311646bf9f420fcea01449670"
       linux/amd64: "804bc0c31c78385ac04e9a36f3c2aa3d3170eb77d66807c2a1660c56b2026bb1"
+
+test:
+  - run: static-web-server --version | grep -q "$NEM_VERSION"

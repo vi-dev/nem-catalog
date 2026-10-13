@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "d45fcdb76535ff5439357f6ef9a5fe99a9acec76c1358dc828ddee6f276943d5"
       linux/arm64: "9482937f14061fb239f2dbb2f97f4103de1b101f5d5defbff319f294f9bd540f"
       linux/amd64: "cd15e0983bf0acc7946cd05d453d1e58376ea92dec2642e745212df2b07d8852"
+
+test:
+  - run: cilium version --client | grep -q "$NEM_VERSION"

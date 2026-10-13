@@ -38,3 +38,6 @@ versions:
       darwin/amd64: "207557c0f708578375be9a286d13078cd709bfccae43d61d004913bb512b10aa"
       linux/arm64: "a5c046965b590a8de2f8c8c16a0dbf9201d99600b0cafd604040232b603e4586"
       linux/amd64: "f929eb8e5b72a85543eeeefb2c38f34a68e0c530e70758a2905b78840c76602c"
+
+test:
+  - run: syncthing --version | grep -q "$NEM_VERSION"

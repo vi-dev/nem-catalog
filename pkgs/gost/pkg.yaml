@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "0892485bd94e37b67a1f1d0d2372ed12d7dc0f1bc763d56177a0c0ee734855e6"
       linux/arm64: "f674c8f4a033dc1dfd4f0d5e9602fbe5b0d0f81307bf3794f44b5b5d6d622eae"
       linux/amd64: "b39037b0380ea001fb3c0c28441c2e10bfc694f90682739a65b53e55dce5238b"
+
+test:
+  - run: gost -V | grep -q "$NEM_VERSION"

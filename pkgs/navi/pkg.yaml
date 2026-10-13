@@ -28,3 +28,6 @@ versions:
     sha256:
       linux/arm64: "de99e69906a0e06ffd30a329645e15f9e96a6b42c49eaac8baccac9bc314768a"
       linux/amd64: "f334047479241f7c8b48d091f4e814dcc798a51a74dfd04ee63cbf67e8c921ba"
+
+test:
+  - run: navi --version | grep -q "$NEM_VERSION"

@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "c45acf40a70cc02539c55555ac240bf5ef24544b7ea9959d22da19f606cec205"
       linux/arm64: "6475c5bdba472e00dddff8da22081e6a9ed28ecfd838451d9f05e22f568787ee"
       linux/amd64: "a27ecb29faab9da1549f4a243bab12f1e43e4ed8ae6a2a2186a543dc9ffd3956"
+
+test:
+  - run: oxipng --version | grep -q "$NEM_VERSION"

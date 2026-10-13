@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "8c06b27ddb51939570066682e4fcd55d2453cc6b6c6ca226cb617371f6a51279"
       linux/arm64: "d859663160af7d7752ec7bccfa1b6dcff5cb2d2a03cfb1d04b3a1127171f5e35"
       linux/amd64: "3e87196faf748905f98062040d5a0e056de0e0eb0247413b70c2fc03c3928ad9"
+
+test:
+  - run: lazyssh --help | grep -q "Lazy SSH server picker"

@@ -110,3 +110,6 @@ versions:
       darwin/amd64: "037e4aeb197870555ff515432bb5f1f2c98dce5f1214631a689112b5e0e4c9fd"
       linux/arm64: "f48f57e3d4343377865b1b64653f96d381d61a7792d89d026e85524732039fde"
       linux/amd64: "62224de2f9dd7cd418800feb953760a302ed2f82a7c547fe1146a4874fb179e4"
+
+test:
+  - run: trufflehog --version | grep -q "$NEM_VERSION"

@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "3dafce865dd778e2501ccbfd53fcbeecfc3244a43d4d1b02446064e39ac58d4e"
       linux/arm64: "5188b0b521966113580f0fef7769173af6303061dee10df247536f9bb55fe988"
       linux/amd64: "d58a3c0ba45805d452c32628320eecdcb5172fd5f42c82e12aeecc7a17eb930b"
+
+test:
+  - run: popeye version | grep -q "$NEM_VERSION"

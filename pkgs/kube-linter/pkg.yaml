@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "c62e8af3c9df2557c7a3922119ea1b35597794737d1ccad493f63a0d66e7b8fc"
       linux/arm64: "802e1b09eabd08f6f0a060a6b8ab2bf7bc7e6bf4f673bb2692303704c84b3e22"
       linux/amd64: "1a6d8419b11971372971fdbc22682b684ebfb7cf1c39591662d1b6ca736c41df"
+
+test:
+  - run: kube-linter version | grep -q "$NEM_VERSION"

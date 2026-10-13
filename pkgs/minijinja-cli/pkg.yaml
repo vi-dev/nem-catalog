@@ -31,3 +31,6 @@ versions:
       darwin/amd64: "283d3e54ed52ff0f97bc4e8b736fa67d5f1bc55b47457ffc8e9310a5fe555997"
       linux/arm64: "5fd4d0ca9a37973564a9ba3d4444466dbca46c4737840b772ba64729cac4277b"
       linux/amd64: "40a7b36eb04075d54f0e079cbf632d2fcf9cc32721539f6b799341632d16f50e"
+
+test:
+  - run: minijinja-cli --version | grep -q "$NEM_VERSION"

@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "62b9383207dd0e4b08bb1a650a0e9e7b3c2e71dd1cd3a8d3be013abaa9dd169a"
       linux/arm64: "fbba88e622ba84c9b0ff7d3674da669061a2f68787e01b711a1b7ff3b4188e01"
       linux/amd64: "04c266103dadb20028ef43c7b69447095f0acd575801110a8837778322a4479d"
+
+test:
+  - run: atlantis version | grep -q "$NEM_VERSION"

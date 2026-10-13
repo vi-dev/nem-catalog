@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "94aa09315773929e027bcb399f78661c2ddffd887b65348bae446601989d9ddd"
       linux/arm64: "eb1cd0948569404c5d9d01c10b32b902e11f8231073315456454dec246bdf26e"
       linux/amd64: "6b0cc08c5ceb551dc52bfac2221752f82215be5908c70605d655e9b91ab1557c"
+
+test:
+  - run: aichat --version | grep -q "$NEM_VERSION"

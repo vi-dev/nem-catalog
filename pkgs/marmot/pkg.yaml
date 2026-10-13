@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "a466f4e6a3266437ce79111a65f28d8c53eee40d0b86c816b91cbfd9c02715bd"
       linux/arm64: "14b1c0e4ac96cd1965705480c75a35f8ab1e2a21180114c5300b6928789ec253"
       linux/amd64: "24b8b67d6347999c5dd4f6cc5cdecb05c90e4940e5974b69b7e8b526ad7cf1bd"
+
+test:
+  - run: marmot -h 2>&1 | grep -q "Usage of marmot"

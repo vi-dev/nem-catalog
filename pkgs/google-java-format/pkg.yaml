@@ -31,3 +31,6 @@ versions:
       darwin/arm64: "572c8be5ea4e15c674f7f9c89f9c0a4b9336950d9c42c07220557e97a4002bce"
       linux/arm64: "37d27263fce029fc59aa4e1b556ac6997d0eb2266a38ba2b8746b709f6c77b11"
       linux/amd64: "8dc71663a6c9cb17b02ba9709bfab5c4de59de6f4ac133fd7a1d5a4394b1193b"
+
+test:
+  - run: google-java-format --version 2>&1 | grep -q "$NEM_VERSION"

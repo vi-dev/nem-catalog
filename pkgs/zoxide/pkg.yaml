@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "18ab7ae2633ad6e2ab79a4e665cbba1e95b7c872d44523326efb793202451dad"
       linux/arm64: "f1f16c5d6298d63dee467eedea1cdcd8490e43e493bea43acd416dc9033ef641"
       linux/amd64: "2d93385b99f3e82cf2701609a1bffcad863fbeb75aa3fe7eb6be4d29be68b1ae"
+
+test:
+  - run: zoxide --version | grep -q "$NEM_VERSION"

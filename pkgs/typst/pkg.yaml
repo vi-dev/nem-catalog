@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "7f9fdd9584866245de9a79e0add8f9236fae6f40a8a45e2c4771ccc14db4e0fa"
       linux/arm64: "5aa8d74a3d906e60ea12a66ac2f37f8eef1b14cbad7182a745e393a10c23dcee"
       linux/amd64: "a6d077d0a95eed5a2eba715b2dae06be954f624ccbf85758a03f389ded33118c"
+
+test:
+  - run: typst --version | grep -q "$NEM_VERSION"

@@ -26,3 +26,6 @@ versions:
     sha256:
       linux/arm64: "40b87ae8628aa2ff0f0d2dc24ab52f689631366385c3da630bae745671fd71ec"
       linux/amd64: "35c70c5c43c29108075e58b893234c67ef585f0b53a7eaf8e9e7d4eec9f339b4"
+
+test:
+  - run: eza --version | grep -q "$NEM_VERSION"

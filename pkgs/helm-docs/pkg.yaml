@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "b2f1ffd0feef8dc0901a38a2053481d1d67b63ca30da4ac774166c6b52fa2245"
       linux/arm64: "c3787212332386dcd122debef7848feb165aa701467ae3e3442df7638f3ac4e4"
       linux/amd64: "a8cf72ada34fad93285ba2a452b38bdc5bd52cc9a571236244ec31022928d6cc"
+
+test:
+  - run: helm-docs --version | grep -q "$NEM_VERSION"

@@ -74,3 +74,6 @@ versions:
       darwin/amd64: "424a50f76a9dcf4d02dab326b2374be1ad404030576ee915866e4af106058b35"
       linux/arm64: "497b518db00ae585f04390758eaa99ad555bee50612dce7d102602778fb46ff0"
       linux/amd64: "ca1fc56d1afc40c8782e96c297fd182a0da162f9a8f52a1e7b094e1dd648e178"
+
+test:
+  - run: wasmtime --version | grep -q "$NEM_VERSION"

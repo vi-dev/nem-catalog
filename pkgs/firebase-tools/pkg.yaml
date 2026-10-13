@@ -72,3 +72,6 @@ versions:
       darwin/arm64: "aacec55ab57ff0470e0fe41fc7fc96ddd9d2100e28082f3f935e747d1eb9e491"
       darwin/amd64: "aacec55ab57ff0470e0fe41fc7fc96ddd9d2100e28082f3f935e747d1eb9e491"
       linux/amd64: "78e5d2b0fa3d2a84cc015b710fb9c9078315a6ba923289f0759dd5e2b901fa32"
+
+test:
+  - run: firebase --version | grep -q "$NEM_VERSION"

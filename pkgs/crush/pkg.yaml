@@ -110,3 +110,6 @@ versions:
       darwin/amd64: "825140048dec4651b624a691303c2ab3d90c6def034de0215a7e9e1ea53d6a4d"
       linux/arm64: "5b08301c9f1127427350ac11ba4fa98829453c38e1d93e70eef8ef0e9d6dbbf1"
       linux/amd64: "4eebb9ce1a3655560bae03c64bebcc546f6b24ba9f9ebd1e8ea844b8c3b37ea0"
+
+test:
+  - run: crush --version | grep -q "$NEM_VERSION"

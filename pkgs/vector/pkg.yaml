@@ -36,3 +36,6 @@ versions:
       darwin/arm64: "009c35b45bbd5a2bf84b876e56347848d75502a03a5bd37258fb54f6d9c40baf"
       linux/arm64: "81cec5343e49985351e13f76ae3d550d7b0f0ac64fd4d88c07e3873bdfdf100a"
       linux/amd64: "b04fafcffcbeb3d43cbba587583dbe3338b24dd34256b3967fb15d137aff75f2"
+
+test:
+  - run: vector --version | grep -q "$NEM_VERSION"

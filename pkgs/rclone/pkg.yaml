@@ -44,3 +44,6 @@ versions:
       darwin/amd64: "4188aa84043d7a6240912923f47639a9d2da21f3b40a521c065c8d92e66563f6"
       linux/arm64: "97685285c9ad6a0cf17d5844115d2a67245af6444db672187074bd9c358de419"
       linux/amd64: "fe435e0c36228e7c2f116a8701f01127bb1f694005fc11d1f27186c8bca4115d"
+
+test:
+  - run: rclone --version | grep -q "$NEM_VERSION"

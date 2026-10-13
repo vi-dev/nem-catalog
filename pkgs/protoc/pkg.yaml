@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "537d73604a344ded6fc94e98e07e529d4fe3e4a0b09e59905353950fafc2a1f7"
       linux/arm64: "01bf9d08808c7f96678b63f4bd8efa559bb4f83d5a7a270d5edaf507f9d5d9cf"
       linux/amd64: "6930ebf62bd4ea607b98fff052596c6ee564b9835b4ce172c75a3f53ae9d91b7"
+
+test:
+  - run: protoc --version | grep -q "$NEM_VERSION"

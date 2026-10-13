@@ -30,3 +30,6 @@ versions:
       darwin/amd64: "f16cd60910691d4a2a6463b278c7d231791644d2a291da6e2f915f7a50875995"
       linux/arm64: "c6358c9bca8531b424e5484a5f41a710b613ca606d3ab5c724d11c0a39dcce6a"
       linux/amd64: "95fe9511cda5ecfa8829a5ce8d3fca6dae68bdd3b0b9946e1634d57761530b45"
+
+test:
+  - run: k3sup version | grep -q "$NEM_VERSION"

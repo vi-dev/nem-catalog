@@ -32,3 +32,6 @@ versions:
       darwin/amd64: "f1522f2558081335584fd4fb67d329d02a9ae6e83dd88b14cae1ad84c770e5c0"
       linux/arm64: "8d38728fa82c0ee568d2ae1ce0720963402d384dd59d4c76bcdbb38d581c815c"
       linux/amd64: "d1e726e8e78a6cf7e1e72ce3746f30fd94ec0eba10be1abab02208a41efc9aa5"
+
+test:
+  - run: templ --version | grep -q "$NEM_VERSION"

@@ -53,3 +53,6 @@ versions:
       darwin/amd64: "f6f06d94b6241521c53d15450c5209b028270bf966f842afb11c030c79f5bc16"
       linux/arm64: "44cd40a8c76c86755375adfeea52cfd3533cb43d7bd647771e0ae065e166df3a"
       linux/amd64: "8df580d2670fed8fa984aac0507099af8df275e665215f5c7a2ae3943893a553"
+
+test:
+  - run: golangci-lint --version | grep -q "$NEM_VERSION"
