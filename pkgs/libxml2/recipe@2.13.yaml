@@ -1,0 +1,57 @@
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+deps:
+  - name: zlib
+    kind: link
+    compat: "1"
+  - name: xz
+    kind: link
+    compat: "5"
+
+bins: [bin]
+libs: [lib]
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+build:
+  deps:
+    - pkgconf
+    - name: zlib
+      kind: link
+      compat: "1"
+    - name: xz
+      kind: link
+      compat: "5"
+  source:
+    url: 'https://download.gnome.org/sources/libxml2/2.13/libxml2-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --libdir=/lib --disable-static --disable-dependency-tracking \
+          --without-python --without-icu --with-zlib --with-lzma
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        make install DESTDIR="$NEM_OUTPUT"
+        rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: xml2-config --version | grep -qx "$NEM_VERSION"
+  - run: |
+      set -e
+      printf '<a><b/></a>' > ok.xml
+      xmllint --noout ok.xml
+      printf '<a>' > bad.xml
+      ! xmllint --noout bad.xml 2>/dev/null
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/libxml2/libxml/parser.h" ]
+      case "$NEM_OS" in
+        darwin) [ -f "$NEM_PREFIX/lib/libxml2.2.dylib" ] ;;
+        *)      [ -f "$NEM_PREFIX/lib/libxml2.so.2" ] ;;
+      esac
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libxml-2.0.pc"
