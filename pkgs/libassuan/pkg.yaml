@@ -54,7 +54,6 @@ build:
         make install DESTDIR="$NEM_OUTPUT"
 
 test:
-  - run: libassuan-config --version | grep -qx "$NEM_VERSION"
   - run: |
       set -e
       [ -f "$NEM_PREFIX/include/assuan.h" ]

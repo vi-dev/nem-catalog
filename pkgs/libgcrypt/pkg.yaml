@@ -57,7 +57,7 @@ build:
         rm -f "$NEM_OUTPUT/lib/"*.la
 
 test:
-  - run: libgcrypt-config --version | grep -qx "$NEM_VERSION"
+  - run: dumpsexp --version | grep -q "(Libgcrypt) $NEM_VERSION"
   - run: |
       set -e
       [ "$(printf nem | hmac256 key)" = dbe03eb9a6662e76db60130f31729c59e4654e73ca4ae016093b2cc951406f9f ]
