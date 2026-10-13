@@ -9,6 +9,11 @@ versionDiscovery:
     repo: GitTools/GitVersion
     filter: '^\d+\.\d+\.\d+$'
 
+deps:
+  - name: icu
+    kind: link
+    platforms: [linux/arm64, linux/amd64]
+
 artifact:
   url: "https://github.com/GitTools/GitVersion/releases/download/{{.Version}}/gitversion-{{replace .OS \"darwin\" \"osx\"}}-{{replace .Arch \"amd64\" \"x64\"}}-{{.Version}}.tar.gz"
 
@@ -25,3 +30,6 @@ versions:
       darwin/amd64: "34b79fa8dc9ee659dc4a7c57f8e3a89ff25fd3959f555d00c8d0d6ad9cb01a01"
       linux/arm64: "1b51227f88ddf705fc01a3b04ca15eb50fe76baf78013f99c731a2fac729dd8e"
       linux/amd64: "4b9c361952a7bd8230e3dfeb68189ac99fc3059b561b186d8c1fce22a2287dc2"
+
+test:
+  - run: gitversion version | grep -q "$NEM_VERSION"

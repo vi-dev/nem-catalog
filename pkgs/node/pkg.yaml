@@ -10,6 +10,11 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
+deps:
+  - name: libatomic
+    kind: link
+    platforms: [linux/arm64, linux/amd64]
+
 artifact:
   url: "https://nodejs.org/dist/v{{.Version}}/node-v{{.Version}}-{{.OS}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
 
@@ -247,3 +252,6 @@ versions:
       darwin/amd64: "b8da981b8a0b1241b70249204916da76c63573ddf5814dbd2d1e41069105cb81"
       linux/arm64: "543fa39e57d4c07855939459a323f4deb9a79dd1bb45e6e99458b0f2de10db8d"
       linux/amd64: "7a8cb04b4a1df4eaf432125324b81b29a088e73570a23259a8de1c65d07fc129"
+
+test:
+  - run: node --version | grep -q "$NEM_VERSION"

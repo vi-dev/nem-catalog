@@ -10,6 +10,11 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
+deps:
+  - name: icu
+    kind: link
+    platforms: [linux/arm64, linux/amd64]
+
 artifact:
   url: "https://github.com/microsoft/kiota/releases/download/v{{.Version}}/{{replace .OS \"darwin\" \"osx\"}}-{{replace .Arch \"amd64\" \"x64\"}}.zip"
 
@@ -39,3 +44,6 @@ versions:
       darwin/amd64: "7c086271fcf779833e1966d9984abfc16af6116a6a53e40da3d1866fd997d59e"
       linux/arm64: "0dc6ccc5d00cd870a47434d8209758f708ff2b905d318731407210c0c6938144"
       linux/amd64: "682416ab85c07bb3152e4c2c54293ae51f582aebde381699d8999f7b076755dd"
+
+test:
+  - run: kiota --version | grep -q "$NEM_VERSION"

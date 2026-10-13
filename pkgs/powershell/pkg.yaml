@@ -10,6 +10,11 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
+deps:
+  - name: icu
+    kind: link
+    platforms: [linux/arm64, linux/amd64]
+
 artifact:
   url: "https://github.com/PowerShell/PowerShell/releases/download/v{{.Version}}/powershell-{{.Version}}-{{replace .OS \"darwin\" \"osx\"}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
 
@@ -33,3 +38,6 @@ versions:
       darwin/amd64: "3db1d177ab39511c1b6b73b05a1630a5db4e8dce22857ca76f14c5d98f2733fd"
       linux/arm64: "ed4084f215d8bce2edd23aa7cb1f1e7b0818e41363a635a22065d2701b6141df"
       linux/amd64: "b34ab3b19acac1d3d4d0d3cfdb02acf62f457b0b6a962ff008132033f7566844"
+
+test:
+  - run: pwsh --version | grep -q "$NEM_VERSION"

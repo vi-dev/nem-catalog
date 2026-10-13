@@ -12,6 +12,11 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
+deps:
+  - name: libatomic
+    kind: link
+    platforms: [linux/arm64, linux/amd64]
+
 artifact:
   url: "https://github.com/pnpm/pnpm/releases/download/v{{.Version}}/pnpm-{{.OS}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
 
@@ -194,3 +199,6 @@ versions:
       darwin/arm64: "860a96978a79ca5132bdc247375f94150a3c98edbecbee36e9f8e0c9e2f7f056"
       linux/arm64: "64eb219b008f7a4c176d81fbce919c20b0b7e093e815cbb669d46e681451f43b"
       linux/amd64: "aadc489ce4473c2af0fec06a5c19e113b5793d404eac49853c8153bf4b0d8263"
+
+test:
+  - run: pnpm --version | grep -q "$NEM_VERSION"

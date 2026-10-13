@@ -13,6 +13,11 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
+deps:
+  - name: libatomic
+    kind: link
+    platforms: [linux/arm64, linux/amd64]
+
 artifact:
   url: "https://github.com/marp-team/marp-cli/releases/download/v{{.Version}}/marp-cli-v{{.Version}}-{{if eq .OS \"darwin\"}}mac{{else}}linux{{if eq .Arch \"arm64\"}}-arm64{{end}}{{end}}.tar.gz"
 
@@ -33,3 +38,6 @@ versions:
       darwin/arm64: "f4a0f1e6948aa1c6b71d5e4036b6b96cdfbb24e4090e310d4858aad857199a28"
       linux/arm64: "809cae4a67c6f22236c20c978dffc585673f4a6d427503abc73e0c9d92ed421c"
       linux/amd64: "ae46ff054919dccd20f2402fd1747a2363ab2dc5a652f2d589df211ed5e26d88"
+
+test:
+  - run: marp --version | grep -q "$NEM_VERSION"
