@@ -5,7 +5,7 @@ description: Rust toolchain — rustc, cargo, and the standard library
 homepage: https://www.rust-lang.org
 license: Apache-2.0 OR MIT
 
-platforms: [darwin/arm64, linux/arm64, linux/amd64]
+platforms: [darwin/arm64, darwin/amd64, linux/arm64, linux/amd64]
 
 versionDiscovery:
   github:
@@ -29,15 +29,21 @@ versions:
   - version: 1.99.0
     sha256:
       darwin/arm64: "f35e7c5b2cf63e67c075d323e4d6b87501219311f09744ab24caecb761c96643"
+      darwin/amd64: "596756101bf43cd335fb247f5cc9ede0c157245523baff25a66694682495cfcb"
       linux/arm64: "42214e693ec00733e2a591e67c13af98faf02a82934108a9f37afd247b376dd0"
       linux/amd64: "de0581ca9d732295a6474cfbd02461db27d69acd5050a8206523a8d6fa1599db"
   - version: 1.98.1
     sha256:
       darwin/arm64: "cfc171d8120d401b10a1028c52646dd8e00e3e66852f949061ce087845f55afd"
+      darwin/amd64: "443a1165abbac41c9143b83ff837c0fb1d8c03d2f8fb1da27427bc9fc646aad3"
       linux/arm64: "f00ba576645cef658e1deed96fab8f707958e9d58808b16343448b5d1c4f7407"
       linux/amd64: "24ba1338a2d35c5a3247936546429e163fa674d726102af18bdf624582c57aea"
   - version: 1.98.0
     sha256:
       darwin/arm64: "026ec75bec81fb8c10b11df98f1336ee39f4bc11e04d6745dffe9fca81e5c0b5"
+      darwin/amd64: "66f4e2e17275753deaba8437380de21072b56b5a083cf954bacb6376df0834fc"
       linux/arm64: "5fbb4282403046d52a4672765c6761a809bf9f33e699b17e6eb7a93ab7770cc3"
       linux/amd64: "aa30409afa67bd1ada244cefd82c7980e6a65bc113bb978e934b2413c75e3900"
+
+test:
+  - run: cargo --version | grep -q "$NEM_VERSION"

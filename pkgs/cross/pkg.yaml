@@ -12,6 +12,9 @@ versionDiscovery:
     filter: '^v\d+\.\d+\.\d+$'
     prefix: "v"
 
+deps:
+  - rust
+
 artifact:
   url: "https://github.com/cross-rs/cross/releases/download/v{{.Version}}/cross-{{replace .Arch \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"
 
@@ -26,3 +29,6 @@ versions:
     sha256:
       darwin/amd64: "84a664edbd5405efc985e9423804cc63d12e55691b9c7e9729355fdf7b9af015"
       linux/amd64: "a486cefa6cb486971b97be321ea9dfc2e90c1979550295314a368f53fab6d588"
+
+test:
+  - run: cross --version | grep -q "cross $NEM_VERSION"
