@@ -48,7 +48,8 @@ build:
         # absolute rpath; strip that flag before the real build so only the
         # scaffold's relative rpath reaches the binary.
         ./configure --prefix=/ --disable-dependency-tracking \
-          --with-libevent="$(pkg-config --variable=prefix libevent_core)"
-        sed -i.bak 's|-Wl,-rpath,[^ ]*||g' Makefile
+          --with-libevent="$(pkg-config --variable=prefix libevent_core)" \
+          ac_cv_func_sandbox_init=no
+        sed -i.bak 's|-Wl,-rpath,/[^ ]*||g' Makefile
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
