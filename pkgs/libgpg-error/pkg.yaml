@@ -32,3 +32,26 @@ build:
   output: out
   steps:
     - run: ./configure --prefix=/ --libdir=/lib --disable-dependency-tracking --enable-shared --disable-static --disable-doc --disable-nls --disable-tests && make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" && make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: gpg-error --version | grep -q "(libgpg-error) $NEM_VERSION"
+  - run: gpgrt-config --version | grep -qx "$NEM_VERSION"
+  - run: gpg-error 1 | grep -q GPG_ERR_GENERAL
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/gpg-error.h" ]
+      ls "$NEM_PREFIX"/lib/libgpg-error.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/gpg-error.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <gpg-error.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(gpg_error_check_version(NULL));
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lgpg-error -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

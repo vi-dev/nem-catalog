@@ -51,3 +51,19 @@ build:
           -DREDIS_STORAGE_BACKEND=OFF -DENABLE_TESTING=OFF -DENABLE_DOCUMENTATION=OFF -DDEPS=DOWNLOAD
         cmake --build build -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         DESTDIR="$NEM_OUTPUT" cmake --install build
+
+test:
+  - run: ccache --version | grep -q "ccache version $NEM_VERSION"
+  - run: |
+      set -e
+      export CCACHE_DIR="$PWD/cache"
+      ccache --zero-stats >/dev/null
+      ccache --show-stats | grep -q 'Cache size'
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      export CCACHE_DIR="$PWD/cache"
+      printf 'int main(void) { return 0; }\n' > probe.c
+      ccache cc -c probe.c -o probe.o
+      ccache cc -c probe.c -o probe.o
+      ccache --show-stats | grep -Eq '^ *Hits: +1 /'

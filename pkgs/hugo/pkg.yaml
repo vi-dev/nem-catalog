@@ -38,3 +38,15 @@ build:
     # The extended build compiles the embedded libsass C++ sources via cgo,
     # which defaults off on some builders (e.g. linux/arm64), so force it on.
     - run: CGO_ENABLED=1 go build -trimpath -tags extended,withdeploy -ldflags "-s -w -X github.com/gohugoio/hugo/common/hugo.vendorInfo=nem" -o "$NEM_OUTPUT/bin/hugo" .
+
+test:
+  - run: hugo version | grep -q "hugo v$NEM_VERSION"
+  - run: |
+      set -e
+      hugo new site demo >/dev/null
+      cd demo
+      printf 'title = "nem"\n' > hugo.toml
+      mkdir -p layouts
+      printf '<h1>{{ .Site.Title }}</h1>' > layouts/index.html
+      hugo --quiet
+      grep -q '<h1>nem</h1>' public/index.html

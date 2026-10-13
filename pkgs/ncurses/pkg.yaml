@@ -62,3 +62,29 @@ build:
           done
           [ -f "pkgconfig/${l}w.pc" ] && ln -sf "${l}w.pc" "pkgconfig/${l}.pc"
         done
+
+test:
+  - run: ncursesw6-config --version | grep -q "^$NEM_VERSION"
+  - run: tic -V | grep -q "ncurses $NEM_VERSION"
+  - run: |
+      set -e
+      [ "$(TERM=xterm-256color tput colors)" = 256 ]
+      TERM=xterm-256color infocmp | grep -q 'colors#'
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/ncurses.h" ]
+      ls "$NEM_PREFIX"/lib/libncursesw.* >/dev/null
+      grep -q "^version=$NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/ncursesw.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <ncurses.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(curses_version());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lncursesw -o probe
+      ./probe | grep -q "^ncurses $NEM_VERSION"

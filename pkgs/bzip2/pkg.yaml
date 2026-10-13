@@ -38,3 +38,28 @@ build:
         for l in "$NEM_OUTPUT"/bin/*; do
           [ -L "$l" ] && ln -sf "$(basename "$(readlink "$l")")" "$l" || true
         done
+
+test:
+  - run: bzip2 --version </dev/null 2>&1 | grep -q "Version $NEM_VERSION,"
+  - run: |
+      set -e
+      printf 'nem compresses' > plain.txt
+      bzip2 -k plain.txt
+      [ "$(bzcat plain.txt.bz2)" = 'nem compresses' ]
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/bzlib.h" ]
+      ls "$NEM_PREFIX"/lib/libbz2.* >/dev/null
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <bzlib.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(BZ2_bzlibVersion());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lbz2 -o probe
+      ./probe | grep -q "^$NEM_VERSION,"

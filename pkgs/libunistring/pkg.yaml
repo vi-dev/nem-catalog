@@ -40,3 +40,28 @@ build:
         make -C lib -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make -C lib install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/unistr.h" ]
+      ls "$NEM_PREFIX"/lib/libunistring.* >/dev/null
+      set -- $(printf '%s' "$NEM_VERSION" | tr . ' ')
+      hex=$(printf '0x%02x%02x%02x' "$1" "$2" "${3:-0}")
+      grep -q "define _LIBUNISTRING_VERSION $hex\$" "$NEM_PREFIX/include/unistring/version.h"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <unistr.h>
+      #include <unistring/version.h>
+      #include <stdio.h>
+      int main(void) {
+        if (u8_strlen((const uint8_t *)"nem") != 3) return 1;
+        printf("0x%06x\n", _libunistring_version);
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lunistring -o probe
+      set -- $(printf '%s' "$NEM_VERSION" | tr . ' ')
+      [ "$(./probe)" = "$(printf '0x%02x%02x%02x' "$1" "$2" "${3:-0}")" ]

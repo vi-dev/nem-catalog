@@ -63,3 +63,8 @@ build:
           am_cv_func_iconv_works=yes
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: pinentry --version | grep -q "(pinentry) $NEM_VERSION"
+  - run: pinentry-tty --version | grep -q "(pinentry) $NEM_VERSION"
+  - run: printf 'GETINFO version\nBYE\n' | pinentry-tty | grep -q "^D $NEM_VERSION"

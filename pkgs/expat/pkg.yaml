@@ -47,3 +47,29 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: xmlwf -v | grep -q "expat_$NEM_VERSION"
+  - run: |
+      set -e
+      printf '<a><b/></a>' > ok.xml
+      xmlwf ok.xml
+      printf '<a>' > bad.xml
+      ! xmlwf bad.xml >/dev/null
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/expat.h" ]
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/expat.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <expat.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(XML_ExpatVersion());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lexpat -o probe
+      [ "$(./probe)" = "expat_$NEM_VERSION" ]

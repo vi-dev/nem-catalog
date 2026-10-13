@@ -43,3 +43,27 @@ build:
         ./configure --prefix=/ --libdir=/lib --with-jemalloc-prefix=""
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: jemalloc-config --version | grep -q "^$NEM_VERSION"
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/jemalloc/jemalloc.h" ]
+      ls "$NEM_PREFIX"/lib/libjemalloc.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/jemalloc.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <jemalloc/jemalloc.h>
+      #include <stdio.h>
+      int main(void) {
+        const char *v;
+        size_t sz = sizeof(v);
+        if (mallctl("version", &v, &sz, NULL, 0) != 0) return 1;
+        puts(v);
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -ljemalloc -o probe
+      ./probe | grep -q "^$NEM_VERSION"

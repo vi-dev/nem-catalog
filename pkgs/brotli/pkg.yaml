@@ -43,3 +43,29 @@ build:
           -DBUILD_SHARED_LIBS=ON -DBROTLI_DISABLE_TESTS=ON
         cmake --build build -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         DESTDIR="$NEM_OUTPUT" cmake --install build
+
+test:
+  - run: brotli --version | grep -q "brotli $NEM_VERSION"
+  - run: |
+      set -e
+      printf 'nem compresses' > plain.txt
+      brotli plain.txt -o packed.br
+      [ "$(brotli -dc packed.br)" = 'nem compresses' ]
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/brotli/encode.h" ]
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libbrotlienc.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <brotli/encode.h>
+      #include <stdio.h>
+      int main(void) {
+        unsigned v = BrotliEncoderVersion();
+        printf("%u.%u.%u\n", v >> 24, (v >> 12) & 0xFFF, v & 0xFFF);
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lbrotlienc -lbrotlicommon -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

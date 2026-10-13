@@ -50,3 +50,24 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: ksba-config --version | grep -qx "$NEM_VERSION"
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/ksba.h" ]
+      ls "$NEM_PREFIX"/lib/libksba.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/ksba.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <ksba.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(ksba_check_version(NULL));
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lksba -lgpg-error -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

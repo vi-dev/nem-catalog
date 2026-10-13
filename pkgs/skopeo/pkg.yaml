@@ -50,3 +50,7 @@ build:
   output: out
   steps:
     - run: CGO_ENABLED=1 go build -trimpath -tags containers_image_ostree_stub,exclude_graphdriver_btrfs -ldflags "-s -w -X main.gitCommit=" -o "$NEM_OUTPUT/bin/skopeo" ./cmd/skopeo
+
+test:
+  - run: skopeo --version | grep -q "skopeo version $NEM_VERSION"
+  - run: skopeo inspect --help | grep -q -- '--raw'

@@ -49,3 +49,23 @@ build:
         ./configure --prefix=/ --libdir=/lib --with-curses --disable-static --disable-install-examples
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" SHLIB_LIBS=-lncursesw
         make install DESTDIR="$NEM_OUTPUT" SHLIB_LIBS=-lncursesw
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/readline/readline.h" ]
+      ls "$NEM_PREFIX"/lib/libreadline.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/readline.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <stdio.h>
+      #include <readline/readline.h>
+      int main(void) {
+        puts(rl_library_version);
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lreadline -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

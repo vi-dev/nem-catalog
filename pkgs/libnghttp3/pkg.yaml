@@ -39,3 +39,23 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: |
+      set -e
+      grep -q "define NGHTTP3_VERSION \"$NEM_VERSION\"" "$NEM_PREFIX/include/nghttp3/version.h"
+      ls "$NEM_PREFIX"/lib/libnghttp3.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libnghttp3.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <nghttp3/nghttp3.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(nghttp3_version(0)->version_str);
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lnghttp3 -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

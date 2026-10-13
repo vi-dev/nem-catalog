@@ -34,3 +34,26 @@ build:
   output: out
   steps:
     - run: make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" prefix=/ install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/utf8proc.h" ]
+      ls "$NEM_PREFIX"/lib/libutf8proc.* >/dev/null
+      set -- $(printf '%s' "$NEM_VERSION" | tr . ' ')
+      grep -q "define UTF8PROC_VERSION_MAJOR $1\$" "$NEM_PREFIX/include/utf8proc.h"
+      grep -q "define UTF8PROC_VERSION_MINOR $2\$" "$NEM_PREFIX/include/utf8proc.h"
+      grep -q "define UTF8PROC_VERSION_PATCH ${3:-0}\$" "$NEM_PREFIX/include/utf8proc.h"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <utf8proc.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(utf8proc_version());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lutf8proc -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

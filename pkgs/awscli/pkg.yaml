@@ -114,3 +114,11 @@ build:
     # The installed bin/ symlinks point at absolute prefix paths, which
     # archive extraction rejects — rewrite them relative.
     - run: cd "$NEM_OUTPUT/bin" && ln -sf ../lib/aws-cli/aws aws && ln -sf ../lib/aws-cli/aws_completer aws_completer
+
+test:
+  - run: aws --version | grep -q "aws-cli/$NEM_VERSION "
+  - run: |
+      set -e
+      export AWS_CONFIG_FILE="$PWD/config" AWS_SHARED_CREDENTIALS_FILE="$PWD/credentials"
+      aws configure set region eu-west-1
+      [ "$(aws configure get region)" = eu-west-1 ]

@@ -52,3 +52,17 @@ build:
         case "$NEM_OS" in darwin) t=macosx ;; *) t=linux-readline ;; esac
         make $t MYCFLAGS="$CPPFLAGS" MYLDFLAGS="$LDFLAGS"
         make install INSTALL_TOP="$NEM_OUTPUT"
+
+test:
+  - run: lua -v | grep -q "Lua $NEM_VERSION"
+  - run: luac -v | grep -q "Lua $NEM_VERSION"
+  - run: |
+      set -e
+      [ "$(lua -e 'print(1 + 1)')" = 2 ]
+      printf 'return 6 * 7\n' > probe.lua
+      luac -o probe.luac probe.lua
+      [ "$(lua -e 'print(dofile("probe.luac"))')" = 42 ]
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/lua.h" ]
+      ls "$NEM_PREFIX"/lib/liblua.* >/dev/null

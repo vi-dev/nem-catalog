@@ -73,3 +73,12 @@ build:
         ./configure --build="$build_triple" --host="$host_triple" --prefix=/ --disable-dependency-tracking
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: ctags --version | grep -q "Universal Ctags $NEM_VERSION,"
+  - run: readtags --version | grep -q "$NEM_VERSION"
+  - run: |
+      set -e
+      printf 'int probe_main(void) { return 0; }\n' > probe.c
+      ctags -o tags probe.c
+      readtags -t tags probe_main | grep -q probe.c

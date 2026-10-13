@@ -42,3 +42,28 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: xz --version | grep -q "(XZ Utils) $NEM_VERSION"
+  - run: |
+      set -e
+      printf 'nem compresses' > plain.txt
+      xz -k plain.txt
+      [ "$(xzcat plain.txt.xz)" = 'nem compresses' ]
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/lzma.h" ]
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/liblzma.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <lzma.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(lzma_version_string());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -llzma -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

@@ -42,3 +42,11 @@ build:
     # the command line to inject -L<zlib>/lib and the rpath; $CPPFLAGS reaches
     # pigz.o via make's implicit rule.
     - run: make LDFLAGS="$LDFLAGS" && mkdir -p "$NEM_OUTPUT/bin" && cp pigz "$NEM_OUTPUT/bin/pigz"
+
+test:
+  - run: pigz --version 2>&1 | grep -q "pigz $NEM_VERSION"
+  - run: |
+      set -e
+      printf 'nem compresses' > plain.txt
+      pigz -k plain.txt
+      [ "$(pigz -dc plain.txt.gz)" = 'nem compresses' ]

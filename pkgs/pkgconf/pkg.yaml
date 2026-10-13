@@ -50,3 +50,15 @@ build:
         meson install -C build --destdir "$NEM_OUTPUT"
         rm -rf "$NEM_OUTPUT/lib" "$NEM_OUTPUT/include" "$NEM_OUTPUT/share"
         ln -s pkgconf "$NEM_OUTPUT/bin/pkg-config"
+
+test:
+  - run: pkgconf --version | grep -qx "$NEM_VERSION"
+  - run: pkg-config --version | grep -qx "$NEM_VERSION"
+  - run: |
+      set -e
+      mkdir pc
+      printf 'prefix=/opt/probe\nName: probe\nDescription: probe\nVersion: 1.2.3\nCflags: -I${prefix}/include\nLibs: -L${prefix}/lib -lprobe\n' > pc/probe.pc
+      export PKG_CONFIG_PATH="$PWD/pc"
+      [ "$(pkgconf --modversion probe)" = 1.2.3 ]
+      pkgconf --cflags probe | grep -q -- '-I/opt/probe/include'
+      pkgconf --libs probe | grep -q -- '-L/opt/probe/lib -lprobe'

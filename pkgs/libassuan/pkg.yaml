@@ -52,3 +52,24 @@ build:
           CFLAGS="$CFLAGS $cflags"
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: libassuan-config --version | grep -qx "$NEM_VERSION"
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/assuan.h" ]
+      ls "$NEM_PREFIX"/lib/libassuan.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libassuan.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <assuan.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(assuan_check_version(NULL));
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lassuan -lgpg-error -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

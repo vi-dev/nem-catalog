@@ -45,3 +45,10 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" getopt
         mkdir -p "$NEM_OUTPUT/bin"
         cp getopt "$NEM_OUTPUT/bin/getopt"
+
+test:
+  - run: getopt --version | grep -q "util-linux $NEM_VERSION"
+  - run: |
+      set -e
+      out=$(getopt -o ab: -n probe -- -a -b val tail)
+      [ "$out" = " -a -b 'val' -- 'tail'" ]

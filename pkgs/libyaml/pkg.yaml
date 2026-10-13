@@ -38,3 +38,23 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/yaml.h" ]
+      ls "$NEM_PREFIX"/lib/libyaml* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/yaml-0.1.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <yaml.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(yaml_get_version_string());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -lyaml -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

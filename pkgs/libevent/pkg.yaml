@@ -52,3 +52,26 @@ build:
         make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
         make install DESTDIR="$NEM_OUTPUT"
         rm -f "$NEM_OUTPUT/lib/"*.la
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/event2/event.h" ]
+      ls "$NEM_PREFIX"/lib/libevent_core* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libevent.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <event2/event.h>
+      #include <stdio.h>
+      int main(void) {
+        struct event_base *base = event_base_new();
+        if (!base) return 1;
+        event_base_free(base);
+        puts(event_get_version());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -levent_core -o probe
+      ./probe | grep -q "^$NEM_VERSION"
