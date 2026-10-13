@@ -10,7 +10,7 @@ versionDiscovery:
     filter: '^\d+\.\d+\.\d+$'
 
 artifact:
-  url: "https://github.com/sass/dart-sass/releases/download/{{.Version}}/dart-sass-{{.Version}}-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"amd64\" \"x64\"}}{{if eq .OS \"linux\"}}-musl{{end}}.tar.gz"
+  url: "https://github.com/sass/dart-sass/releases/download/{{.Version}}/dart-sass-{{.Version}}-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"amd64\" \"x64\"}}.tar.gz"
 
 install:
   - extract: {strip: 1}
@@ -24,35 +24,38 @@ versions:
     sha256:
       darwin/arm64: "4453e66a326f350821622912d99115eefe6a636838a10a279e341254ef00594d"
       darwin/amd64: "f40e107223cebaaf3dbd6c6ed5849dbb791efd008f80a58df2746e5fa54cf1eb"
-      linux/arm64: "30d586373af18b2f6c66aca8d7aed37674a463742763fa8f40416b016d9f20c9"
-      linux/amd64: "e497419d75c5be842ae53c280c3749b61fdc9eddd72960640323d277ad7579d5"
+      linux/arm64: "7f53a2a77ef4aaf24a9f2f8c826759ed93b38954430a2e32130921a2e16a4a1c"
+      linux/amd64: "9046fdd4a31a524a0020298c55d9e155d4c22363ef268e8992574335a72c6a6f"
   - version: 1.105.0
     sha256:
       darwin/arm64: "4f372dfd8c843557bff40112e4a2a049cad4c183dbe8552bc8c58ea9c31ed2b8"
       darwin/amd64: "ee5450c30a61bb2d76bded04101fe0e35fcfe2a183b33ec91300173c5267a0fa"
-      linux/arm64: "98fbeaea1674851cba3b6f854fa3ff00a73bf8bd6056c0e8a768c47d4f578b43"
-      linux/amd64: "b71b36d88354825b57eaffed397538aa84d2e8840e8d2fe13dd57cd8aa3a3914"
+      linux/arm64: "b7e4f1e19a91afd35cedadb8b814ee24627a96af9777632040fd3719c2fa43d7"
+      linux/amd64: "2620fa32fdc09411469539e3b678a31a4f164ed704aaee9f8f1ab664dbaa153b"
   - version: 1.104.1
     sha256:
       darwin/arm64: "1ef58a518ab901c1c4f08890537e111f690c375d984927dafd1decb1c5e6b680"
       darwin/amd64: "a1c614f4e35641d7a62658beaa1b500962cbf9ac6c568718db4f55505d5490e9"
-      linux/arm64: "37d643a1ac39004cf4d90f6dcfed888b00fed15d81eeda5e99a6f8402f3c9a56"
-      linux/amd64: "dfb89c5cad91b3412154bb27c27dd4eaf9f2884d5288c61a4d4ef3bf80444cb1"
+      linux/arm64: "0bc2be53e11bd16462b577d5fe2f4c776287ed371d5aba2f7211cfd385a5c8ed"
+      linux/amd64: "85f31863aa62a1ba93158105609b94206fe9e17a37ad2855a69c543f83d1abae"
   - version: 1.104.0
     sha256:
       darwin/arm64: "bd12160a98a44545ce37189f48f55d8c078a07504380bb427d315fc15e3f0777"
       darwin/amd64: "cc9e752131aae9f76cd3c9ee9f33818a46a771835009ec2507bdf399b83b4f94"
-      linux/arm64: "b97c11be4a7617309c37cf9801f886b09328533b2e120f47f31b06dde9c1c35d"
-      linux/amd64: "b4a2e997e172097e15bf8834f8e7db5f664a989de954769075d098c80ad081b4"
+      linux/arm64: "cc1a734120648089503fabe65af9ff18022ba3fab24d7490c1ab6460f3992d17"
+      linux/amd64: "1fab072c812ac91b010dac22e38a15ae3300853d069a4f0a2d50c52c8429e9b7"
   - version: 1.103.1
     sha256:
       darwin/arm64: "7f48b426ed9ea77c2866c031e1b055cc4ecda7940b3500b630970ce37daef391"
       darwin/amd64: "dbd5257cf503a56e8d0d693a6c47e07149769a45346538d07b4db0f702994f17"
-      linux/arm64: "08354700b647570ae42226b33693f8e0c4499f5f3baec12ffc9f53e7dab5d157"
-      linux/amd64: "7f3898ec11f8392f72bbf59e85e5183e0e20071a0b853816bee18e682568477c"
+      linux/arm64: "2877de5942c8e99ed1e30fffefdcbef0fc47e64420831c06230abb54b17275e6"
+      linux/amd64: "b33a7747fc41cb4f96dff09eaf02ada4dd47153f2e54cda915ff9310d9f8914a"
   - version: 1.103.0
     sha256:
       darwin/arm64: "9ec2abef15fc88da2fe10b883044101e4d34072828b6a837aaada4bbb3a9b32c"
       darwin/amd64: "fbfb608053055b8898f7559859ed01119d09db6cd54b1141bdc058c9bbd2510b"
-      linux/arm64: "8d96201d8c381fde326e4b8df3f379ac848584026ae5e8b2e9b3e5e560a7b2a2"
-      linux/amd64: "647acf0c3ec3c84a51c8ab417adfb1e79f3f8e830b397148e29512d4d14ad14d"
+      linux/arm64: "213a165c1dc66f080a5ba0a0a21e9361fa78b04989a41d1251c1311a0f8211f0"
+      linux/amd64: "b649fcb72f1aba696d80a07882777daa1403a740f694c585a3a6e17e5b8198ca"
+
+test:
+  - run: sass --version | grep -q "$NEM_VERSION"
