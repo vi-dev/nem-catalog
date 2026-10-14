@@ -7,7 +7,7 @@ license: Python-2.0
 versionDiscovery:
   http:
     url: https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest
-    filter: '"name": "cpython-(?P<version>\d+\.\d+\.\d+)\+(?P<date>\d+)-'
+    filter: '"name":\s*"cpython-(?P<version>\d+\.\d+\.\d+)\+(?P<date>\d+)-'
 
 artifact:
   url: "https://github.com/astral-sh/python-build-standalone/releases/download/{{.Meta.date}}/cpython-{{.Version}}+{{.Meta.date}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}-install_only.tar.gz"
