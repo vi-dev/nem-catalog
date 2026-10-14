@@ -1,0 +1,88 @@
+schema: 3
+
+name: libjpeg-turbo
+description: JPEG codec with SIMD acceleration — libjpeg API, TurboJPEG, and cjpeg/djpeg tools
+homepage: https://libjpeg-turbo.org
+license: IJG AND BSD-3-Clause AND Zlib
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+bins: [bin]
+libs: [lib]
+
+# Four-part tags (3.1.4.1) are point re-releases; x.y.90+ are betas.
+versionDiscovery:
+  github:
+    repo: libjpeg-turbo/libjpeg-turbo
+    filter: '^\d+\.\d+\.(\d|[1-7]\d)$'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 3.2.0
+    sourceSha256: "6f30092cef9fb839779646608f4ee14ae3cbac989c47fa05e841b0841f09878e"
+
+build:
+  deps:
+    - cmake
+  source:
+    url: 'https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/{{.Version}}/libjpeg-turbo-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # The output dir is the install prefix, with relative dirs, so the
+    # exported CMake targets stay relocatable (a bare "/" prefix forces
+    # usr/ and bakes absolute paths into them); nem re-roots the .pc files.
+    # x86-64 SIMD needs nasm, which the Linux builder lacks; arm64 SIMD is
+    # compiler intrinsics. libjpeg-turbo pins an install rpath to the build
+    # tree's lib dir; the loader-relative one comes from $LDFLAGS instead.
+    - run: |
+        set -e
+        simd=ON
+        case "$NEM_OS/$NEM_ARCH" in linux/amd64) simd=OFF ;; esac
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$NEM_OUTPUT" \
+          -DCMAKE_INSTALL_BINDIR=bin -DCMAKE_INSTALL_LIBDIR=lib \
+          -DCMAKE_INSTALL_INCLUDEDIR=include -DCMAKE_INSTALL_DATAROOTDIR=share \
+          -DENABLE_SHARED=ON -DENABLE_STATIC=OFF -DWITH_TURBOJPEG=ON -DWITH_TOOLS=ON \
+          -DWITH_SIMD="$simd" -DCMAKE_SKIP_INSTALL_RPATH=ON
+        cmake --build build -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        cmake --install build
+
+test:
+  - run: djpeg -version 2>&1 | grep -q "libjpeg-turbo version $NEM_VERSION"
+  - run: |
+      set -e
+      printf 'P6\n2 2\n255\n' > in.ppm
+      printf '\377\0\0\0\377\0\0\0\377\377\377\377' >> in.ppm
+      cjpeg -quality 95 -outfile out.jpg in.ppm
+      djpeg -pnm -outfile out.ppm out.jpg
+      [ "$(head -c 2 out.ppm)" = P6 ]
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/jpeglib.h" ]
+      [ -f "$NEM_PREFIX/include/turbojpeg.h" ]
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libjpeg.pc"
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libturbojpeg.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <stdio.h>
+      #include <jpeglib.h>
+      #define STR_(x) #x
+      #define STR(x) STR_(x)
+      int main(void) {
+        struct jpeg_error_mgr err;
+        struct jpeg_decompress_struct cinfo;
+        cinfo.err = jpeg_std_error(&err);
+        jpeg_create_decompress(&cinfo);
+        jpeg_destroy_decompress(&cinfo);
+        puts(STR(LIBJPEG_TURBO_VERSION));
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -ljpeg -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

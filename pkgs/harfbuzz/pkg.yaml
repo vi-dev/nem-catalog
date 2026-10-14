@@ -1,0 +1,87 @@
+schema: 3
+
+name: harfbuzz
+description: Text shaping and font subsetting engine (libharfbuzz, libharfbuzz-subset)
+homepage: https://harfbuzz.github.io
+license: MIT-0
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# The major bumps often but the ABI is stable (libharfbuzz.0); compat tracks
+# the major so dependents rebuild deliberately. freetype is the only font
+# backend; freetype itself is built without HarfBuzz, so there is no cycle.
+# Library only: the hb-* tools need glib, which would drag glib's closure
+# into every dependent.
+deps:
+  - name: freetype
+    kind: link
+    compat: "2"
+
+libs: [lib]
+
+versionDiscovery:
+  github:
+    repo: harfbuzz/harfbuzz
+    filter: '^\d+\.\d+\.\d+$'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 14.6.0
+    sourceSha256: "d07a007327277708a2a73ae437887cdbaf282937f6d03ca5467723e9099af586"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - python
+    - name: freetype
+      kind: link
+      compat: "2"
+  source:
+    url: 'https://github.com/harfbuzz/harfbuzz/releases/download/{{.Version}}/harfbuzz-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    # Pinned rather than auto so a missing dependency fails the build; the
+    # glib, cairo, ICU and introspection integrations stay out.
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dfreetype=enabled -Dsubset=enabled -Dutilities=disabled \
+          -Dglib=disabled -Dgobject=disabled -Dcairo=disabled -Dchafa=disabled \
+          -Dicu=disabled -Dgraphite2=disabled -Dintrospection=disabled \
+          -Dtests=disabled -Ddocs=disabled -Dbenchmark=disabled -Dgpu_demo=disabled
+        ninja -C build
+        DESTDIR="$NEM_OUTPUT" ninja -C build install
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/harfbuzz/hb.h" ]
+      [ -f "$NEM_PREFIX/include/harfbuzz/hb-ft.h" ]
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/harfbuzz.pc"
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/harfbuzz-subset.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <hb.h>
+      #include <stdio.h>
+      int main(void) {
+        hb_buffer_t *b = hb_buffer_create();
+        hb_buffer_add_utf8(b, "nem", -1, 0, -1);
+        hb_buffer_guess_segment_properties(b);
+        unsigned n = hb_buffer_get_length(b);
+        hb_buffer_destroy(b);
+        if (n != 3) return 1;
+        puts(hb_version_string());
+        return 0;
+      }
+      CEOF
+      cc -I"$NEM_PREFIX/include/harfbuzz" $CPPFLAGS probe.c $LDFLAGS -lharfbuzz -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

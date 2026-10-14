@@ -1,0 +1,104 @@
+schema: 3
+
+name: freetype
+description: Font rendering engine for TrueType, OpenType, Type 1 and more
+homepage: https://freetype.org
+license: FTL OR GPL-2.0-or-later
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat "2" floats within 2.x; releases share the libfreetype.6 soname.
+# bzip2 (PCF fonts) and HarfBuzz (auto-hinter shaping) are left out: the
+# catalog's libbz2 is static-only and HarfBuzz would cycle back onto freetype.
+deps:
+  - name: zlib
+    kind: link
+    compat: "1"
+  - name: libpng
+    kind: link
+    compat: "1.6"
+  - name: brotli
+    kind: link
+    compat: "1"
+
+libs: [lib]
+
+# download.savannah.gnu.org redirects to volunteer mirrors, some of which
+# time out; the download-mirror host serves the files itself.
+versionDiscovery:
+  http:
+    url: https://download-mirror.savannah.gnu.org/releases/freetype/
+    filter: 'freetype-(\d+\.\d+\.\d+)\.tar\.xz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 2.15.0
+    sourceSha256: "93cd47eb719c325107f2d3cf087d06299e944c3b48a40b55537302304dea1dd5"
+
+build:
+  deps:
+    - cmake
+    - pkgconf
+    - name: zlib
+      kind: link
+      compat: "1"
+    - name: libpng
+      kind: link
+      compat: "1.6"
+    - name: brotli
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://download-mirror.savannah.gnu.org/releases/freetype/freetype-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    # The output dir is the install prefix, with relative dirs, so the
+    # exported CMake targets stay relocatable (a bare "/" prefix forces
+    # usr/ and bakes absolute paths into them); nem re-roots the .pc files.
+    # CMake's find modules ignore CPPFLAGS/LDFLAGS, so the dep prefixes are
+    # passed explicitly, ahead of any system zlib. Required rather than auto
+    # so a missing dependency fails the build instead of silently shipping a
+    # reduced freetype.
+    - run: |
+        set -e
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$NEM_OUTPUT" \
+          -DCMAKE_PREFIX_PATH="$NEM_DEP_ZLIB_PREFIX;$NEM_DEP_LIBPNG_PREFIX;$NEM_DEP_BROTLI_PREFIX" \
+          -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_INSTALL_INCLUDEDIR=include \
+          -DBUILD_SHARED_LIBS=ON \
+          -DFT_REQUIRE_ZLIB=ON -DFT_REQUIRE_PNG=ON -DFT_REQUIRE_BROTLI=ON \
+          -DFT_DISABLE_BZIP2=ON -DFT_DISABLE_HARFBUZZ=ON
+        cmake --build build -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        cmake --install build
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/freetype2/ft2build.h" ]
+      ls "$NEM_PREFIX"/lib/libfreetype.* >/dev/null
+      [ -f "$NEM_PREFIX/lib/pkgconfig/freetype2.pc" ]
+  # freetype2.pc carries the libtool version, so the release is read from
+  # the library itself.
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <ft2build.h>
+      #include FT_FREETYPE_H
+      #include <stdio.h>
+      int main(void) {
+        FT_Library lib;
+        FT_Int major, minor, patch;
+        if (FT_Init_FreeType(&lib)) return 1;
+        FT_Library_Version(lib, &major, &minor, &patch);
+        FT_Done_FreeType(lib);
+        printf("%d.%d.%d\n", major, minor, patch);
+        return 0;
+      }
+      CEOF
+      cc -I"$NEM_PREFIX/include/freetype2" $CPPFLAGS probe.c $LDFLAGS -lfreetype -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

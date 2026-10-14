@@ -1,0 +1,71 @@
+schema: 3
+
+name: pixman
+description: Low-level pixel manipulation library behind cairo
+homepage: https://pixman.org
+license: MIT
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat "0" floats within 0.x; releases share the libpixman-1.0 soname.
+libs: [lib]
+
+# Odd minors are development snapshots; the filter keeps the stable line.
+# The tag archives come from upstream's GitLab, which sits behind a CDN;
+# the release tarballs on cairographics.org and x.org share one origin
+# host that drops connections for hours at a time.
+versionDiscovery:
+  http:
+    url: https://gitlab.freedesktop.org/api/v4/projects/pixman%2Fpixman/repository/tags?per_page=20
+    filter: '"name":"pixman-(\d+\.\d*[02468]\.\d+)"'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 0.46.4
+    sourceSha256: "1b8288086e5da0ec5cb95cf174a919cc6fe4548f10dc3cd873b3bb1d9e8fdeab"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - python
+  source:
+    url: 'https://gitlab.freedesktop.org/pixman/pixman/-/archive/pixman-{{.Version}}/pixman-pixman-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # SIMD paths stay auto-detected per platform; tests and demos are off.
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dtests=disabled -Ddemos=disabled -Dgtk=disabled -Dopenmp=disabled -Dlibpng=disabled
+        ninja -C build
+        DESTDIR="$NEM_OUTPUT" ninja -C build install
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/pixman-1/pixman.h" ]
+      ls "$NEM_PREFIX"/lib/libpixman-1.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/pixman-1.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <pixman.h>
+      #include <stdio.h>
+      int main(void) {
+        pixman_image_t *img = pixman_image_create_bits(PIXMAN_a8r8g8b8, 2, 2, NULL, 0);
+        if (!img) return 1;
+        pixman_image_unref(img);
+        puts(pixman_version_string());
+        return 0;
+      }
+      CEOF
+      cc -I"$NEM_PREFIX/include/pixman-1" $CPPFLAGS probe.c $LDFLAGS -lpixman-1 -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

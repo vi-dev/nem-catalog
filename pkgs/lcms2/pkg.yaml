@@ -1,0 +1,75 @@
+schema: 3
+
+name: lcms2
+description: Little CMS color management engine (ICC profiles and transforms)
+homepage: https://www.littlecms.com
+license: MIT
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat "2" floats within 2.x; releases share the liblcms2.2 soname.
+libs: [lib]
+
+# Tags read lcms2.19 or lcms2.19.1; release candidates carry an rc suffix.
+versionDiscovery:
+  github:
+    repo: mm2/Little-CMS
+    filter: '^lcms\d+\.\d+(\.\d+)?$'
+    prefix: "lcms"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 2.19.1
+    sourceSha256: "bfc54f7bab59fbc921012014a8032e4cba4abd46db47d46b76416a8c0b2815c8"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - python
+  source:
+    url: 'https://github.com/mm2/Little-CMS/releases/download/lcms{{.Version}}/lcms2-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # Library only: jpeg and tiff are used by the optional utilities, and
+    # the fast-float and threaded plugins are GPL-3.0.
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dtests=disabled -Dutils=false -Djpeg=disabled -Dtiff=disabled \
+          -Dfastfloat=false -Dthreaded=false
+        ninja -C build
+        DESTDIR="$NEM_OUTPUT" ninja -C build install
+
+# Point releases keep the major.minor in lcms2.pc and in the encoded CMM
+# version (2.19.x -> 2.19, 2190).
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/lcms2.h" ]
+      ls "$NEM_PREFIX"/lib/liblcms2.* >/dev/null
+      grep -qE "^Version: $(printf '%s' "$NEM_VERSION" | cut -d. -f1,2)(\.[0-9]+)?$" "$NEM_PREFIX/lib/pkgconfig/lcms2.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <lcms2.h>
+      #include <stdio.h>
+      int main(void) {
+        cmsHPROFILE p = cmsCreate_sRGBProfile();
+        if (!p) return 1;
+        cmsCloseProfile(p);
+        printf("%d\n", cmsGetEncodedCMMversion());
+        return 0;
+      }
+      CEOF
+      cc $CPPFLAGS probe.c $LDFLAGS -llcms2 -o probe
+      major=$(printf '%s' "$NEM_VERSION" | cut -d. -f1)
+      minor=$(printf '%s' "$NEM_VERSION" | cut -d. -f2)
+      [ "$(./probe)" = "$(( major * 1000 + minor * 10 ))" ]

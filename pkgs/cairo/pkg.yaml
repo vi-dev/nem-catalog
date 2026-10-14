@@ -1,0 +1,120 @@
+schema: 3
+
+name: cairo
+description: 2D vector graphics library with image, PNG, PDF, PostScript and SVG surfaces
+homepage: https://cairographics.org
+license: LGPL-2.1-only OR MPL-1.1
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat "1" floats within 1.x; releases share the libcairo.2 soname.
+deps:
+  - name: pixman
+    kind: link
+    compat: "0"
+  - name: freetype
+    kind: link
+    compat: "2"
+  - name: fontconfig
+    kind: link
+    compat: "2"
+  - name: libpng
+    kind: link
+    compat: "1.6"
+  - name: zlib
+    kind: link
+    compat: "1"
+
+libs: [lib]
+
+# Odd minors are development snapshots; the filter keeps the stable line.
+# The tag archives come from upstream's GitLab, which sits behind a CDN;
+# the release tarballs on cairographics.org share an origin host with
+# x.org that drops connections for hours at a time.
+versionDiscovery:
+  http:
+    url: https://gitlab.freedesktop.org/api/v4/projects/cairo%2Fcairo/repository/tags?per_page=20
+    filter: '"name":"(\d+\.\d*[02468]\.\d+)"'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.18.6
+    sourceSha256: "a95ae4f522ef24312af7339563f65e0a03b1ad3d58a46df73d2ef690fe15ae7f"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - python
+    - name: pixman
+      kind: link
+      compat: "0"
+    - name: freetype
+      kind: link
+      compat: "2"
+    - name: fontconfig
+      kind: link
+      compat: "2"
+    - name: libpng
+      kind: link
+      compat: "1.6"
+    - name: zlib
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://gitlab.freedesktop.org/cairo/cairo/-/archive/{{.Version}}/cairo-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # Pinned rather than auto so a missing dependency fails the build. The
+    # window-system backends (xlib, xcb, quartz, dwrite), glib, lzo, spectre
+    # and the symbol-lookup tracing tool stay out so the build is the same
+    # on every platform.
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dfreetype=enabled -Dfontconfig=enabled -Dpng=enabled -Dzlib=enabled \
+          -Dxlib=disabled -Dxcb=disabled -Dquartz=disabled -Ddwrite=disabled \
+          -Dtee=disabled -Dlzo=disabled -Dglib=disabled -Dspectre=disabled \
+          -Dsymbol-lookup=disabled -Dtests=disabled -Dgtk_doc=false
+        ninja -C build
+        DESTDIR="$NEM_OUTPUT" ninja -C build install
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/cairo/cairo.h" ]
+      ls "$NEM_PREFIX"/lib/libcairo.* >/dev/null
+      for pc in cairo cairo-ft cairo-fc cairo-png cairo-pdf cairo-ps cairo-svg; do
+        grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/$pc.pc"
+      done
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <cairo.h>
+      #include <cairo-svg.h>
+      #include <stdio.h>
+      int main(void) {
+        cairo_surface_t *s = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 4, 4);
+        cairo_t *cr = cairo_create(s);
+        cairo_set_source_rgb(cr, 1, 0, 0);
+        cairo_paint(cr);
+        cairo_destroy(cr);
+        if (cairo_surface_write_to_png(s, "probe.png") != CAIRO_STATUS_SUCCESS) return 1;
+        cairo_surface_destroy(s);
+        cairo_surface_t *svg = cairo_svg_surface_create("probe.svg", 4, 4);
+        cairo_surface_destroy(svg);
+        puts(cairo_version_string());
+        return 0;
+      }
+      CEOF
+      cc -I"$NEM_PREFIX/include/cairo" $CPPFLAGS probe.c $LDFLAGS -lcairo -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]
+      [ "$(head -c 4 probe.png | tail -c 3)" = PNG ]
+      grep -q '<svg' probe.svg

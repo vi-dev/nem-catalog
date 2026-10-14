@@ -1,0 +1,67 @@
+schema: 3
+
+name: openjpeg
+description: JPEG 2000 codec library (libopenjp2)
+homepage: https://www.openjpeg.org
+license: BSD-2-Clause
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# compat "2" floats within 2.x; releases share the libopenjp2.7 soname.
+libs: [lib]
+
+versionDiscovery:
+  github:
+    repo: uclouvain/openjpeg
+    filter: '^v\d+\.\d+\.\d+$'
+    prefix: "v"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 2.5.4
+    sourceSha256: "a695fbe19c0165f295a8531b1e4e855cd94d0875d2f88ec4b61080677e27188a"
+
+build:
+  deps:
+    - cmake
+  source:
+    url: 'https://github.com/uclouvain/openjpeg/archive/refs/tags/v{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # The output dir is the install prefix, with relative dirs, so the
+    # exported CMake targets stay relocatable (a bare "/" prefix forces
+    # usr/ and bakes absolute paths into them); nem re-roots the .pc files.
+    # Library only: the opj_* codec tools would pull in libpng, libtiff and
+    # lcms2.
+    - run: |
+        set -e
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$NEM_OUTPUT" \
+          -DCMAKE_INSTALL_LIBDIR=lib -DCMAKE_INSTALL_INCLUDEDIR=include \
+          -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=OFF -DBUILD_CODEC=OFF -DBUILD_TESTING=OFF
+        cmake --build build -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        cmake --install build
+
+test:
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/openjpeg-${NEM_VERSION%.*}/openjpeg.h" ]
+      ls "$NEM_PREFIX"/lib/libopenjp2.* >/dev/null
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/libopenjp2.pc"
+  - run: |
+      set -e
+      command -v cc >/dev/null || exit 0
+      cat > probe.c <<'CEOF'
+      #include <openjpeg.h>
+      #include <stdio.h>
+      int main(void) {
+        puts(opj_version());
+        return 0;
+      }
+      CEOF
+      cc -I"$NEM_PREFIX/include/openjpeg-${NEM_VERSION%.*}" $CPPFLAGS probe.c $LDFLAGS -lopenjp2 -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]

@@ -1,0 +1,211 @@
+schema: 3
+
+name: poppler
+description: PDF rendering library and the pdftotext, pdftoppm, pdftocairo, pdfinfo, pdfimages, pdfsig… tools
+homepage: https://poppler.freedesktop.org
+license: GPL-2.0-only OR GPL-3.0-only
+
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+# Each dep stays within one soname: libfreetype.6, libfontconfig.1,
+# libjpeg.62, libopenjp2.7, libpng16, libz.1, libharfbuzz.0, liblcms2.2,
+# libtiff.6, libbrotlidec.1, libcurl.4, libcairo.2, libgpgmepp.6, libgpgme.11
+# and libgpg-error.0 (both included directly by the GPG backend).
+deps:
+  - name: freetype
+    kind: link
+    compat: "2"
+  - name: fontconfig
+    kind: link
+    compat: "2"
+  - name: libjpeg-turbo
+    kind: link
+    compat: "3"
+  - name: openjpeg
+    kind: link
+    compat: "2"
+  - name: libpng
+    kind: link
+    compat: "1.6"
+  - name: zlib
+    kind: link
+    compat: "1"
+  - name: harfbuzz
+    kind: link
+    compat: "14"
+  - name: lcms2
+    kind: link
+    compat: "2"
+  - name: libtiff
+    kind: link
+    compat: "4"
+  - name: brotli
+    kind: link
+    compat: "1"
+  - name: curl
+    kind: link
+    compat: "8"
+  - name: cairo
+    kind: link
+    compat: "1"
+  - name: gpgmepp
+    kind: link
+    compat: "2"
+  - name: gpgme
+    kind: link
+    compat: "2"
+  - name: libgpg-error
+    kind: link
+    compat: "1"
+
+bins: [bin]
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://poppler.freedesktop.org/
+    filter: 'poppler-(\d+\.\d+\.\d+)\.tar\.xz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 26.10.0
+    sourceSha256: "6792cb7c69205007ad87d2e936cecc5b3a31fac29ab54ffc3175fdb6b2a6ce35"
+
+build:
+  deps:
+    - cmake
+    - pkgconf
+    - name: freetype
+      kind: link
+      compat: "2"
+    - name: fontconfig
+      kind: link
+      compat: "2"
+    - name: libjpeg-turbo
+      kind: link
+      compat: "3"
+    - name: openjpeg
+      kind: link
+      compat: "2"
+    - name: libpng
+      kind: link
+      compat: "1.6"
+    - name: zlib
+      kind: link
+      compat: "1"
+    - name: harfbuzz
+      kind: link
+      compat: "14"
+    - name: lcms2
+      kind: link
+      compat: "2"
+    - name: libtiff
+      kind: link
+      compat: "4"
+    - name: brotli
+      kind: link
+      compat: "1"
+    - name: curl
+      kind: link
+      compat: "8"
+    - name: cairo
+      kind: link
+      compat: "1"
+    - name: gpgmepp
+      kind: link
+      compat: "2"
+    - name: gpgme
+      kind: link
+      compat: "2"
+    - name: libgpg-error
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://poppler.freedesktop.org/poppler-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    # CMake's find modules ignore CPPFLAGS/LDFLAGS, so the dep prefixes are
+    # passed explicitly, ahead of any system zlib.
+    # Core library, the C++ wrapper and the CLI tools with every codec and
+    # service the catalog can supply, including cairo output (pdftocairo)
+    # and the GPG signature backend (pdfsig). Off: the glib/Qt wrappers
+    # (bindings), the NSS signature backend (NSS is not in the catalog) and
+    # Boost (a Splash speed-up only). RUN_GPERF_IF_PRESENT keeps the
+    # builder's gperf from regenerating shipped tables.
+    # The build env carries the dep include dirs in CPPFLAGS/CFLAGS but has
+    # no CXXFLAGS, and poppler includes <harfbuzz/hb.h> from the include root.
+    - run: |
+        set -e
+        CXXFLAGS="$CPPFLAGS $CXXFLAGS" cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ \
+          -DCMAKE_PREFIX_PATH="$NEM_DEP_FREETYPE_PREFIX;$NEM_DEP_FONTCONFIG_PREFIX;$NEM_DEP_LIBJPEG_TURBO_PREFIX;$NEM_DEP_OPENJPEG_PREFIX;$NEM_DEP_LIBPNG_PREFIX;$NEM_DEP_ZLIB_PREFIX;$NEM_DEP_HARFBUZZ_PREFIX;$NEM_DEP_LCMS2_PREFIX;$NEM_DEP_LIBTIFF_PREFIX;$NEM_DEP_BROTLI_PREFIX;$NEM_DEP_CURL_PREFIX;$NEM_DEP_CAIRO_PREFIX;$NEM_DEP_GPGMEPP_PREFIX;$NEM_DEP_GPGME_PREFIX;$NEM_DEP_LIBGPG_ERROR_PREFIX" \
+          -DCMAKE_INSTALL_BINDIR=/bin -DCMAKE_INSTALL_LIBDIR=/lib \
+          -DCMAKE_INSTALL_INCLUDEDIR=/include -DCMAKE_INSTALL_DATAROOTDIR=/share \
+          -DBUILD_SHARED_LIBS=ON -DENABLE_UTILS=ON -DENABLE_CPP=ON \
+          -DENABLE_UNSTABLE_API_ABI_HEADERS=ON -DFONT_CONFIGURATION=fontconfig \
+          -DENABLE_LIBJPEG=ON -DENABLE_LIBOPENJPEG=ON -DENABLE_LCMS=ON -DENABLE_LIBTIFF=ON \
+          -DENABLE_BROTLI=ON -DENABLE_HARFBUZZ=ON -DENABLE_LIBCURL=ON \
+          -DENABLE_GLIB=OFF -DENABLE_GOBJECT_INTROSPECTION=OFF -DENABLE_QT5=OFF -DENABLE_QT6=OFF \
+          -DENABLE_GPGME=ON -DENABLE_BOOST=OFF -DENABLE_NSS3=OFF \
+          -DBUILD_MANUAL_TESTS=OFF -DBUILD_CPP_TESTS=OFF -DRUN_GPERF_IF_PRESENT=OFF
+        cmake --build build -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)"
+        DESTDIR="$NEM_OUTPUT" cmake --install build
+
+test:
+  - run: pdfinfo -v 2>&1 | grep -q "pdfinfo version $NEM_VERSION"
+  # A nem env exports fontconfig's FONTCONFIG_PATH; the test sets it the
+  # same way. The one-page PDF is assembled with correct xref offsets, so no
+  # recovery warnings mask a real parsing problem.
+  - run: |
+      set -e
+      export FONTCONFIG_PATH="$NEM_DEP_FONTCONFIG_PREFIX/etc/fonts"
+      printf '%%PDF-1.4\n' > nem.pdf
+      o1=$(wc -c < nem.pdf)
+      printf '1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n' >> nem.pdf
+      o2=$(wc -c < nem.pdf)
+      printf '2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n' >> nem.pdf
+      o3=$(wc -c < nem.pdf)
+      printf '3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 200 100] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\nendobj\n' >> nem.pdf
+      o4=$(wc -c < nem.pdf)
+      body='BT /F1 24 Tf 20 40 Td (nem) Tj ET'
+      printf '4 0 obj\n<< /Length %d >>\nstream\n%s\nendstream\nendobj\n' "${#body}" "$body" >> nem.pdf
+      o5=$(wc -c < nem.pdf)
+      printf '5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n' >> nem.pdf
+      x=$(wc -c < nem.pdf)
+      printf 'xref\n0 6\n0000000000 65535 f \n' >> nem.pdf
+      for o in "$o1" "$o2" "$o3" "$o4" "$o5"; do printf '%010d 00000 n \n' "$o" >> nem.pdf; done
+      printf 'trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n%d\n%%%%EOF\n' "$x" >> nem.pdf
+      pdfinfo nem.pdf | grep -q '^Pages: *1$'
+      [ "$(pdftotext nem.pdf - | tr -d '\f\n')" = nem ]
+      pdftoppm -png -r 36 nem.pdf page
+      [ "$(head -c 4 page-1.png | tail -c 3)" = PNG ]
+      pdftoppm -tiff -r 36 nem.pdf tpage
+      head -c 2 tpage-1.tif | grep -qE '^(II|MM)$'
+      pdftocairo -svg nem.pdf nem.svg
+      grep -q '<svg' nem.svg
+      pdftocairo -png -r 36 nem.pdf cpage
+      [ "$(head -c 4 cpage-1.png | tail -c 3)" = PNG ]
+      pdfsig nem.pdf | grep -q 'does not contain any signatures'
+  - run: |
+      set -e
+      [ -f "$NEM_PREFIX/include/poppler/cpp/poppler-version.h" ]
+      [ -f "$NEM_PREFIX/include/poppler/PDFDoc.h" ]
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/poppler.pc"
+      grep -q "Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/poppler-cpp.pc"
+  - run: |
+      set -e
+      command -v c++ >/dev/null || exit 0
+      cat > probe.cpp <<'CEOF'
+      #include <poppler/cpp/poppler-version.h>
+      #include <iostream>
+      int main() {
+        std::cout << poppler::version_string() << '\n';
+        return 0;
+      }
+      CEOF
+      c++ -std=c++17 $CPPFLAGS probe.cpp $LDFLAGS -lpoppler-cpp -o probe
+      [ "$(./probe)" = "$NEM_VERSION" ]
