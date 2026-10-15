@@ -26,3 +26,6 @@ versions:
       darwin/amd64: "b26e2d7fb91b833ac38cb7abb810cb8af6e7f6489a1c298cb63e584cd1f890a2"
       linux/arm64: "3adc2bb2395c3efff89623499b20eea66ef54924c485d3ae86762393a31736ea"
       linux/amd64: "018c4c9884dea971eda860435ede3021d1150732f34cfd245498c6726d8cab90"
+
+test:
+  - run: naabu --version 2>&1 | grep -q "$NEM_VERSION"
