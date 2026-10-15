@@ -23,6 +23,18 @@ test:
   - run: pscale version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.346.0
+    sha256:
+      darwin/arm64: "6e8a3f064f45ad29f187ba3dda24ad3a45328bd11a200b89c200d06bdc5c3a6b"
+      darwin/amd64: "f1cbcda8f23c10414a36df6e8cea1adf7aea8fecec5b76fd08dd0bcf3bbdad97"
+      linux/arm64: "5d1c0c98244e3a5153d0d1d8403e7548ec9f4fa4831478a3efef75114f58ea8d"
+      linux/amd64: "c9df2a3e54c1ad47209a640d45b1ce3797c14978e7b0ded3267a74d85a06c267"
+  - version: 0.345.0
+    sha256:
+      darwin/arm64: "d774eb31cd764dee4c01a1671f3ea17e1d3cb9b8aefe829e82cce2c3358fe028"
+      darwin/amd64: "f7c9453615dbb9a212a141449ecf6550b790f166dfdbeda5fb635885bf60e348"
+      linux/arm64: "ebc420f98a722021499ff9ddced8b574bb6b781a90ed6e070c730c76d72963d5"
+      linux/amd64: "7659b46c7f4190da330107d29d81618e662c7009efdc49923fff11db5494b168"
   - version: 0.344.0
     sha256:
       darwin/arm64: "1b59b271590d9b49dd52aafbb0e5c0cd788b44c00a5627d6487cd0d18815cf53"

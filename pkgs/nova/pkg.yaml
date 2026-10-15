@@ -23,6 +23,12 @@ test:
   - run: nova version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.12.2
+    sha256:
+      darwin/arm64: "44434e2c4cecb036ec930805ac98ef73cd01e8bae4b0f7caa700f5680e18e170"
+      darwin/amd64: "7d00014cc97952085884d32a9a9b4f78c4cbd3bc8b0913a9ecc05623d6cd1ef6"
+      linux/arm64: "08e09c287577e65f9bd0fd3a0339126799c30da82f8a91f02b2d58036ec606e9"
+      linux/amd64: "6a3be40af29d5553da9fb820c5b0a583db5b3cb290c5663495f697680b285ed4"
   - version: 3.12.1
     sha256:
       darwin/arm64: "6956076e26c5404461155acfb7e955b5343b68c598e4d200eec60100a55f3447"

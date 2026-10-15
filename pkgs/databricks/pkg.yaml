@@ -23,6 +23,12 @@ test:
   - run: databricks --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.21.0
+    sha256:
+      darwin/arm64: "dcf4f4eaa4d5f0fe4caf808dfb6ac4b3a2ba0740258b8e6a56b1e72fd23ef1f9"
+      darwin/amd64: "0da076184db754e3040151f54eded5ab04f367c14a2e98ec985a2c08bff2e60a"
+      linux/arm64: "27900190575596418142e9a130e7b56b3a7bfda1d3dfd1f3f3b6a0ca3ec71846"
+      linux/amd64: "220e7894fe296d7bc20e131e6dc3c71e063b7d2531d568afd2b3f8d7f6869bb9"
   - version: 1.20.0
     sha256:
       darwin/arm64: "8c1dd9b64288025614a04aa094af7fd757cc17c13578d3ab38ea9e4c26cc629f"

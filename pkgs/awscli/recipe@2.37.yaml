@@ -1,0 +1,32 @@
+platforms: [darwin/arm64, linux/arm64, linux/amd64]
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+bins: [bin]
+
+build:
+  deps:
+    # The portable-exe lock pins pyinstaller 6.19, which needs Python < 3.15.
+    - python@3.14.8
+  source:
+    url: 'https://github.com/aws/aws-cli/archive/refs/tags/{{.Version}}.tar.gz'
+  output: out
+  steps:
+    # portable-exe is the frozen, relocatable install type; the default
+    # system-sandbox type is a venv wired to build-time absolute paths.
+    - run: ./configure --prefix=/ --with-download-deps --with-install-type=portable-exe && make && make install DESTDIR="$NEM_OUTPUT"
+    # The installed bin/ symlinks point at absolute prefix paths, which
+    # archive extraction rejects — rewrite them relative.
+    - run: cd "$NEM_OUTPUT/bin" && ln -sf ../lib/aws-cli/aws aws && ln -sf ../lib/aws-cli/aws_completer aws_completer
+
+test:
+  - run: aws --version | grep -q "aws-cli/$NEM_VERSION "
+  - run: |
+      set -e
+      export AWS_CONFIG_FILE="$PWD/config" AWS_SHARED_CREDENTIALS_FILE="$PWD/credentials"
+      aws configure set region eu-west-1
+      [ "$(aws configure get region)" = eu-west-1 ]

@@ -23,6 +23,12 @@ test:
   - run: bearer version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.1.2
+    sha256:
+      darwin/arm64: "3796912e893f3d5414b8143dec95dfe3cd4a2bd932537dc5b29d0a8898109bfd"
+      darwin/amd64: "101297e4bf435e1eb3c81790416e6d9453179272cecba79f5473ba5229e31523"
+      linux/arm64: "5a872028f69c1b0272941402770e65f7473f98dd696a79b0cbea9881a7c91651"
+      linux/amd64: "a1db6ef048c348ac637e15e5866c99203b688b1313df8a06464dbf01a334f121"
   - version: 2.1.1
     sha256:
       darwin/arm64: "96fb52d993111c633e7b8a906b7abbba4f0745b56bc0e28894fd09123e8d6c32"

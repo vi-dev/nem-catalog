@@ -22,6 +22,12 @@ test:
   - run: virtctl version --client | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.9.1
+    sha256:
+      darwin/arm64: "91a331acb7e07eeeefdd2378910c500d60269b12f183fba17eac12109f4b8717"
+      darwin/amd64: "dd414cea44975f573f3e635937df766942423ec79b64e29cb91826fcc63b8056"
+      linux/arm64: "12a26aa4f1088594eeafb76b209e1c9752fa6a10d968b6c98364f96f6c1ecbc5"
+      linux/amd64: "c289393c8186a258653594605f5199b4c171a3131e6e409ed204a96b491b782a"
   - version: 1.9.0
     sha256:
       darwin/arm64: "8527cf7601a6d1a2fa3e8014bacacc9e7dd1a338bc572c74d3734360a344d116"

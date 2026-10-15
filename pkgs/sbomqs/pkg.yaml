@@ -23,6 +23,12 @@ test:
   - run: sbomqs version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.1.3
+    sha256:
+      darwin/arm64: "1d923bdbb8ad4928db345523a38b03a25bf1ee89308ceef8c7b3acd4b614912b"
+      darwin/amd64: "d3c6efbc93ada92333208daa4d5664a7060b90c7de4401a37935abd2c489bb1e"
+      linux/arm64: "f8bdc31f52bff4560bbcf9073864a05903ba955da52af89593f88dab402fbe20"
+      linux/amd64: "c96f07a6a27314c1c268af141af04f1c1b49e61400d7058f6419ca4f7f3bdd6b"
   - version: 2.1.2
     sha256:
       darwin/arm64: "cef45fcbdf12954cde0ff87c3740a0681d05e90d8c0cbee2e48e5e62b05d1c20"

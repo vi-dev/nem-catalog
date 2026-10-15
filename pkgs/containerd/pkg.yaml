@@ -21,6 +21,10 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 2.4.2
+    sha256:
+      linux/arm64: "fdfab81a86192ddb8165d72f116ec985485c9e12505e323c4f4579c48020f276"
+      linux/amd64: "35880c1dd4627e8ce56526bfabb39c144e83458ffdb197ce6f05d17d94d7d91e"
   - version: 2.4.1
     sha256:
       linux/arm64: "67f9b0a81c7140aaf15fe69053e88175270fadd33aeaffc1b9017123c1f55cea"

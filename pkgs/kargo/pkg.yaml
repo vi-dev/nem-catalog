@@ -22,6 +22,12 @@ test:
   - run: kargo version --client | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.12.4
+    sha256:
+      darwin/arm64: "9e5da98dd26a90827936fcef387b5397f6fb1b78a8151dab7e95a63eb8b1c798"
+      darwin/amd64: "771932134539cb6d9245f3e2e2d120ae8613a8ef6417ffa4e509098442c831b6"
+      linux/arm64: "4e5efab98eed2b223a44b141c48ee544c18f2f7f504f42e19f92a4b12c70b7bb"
+      linux/amd64: "89c677bc14c1a532a9802f947976cf17dcf6b6a28cb9964a7688540bc6ab2848"
   - version: 1.12.3
     sha256:
       darwin/arm64: "e1b0aa5bc2844ab090717ac0b9b3f75908cc4b6a47824ea70c40e2fd1ca61f7d"
