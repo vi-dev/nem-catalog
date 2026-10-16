@@ -1,0 +1,70 @@
+schema: 3
+name: libgbm
+description: Generic Buffer Management loader from Mesa, without any GPU driver
+homepage: https://www.mesa3d.org
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+# Mesa's version; libgbm.so.1 has kept its soname across Mesa majors.
+deps:
+  - name: libdrm
+    kind: link
+    compat: "2"
+  - name: expat
+    kind: link
+    compat: "2"
+
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://mesa.freedesktop.org/archive/
+    filter: 'mesa-(\d+\.\d+\.\d+)\.tar\.xz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 26.2.5
+    sourceSha256: "794b3d1729075dae7ebd47c7283b7ca0cdb5dec668f7f11cc0a5d82f6138a0a5"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - python
+    - name: libdrm
+      kind: link
+      compat: "2"
+    - name: expat
+      kind: link
+      compat: "2"
+    - name: zlib
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://mesa.freedesktop.org/archive/mesa-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        python3 -m pip install --quiet --target "$PWD/.pydeps" mako==1.4.3 pyyaml==6.0.3 packaging==26.3
+        export PYTHONPATH="$PWD/.pydeps"
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dgallium-drivers= -Dvulkan-drivers= -Dvideo-codecs= -Dplatforms= \
+          -Dgbm=enabled -Dglx=disabled -Degl=disabled -Dgles1=disabled -Dgles2=disabled \
+          -Dopengl=false -Dllvm=disabled -Dzstd=disabled -Dvalgrind=disabled -Dlibunwind=disabled
+        meson compile -C build
+        meson install -C build --destdir "$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/gbm.pc"
+      ls "$NEM_PREFIX"/lib/libgbm.so.1 >/dev/null
+      ! test -e "$NEM_PREFIX/lib/libEGL.so.1"

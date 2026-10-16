@@ -1,0 +1,50 @@
+schema: 3
+name: libxkbcommon
+description: Keyboard keymap compiler and state machine library
+homepage: https://xkbcommon.org
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+versionDiscovery:
+  github:
+    repo: xkbcommon/libxkbcommon
+    filter: '^xkbcommon-\d+\.\d+\.\d+$'
+    prefix: "xkbcommon-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.13.2
+    sourceSha256: "acc4d5f7c3cbba5f9f8d08d8bdbeede84ecede46792f47929aa9321873385528"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+  source:
+    url: 'https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Denable-x11=false -Denable-wayland=false -Denable-tools=false \
+          -Denable-docs=false -Denable-xkbregistry=false \
+          -Denable-bash-completion=false \
+          -Dxkb-config-root=/usr/share/X11/xkb
+        meson compile -C build
+        meson install -C build --destdir "$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xkbcommon.pc"
+      ls "$NEM_PREFIX"/lib/libxkbcommon.so.0 >/dev/null

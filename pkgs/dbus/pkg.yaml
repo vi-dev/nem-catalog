@@ -1,0 +1,54 @@
+schema: 3
+name: dbus
+description: D-Bus message bus client library, libdbus-1
+homepage: https://www.freedesktop.org/wiki/Software/dbus/
+license: AFL-2.1 OR GPL-2.0-or-later
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+# Odd minor versions are development releases.
+versionDiscovery:
+  http:
+    url: https://dbus.freedesktop.org/releases/dbus/
+    filter: 'dbus-(1\.\d*[02468]\.\d+)\.tar\.xz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.16.2
+    sourceSha256: "0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - name: expat
+      kind: link
+      compat: "2"
+  source:
+    url: 'https://dbus.freedesktop.org/releases/dbus/dbus-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dmessage_bus=false -Dtools=false -Dsystemd=disabled -Dselinux=disabled \
+          -Dapparmor=disabled -Dlibaudit=disabled -Dx11_autolaunch=disabled \
+          -Dmodular_tests=disabled -Ddoxygen_docs=disabled -Dxml_docs=disabled \
+          -Dducktype_docs=disabled -Dqt_help=disabled
+        meson compile -C build
+        meson install -C build --destdir "$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/dbus-1.pc"
+      ls "$NEM_PREFIX"/lib/libdbus-1.so.3 >/dev/null
+      ! test -e "$NEM_PREFIX/bin/dbus-daemon"

@@ -1,0 +1,55 @@
+schema: 3
+name: alsa-lib
+description: ALSA user-space audio library, libasound
+homepage: https://www.alsa-project.org
+license: LGPL-2.1-or-later
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+# The configuration directory is baked in as an absolute /share/alsa; the
+# export also applies to host ALSA tools while the package is active.
+env:
+  - name: ALSA_CONFIG_DIR
+    value: "{{.InstallDir}}/share/alsa"
+
+versionDiscovery:
+  github:
+    repo: alsa-project/alsa-lib
+    filter: '^v\d+\.\d+\.\d+(\.\d+)?$'
+    prefix: "v"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.2.16.1
+    sourceSha256: "f740db7f488255944ffd4428416ee3390a96742856916433df468c281436480e"
+
+build:
+  deps:
+    - pkgconf
+  source:
+    url: 'https://www.alsa-project.org/files/pub/lib/alsa-lib-{{.Version}}.tar.bz2'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-static --disable-dependency-tracking --disable-python
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+        rm -rf "$NEM_OUTPUT/bin"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/alsa.pc"
+      ls "$NEM_PREFIX"/lib/libasound.so.2 >/dev/null
+      test -f "$ALSA_CONFIG_DIR/alsa.conf"

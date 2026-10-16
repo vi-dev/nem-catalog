@@ -1,0 +1,68 @@
+schema: 3
+name: at-spi2-core
+description: Assistive technology service provider interface, with the ATK libraries
+homepage: https://gitlab.gnome.org/GNOME/at-spi2-core
+license: LGPL-2.1-or-later
+
+platforms: [linux/arm64, linux/amd64]
+
+# compat "2" floats within 2.x; releases share the libatspi.so.0 soname.
+deps:
+  - name: glib
+    kind: link
+    compat: "2"
+  - name: dbus
+    kind: link
+    compat: "1"
+
+libs: [lib]
+
+# The url and discovery dir track the stable major.minor series.
+versionDiscovery:
+  http:
+    url: https://download.gnome.org/sources/at-spi2-core/2.62/
+    filter: 'at-spi2-core-(\d+\.\d+\.\d+)\.tar\.xz'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 2.62.1
+    sourceSha256: "cca6b6a86e4389d89b370288761ce2385ddeceb10c4412da78689bc30c88af2d"
+
+build:
+  deps:
+    - meson
+    - ninja
+    - pkgconf
+    - name: glib
+      kind: link
+      compat: "2"
+    - name: dbus
+      kind: link
+      compat: "1"
+    - name: libxml2
+      kind: link
+      compat: "2"
+  source:
+    url: 'https://download.gnome.org/sources/at-spi2-core/2.62/at-spi2-core-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        meson setup build --prefix=/ --libdir=lib --buildtype=release \
+          -Dx11=disabled -Dintrospection=disabled -Duse_systemd=false \
+          -Ddefault_bus=dbus-daemon -Ddbus_daemon=/usr/bin/dbus-daemon \
+          -Dgtk2_atk_adaptor=false -Ddocs=false
+        meson compile -C build
+        meson install -C build --destdir "$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/atspi-2.pc"
+      ls "$NEM_PREFIX"/lib/libatk-1.0.so.0 "$NEM_PREFIX"/lib/libatspi.so.0 "$NEM_PREFIX"/lib/libatk-bridge-2.0.so.0 >/dev/null
+  - run: '! grep -aq "libX" "$NEM_PREFIX"/lib/*.so.*'
