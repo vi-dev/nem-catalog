@@ -94,15 +94,15 @@ build:
     url: 'https://github.com/systemd/systemd/archive/refs/tags/v{{.Version}}.tar.gz'
   output: out
   steps:
-    # The binaries load libsystemd-shared from lib/systemd; both rpaths keep
-    # that reachable from bin/ and from within lib/systemd itself.
+    # bin/, lib/systemd, lib/udev and the lib/systemd/*-generators each load
+    # libsystemd-shared from lib/systemd.
     # Components needing libraries the catalog lacks are pinned off, and the
     # manuals need an XML toolchain the builders do not carry.
     - run: |
         set -e
         python3 -m pip install --quiet --target "$PWD/.pydeps" jinja2
         export PYTHONPATH="$PWD/.pydeps"
-        export LDFLAGS="$LDFLAGS -Wl,-rpath,\$ORIGIN -Wl,-rpath,\$ORIGIN/../lib/systemd"
+        export LDFLAGS="$LDFLAGS -Wl,-rpath,\$ORIGIN -Wl,-rpath,\$ORIGIN/../lib/systemd -Wl,-rpath,\$ORIGIN/../systemd -Wl,-rpath,\$ORIGIN/.."
         meson setup build --prefix=/ --libdir=lib --buildtype=release \
           -Dmode=release -Dman=disabled -Dhtml=disabled -Dtests=false -Dhwdb=false \
           -Dlz4=enabled -Dzstd=enabled -Dxz=enabled -Dzlib=enabled -Dopenssl=enabled \
@@ -132,3 +132,10 @@ test:
         printf '%s' "$out" | grep -q -- "$f"
       done
       ! ldd "$NEM_PREFIX"/lib/libsystemd.so.0 | grep -q 'not found'
+  # The udev helpers and the generators sit below lib/ and must still find
+  # libsystemd-shared without any loader path from the environment.
+  - run: |
+      set -e
+      for f in lib/udev/ata_id lib/systemd/system-generators/systemd-system-update-generator lib/systemd/systemd-executor; do
+        if env -i ldd "$NEM_PREFIX/$f" | grep -q 'not found'; then exit 1; fi
+      done
