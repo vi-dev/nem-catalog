@@ -1,0 +1,44 @@
+schema: 3
+name: nspr
+description: Netscape Portable Runtime, the platform layer under NSS
+homepage: https://firefox-source-docs.mozilla.org/nspr/
+license: MPL-2.0
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib]
+
+versionDiscovery:
+  http:
+    url: https://ftp.mozilla.org/pub/nspr/releases/
+    filter: 'v(\d+\.\d+(?:\.\d+)?)/'
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: "4.40"
+    sourceSha256: "c0c1884c627f3db7a783f7c7314c695226b2043696791d15519e7e0578c19bdc"
+
+build:
+  source:
+    url: 'https://ftp.mozilla.org/pub/nspr/releases/v{{.Version}}/src/nspr-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        cd nspr
+        ./configure --prefix=/ --with-mozilla --with-pthreads --enable-64bit
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+        rm -rf "$NEM_OUTPUT/bin" "$NEM_OUTPUT"/lib/*.a
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/nspr.pc"
+      ls "$NEM_PREFIX"/lib/libnspr4.so "$NEM_PREFIX"/lib/libplc4.so "$NEM_PREFIX"/lib/libplds4.so >/dev/null
+      test -f "$NEM_PREFIX/include/nspr/prtypes.h"

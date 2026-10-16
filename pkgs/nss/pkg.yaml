@@ -1,0 +1,74 @@
+schema: 3
+name: nss
+description: Network Security Services, Mozilla's TLS and certificate libraries
+homepage: https://firefox-source-docs.mozilla.org/security/nss/
+license: MPL-2.0
+
+platforms: [linux/arm64, linux/amd64]
+
+deps:
+  - name: nspr
+    kind: link
+    compat: "4"
+  - name: sqlite
+    kind: link
+    compat: "3"
+
+bins: [bin]
+libs: [lib]
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 3.131
+    sourceSha256: "ca0005bc77e9255d9942103e6f9756cfe311a3df72afa99860709e386eb3c167"
+
+build:
+  deps:
+    - name: nspr
+      kind: link
+      compat: "4"
+    - name: sqlite
+      kind: link
+      compat: "3"
+    - name: zlib
+      kind: link
+      compat: "1"
+    - ninja
+    - python
+  source:
+    url: 'https://ftp.mozilla.org/pub/security/nss/releases/NSS_{{replace .Version "." "_"}}_RTM/src/nss-{{.Version}}.tar.gz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        python3 -m pip install --quiet --target "$PWD/.pydeps" gyp-next==0.22.3
+        export PYTHONPATH="$PWD/.pydeps" PATH="$PWD/.pydeps/bin:$PATH"
+        mkdir -p dist/Release/lib
+        cp "$NEM_DEP_NSPR_PREFIX"/lib/*.so "$NEM_DEP_SQLITE_PREFIX"/lib/libsqlite3.so* dist/Release/lib/
+        cd nss
+        ./build.sh -o --disable-tests --system-sqlite \
+          --with-nspr="$NEM_DEP_NSPR_PREFIX/include/nspr:$NEM_DEP_NSPR_PREFIX/lib" \
+          --dist="$PWD/../dist" -j "$(nproc)"
+        cd ..
+        mkdir -p "$NEM_OUTPUT/lib/pkgconfig" "$NEM_OUTPUT/include/nss" "$NEM_OUTPUT/bin"
+        for f in dist/Release/lib/*.so dist/Release/lib/*.chk; do
+          case "$(basename "$f")" in
+            libnspr4.so|libplc4.so|libplds4.so|libsqlite3.so*) ;;
+            *) cp "$f" "$NEM_OUTPUT/lib/" ;;
+          esac
+        done
+        cp dist/public/nss/*.h "$NEM_OUTPUT/include/nss/"
+        cp dist/Release/bin/certutil "$NEM_OUTPUT/bin/"
+        printf 'prefix=/\nexec_prefix=${prefix}\nlibdir=${prefix}/lib\nincludedir=${prefix}/include/nss\n\nName: NSS\nDescription: Network Security Services\nVersion: %s\nRequires: nspr\nLibs: -L${libdir} -lnss3 -lnssutil3 -lsmime3 -lssl3\nCflags: -I${includedir}\n' "$NEM_VERSION" > "$NEM_OUTPUT/lib/pkgconfig/nss.pc"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/nss.pc"
+      ls "$NEM_PREFIX"/lib/libnss3.so "$NEM_PREFIX"/lib/libnssutil3.so "$NEM_PREFIX"/lib/libsoftokn3.so "$NEM_PREFIX"/lib/libfreeblpriv3.so >/dev/null
+  - run: certutil -N -d "sql:$PWD" --empty-password && test -f cert9.db
