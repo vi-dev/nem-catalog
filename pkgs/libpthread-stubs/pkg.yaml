@@ -1,0 +1,44 @@
+schema: 3
+name: libpthread-stubs
+description: pkg-config stub for pthread, required by the libxcb build
+homepage: https://gitlab.freedesktop.org/xorg/lib/pthread-stubs
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib/pkgconfig]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/pthread-stubs.git
+    filter: '^libpthread-stubs-\d+\.\d+$'
+    prefix: "libpthread-stubs-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: "0.5"
+    sourceSha256: "59da566decceba7c2a7970a4a03b48d9905f1262ff94410a649224e33d2442bc"
+
+build:
+  deps:
+    - pkgconf
+  source:
+    url: 'https://xcb.freedesktop.org/dist/libpthread-stubs-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: 'grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/pthread-stubs.pc"'

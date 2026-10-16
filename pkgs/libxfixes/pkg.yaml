@@ -1,0 +1,60 @@
+schema: 3
+name: libxfixes
+description: X Fixes extension client library
+homepage: https://gitlab.freedesktop.org/xorg/lib/libxfixes
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+# compat "6" floats within 6.x; releases share the libXfixes.so.3 soname.
+deps:
+  - name: libx11
+    kind: link
+    compat: "1"
+  - name: xorgproto
+    kind: link
+
+libs: [lib]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/libxfixes.git
+    filter: '^libXfixes-\d+\.\d+\.\d+$'
+    prefix: "libXfixes-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 6.0.2
+    sourceSha256: "39f115d72d9c5f8111e4684164d3d68cc1fd21f9b27ff2401b08fddfc0f409ba"
+
+build:
+  deps:
+    - pkgconf
+    - name: xorgproto
+      kind: link
+    - name: libx11
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/lib/libXfixes-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-static --disable-dependency-tracking
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xfixes.pc"
+      ls "$NEM_PREFIX"/lib/libXfixes.so.3 >/dev/null

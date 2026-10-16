@@ -1,0 +1,53 @@
+schema: 3
+name: libxdmcp
+description: X Display Manager Control Protocol library
+homepage: https://gitlab.freedesktop.org/xorg/lib/libxdmcp
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+deps:
+  - name: xorgproto
+    kind: link
+
+libs: [lib]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/libxdmcp.git
+    filter: '^libXdmcp-\d+\.\d+\.\d+$'
+    prefix: "libXdmcp-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.1.5
+    sourceSha256: "d8a5222828c3adab70adf69a5583f1d32eb5ece04304f7f8392b6a353aa2228c"
+
+build:
+  deps:
+    - pkgconf
+    - name: xorgproto
+      kind: link
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/lib/libXdmcp-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-static --disable-dependency-tracking
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xdmcp.pc"
+      ls "$NEM_PREFIX"/lib/libXdmcp.so.6 >/dev/null

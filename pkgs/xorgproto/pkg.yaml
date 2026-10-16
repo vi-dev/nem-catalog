@@ -1,0 +1,46 @@
+schema: 3
+name: xorgproto
+description: X Window System protocol headers
+homepage: https://gitlab.freedesktop.org/xorg/proto/xorgproto
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib/pkgconfig]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/proto/xorgproto.git
+    filter: '^xorgproto-\d{4}\.\d+$'
+    prefix: "xorgproto-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 2026.1
+    sourceSha256: "f9bfe4a9ed8c8ab9d2a3b0d49797f046052dadd06b7a8b45dbffaffb137e8290"
+
+build:
+  deps:
+    - pkgconf
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/proto/xorgproto-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+        mkdir -p "$NEM_OUTPUT/lib/pkgconfig"
+        mv "$NEM_OUTPUT"/share/pkgconfig/*.pc "$NEM_OUTPUT/lib/pkgconfig/"
+
+test:
+  - run: test -f "$NEM_PREFIX/include/X11/Xproto.h" && test -f "$NEM_PREFIX/lib/pkgconfig/xproto.pc"

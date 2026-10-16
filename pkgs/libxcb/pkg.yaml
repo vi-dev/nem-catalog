@@ -1,0 +1,69 @@
+schema: 3
+name: libxcb
+description: X protocol C-language binding, with its extension libraries
+homepage: https://gitlab.freedesktop.org/xorg/lib/libxcb
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+# compat "1" floats within 1.x; releases share the libxcb.so.1 soname.
+deps:
+  - name: libxau
+    kind: link
+    compat: "1"
+  - name: libxdmcp
+    kind: link
+    compat: "1"
+
+libs: [lib]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/libxcb.git
+    filter: '^libxcb-\d+\.\d+\.\d+$'
+    prefix: "libxcb-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.17.0
+    sourceSha256: "599ebf9996710fea71622e6e184f3a8ad5b43d0e5fa8c4e407123c88a59a6d55"
+
+build:
+  deps:
+    - pkgconf
+    - name: libxau
+      kind: link
+      compat: "1"
+    - name: libxdmcp
+      kind: link
+      compat: "1"
+    - name: xcb-proto
+      kind: link
+    - name: libpthread-stubs
+      kind: link
+    - name: xorgproto
+      kind: link
+    - python
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/lib/libxcb-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-static --disable-dependency-tracking --disable-devel-docs --without-doxygen
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xcb.pc"
+      ls "$NEM_PREFIX"/lib/libxcb.so.1 "$NEM_PREFIX"/lib/libxcb-render.so.0 "$NEM_PREFIX"/lib/libxcb-shape.so.0 >/dev/null

@@ -1,0 +1,46 @@
+schema: 3
+name: xtrans
+description: X Network Transport layer, header-only, used to build libX11
+homepage: https://gitlab.freedesktop.org/xorg/lib/libxtrans
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib/pkgconfig]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/libxtrans.git
+    filter: '^xtrans-\d+\.\d+\.\d+$'
+    prefix: "xtrans-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.6.0
+    sourceSha256: "faafea166bf2451a173d9d593352940ec6404145c5d1da5c213423ce4d359e92"
+
+build:
+  deps:
+    - pkgconf
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/lib/xtrans-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+        mkdir -p "$NEM_OUTPUT/lib/pkgconfig"
+        mv "$NEM_OUTPUT"/share/pkgconfig/*.pc "$NEM_OUTPUT/lib/pkgconfig/"
+
+test:
+  - run: 'grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xtrans.pc"'

@@ -1,0 +1,62 @@
+schema: 3
+name: libx11
+description: X11 client library, Xlib over XCB
+homepage: https://gitlab.freedesktop.org/xorg/lib/libx11
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+# compat "1" floats within 1.x; releases share the libX11.so.6 soname.
+deps:
+  - name: libxcb
+    kind: link
+    compat: "1"
+  - name: xorgproto
+    kind: link
+
+libs: [lib]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/libx11.git
+    filter: '^libX11-\d+\.\d+\.\d+$'
+    prefix: "libX11-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.8.13
+    sourceSha256: "69606f485c2c07c14ef64f75b7bb326d48587af33795d9ab3e607c0b5f94f11c"
+
+build:
+  deps:
+    - pkgconf
+    - name: xorgproto
+      kind: link
+    - name: xtrans
+      kind: link
+    - name: libxcb
+      kind: link
+      compat: "1"
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/lib/libX11-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-static --disable-dependency-tracking --disable-specs --without-xmlto --without-fop
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/x11.pc"
+      ls "$NEM_PREFIX"/lib/libX11.so.6 >/dev/null

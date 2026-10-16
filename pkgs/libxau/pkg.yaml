@@ -1,0 +1,53 @@
+schema: 3
+name: libxau
+description: X11 authorisation library
+homepage: https://gitlab.freedesktop.org/xorg/lib/libxau
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+deps:
+  - name: xorgproto
+    kind: link
+
+libs: [lib]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/lib/libxau.git
+    filter: '^libXau-\d+\.\d+\.\d+$'
+    prefix: "libXau-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.0.12
+    sourceSha256: "74d0e4dfa3d39ad8939e99bda37f5967aba528211076828464d2777d477fc0fb"
+
+build:
+  deps:
+    - pkgconf
+    - name: xorgproto
+      kind: link
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/lib/libXau-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/ --disable-static --disable-dependency-tracking
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xau.pc"
+      ls "$NEM_PREFIX"/lib/libXau.so.6 >/dev/null

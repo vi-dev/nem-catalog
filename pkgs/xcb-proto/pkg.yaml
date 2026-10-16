@@ -1,0 +1,51 @@
+schema: 3
+name: xcb-proto
+description: XML descriptions of the X protocol and the xcbgen Python module
+homepage: https://gitlab.freedesktop.org/xorg/proto/xcbproto
+license: MIT
+
+platforms: [linux/arm64, linux/amd64]
+
+libs: [lib/pkgconfig]
+
+versionDiscovery:
+  git:
+    url: https://gitlab.freedesktop.org/xorg/proto/xcbproto.git
+    filter: '^xcb-proto-\d+\.\d+\.\d+$'
+    prefix: "xcb-proto-"
+
+artifact:
+  oci: ":{{.Version}}"
+
+install:
+  - extract: {strip: 0}
+
+versions:
+  - version: 1.17.0
+    sourceSha256: "2c1bacd2110f4799f74de6ebb714b94cf6f80fb112316b1219480fd22562148c"
+
+build:
+  deps:
+    - pkgconf
+    - python
+  source:
+    url: 'https://xorg.freedesktop.org/archive/individual/proto/xcb-proto-{{.Version}}.tar.xz'
+  output: out
+  steps:
+    - run: |
+        set -e
+        # Extraction skews mtimes; one shared stamp stops make regenerating
+        # pregenerated files.
+        find . -exec touch -t 202001010000 {} +
+        ./configure --prefix=/
+        make -j"$(nproc)"
+        make install DESTDIR="$NEM_OUTPUT"
+        mkdir -p "$NEM_OUTPUT/lib/pkgconfig"
+        mv "$NEM_OUTPUT"/share/pkgconfig/*.pc "$NEM_OUTPUT/lib/pkgconfig/"
+
+test:
+  - run: |
+      set -e
+      grep -q "^Version: $NEM_VERSION" "$NEM_PREFIX/lib/pkgconfig/xcb-proto.pc"
+      grep -q pcfiledir "$NEM_PREFIX/lib/pkgconfig/xcb-proto.pc"
+      ls "$NEM_PREFIX"/lib/python3*/site-packages/xcbgen/__init__.py >/dev/null
