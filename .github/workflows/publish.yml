@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     outputs:
+      build: ${{ steps.plan.outputs.build }}
       smoke: ${{ steps.plan.outputs.smoke }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -29,12 +30,16 @@ jobs:
       - id: detect
         uses: ./.github/actions/changed-packages
       - id: plan
-        name: Compute smoke plan
+        name: Compute the build and smoke plans
         shell: bash
         env:
           BUILD: ${{ steps.detect.outputs.build }}
           PREBUILT: ${{ steps.detect.outputs.prebuilt }}
-        run: echo "smoke=$(jq -c --argjson p "$PREBUILT" '. + $p' <<< "$BUILD")" >> "$GITHUB_OUTPUT"
+        run: |
+          {
+            echo "build=$(jq -r 'join(" ")' <<< "$BUILD")"
+            echo "smoke=$(jq -c --argjson p "$PREBUILT" '. + $p' <<< "$BUILD")"
+          } >> "$GITHUB_OUTPUT"
 
   stage:
     runs-on: ubuntu-latest
@@ -44,12 +49,14 @@ jobs:
       - uses: ./.github/actions/setup-nem
       - run: nem catalog publish ghcr.io/vi-dev/nem-catalog . --tag v3-staging
 
+  # Changed built versions are rebuilt even when their archives exist.
   archives:
-    needs: stage
+    needs: [changes, stage]
     uses: ./.github/workflows/build-archives.yml
     with:
       catalog: ghcr.io/vi-dev/nem-catalog:v3-staging
-      missing: true
+      packages: ${{ needs.changes.outputs.build }}
+      force: true
       push: true
 
   smoke:
