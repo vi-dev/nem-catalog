@@ -7,7 +7,7 @@ license: Apache-2.0
 versionDiscovery:
   github:
     repo: superfly/flyctl
-    filter: '^v\d+\.\d+\.\d+$'
+    filter: '^v0\.\d+\.\d+$'
     prefix: "v"
 
 artifact:

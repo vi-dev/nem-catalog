@@ -7,7 +7,7 @@ license: MIT
 versionDiscovery:
   github:
     repo: visioncortex/vtracer
-    filter: '^\d+\.\d+\.\d+$'
+    filter: '^(0\.6\.[0-4]|[1-9]\d*\.\d+\.\d+)$'
 
 artifact:
   url: "https://github.com/visioncortex/vtracer/releases/download/{{.Version}}/vtracer-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-musl\"}}.tar.gz"

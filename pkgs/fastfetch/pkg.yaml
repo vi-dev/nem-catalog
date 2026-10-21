@@ -10,7 +10,7 @@ versionDiscovery:
     filter: '^\d+\.\d+\.\d+$'
 
 artifact:
-  url: "https://github.com/fastfetch-cli/fastfetch/releases/download/{{.Version}}/fastfetch-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"arm64\" \"aarch64\"}}.tar.gz"
+  url: "https://github.com/fastfetch-cli/fastfetch/releases/download/{{.Version}}/fastfetch-{{if eq .OS \"darwin\"}}macos-universal{{else}}linux-{{replace .Arch \"arm64\" \"aarch64\"}}{{end}}.tar.gz"
 
 install:
   - extract: {strip: 1}
@@ -19,6 +19,12 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 2.70.0
+    sha256:
+      darwin/arm64: "8e3e2f3583a5b43ea20c451edfe0dac7172835c5b7de97a96347168f31106558"
+      darwin/amd64: "8e3e2f3583a5b43ea20c451edfe0dac7172835c5b7de97a96347168f31106558"
+      linux/arm64: "fff4a127e4d76242e3bdac2a12430fc252fd6086d3eb30aee0382c3b0fece478"
+      linux/amd64: "945b941b2a85e8de88b4c89714ad18ee6a7a129bb3c544bb448e9e0e027c226a"
   - version: 2.69.0
     sha256:
       darwin/arm64: "3901a90b11f1823a00fea6f3c3c877e7f336465e9d9facc98fd6b8803e8fac7e"

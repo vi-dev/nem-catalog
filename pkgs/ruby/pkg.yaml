@@ -28,7 +28,7 @@ bins: [bin]
 versionDiscovery:
   http:
     url: https://cache.ruby-lang.org/pub/ruby/index.txt
-    filter: 'ruby-(\d+\.\d+\.\d+)\.tar\.gz'
+    filter: 'ruby-(3\.\d+\.\d+)\.tar\.gz'
 
 artifact:
   oci: ":{{.Version}}"
@@ -59,10 +59,8 @@ build:
     - name: libffi
       kind: link
       compat: "3"
-  # The directory pins the minor series; bumping to a new series 404s at
-  # hash time until it is updated.
   source:
-    url: 'https://cache.ruby-lang.org/pub/ruby/3.4/ruby-{{.Version}}.tar.gz'
+    url: 'https://cache.ruby-lang.org/pub/ruby/{{versionMajorMinor .Version}}/ruby-{{.Version}}.tar.gz'
   output: out
   steps:
     - run: |

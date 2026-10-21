@@ -1,0 +1,13 @@
+platforms: [darwin/amd64, linux/arm64, linux/amd64]
+
+artifact:
+  url: "https://github.com/bridgecrewio/checkov/releases/download/{{.Version}}/checkov_{{.OS}}_{{replace .Arch \"amd64\" \"X86_64\"}}.zip"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "checkov", dst: "bin/checkov", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: checkov --version | grep -q "$NEM_VERSION"

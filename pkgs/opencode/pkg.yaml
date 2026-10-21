@@ -7,7 +7,7 @@ license: MIT
 versionDiscovery:
   github:
     repo: anomalyco/opencode
-    filter: '^v\d+\.\d+\.\d+$'
+    filter: '^v1\.\d+\.\d+$'
     prefix: "v"
 
 # Upstream ships darwin as zip and linux as tar.gz, hence the extension switch.

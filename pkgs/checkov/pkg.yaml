@@ -4,7 +4,7 @@ description: Static analysis for infrastructure as code
 homepage: https://www.checkov.io
 license: Apache-2.0
 
-platforms: [darwin/amd64, linux/arm64, linux/amd64]
+platforms: [darwin/amd64, linux/amd64]
 
 versionDiscovery:
   github:
@@ -21,6 +21,38 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 3.3.30
+    sha256:
+      darwin/amd64: "22844857d63d9e1ab1f649ae5c807d1b5f0570eab87ac26a35637ba647590807"
+      linux/amd64: "c797cca544ce6cfc64b3edff2efa6e53982c0d540b6fdcf851f7fcc9bf040e7a"
+  - version: 3.3.29
+    sha256:
+      darwin/amd64: "e1575a31dadd0b40a9845a8174a9d77293802b55c71957e8789f7b78368a688a"
+      linux/amd64: "0d5a1b91abcbca2829ed760a4b7977fab4c88882a65b511423c7ee6b1b10a840"
+  - version: 3.3.28
+    sha256:
+      darwin/amd64: "2f5f1a68c1b1860a8239fbf8ab6f3cf03d49fc825909dab3cbcf01c9455a4268"
+      linux/amd64: "9b030e1e46f41796fc39fc7fb30933df5f032bd9446c32b416eaee005ff3a011"
+  - version: 3.3.27
+    sha256:
+      darwin/amd64: "afe7d020db376f3a36364bf28f569708b262c7cfb730bd98188017d46eccb81f"
+      linux/amd64: "fbd3ee0bd93020844cb6e661bae8f06d3ef3aa19806dec45305a30fa774207c5"
+  - version: 3.3.26
+    sha256:
+      darwin/amd64: "45af3ea04a0f200953e5b7e005cd2670ac107ee5b53ef1be7cf883cd07bbf3c7"
+      linux/amd64: "f9112c5c30ff1efdd6a386bccdfe74f3b69e6c97921596b16b109e9dc530a5b7"
+  - version: 3.3.25
+    sha256:
+      darwin/amd64: "9f4d03781fff7b239cc901b28147dd838af3fa512773d6bdc2d57b148b2ff937"
+      linux/amd64: "d76cd26e0eb642be12f60751ee627be3bab6c81e7add30dee018a03c0c1941e2"
+  - version: 3.3.23
+    sha256:
+      darwin/amd64: "346fee073a88a558e8718e5edd5c525e6325548e3be2fa6a9cab4722d3d764aa"
+      linux/amd64: "83bbef1a9e30a93ab3fc38822b28a7883fb787df219607a66c7f10e5cd807089"
+  - version: 3.3.21
+    sha256:
+      darwin/amd64: "26a1850bd56628242a3857b4684478848b6aedbe6727be66000ebaee9424c77d"
+      linux/amd64: "2c786f829b8389c34974e48bae7787b9b34ded4dcd7d916389720805722907c1"
   - version: 3.3.20
     sha256:
       darwin/amd64: "31c907f5b6f5713804cd4f380b14bb13b6f0e7cda5f1c655fccbd78422e8ea8a"

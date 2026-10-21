@@ -10,7 +10,7 @@ versionDiscovery:
     filter: '^\d+\.\d+\.\d+$'
 
 artifact:
-  url: "https://github.com/Wilfred/difftastic/releases/download/{{.Version}}/difft-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+  url: "https://github.com/Wilfred/difftastic/releases/download/{{.Version}}/difft-{{.Version}}-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
 
 install:
   - extract: {strip: 0}
@@ -19,6 +19,12 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 0.71.0
+    sha256:
+      darwin/arm64: "92acf8890543b6d6f436a87a7a5ec64f82a4b8dbe3a7e564c1e5cbfe60823bc7"
+      darwin/amd64: "390b5299b0bc5059b5617f448eb1f3cb42c689933258fc57770c24d257a5d8a8"
+      linux/arm64: "5f046098b36ff985d0f99fec6f22cf74961db60386ff9d40df39fd99660aae2c"
+      linux/amd64: "61aea5394a53c56f144637cf39b3a0c0dafa27769731745e5851ff276e6478da"
   - version: 0.70.0
     sha256:
       darwin/arm64: "1921267221fcb5779d30c4dcc0b3b4620abbe851ffd5596a4715576581518f51"

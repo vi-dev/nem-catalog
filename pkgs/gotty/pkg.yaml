@@ -7,7 +7,7 @@ license: MIT
 versionDiscovery:
   github:
     repo: sorenisanerd/gotty
-    filter: '^v\d+\.\d+\.\d+$'
+    filter: '^v1\.\d+\.\d+$'
     prefix: "v"
 
 artifact:

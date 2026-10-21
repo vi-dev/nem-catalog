@@ -1,0 +1,11 @@
+artifact:
+  url: "https://github.com/Wilfred/difftastic/releases/download/{{.Version}}/difft-{{replace (replace .Arch \"arm64\" \"aarch64\") \"amd64\" \"x86_64\"}}-{{replace (replace .OS \"darwin\" \"apple-darwin\") \"linux\" \"unknown-linux-gnu\"}}.tar.gz"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "difft", dst: "bin/difft", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: difft --version | grep -q "$NEM_VERSION"

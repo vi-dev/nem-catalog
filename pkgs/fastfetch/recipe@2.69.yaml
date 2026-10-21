@@ -1,0 +1,11 @@
+artifact:
+  url: "https://github.com/fastfetch-cli/fastfetch/releases/download/{{.Version}}/fastfetch-{{replace .OS \"darwin\" \"macos\"}}-{{replace .Arch \"arm64\" \"aarch64\"}}.tar.gz"
+
+install:
+  - extract: {strip: 1}
+  - copy: {src: "usr/bin/fastfetch", dst: "bin/fastfetch", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: fastfetch --version | grep -q "$NEM_VERSION"

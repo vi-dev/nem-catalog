@@ -7,7 +7,7 @@ license: MIT
 versionDiscovery:
   github:
     repo: pvolok/mprocs
-    filter: '^v\d+\.\d+\.\d+$'
+    filter: '^v0\.\d\.\d+$'
     prefix: "v"
 
 artifact:
