@@ -23,6 +23,12 @@ test:
   - run: sqruff --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.42.0
+    sha256:
+      darwin/arm64: "632175647f05fb6a3b48cd10262a4baf5180aa0479848bea2b0a8556ff2cc300"
+      darwin/amd64: "14be6664a910a045a1191db6052db302394cea60fe83b23575539d9af237eba6"
+      linux/arm64: "2eafdc2b29c35df745a21d95b321405cad9a2bdd1f24d1b968c619f28394f1f2"
+      linux/amd64: "0f3bef6aea7938e9c26777fb1ee4649755170f602fa3b89f84edbbf861589426"
   - version: 0.41.0
     sha256:
       darwin/arm64: "f131fc986360a098807cb385c269e102e25f3143ad0855f3c0e4a68c79e11535"

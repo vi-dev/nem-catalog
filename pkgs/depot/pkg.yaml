@@ -23,6 +23,18 @@ test:
   - run: depot version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.102.25
+    sha256:
+      darwin/arm64: "565561335ef52b18bf6e465657ca911a216325f9ad531ba9cfab336c2e757de4"
+      darwin/amd64: "d3912e4374450a24c0624bca1bbfa8c5f70c59e417b566a46a57a1840678ccfb"
+      linux/arm64: "52abe04ef24cd06f2ed37e15dbaa1d52d282db26ead04ff2493faf181347d6eb"
+      linux/amd64: "b62952f5951a0bcd4f48597b59fe29a4b7d84cac4e82710ee19d79262bf271af"
+  - version: 2.102.24
+    sha256:
+      darwin/arm64: "ce03c78366fd48544e8e576e143048f62c612826cea35ab4d31c3e154273d5ae"
+      darwin/amd64: "9d72d3cf74887ee59fa3491fe45c28a7cf0c25b8899e71489f19c045eaf17f0f"
+      linux/arm64: "a1e35f977a6d9b196d4487edfc4a3dc133bd7251dba9402facaa4dfb9cc36030"
+      linux/amd64: "ad7601c20ea08b25cc4c9b2b869ae613dc0417ef1d9de03f8f82ab94a4ec7df5"
   - version: 2.102.23
     sha256:
       darwin/arm64: "e7bf7b5c82993c9e0bac0c8bf6070e0bc33746ce96815399bac82ade12e9ce59"

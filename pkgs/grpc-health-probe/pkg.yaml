@@ -22,6 +22,12 @@ test:
   - run: grpc_health_probe -version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.4.60
+    sha256:
+      darwin/arm64: "3254f95fc16b5a83c4eadd41ce89cd1a83c8ab6daff3c2820366360be3afd3fa"
+      darwin/amd64: "aa404da955d73fd1207a13b559baceedc93af6f07a626fa9d0f273052a26ae95"
+      linux/arm64: "e749fe05e917c4eaa31d35a88aa5db1cd4c2dd729220d7649b3ede0846492bee"
+      linux/amd64: "faf2e85b5f71c9bee54bdcd8ac84c73dc052d3a1e2dcb78349e3a587a9935680"
   - version: 0.4.59
     sha256:
       darwin/arm64: "ea01b2aebaeb888d460649072ebff6528f19d3bdecf5a92d74ea39b86371be58"

@@ -23,6 +23,12 @@ env:
     value: "{{.InstallDir}}"
 
 versions:
+  - version: 1.27.3
+    sha256:
+      darwin/arm64: "dd3908cf20959d798c1e06ebe5b72213f0505ce01373b40ce3110975a6cd99c2"
+      darwin/amd64: "b6f8e931e4ab497fcde6da8ae4499a58f9d258e55c8a80824a516eae5950a750"
+      linux/arm64: "a06e99309dbcbdca1a8ccd2282c3ee146e55930886e26b4f1193269587165f49"
+      linux/amd64: "65efbc80fdc1fa2cd2631cad5b481777a68e8725f34e89f50fc6ac714e379b40"
   - version: 1.27.2
     sha256:
       darwin/arm64: "76812b213b1b2302c978d28fa52fa92d541704b9e7d9d5db8002c50e4018c4c5"

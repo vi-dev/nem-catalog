@@ -23,6 +23,24 @@ test:
   - run: railway --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 5.71.0
+    sha256:
+      darwin/arm64: "350748f2edf41f46b22c5d66cea4294d660e764804e252ddba08a27b19cd0bd1"
+      darwin/amd64: "1b41dd77292657c80ae3dfccbe7653bbb40b7cdc95a8f4b06c2c1f0c2a009919"
+      linux/arm64: "d160ad2a029eaac4b4c85012adb67c1f5709ba81f7320edb5a27be928211d638"
+      linux/amd64: "2e682fd2ddf8d6fdf9e46d9d99d99646ff0022a6abb0c2bca93011348a269fb9"
+  - version: 5.70.0
+    sha256:
+      darwin/arm64: "d1a862595a4021a2463fa4f8a699c5b378514cafa2bb7674ffb7ae5a791cc78d"
+      darwin/amd64: "5a75c7b0cd5cccbcd95c050335a8badb129f8a3a37896065adf8178f4d35f4ee"
+      linux/arm64: "b13f1945844ebdefd26e79d7bdf22ca4a70c8a95bdeba05f04afa5808c5cc076"
+      linux/amd64: "f518230646acc7a6a7a67365e7642618f659d5d8cdd7cf8c180336140d0504eb"
+  - version: 5.69.0
+    sha256:
+      darwin/arm64: "4376c4989259a7c665b119118d52dc37b3508afcff044cb22ba80c8239b9696c"
+      darwin/amd64: "598dc90f74695af2543fd903d4056af95f199431a5c46801b86df4bbe0e9fb05"
+      linux/arm64: "6fce6fca318beb81c712998087667374877283428ced9c133f031b821d774589"
+      linux/amd64: "1bd0612e743adf69b13bee7a6e49dd9bf2f0efb5f97b90f90d1b15b122a840e5"
   - version: 5.68.0
     sha256:
       darwin/arm64: "b16d92cd322518cacc85da426f96f032496e1a09371e9091e9cf8e1bbc54aa4b"

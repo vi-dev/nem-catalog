@@ -26,6 +26,12 @@ install:
 bins: ["rustc/bin", "cargo/bin"]
 
 versions:
+  - version: 1.99.1
+    sha256:
+      darwin/arm64: "b73b6a78c4e7171a8fe1b4bee5342273605c5c9a9a4997554c15bb3ce2753b6a"
+      darwin/amd64: "ca9900354aeaa5d31c47ce8e07ac90e9fb7377b39ca10e3981a85d6008679522"
+      linux/arm64: "703b190f0d723ae68985797f3bb5f62f01b1723f138464c6f30f32b766eb0abf"
+      linux/amd64: "aded4e6c1d580415e7b594a3080d8e23e9cbe06f159f97e300aa6875211f71bf"
   - version: 1.99.0
     sha256:
       darwin/arm64: "f35e7c5b2cf63e67c075d323e4d6b87501219311f09744ab24caecb761c96643"

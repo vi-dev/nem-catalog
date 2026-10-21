@@ -23,6 +23,18 @@ test:
   - run: vacuum version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.33.2
+    sha256:
+      darwin/arm64: "2638ce8f8a9e4d6ad565e6262f9d94942d05a8e63b4cffc5f3ac55f9ed59c8f7"
+      darwin/amd64: "dff936037f92af555239e767901ecdc2d52689c86f633e363aeab9dc70c4f6b0"
+      linux/arm64: "03ebd836193530d2b153964fa208ac69587105ca065e33f9fbd89b2bedf06f23"
+      linux/amd64: "f6986baeb4d50365fb620f68b2a450e54fc1c9c2d48b7524d330bf9476c29bf9"
+  - version: 0.33.1
+    sha256:
+      darwin/arm64: "b349eea5d2078821398642db80942d42f3d9a2bbfe0b87dfcb6f6cfcffc71439"
+      darwin/amd64: "071ae2fd060d7985ecf85cacee70bd3ad6ed1f28da1c1f9d9174d8c7830089ce"
+      linux/arm64: "79ee040106d7e777c3a2dc2e48333f1e09ad9b57e4f9ced98f6b1c6cd9e01cd3"
+      linux/amd64: "3e4c7c96baa2716ee26a8aa34c92dd8ff5fee7e57d045c7e884b0f546cd918b6"
   - version: 0.33.0
     sha256:
       darwin/arm64: "de5410bfc557fd9f81a2a3bb6588674d350ba274ed2ddcc3b4ecd3e77968d63b"

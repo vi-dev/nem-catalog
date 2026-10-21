@@ -36,6 +36,12 @@ test:
   - run: initdb --version | grep -q "${NEM_VERSION%.*}"
 
 versions:
+  - version: 18.6.1
+    sha256:
+      darwin/arm64: "89e91cc80650a43d22c018b95ca356a0c9e15838a1182fed2880bfb5d7d9c9a6"
+      darwin/amd64: "4229812543e19c91864ebdf5d8f78883c5816d51d4cc5d065298260c1f64d37e"
+      linux/arm64: "1ab47fa2f06ff70454309ad02e5d89c46488300d43977231481fd6b160b9d556"
+      linux/amd64: "e84b02dd8d0ce5879fb697330a789231c8b8f8d958dae3ad4d90fecc710b1315"
   - version: 18.6.0
     sha256:
       darwin/arm64: "a257bcdb8aa3301a13d6a5bcec48f8c9517045b7cbae71e50788b2615539e95b"

@@ -23,6 +23,12 @@ test:
   - run: redis_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.94.0
+    sha256:
+      darwin/arm64: "f7c78c61a0678b376bbae45812175e424a6df58b0742196c766ca87720229d13"
+      darwin/amd64: "a3113246a4709c644e0b58e77ed19084fe650810d8fdc9ddf4574a63666dbad1"
+      linux/arm64: "a0b6bd03f1d3fbbb60d74690d7553cf8ef0614d2e1a457d81fa5f72d63d2de21"
+      linux/amd64: "eaf433a64e6418235b25d4ec815d64759898f314d64dbb1fb074ca354f81b18b"
   - version: 1.93.0
     sha256:
       darwin/arm64: "c942054d0c0e45435fdfed9991e9067e2d21139adee70dc924581914d376a4de"

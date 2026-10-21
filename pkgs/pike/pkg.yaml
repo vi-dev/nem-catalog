@@ -23,6 +23,12 @@ test:
   - run: pike version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.0.13
+    sha256:
+      darwin/arm64: "aad2092fa297bc928e7511c9f134c75ead54ab512ed0cba930e72c6983214eb6"
+      darwin/amd64: "6b138f2e653039a2a7f945d7621f6d574209df1a51717b4699d79bc0638c5a4e"
+      linux/arm64: "cbf3f2e417c94fd1147844af76d3b83ddedd13b4317dad7b76aea9e9d971d43d"
+      linux/amd64: "bb6c34a31cd6a51453f3d8cf50ab1afa968428cb2be551b863fe74b7c241849f"
   - version: 1.0.12
     sha256:
       darwin/arm64: "abc83527222e897866678f98e1d8b2f95749ff4023a64d940cfa984a4fda30c8"

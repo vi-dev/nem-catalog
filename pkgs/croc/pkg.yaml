@@ -20,6 +20,12 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 11.5.5
+    sha256:
+      darwin/arm64: "44dce75f98e29cbcb1f4239e1e493ef337c8013a7be48517eb21eced771bffaa"
+      darwin/amd64: "7a008d61dd7f7da02b42344057ba46ad810be7252f33b2fafebec8f48060c4ec"
+      linux/arm64: "c8606c6b4450e4a50b3ef25bd486ed4f9fa4a1ac6e2ecefb2bcbdbbfce1a51a9"
+      linux/amd64: "2dee9b7ede849971532c597ef3fd29507bfc970330758cfed13657be04f34243"
   - version: 11.5.4
     sha256:
       darwin/arm64: "ec43d98b4e9e753ad93638abd0811769cc27d3dae5595d35af5f979ad2fa27e1"

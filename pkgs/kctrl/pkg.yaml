@@ -22,6 +22,12 @@ test:
   - run: kctrl version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.60.10
+    sha256:
+      darwin/arm64: "75ce9d3e49212062e9d9740e719d7b0235242cf7fdc1ea3c207b29f95de38e3f"
+      darwin/amd64: "fc2b9af6b517730a3e910f31481459017f341de67e6f736867a4e2ab3d3996ad"
+      linux/arm64: "aca7b5dda05d00027afcf1a0192772f52e68efc71c0392904968b0d4f398a39d"
+      linux/amd64: "f397167dbc4be71267e1f70aaf362ce69739c69aa237c010abb132b3630628a5"
   - version: 0.60.9
     sha256:
       darwin/arm64: "37086f4721b175dc6f53f6a9fff908bce1ad50e2683a4f7f9fb8928a16ade0ed"

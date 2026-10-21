@@ -24,6 +24,18 @@ test:
   - run: kafka-topics.sh --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 4.4.0
+    sha256:
+      darwin/arm64: "5d46df16e8dbd228fed83c3e6fc4306916cf3d9156184a7fc2462e9ad9711a7d"
+      darwin/amd64: "5d46df16e8dbd228fed83c3e6fc4306916cf3d9156184a7fc2462e9ad9711a7d"
+      linux/arm64: "5d46df16e8dbd228fed83c3e6fc4306916cf3d9156184a7fc2462e9ad9711a7d"
+      linux/amd64: "5d46df16e8dbd228fed83c3e6fc4306916cf3d9156184a7fc2462e9ad9711a7d"
+  - version: 4.3.2
+    sha256:
+      darwin/arm64: "023a48609152d9ca621709448e2db71ca080b96258447a7d39d2798c262a8526"
+      darwin/amd64: "023a48609152d9ca621709448e2db71ca080b96258447a7d39d2798c262a8526"
+      linux/arm64: "023a48609152d9ca621709448e2db71ca080b96258447a7d39d2798c262a8526"
+      linux/amd64: "023a48609152d9ca621709448e2db71ca080b96258447a7d39d2798c262a8526"
   - version: 4.3.1
     sha256:
       darwin/arm64: "f118328b2d053497350d5befd82c08db7ffd710327ff52943dd5caaa1b25db21"

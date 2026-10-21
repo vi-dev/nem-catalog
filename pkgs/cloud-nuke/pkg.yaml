@@ -22,6 +22,12 @@ test:
   - run: cloud-nuke --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.53.0
+    sha256:
+      darwin/arm64: "dd0a280f672923f0ce9f2728e0170efe1bd25af64dfe00eee360b6de5d65c874"
+      darwin/amd64: "606bb563c22620dc71d12c146b9f7662e5f39e0400ec50a178642e956740053c"
+      linux/arm64: "61a501cae139284474b9b31ffe6a102c8eedd7a9596322b1b1ddc9dc2a5589b2"
+      linux/amd64: "7e47ec383855eb3e0111335d9c73a7f09b942e4f78fcf3c3e297cf375272dbf0"
   - version: 0.52.0
     sha256:
       darwin/arm64: "366d209ce427d25342542f4304bc1eb6987daa6561823e761336bc9edfdb710d"

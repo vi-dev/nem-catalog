@@ -25,6 +25,12 @@ test:
   - run: gitsign --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.18.0
+    sha256:
+      darwin/arm64: "32db71436dcfcba055517165ac6dfaa8aacbc73c405405259149df4a188ff7b1"
+      darwin/amd64: "224253f24e98cd024741c80d8ba7a42a9ce11710ba94b6e88084e7a987406540"
+      linux/arm64: "dec27cbc6602c62542f738312082d481254c743ff91055ecc394cf3a60be1c01"
+      linux/amd64: "2bc625472a08fea3bb6a57982c7d8b4978d1032251d305ceef3bf2ded0ca4483"
   - version: 0.17.1
     sha256:
       darwin/arm64: "4994e9629aae6a3fea9c0f770f279b273bad3e86ac8ebd3e9dc90f317428589d"

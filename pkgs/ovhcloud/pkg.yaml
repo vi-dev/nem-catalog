@@ -23,6 +23,12 @@ test:
   - run: ovhcloud version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.16.0
+    sha256:
+      darwin/arm64: "79437d459e25e2594b47c976f765e3abc51668e1dd809d08eaac448c6ca075a0"
+      darwin/amd64: "36363eb9dfe95ee403ad4645b831c7d48e8dd288d45c642afd9c22707d84ffb0"
+      linux/arm64: "6ad093b46729269dca35a85a0df864557891add5c98a099ad1631980fe0aa1be"
+      linux/amd64: "527fb1c9bde0680837601e08bc064783b57eb301ab5a81fb9c1fc17f466f2898"
   - version: 0.15.0
     sha256:
       darwin/arm64: "26b78ca0045dd21db040b2991d8a301bafcb898454ea80b5285a04e184132142"
