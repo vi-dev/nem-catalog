@@ -64,7 +64,7 @@ jobs:
       packages: ${{ join(fromJSON(needs.changes.outputs.build), ' ') }}
       push: false
       prune: true
-      official: ghcr.io/vi-dev/nem-catalog:v3
+      official: ghcr.io/vi-dev/nem-catalog:v4
 
   prebuilt:
     needs: changes
@@ -74,7 +74,7 @@ jobs:
       catalog: "."
       entries: ${{ needs.changes.outputs.prebuilt }}
       prune: true
-      official: ghcr.io/vi-dev/nem-catalog:v3
+      official: ghcr.io/vi-dev/nem-catalog:v4
       timeout-minutes: 60
 
   ci-ok:

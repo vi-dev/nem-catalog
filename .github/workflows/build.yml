@@ -25,7 +25,7 @@ jobs:
   archives:
     uses: ./.github/workflows/build-archives.yml
     with:
-      catalog: ghcr.io/vi-dev/nem-catalog:v3
+      catalog: ghcr.io/vi-dev/nem-catalog:v4
       missing: ${{ inputs.package == '' }}
       packages: ${{ inputs.package }}
       push: true

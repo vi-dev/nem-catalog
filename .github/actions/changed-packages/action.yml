@@ -3,7 +3,7 @@ description: Classify packages whose manifests differ from the published catalog
 inputs:
   catalog-ref:
     description: Published catalog ref the working tree is diffed against (the diff target)
-    default: ghcr.io/vi-dev/nem-catalog:v3
+    default: ghcr.io/vi-dev/nem-catalog:v4
 outputs:
   build:
     description: JSON array of name@version strings for packages built from source, one per version to act on
