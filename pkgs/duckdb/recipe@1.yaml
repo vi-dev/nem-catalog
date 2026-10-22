@@ -1,0 +1,11 @@
+artifact:
+  url: "https://github.com/duckdb/duckdb/releases/download/v{{.Version}}/duckdb_cli-{{replace .OS \"darwin\" \"osx\"}}-{{.Arch}}.zip"
+
+install:
+  - extract: {strip: 0}
+  - copy: {src: "duckdb", dst: "bin/duckdb", mode: 0o755}
+
+bins: ["bin"]
+
+test:
+  - run: duckdb --version | grep -q "$NEM_VERSION"

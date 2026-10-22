@@ -11,7 +11,7 @@ versionDiscovery:
     prefix: "v"
 
 artifact:
-  url: "https://github.com/duckdb/duckdb/releases/download/v{{.Version}}/duckdb_cli-{{replace .OS \"darwin\" \"osx\"}}-{{.Arch}}.zip"
+  url: "https://github.com/duckdb/duckdb/releases/download/v{{.Version}}/duckdb-cli-{{replace .OS \"darwin\" \"osx\"}}-{{.Arch}}.tar.gz"
 
 install:
   - extract: {strip: 0}
@@ -20,6 +20,12 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 2.0.0
+    sha256:
+      darwin/arm64: "188a36fe8883ef52e69165a0cbb6031ef679c8e6c448a1ce22951964149b7f96"
+      darwin/amd64: "fbc7013ba09d117396dabf16783281c2add47fc01cdac4855464a03526dc96ee"
+      linux/arm64: "859e1875d2a9515fbb4bf8871061437a14af82320da68c753f094c4b776348fe"
+      linux/amd64: "c6507206baf7793c6013dbd82368469a45f20dc0e17a6f92f204602f652ed2bc"
   - version: 1.5.6
     sha256:
       darwin/arm64: "8e0f6825653f8d057922e6147db920bebf072cb41f4b041fd35521c18d7d126e"
