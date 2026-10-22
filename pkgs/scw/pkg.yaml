@@ -22,6 +22,12 @@ test:
   - run: scw version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.65.2
+    sha256:
+      darwin/arm64: "17b756a7a02659e4db49b27e92d0039776a124f79587ee3366fda83c2d2e3e0b"
+      darwin/amd64: "90dc1d10c622cbd6b8dc42490fd2b1f7803e1ea2201952b466e39730fa394c47"
+      linux/arm64: "28f2115b7fce9d23f5726dc38566c7c973f579804be78a46f908c1a57da71893"
+      linux/amd64: "184e697e6ab8a8e825be1c5cf61d104341abe3598bb0e20b7a54618cb05231b3"
   - version: 2.65.1
     sha256:
       darwin/arm64: "55db3c479ba97ce4642ba10ebd52ffba9069ffddd7f2281575bcfb4da00d7929"

@@ -23,6 +23,12 @@ test:
   - run: azcopy --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 10.34.1
+    sha256:
+      darwin/arm64: "44f5e72f663215f838c6ccedf6da9f0fbc9ee7215610bf88b92b1bfa931e5524"
+      darwin/amd64: "ce08c90e377d64602dcbd68ce68400a732f3fd2913dd7334fb8742a514963ab9"
+      linux/arm64: "2a91849116c7c2b7497fbed2c6af63d625119110bc758a8798310f5fc7176cea"
+      linux/amd64: "a0021809e53f2b40705509626b8d44f2312fa8ef39deeb941fcffd35012bf6d1"
   - version: 10.34.0
     sha256:
       darwin/arm64: "f479825bf43acb9d07c66dfabd1ddac7492322642c9bf7bda2a76ae854be754f"

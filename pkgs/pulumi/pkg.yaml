@@ -20,6 +20,12 @@ install:
 bins: ["pulumi"]
 
 versions:
+  - version: 3.271.0
+    sha256:
+      darwin/arm64: "d855d3d9016ef616695c35964c967f28493272f8acbaeff2e856c8484c4b8f15"
+      darwin/amd64: "0dcc11080718b71ebd7bcae3f3f22752d887a275532e4f1f13fcd9ba72e15eb7"
+      linux/arm64: "d8889833c6cfd8e1393e765f85891fd93af47651c1db08c54a11750b5c11df1c"
+      linux/amd64: "48b92e1584cf10649e43add7b4750e8be71231976f0cf25c94148a7ed254a01f"
   - version: 3.270.0
     sha256:
       darwin/arm64: "688a9f4c5bb685cbd40b83e45c282715cb537ff2a5be97ffb6367ed6f6c26b34"

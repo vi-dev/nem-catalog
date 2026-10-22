@@ -24,6 +24,11 @@ test:
   - run: release-plz --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.3.174
+    sha256:
+      darwin/arm64: "415494b8540935e4b38f815bd4c3640092313b101323398d641e91b1f7489d80"
+      linux/arm64: "ab1a5a36d93cc4abedd9474381300a709ea06cd915c88c67c187118dbd9475d1"
+      linux/amd64: "8240e953608d40e709d042e9ac0e206d518825de3d88a3da9ebeaf2a3ff57ea9"
   - version: 0.3.173
     sha256:
       darwin/arm64: "8d62c91eb7afd0cdb30729dbbf5129d0f078d80299dca89d7147709479ab67b1"

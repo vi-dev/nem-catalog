@@ -23,6 +23,12 @@ test:
   - run: pinact --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 5.0.1
+    sha256:
+      darwin/arm64: "58390ac843b7a14414df79762e2f64051158d00549762b1c49ded3d2f1746007"
+      darwin/amd64: "a8eb8dd4daecb7eefa660e1920ff65302714173be9c2f335a0ae77f053fd975a"
+      linux/arm64: "fc1432004f378ae51d549a356195b4d2e3ee05935dbd20e3bbca66db1cdf6590"
+      linux/amd64: "12500c0fff5db94a0155e2e76ed959d1dc0e899056ee168d8fb7b4840e7c04f0"
   - version: 5.0.0
     sha256:
       darwin/arm64: "3437ebfc9db720e431e86fd03ed19173b88dcb80b0f177d11a892126108661b5"

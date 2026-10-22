@@ -23,6 +23,18 @@ test:
   - run: qovery version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.175.1
+    sha256:
+      darwin/arm64: "d995245df476621feb3eab538c04a7a9fb5da952cdcfa1d8b99639e4b870d5da"
+      darwin/amd64: "97a723298a075a6ea948bbc3d037f9fba300f78b30dd5ff4443691bda2216c6b"
+      linux/arm64: "8c01dcef5bb2ac0f589defc6cef4c9eefa6e8a6688d7b5fb3c85dfdda25ef0f2"
+      linux/amd64: "b4c03408d487be1563ae363ee1730d335c2f6b67c17b4af091476810590a8758"
+  - version: 1.175.0
+    sha256:
+      darwin/arm64: "8c4adb0d40f1faa4fdebb5709dfd3b0df142a64a619126582c32fc762bdfb80c"
+      darwin/amd64: "98cd5ea062fa048caf593e4e6bcdd420b0690ac6560f8931b9976e497d686f6d"
+      linux/arm64: "8e045275c3587a7b2f660facd740262538ffd7692b9d06cd307051e7ef39ca64"
+      linux/amd64: "2a92021f6bb4cbab5063bf1b1ba7f634a59780164d7e330a80cf87449ce8752b"
   - version: 1.174.1
     sha256:
       darwin/arm64: "8d67062ad0930d7d8392dff1638feff13d329f1be664d6df45b6def943bc8511"

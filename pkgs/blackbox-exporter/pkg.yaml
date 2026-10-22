@@ -23,6 +23,12 @@ test:
   - run: blackbox_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.29.1
+    sha256:
+      darwin/arm64: "c47f7e5cd01fe105daab389a743b11b059bf5624ffeefa77b722586bbb0f30ab"
+      darwin/amd64: "bcee83ca8d5fdf6d9d80eac9cc6bc959304fdc30f60e1c7415ca25f84e7650b5"
+      linux/arm64: "c597b0d442c02c0f2c8f691cbc7784216c786fada28f300c7b914e1f94523834"
+      linux/amd64: "b82b81839e6317e84fdd367f46d7ddd3b773fa09cbe2e3d5633a59171d741e76"
   - version: 0.29.0
     sha256:
       darwin/arm64: "5f4f1407f9f67a5c9a6df67803bb3a508df0a818fec885bf9790d141ac7e8c2e"

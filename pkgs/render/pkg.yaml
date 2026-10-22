@@ -23,6 +23,12 @@ test:
   - run: render --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.31.0
+    sha256:
+      darwin/arm64: "a3e68bc09243e43e4f80aca5da6e4553e71a52d2aef3fe29783ddcc48ac2cdc0"
+      darwin/amd64: "3bbfbc51bc395947f579cb4aa2ab47841dbad27f3faf50420aaf9cac754cf293"
+      linux/arm64: "9a82295b7fb8fc968fb5f8a44dbdb20ab3a47f1f7e8f12e7113fa4314e97dbc5"
+      linux/amd64: "1cbebf1c0e083fd4410df7096fd76205bd5d6e81c7893f2587b34f1cfe2cdf85"
   - version: 2.30.0
     sha256:
       darwin/arm64: "cd914e3dfda306d22b0dcf3e16f2c0ce741c64a2e76dfe1b0ae9fc54f65b49e9"

@@ -24,6 +24,12 @@ test:
   - run: hoverctl version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.12.16
+    sha256:
+      darwin/arm64: "d38f9a9a7ee8c0bd31133da1ec2e5ea0fee0f7becf0fb0db46bacd1118ee0fed"
+      darwin/amd64: "4a93916b71fb2addf630c17c175de57e7a845c4408e56c7038a475816451626d"
+      linux/arm64: "54e2ae6176175ea0466f4a84ce832ca0558c9ab89ab5e8f3fd341d1fac00d565"
+      linux/amd64: "ac56ac4405409435724dc84d359cacd23d36ed14ff047099d1e39b5917c00322"
   - version: 1.12.15
     sha256:
       darwin/arm64: "8adbc9d82acfc4ddeee8eb265c68821ec7bc49d468dca306921bbfbf2cb419f5"

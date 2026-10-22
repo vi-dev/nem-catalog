@@ -23,6 +23,12 @@ test:
   - run: azd version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.37.1
+    sha256:
+      darwin/arm64: "4d47fcbca07dbe1b69adb67023141d3fc755990f36ac54176abecacb49c55bbf"
+      darwin/amd64: "c3bdb8bffa48023b80c922aca57cb1c286dd557846e9913098ec3780ee89ed29"
+      linux/arm64: "ac603805c2888cf26b9d24afef493d32a814da276423b3faa5016b9ac81992b8"
+      linux/amd64: "be81c6012f1a8848c3194729eba90d23f2ce5e19604a78bc1a82ca82ec0794f4"
   - version: 1.37.0
     sha256:
       darwin/arm64: "f5e6904e01379b5e30abdab24f644523c26deee5afdf10ecf31f770176683063"

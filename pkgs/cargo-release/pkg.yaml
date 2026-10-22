@@ -23,6 +23,12 @@ test:
   - run: cargo-release release --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.1.7
+    sha256:
+      darwin/arm64: "39e1121c5e9671b0ff4703692b7ce2d9576c540118869091b7ad85a15187d129"
+      darwin/amd64: "9abd1bb84a581e982e4ae00a4c4413c14657b4cba8cd76b0eb003e00fe361a7a"
+      linux/arm64: "5fe8e87ad62dcb5e517f1504aa79b81022599b19b0cadb066af07d0996b0b90a"
+      linux/amd64: "9e04ae8b068f52788ce301cabaf34c4b3f0c945793d02c88442b561073f6bdb1"
   - version: 1.1.6
     sha256:
       darwin/arm64: "2f41e0d9f9538108f943f498af9f923cd6efd7e3ecdd69c7f78516bb29f32c53"

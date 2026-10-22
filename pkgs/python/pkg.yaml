@@ -18,6 +18,13 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 3.15.1
+    meta: {date: "20261021"}
+    sha256:
+      darwin/arm64: "7813c29e204fbe85f4c340f66a0c9c9282f1f6bdd09fb01b5cc618770a669f31"
+      darwin/amd64: "87d8b6d0f03edf41d24f636ee9891efa71b99512aca5a2f273da3d8d788523d2"
+      linux/arm64: "9e638f444786e6c310a31b0ba922c690f722af320025f3d3a9f74edcef246fc1"
+      linux/amd64: "67875a8b80b611c06f4829dcae7ffc3146422cf4dcbcd978f65feb9a81cdb710"
   - version: 3.15.0
     meta: {date: "20261013"}
     sha256:

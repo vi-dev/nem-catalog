@@ -26,6 +26,10 @@ test:
   - run: rqlited -version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 10.6.4
+    sha256:
+      linux/arm64: "760dd00175a85ff1e8834a03bd0d7b0d58395fd399dc20045ea94fd3bddebc7a"
+      linux/amd64: "a3669d12968f0d0c06f36311dc7313bf93688ff57651f735c3d138acb22cfce0"
   - version: 10.6.3
     sha256:
       linux/arm64: "2b419153ee084d744129db816b2630cc814f8d155250534c0ce94be9888041ba"

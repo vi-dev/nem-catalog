@@ -23,6 +23,12 @@ test:
   - run: prometheus-nats-exporter -version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.20.3
+    sha256:
+      darwin/arm64: "f4b309a6b423acf021e4613db5271bd9f187bc36ff45ae0d840bdb53c3da1d94"
+      darwin/amd64: "b9136cf3a649d6cffb81d027e25751cdf54831e6a959eb6460d169153a550d94"
+      linux/arm64: "7d82dc00a7eb1b14ea7f18ab917dcc350a45dda60ff3af877264aee7b721db58"
+      linux/amd64: "be2eab36ebc5f57fdd9ad1c61d4022f4fa436d6339336bea8d5b7587b879bb47"
   - version: 0.20.2
     sha256:
       darwin/arm64: "72cc5cb78f8d2d88d81ab544f1a491d770ae1c642c428a5e8fd6f72a3e5a9129"
