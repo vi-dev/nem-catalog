@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/vi-dev/nem-catalog/actions/workflows/publish.yml"><img src="https://github.com/vi-dev/nem-catalog/actions/workflows/publish.yml/badge.svg" alt="Publish"></a>
-  <a href="pkgs/"><img src="https://img.shields.io/github/directory-file-count/vi-dev/nem-catalog/pkgs?type=dir&label=packages&color=d8843a" alt="Packages"></a>
+  <a href="pkgs/"><img src="https://img.shields.io/github/directory-file-count/vi-dev/nem-catalog/pkgs?type=dir&label=packages&color=f59e0b" alt="Packages"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/vi-dev/nem-catalog?color=blue" alt="License: MIT"></a>
 </p>
 
