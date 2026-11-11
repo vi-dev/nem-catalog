@@ -28,6 +28,8 @@ versions:
     sourceSha256: "2812e9c06583fa24c8dc46bdb5291310a69196352ceaca8fbe98106ff36ae7d8"
 
 build:
+  deps:
+    - pkgconf
   source:
     url: 'https://github.com/ngtcp2/nghttp3/releases/download/v{{.Version}}/nghttp3-{{.Version}}.tar.gz'
   output: out

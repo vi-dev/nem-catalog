@@ -28,6 +28,8 @@ versions:
     sourceSha256: "aa317e2cf9dca6afa0aed68f8fad6ff303ec6982e25a78c75c0b65e2b9b3ded5"
 
 build:
+  deps:
+    - pkgconf
   source:
     url: 'https://github.com/nghttp2/nghttp2/releases/download/v{{.Version}}/nghttp2-{{.Version}}.tar.gz'
   output: out
