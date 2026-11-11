@@ -52,8 +52,8 @@ build:
         openssl_prefix=$(pkg-config --variable=prefix openssl)
         rpath_ldflags=$LDFLAGS
         unset CFLAGS CPPFLAGS LDFLAGS
-        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" BUILD_TLS=yes OPENSSL_PREFIX="$openssl_prefix" SERVER_LDFLAGS="$rpath_ldflags" GTEST_LIBS=unused
-        make install PREFIX="$NEM_OUTPUT" BUILD_TLS=yes OPENSSL_PREFIX="$openssl_prefix" SERVER_LDFLAGS="$rpath_ldflags" GTEST_LIBS=unused
+        make -j"$(sysctl -n hw.ncpu 2>/dev/null || nproc || echo 4)" BUILD_TLS=yes OPENSSL_PREFIX="$openssl_prefix" SERVER_CFLAGS=-Wno-error=deprecated-declarations SERVER_LDFLAGS="$rpath_ldflags" GTEST_LIBS=unused
+        make install PREFIX="$NEM_OUTPUT" BUILD_TLS=yes OPENSSL_PREFIX="$openssl_prefix" SERVER_CFLAGS=-Wno-error=deprecated-declarations SERVER_LDFLAGS="$rpath_ldflags" GTEST_LIBS=unused
 
 test:
   - run: valkey-cli --version | grep -q "$NEM_VERSION"
