@@ -23,6 +23,12 @@ test:
   - run: flowpipe --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.2.3
+    sha256:
+      darwin/arm64: "6a274a6338095866b972df854b925f8fca24fa9bc544b6da3d71fabbc82b9220"
+      darwin/amd64: "6e411870bf8076005c7a3645b5a18c0b8c6dec524b464910a94ee79493241711"
+      linux/arm64: "5c8752dde9f4bbafa16c983429536c26376c1897d341198c1007658ab33c76ab"
+      linux/amd64: "5c61fc7cee2eae4a41eac1f24f3008b17af6cf3d57a466228c8c3dbe88ce8480"
   - version: 1.2.2
     sha256:
       darwin/arm64: "1691ea438aabedac3e9e5a1c17e5e5fabd019468c24c0aa925808723c29d6bc7"

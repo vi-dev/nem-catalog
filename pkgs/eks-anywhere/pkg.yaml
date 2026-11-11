@@ -26,6 +26,12 @@ test:
   - run: eksctl anywhere version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.26.4
+    sha256:
+      darwin/arm64: "317a083fb3deefe7f784e7cb82694e8be3bd231b549561ba6b6201462cdaaffa"
+      darwin/amd64: "c0e15c77cd0fd670c303e2208542655cc581f38757cf99695c04025bf70eee6e"
+      linux/arm64: "b685b04a965f1cdfc2802b5226a70ed3b4511b328cdbbfce05af6393c9f69f12"
+      linux/amd64: "c7c1b008d4bafbef32f070698f8037600681340feb27ddfa388b059da0c9dfad"
   - version: 0.26.3
     sha256:
       darwin/arm64: "d859852bfa0f8b59e77c548ab2c7acb702ee050c94c75497eba3064dd432c745"

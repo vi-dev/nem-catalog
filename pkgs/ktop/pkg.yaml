@@ -23,6 +23,18 @@ test:
   - run: ktop --help | grep -q -- --all-namespaces
 
 versions:
+  - version: 0.6.1
+    sha256:
+      darwin/arm64: "bd586d71a765d20bab39e62a9629e5bc72c9508c221cc0be0af02b195a74c268"
+      darwin/amd64: "ce99d2982ddbf7979851e3167664943a8fa2cbeff46fed3c7ffccdf2ecd17987"
+      linux/arm64: "ccf8e79aa70a6b062ddde002169ae81cd35bb33ac60e6c519b8aa5f1add019a1"
+      linux/amd64: "354fa49fda7658027cd73e831e07a99da5c9fdc4a11d18eff06763d9ceac6fe0"
+  - version: 0.6.0
+    sha256:
+      darwin/arm64: "b8b001d256ecac27a8654b848a7e27f329278cd4f4b4d882c37b6c036c3cc40e"
+      darwin/amd64: "f553dcd9b86013359682d5c359961615a984092f54e927c1676866a407cbdd04"
+      linux/arm64: "7c919d6fdb4ec1061d027fcf937999ee55f4a1b4089ce4068e37582503744803"
+      linux/amd64: "15e4e696a2626fe7e90e69bba366b2b71d583d13576acd9a237d6f00f02128ea"
   - version: 0.5.3
     sha256:
       darwin/arm64: "fa8688b99974c55080d27abb1fb4a1796af5deb59c3c735d482720384c43f456"

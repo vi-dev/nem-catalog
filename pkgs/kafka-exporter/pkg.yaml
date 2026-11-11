@@ -23,6 +23,12 @@ test:
   - run: kafka_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.11.0
+    sha256:
+      darwin/arm64: "4c6856cb610a84400df2d64516b50ad187568c1399214d1e3dbf8d3b619a66ac"
+      darwin/amd64: "da70a5da19d08005b771ed09a6ce42cc854912b407606b8391b7b2146e17e9f1"
+      linux/arm64: "4f5f0341cd5345d863b3017eb9bc143f653c43a7b37cd2bc5a6a4b028ef61c45"
+      linux/amd64: "6a14dd10709d627d7be29a4b98fae8bb888761c7da54410e72bef8cdaf906e86"
   - version: 1.10.0
     sha256:
       darwin/arm64: "1b700284a5ef09ce05c9959da87a20642e3f19409d348cddd82aa1c4c9a94900"

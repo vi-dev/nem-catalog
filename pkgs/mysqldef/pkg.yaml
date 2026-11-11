@@ -23,6 +23,30 @@ test:
   - run: mysqldef --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.11.30
+    sha256:
+      darwin/arm64: "0e63c3ccf51dd2b86dd268e1d6faf40bc7fc14fb7e202879342999b8e0d5b163"
+      darwin/amd64: "0e9126fbf4a13aec262f65ec062e722658123762d8eb3cfbb0578dc205484c24"
+      linux/arm64: "998ca308eea1e834cce4933a56db3a5521e0b8335c877899dfad60e5aa28ace2"
+      linux/amd64: "452a844c326f074401ef65834b70fa630123241b9d41cbd06ab0c1c8cd944a2c"
+  - version: 3.11.29
+    sha256:
+      darwin/arm64: "12f4e09f4fc1c9331659ed358c4e97ab8afe81b9bbb6d6abf0416de404455b5a"
+      darwin/amd64: "0abace828aada23cf2bb2e8374a89dc14562bd64a2ee9091782dc4d72aa62fdb"
+      linux/arm64: "012c6a426b197c0cde65d897306346fd0d120c2eede29f0cac3d578803e099a3"
+      linux/amd64: "c3ef03343fd3220359648fc03d1068bda3189e82c748a7875fe5d9677eb6dbaa"
+  - version: 3.11.28
+    sha256:
+      darwin/arm64: "f46be51d202ad92c01cc45a36379fb660ba3a1bb723554f2ccb746a005cf070f"
+      darwin/amd64: "15ba4df42ea27381c3c6e1688da9b85f6830323c2ffc71040c0607d5f5d2fa74"
+      linux/arm64: "3d9c37f6f02a69ae26981457d8289865d22bae1f554c2afa27d02f9abaab52bb"
+      linux/amd64: "25ac8048cd57d612be982a935b06c2d78e2b08c497718f6840f64c5079553226"
+  - version: 3.11.27
+    sha256:
+      darwin/arm64: "34c8b8df234fd0943930ffc2d4b8d0c0a15985ba7f7e0a1b7bba333b55982dac"
+      darwin/amd64: "3fae874846126ee51a3340748adbba9ca73e5a16caf50ace9a5e3b14186d0185"
+      linux/arm64: "855f0beb32b857481118cf75aee5a9684293d95bf0890ecd76bb43e0ba4d3405"
+      linux/amd64: "fe0e65bfa577d93e11045740986b0107fb4e851ff8b8703f4f2d5fb002047cdf"
   - version: 3.11.26
     sha256:
       darwin/arm64: "7a904b1801b52b20f106be8a3bdd2a1997f63a79ca8b5c0a7b99185f4aeb4e66"

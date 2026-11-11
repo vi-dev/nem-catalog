@@ -23,6 +23,12 @@ test:
   - run: tfmigrate --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.4.6
+    sha256:
+      darwin/arm64: "76551b95ec8a20d810b278ed0299d3985a9bc2f752c1efcb26a79de25ae5f340"
+      darwin/amd64: "e287e8db990d5b3a9623ec3dc90a3089f97262a19f8680584b61dd19442e5d20"
+      linux/arm64: "ca794122ad3de0aa6a02e5c51b39bd6d594a53635332335bd4720ffb85ad34a2"
+      linux/amd64: "e158ff03d423449beeeddf69d46554f6350708ec6a9f7fed9e35a3513ea1d1af"
   - version: 0.4.5
     sha256:
       darwin/arm64: "8ee985ee9443940d1702d9069cbd81b05d8a4c039bf5aa2eaf49da04e790d263"

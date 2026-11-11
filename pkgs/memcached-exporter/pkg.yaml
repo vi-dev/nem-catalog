@@ -23,6 +23,12 @@ test:
   - run: memcached_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.18.0
+    sha256:
+      darwin/arm64: "f2098fc543f2fbc39e5ef71de0a45e2a880278b7d6434f60394457cef57ee5b7"
+      darwin/amd64: "b73ae0ff02e2382ad825884c6d9effe09493fb128d3f0a124a751c4f99a111ed"
+      linux/arm64: "1dd7aa32b81d6729d8fc00a31d10d8c49e20cb2bee7d35497c04cce7634b5dd2"
+      linux/amd64: "a8138e95dcd7ab2681b825fd77f365ce3378f99a107fb493bbdca80fc2dc92f8"
   - version: 0.17.0
     sha256:
       darwin/arm64: "119aeab016be57ffd10a5734aee27cf9df2018015639babb3bd5459da8273a78"

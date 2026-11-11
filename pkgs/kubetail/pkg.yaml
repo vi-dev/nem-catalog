@@ -22,6 +22,12 @@ test:
   - run: kubetail --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.18.1
+    sha256:
+      darwin/arm64: "706b15fc60c9bfe013bfbfe65fae12afb8e2baa3233d0145d7fcff8ea6e7ed98"
+      darwin/amd64: "e7075b153534bb477cb4249bb1e845c9f6490aeeb39e2c24923dce806ff51513"
+      linux/arm64: "091d5fc4da02321b53d5c69790baff7b55025aea15c1fbb220c8cf40b203b005"
+      linux/amd64: "f02db985113804c98748cc2b539c68171a00924af1738683a569ffb002e1520c"
   - version: 0.18.0
     sha256:
       darwin/arm64: "aaa80f37644abc40b0f939cc566e3f0b7499925423655172c5a6cecc7632f4db"

@@ -22,6 +22,12 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 3.7.3
+    sha256:
+      darwin/arm64: "efd1fc11ea761c9c39c9011fda9c92a9eaecf91be3b7b3198afe4dc786435e28"
+      darwin/amd64: "95ea410197c6c1f92e299bd632765231efa2183e3675137c2a9a5ba625f7f2c9"
+      linux/arm64: "ce4c08f5f43d99f0d1993552ce2906829c0366077a97e5e52529337f151a29fb"
+      linux/amd64: "5dfa9cc3b3ce3b4b491fbcc2057d3daa166bcc6676f743fcd20f8e5760cb9775"
   - version: 3.7.2
     sha256:
       darwin/arm64: "73b7cc4b55ee302943f644f3b9a1a42c919bb64f8f45b6dd03cb2e4c2a2c8960"

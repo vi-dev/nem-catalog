@@ -22,6 +22,18 @@ test:
   - run: aws-sso version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.4.1
+    sha256:
+      darwin/arm64: "f9c829a46580166dd91c179afc51d3225f8fec6b744fd739583ada3835fc5bf2"
+      darwin/amd64: "a7caf5a6dd2e5999665f0641baf1b6ac8a23dd884cf7bca8583a3cd820a16685"
+      linux/arm64: "eca27b0b81d19e0b8a05e44c66b0eee56920f3825b690e6596161f6d4bfaeedc"
+      linux/amd64: "af624e4b218cb6f00e41dfb9cfa8db9554a9e6b42b64c56ca6bf30ebdd1389c5"
+  - version: 2.4.0
+    sha256:
+      darwin/arm64: "2330cd69446c7ace54bd64202fb7d04dfa971f1cc1c5a74c2c4ca5e9ad30c444"
+      darwin/amd64: "c4d07109407804ba0463883d084ced03eaf395a158d0143997b508693fc294ef"
+      linux/arm64: "7596a6133944037ae65b63b5ddc9fce67b4b595b435785cf46fc0ffb85d00ee0"
+      linux/amd64: "3353a1487c6b78149718a6817b988311cd2ca80c4df69eeca45cc7d8e975b471"
   - version: 2.3.4
     sha256:
       darwin/arm64: "7e59143757968c2bca0934c5235ef13201798c9b70022a78042ee7e87707f51f"

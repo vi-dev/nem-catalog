@@ -24,6 +24,12 @@ test:
   - run: gix --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.61.0
+    sha256:
+      darwin/arm64: "5fd0f8ae30eb05e0bfe7a5840c732ac0d54f01d136d0e824d4f9ed6da42eebdc"
+      darwin/amd64: "d73146a0fbb45d7d580fa6bb01b430829ada6b99df15da79e7d7690bf90d8616"
+      linux/arm64: "f5f5e84f3173601316ce6098377db576203a49669ae0f04879829e793a4d579b"
+      linux/amd64: "ffbaf6cfc6a7e3bf0534f72841741a81f2ae995145d6ab8df709c590b53d678d"
   - version: 0.60.0
     sha256:
       darwin/arm64: "0f32195112eefe14f0d6b298bfe3af32b7e956a6f4697c05baab808cc88dc587"

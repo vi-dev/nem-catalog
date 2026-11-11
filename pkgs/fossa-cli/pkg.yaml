@@ -23,6 +23,30 @@ test:
   - run: fossa --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.20.10
+    sha256:
+      darwin/arm64: "bfa8eeba500248da463663d25450df2464e99a0c1814ab93384f443386a5df39"
+      darwin/amd64: "e76a463c58caa0e1f3d5818bb30e05b5c8d5628258d9114fed9934b78b86f54c"
+      linux/arm64: "c85540018ab4958ff0305c3005753ecbf5a777e3806ec2bc541564e8cf2f915a"
+      linux/amd64: "b6314a200d3d82168b970cffc1aba73b53d3f2ff45a23c1b4d1d9a10acf38516"
+  - version: 3.20.8
+    sha256:
+      darwin/arm64: "79fe6cead46ad1d49d59204601983a4f86174454217e2d5da26c8155c4c829d4"
+      darwin/amd64: "de9103d15608945cb18e18e43aa3e3c896e0d80c7891b9ada7df7c0e33416f40"
+      linux/arm64: "8a8a19382003bcc20be61f4b4a589489c6b34483b7909f8c2a4583f9d229531a"
+      linux/amd64: "e4b5c82784126a3f7e67badda4c2906742001a3368d48e7181db2b73226ed2d1"
+  - version: 3.20.7
+    sha256:
+      darwin/arm64: "c0088e30532dd7c15466c25147c6fcfc022cdd2c2a7a2f5ee5aa7b14305ab15e"
+      darwin/amd64: "03c85347849ea3dc4984c89ac07f1841ea077478bfb032430708937e61969d39"
+      linux/arm64: "89fdcfac1d4fbcb6904017a91baa3128668add6fc0a23dab97e023a216ff2c8b"
+      linux/amd64: "115b6cc4f416e9819bc1aa168ebdd78a2dd48da8a2d5ff6bdd9107a8e7a75185"
+  - version: 3.20.6
+    sha256:
+      darwin/arm64: "596911ea13b6e0f13c7e94cacc0889ae5c69416bbff3fd2e1a843c0221959a92"
+      darwin/amd64: "1412deceb227f09721365d44b9018adcd3c98b8785c680337edb8b069f45f6b5"
+      linux/arm64: "d6344d5e13f818b906ddddef5116e4c93c8defa142d708ca07563e8a3a500e3b"
+      linux/amd64: "5bf316d74702ad5b97c3d15f1c16250badb9dd2560b286b3a75abd71a368c8e9"
   - version: 3.20.5
     sha256:
       darwin/arm64: "2b8a94b3204bc7b689fa43888d8dead1bc473631b13d066af29023773b7387c4"

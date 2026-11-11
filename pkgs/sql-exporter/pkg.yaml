@@ -23,6 +23,18 @@ test:
   - run: sql_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.24.13
+    sha256:
+      darwin/arm64: "fa226b61386a170cbf75e307b1a4279fcb46899562bae895b4c8c00fa18d350d"
+      darwin/amd64: "58d78fea21f5b634ae11a9935b891bf307125ca07be289262fe803fc80469253"
+      linux/arm64: "05571785fce2c041d35b575b596ad12b8b9f874fca91e2014d238adf1748633b"
+      linux/amd64: "21ecaab527c8a8e6c84b779fe5fbc9dd43f8b88aefbc40b023e24c92fc0a8fb0"
+  - version: 0.24.12
+    sha256:
+      darwin/arm64: "d84b4c4aa1676b07dc9a0e5d525dcb9a41397ff82ece5152ed85f8411471615d"
+      darwin/amd64: "5b560ba55592318409b08f389f8395f67dc81185e8a749de8abc92647c879b0d"
+      linux/arm64: "45e2fdbcdb954d1e62af9041c3ac91ecb492b8cee56b63f3725d920301ec4382"
+      linux/amd64: "a2d8881d87b6f696cd523f531d032cb93c044dfe4c4013803e7d3e070764ac3b"
   - version: 0.24.11
     sha256:
       darwin/arm64: "83723adb3fda6f4597a828ad86c79b83fdfe73709574bb8facdda5f55bff245b"

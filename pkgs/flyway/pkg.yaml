@@ -25,6 +25,24 @@ test:
   - run: flyway --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 13.12.1
+    sha256:
+      darwin/arm64: "f5df69ec93ce5a58d0e2d67c011c2d57b248188a666fb0c970c2cb7e0c8a8551"
+      darwin/amd64: "f5df69ec93ce5a58d0e2d67c011c2d57b248188a666fb0c970c2cb7e0c8a8551"
+      linux/arm64: "f5df69ec93ce5a58d0e2d67c011c2d57b248188a666fb0c970c2cb7e0c8a8551"
+      linux/amd64: "f5df69ec93ce5a58d0e2d67c011c2d57b248188a666fb0c970c2cb7e0c8a8551"
+  - version: 13.12.0
+    sha256:
+      darwin/arm64: "6c62f47675d81285643ae0bde7b0f1f9c8712d487553785c3690589a343468b6"
+      darwin/amd64: "6c62f47675d81285643ae0bde7b0f1f9c8712d487553785c3690589a343468b6"
+      linux/arm64: "6c62f47675d81285643ae0bde7b0f1f9c8712d487553785c3690589a343468b6"
+      linux/amd64: "6c62f47675d81285643ae0bde7b0f1f9c8712d487553785c3690589a343468b6"
+  - version: 13.11.1
+    sha256:
+      darwin/arm64: "24c1eda7b6c5d7b64410bbb7512ab5584643faf1c840edb7349c3e29fab802b1"
+      darwin/amd64: "24c1eda7b6c5d7b64410bbb7512ab5584643faf1c840edb7349c3e29fab802b1"
+      linux/arm64: "24c1eda7b6c5d7b64410bbb7512ab5584643faf1c840edb7349c3e29fab802b1"
+      linux/amd64: "24c1eda7b6c5d7b64410bbb7512ab5584643faf1c840edb7349c3e29fab802b1"
   - version: 13.10.3
     sha256:
       darwin/arm64: "0d7ed27c15b1a6e42bb444f370a789d52ec515b483cd74643c165b1d855c0145"

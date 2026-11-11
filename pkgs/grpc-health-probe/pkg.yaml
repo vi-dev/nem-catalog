@@ -22,6 +22,18 @@ test:
   - run: grpc_health_probe -version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.4.62
+    sha256:
+      darwin/arm64: "c19750c64fe9306a606f57ccd49866cc8bddf3cf80a57a85bf81ef3c46fc6589"
+      darwin/amd64: "c195a5b85c263e983bfa1d7e0d6eda19753be1a537f2c6e3669cde44a1b2a94f"
+      linux/arm64: "ddcaf12db09abde6bfab156fb862ae2a558f23dee3ee64d557077d891003ddfa"
+      linux/amd64: "d7321a60cfb40f0e8786a6d9f74fbc716dc6bcd078d3312f8fb34caf2d92acdc"
+  - version: 0.4.61
+    sha256:
+      darwin/arm64: "94f2a1690233cde97ba1ae2a6e50ea96bbf8af4f6226a0ed618a1309d80332d5"
+      darwin/amd64: "34b0863e8a85927126e93bb76946333fa556a8618a8fab7e8fafd26841c6a559"
+      linux/arm64: "c6ede27c8da07748f188930dfffba089e058cf711e26604591a152ff225d3a99"
+      linux/amd64: "3746f63e89561616ce69eafdc9b46f8b23b47db3a564f6f2e8c31359a60e2f38"
   - version: 0.4.60
     sha256:
       darwin/arm64: "3254f95fc16b5a83c4eadd41ce89cd1a83c8ab6daff3c2820366360be3afd3fa"

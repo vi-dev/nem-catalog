@@ -23,6 +23,12 @@ test:
   - run: git-credential-oauth version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.18.0
+    sha256:
+      darwin/arm64: "25f8a01d0f323c43a571b644ba785b8d9013ac6e9097d95ad5ba78f8007376d9"
+      darwin/amd64: "463cc93b54b674d6025732e8720e304da7c5cf6b0658076e906af62c7b1c4724"
+      linux/arm64: "2fde91bbdba9444149de1be8bc22db56b13b4b5c93e6d0a9f4f8cda8ffed2dd3"
+      linux/amd64: "3c7ae191a1dae34735585729bba565e27aac33a3b069f891e830ddca2caa5bbc"
   - version: 0.17.2
     sha256:
       darwin/arm64: "1736b355765b562ac2eef6068fd1831468415f6ec94762e184f1242b1e0ecf7d"

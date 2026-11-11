@@ -23,6 +23,12 @@ test:
   - run: snmp_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.31.0
+    sha256:
+      darwin/arm64: "8574532748861fd05612e258ef26d3282e526cc742133f3f821f617626f67671"
+      darwin/amd64: "74ffc0f2f93a3950bf9abedac88adb4c9249521fa1522a14125a2cd40187c901"
+      linux/arm64: "a854feb530c16e7e4aa5d4d96f9d44f98320c415b5048e93e152593412ffaac8"
+      linux/amd64: "264d1b3be8dd1133fcbd11cbb81ab2a65f121237ab2fff198adb1cc6961ed3ae"
   - version: 0.30.1
     sha256:
       darwin/arm64: "043f8e9a1b329f8d467b99ba520b11742f9dab68dac418246ac1b7ae9f1969ac"

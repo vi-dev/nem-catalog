@@ -23,6 +23,12 @@ test:
   - run: kubecm version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.36.0
+    sha256:
+      darwin/arm64: "45af2a0d7d97c6693f29d98692d7829f6e76bbd20540c3b5f215734cc38618fd"
+      darwin/amd64: "49ddabdc323b20a6f14f098dce874a35c91c5b6cb00b77a2c541198484c21a42"
+      linux/arm64: "aff313d3298cea88cf4f662d23654a24c8fd3242b3e7f84436b0869b06e2fa71"
+      linux/amd64: "a014e57c0a8f659a76210c5b97393f306340bbd45296a168f5e47f095a132611"
   - version: 0.35.1
     sha256:
       darwin/arm64: "35ea4876ae8d146536def212489056b08219b4a41ac82a7a7305072087b21aad"

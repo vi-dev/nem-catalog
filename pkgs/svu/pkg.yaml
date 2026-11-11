@@ -23,6 +23,24 @@ test:
   - run: svu --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.4.4
+    sha256:
+      darwin/arm64: "d29079db5bf50f25b805ca8511457d9ea067a3efb7ccbf155d24e512d3dcd2be"
+      darwin/amd64: "d29079db5bf50f25b805ca8511457d9ea067a3efb7ccbf155d24e512d3dcd2be"
+      linux/arm64: "06e35970f1f728472a573a01a2a48e1dbde476121d922d717b00d672dc102f69"
+      linux/amd64: "f113776c1c4c2a2a3c6e27991efaa8071aafc1ec5644fa77ff809ec69aacd5da"
+  - version: 3.4.3
+    sha256:
+      darwin/arm64: "c3627b34b7120fb18df435b286061da5d6fb94ea22fbf4e1a8840cd5ceaa42e8"
+      darwin/amd64: "c3627b34b7120fb18df435b286061da5d6fb94ea22fbf4e1a8840cd5ceaa42e8"
+      linux/arm64: "13e336729e48acedaba98ca3b95677205d823838292f58c97f81b3e8548a37df"
+      linux/amd64: "5fbb90426372fa11567d826f5c3f04154bdf342959ca694cc152330c4fe130e3"
+  - version: 3.4.2
+    sha256:
+      darwin/arm64: "5134cf3cc2f15c3de9f34eda6f775a5ef3a751bd698e61590ba7d84a8ef2068e"
+      darwin/amd64: "5134cf3cc2f15c3de9f34eda6f775a5ef3a751bd698e61590ba7d84a8ef2068e"
+      linux/arm64: "1b90854f0df87c99cb8ed7134c73b5f2d0bc94293eb91095f868be649f6e0f1a"
+      linux/amd64: "c0c086b557ff68bd0fabbf5a1c5783d160e72ddd514e84e4d7e3f8f1427361bb"
   - version: 3.4.1
     sha256:
       darwin/arm64: "aeec0a735f12d6313c5b4f295ac2f86e00b56571d241abe5aa0306b41f43efd7"

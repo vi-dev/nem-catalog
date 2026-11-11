@@ -31,6 +31,10 @@ install:
   - extract: {strip: 0}
 
 versions:
+  - version: 15.1.0
+    sourceSha256: "0fc7c565443a5f4be7da65ac5ee5bd737d9b158dc908708b7689a0a5796b0c8d"
+  - version: 15.0.0
+    sourceSha256: "968536e9abd782f07f7954044c0c4020199fcdd39b41d221ec42d2a3be4a44df"
   - version: 14.6.0
     sourceSha256: "d07a007327277708a2a73ae437887cdbaf282937f6d03ca5467723e9099af586"
 

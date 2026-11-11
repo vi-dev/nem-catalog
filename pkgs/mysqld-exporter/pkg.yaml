@@ -23,6 +23,12 @@ test:
   - run: mysqld_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.21.0
+    sha256:
+      darwin/arm64: "fcf0a72f78e34e2169fefc4402eb2b651b4ff946e24ed42587925e34b7ebd44e"
+      darwin/amd64: "fbba838286d0c55f961b5873c753dc2a58e116d52ce654360b3a98495054b151"
+      linux/arm64: "15e9dc9749a4cec2ddcb8195f1c4ff04ba4edc9ad6269efc4ee174aa1c7d5c07"
+      linux/amd64: "dc38d4173ab07d1e2ec8699a3957d29d31c0b9619822cc3a451771c468f704c7"
   - version: 0.20.0
     sha256:
       darwin/arm64: "c0f834a7d015138fdb0fad3fa6a1076fcf0361ae8b90c58f2257cab76f33382b"

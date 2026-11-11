@@ -23,6 +23,12 @@ test:
   - run: aztfexport --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.21.0
+    sha256:
+      darwin/arm64: "c714e6f2756fd2ac84b30647c44e11ec37cccaac3a02c213adbbbf09835039f9"
+      darwin/amd64: "8f0e4a07e77849b9905d791415ef883ff4a59d087735e010992d5d6348448ac0"
+      linux/arm64: "5dffd0f7cebf133ee9b266f091af6be9f54c7dce47fe0250bbcfc439e39aa40f"
+      linux/amd64: "88ce270f6d7ccc9d2ad8a40ca57c1f8b3fd88a56feb0624dcce6f9a18bd74d25"
   - version: 0.20.0
     sha256:
       darwin/arm64: "233f93c70b3fa44d312015db87c7bcd1cb8bd6e5b15db5a99e7f1f6436a06a38"

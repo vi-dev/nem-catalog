@@ -23,6 +23,12 @@ test:
   - run: cargo-espflash --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 4.7.0
+    sha256:
+      darwin/arm64: "3e9f664ed4eb7705d6ca249381ada7444c8045de3b0ea77efc8b819d1d96d96a"
+      darwin/amd64: "989a87d004f1fdaf79f22a07e7932a663a055c789f07a863e89bb59a574be9b3"
+      linux/arm64: "841d3ce3a32bb151e99d6ebc6f0329990cdb2a80f262aeb0bdd0a8bd5a3e3580"
+      linux/amd64: "0d0ca701660942aaed7452a10d59f484f462cdaf038112de520d5c2f1721220e"
   - version: 4.6.0
     sha256:
       darwin/arm64: "27bfed85cd48792c78d5cacda7119b444cbaf427ea1c367d8fd43dd4ea716dfa"

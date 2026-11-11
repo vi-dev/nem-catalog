@@ -23,6 +23,12 @@ test:
   - run: cargo-hack hack --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.6.46
+    sha256:
+      darwin/arm64: "9ad9fae78158671df8161b1803bb6b9f6a8b0081adc70a5c2bb91dff5ec4044d"
+      darwin/amd64: "d59a46947429dfa58e1c2f9b644e878580f85c3001b0f26854eeaa9da5b00fc4"
+      linux/arm64: "2d6f3b8f73c53214195255a89a3dfd91520ad35254c7621fd5e9254e5751625d"
+      linux/amd64: "82875b396319288894d4c213389a107039756e37f0f7eb299ed15f5d4ad269cf"
   - version: 0.6.45
     sha256:
       darwin/arm64: "af0ab90e56aa716ae9f545a93e4338d4f36525e187d367b6519da71b60249b50"

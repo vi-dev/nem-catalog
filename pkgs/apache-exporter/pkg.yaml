@@ -23,6 +23,18 @@ test:
   - run: apache_exporter --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.1.3
+    sha256:
+      darwin/arm64: "3dffac05ead1869fa2006584dfb6312e846842b08b424739c0d30756ecd184a9"
+      darwin/amd64: "9bdc69b37b6db98a814201cf3b278b1f437a68c0233c983ca7f33d5008205385"
+      linux/arm64: "3e9574a9799e7781fbb91a37517518daf87232b2d68ff4c27c9cba78b507e57a"
+      linux/amd64: "85fa93e4495d5cc8eaec8d43fe530605f30dd9a08b4e0f4852507207fe86037a"
+  - version: 1.1.2
+    sha256:
+      darwin/arm64: "7525151643a214b4015234fa2f51321094c3886425cacdcb1f036cfa77c350e2"
+      darwin/amd64: "f14263edf05ead03ef0461a04883c06481cd9bc17522acb8bb9643623c78effb"
+      linux/arm64: "05ee875d3431416fe1f6a80d1a916bce1e9ac7c66587537f2071d7ab6f0c2f32"
+      linux/amd64: "582cb09fa69b363d304915ca095acf57dde70174ac119994b6b970c35e5fb271"
   - version: 1.1.1
     sha256:
       darwin/arm64: "8461619fbef4f0157a5427dbdbc3ef4d6490ac7da44336ee1d59142ccf788d37"

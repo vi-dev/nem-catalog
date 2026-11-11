@@ -23,6 +23,12 @@ test:
   - run: civo version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.6.0
+    sha256:
+      darwin/arm64: "7012b573a0d6ea0969d890dc01d4f86eb7395db72f2a10e14861a89df2dfcd68"
+      darwin/amd64: "c7bedd69b31d1df7bf2916642c9c954d05eb087c91e0d3e988dfcca9a69da8b8"
+      linux/arm64: "8859e9ab10c4b86c53996d0efb99c3b65bbc7da447717fb4bc9504bdc50f4093"
+      linux/amd64: "8f9c8b3250a17e323fd13293ae771418e29bd604773410d7126611cc85ef09cd"
   - version: 1.5.5
     sha256:
       darwin/arm64: "0cea284c00b8fa5b7b5f3b5c0baacd14778671c6c4a2692a415be84c344e18dc"

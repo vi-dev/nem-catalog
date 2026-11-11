@@ -32,6 +32,12 @@ env:
     platforms: [darwin]
 
 versions:
+  - version: 11.0.33_10
+    sha256:
+      darwin/arm64: "6ef5b027206691439b2dcb2fc05adc13cc7f5b6e75a08fce8f75ee188adc7751"
+      darwin/amd64: "11e3e9de3ce65ff957aee9b4b76876553e9d328cab9aede47996463625c88887"
+      linux/arm64: "60b0fb79bb678b6fae3e499c7b0a353e68633ed0ab69d1a6bafe6092ed1e59e4"
+      linux/amd64: "c4b8eaf56c93b95b689ffc08d155df1bcdbbffb666f8f71d21d97aedaea6f0ec"
   - version: 11.0.32_9
     sha256:
       darwin/arm64: "3e3687488e472035b7a27732f0f6127d59903ba9fd0cb6c815f1a182f4160109"

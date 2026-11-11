@@ -23,6 +23,24 @@ test:
   - run: cr version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.10.1
+    sha256:
+      darwin/arm64: "dc3d572f22284ea5909c7173ca153e384a4a3ee64c9fed80386d86feefbd9a66"
+      darwin/amd64: "76bce266cec371934e46fe0c6a95042b7bc5908b164723b202dc37ef22fbec7d"
+      linux/arm64: "a52a067a56a6e2dc295b250a32692a0fbb5b96b69516a89f38c8dc30dd130921"
+      linux/amd64: "ce46baf9975d10193b7070b2b7406750c3f664181e36df3f3bbb4a00be40dc1b"
+  - version: 1.10.0
+    sha256:
+      darwin/arm64: "fa1ee90900518d5e9f65a29fbf50e893f13dbf2f35a6870eadce14d90b0a14b6"
+      darwin/amd64: "f50407739268a5427b005fc451126186bf9c4611c4bcc8a7e2cbe9f41ed77e92"
+      linux/arm64: "28394a1175a4df9704cd4e538a1211c519c64c3804c2e81abc1b1c425a1a0c54"
+      linux/amd64: "d7da00a067a972e3180a81a8a37b169e312def65d3589906c58357a022c0170f"
+  - version: 1.9.0
+    sha256:
+      darwin/arm64: "0a1258e2078fcbf7bf5826b2e3970010397f03decd578ba8b5b79c5ab3be7687"
+      darwin/amd64: "c5934990d082afec22989d01b9e49664fe804a0a3cb2273a65f858c332b57793"
+      linux/arm64: "fb01f90a8097083bcdd14de0ef8976c42ddfba302ded3a395464857eb832d036"
+      linux/amd64: "8131cb6016e2bcc9e4f63cadfdd7026ae3fa4d2c4d319f4cb72ff3c6a43a5a36"
   - version: 1.8.1
     sha256:
       darwin/arm64: "d957e23f012650cf7ddf6c907688358d572e4a1b8e0e64b31f4b4c03472a0e4b"

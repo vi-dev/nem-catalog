@@ -23,6 +23,30 @@ test:
   - run: netbird version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.82.1
+    sha256:
+      darwin/arm64: "c7be441f6e53a859322375c7739c5f584f626857fb37268da340742168ff5894"
+      darwin/amd64: "f62a6c8a4bdf2bce86116741071cb9802fc56136c1fb89930f88e1e623a9fb39"
+      linux/arm64: "8c6a4d4084e1746a3c9b86f0ce8be1ca05544ba08d7dbb78609c5c9d6b009e0e"
+      linux/amd64: "c8f10b89dfa01b8bcad5ec25b666a83e351be4e22eb784b822478b9326a35423"
+  - version: 0.82.0
+    sha256:
+      darwin/arm64: "a46b84c962ac1f47a822d91cb2480bb892f01ee5d74fd2504b6106ceac5f0f87"
+      darwin/amd64: "ee8aadb88419d65af1fd7c68b718f792ce51e912491e13f548b1cf6dc60a11e6"
+      linux/arm64: "c2e5ccb5824cb29fe008a5a54854fd5926b89d3aaff7ab8721f77abf8e8b3e62"
+      linux/amd64: "b569f65de303d21317bc716f3116002e2cf175ae22a9f6d2bed91200a2f5000b"
+  - version: 0.81.5
+    sha256:
+      darwin/arm64: "2b1d8fcc3ebd15d9b656b7274dada546780d9c6a55077489844b8a47a605764a"
+      darwin/amd64: "302beac4ee0b0f1de8207bf0c02fa8da77449c260147836420b06804bb28db4d"
+      linux/arm64: "7770879deef78d041d5ae55d4216016ce74c6a21d3493c95554bd8530530eb4e"
+      linux/amd64: "e08f9ea3f6d9e55bf1aa776b08c25146afdc45657f602ed02c1a4ae666b9d775"
+  - version: 0.81.4
+    sha256:
+      darwin/arm64: "459782e6967bdcb3a59734a4da37c9f77d6e085b28039b0501039a1a7cbd0aae"
+      darwin/amd64: "a826aeb8fe328d153eb895a6185a00003a79b1d1040a0898f6bf49b694d92f39"
+      linux/arm64: "428a6fdc330bc43c2791ef208ce6b059d50731cf4bffc5a6e4e8af2f4c7a5029"
+      linux/amd64: "e9b3d7e396584ddc2513d50bc9168fe4b6a89c1a527308c1e51331c7a1e67165"
   - version: 0.81.3
     sha256:
       darwin/arm64: "bc37108ee88cbc0a998031231570a2c62f03c0937867a0114b8d137e7840fe71"

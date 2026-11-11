@@ -23,6 +23,12 @@ test:
   - run: tkn version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.46.2
+    sha256:
+      darwin/arm64: "2becfee4a56b7204ee1784e93ed4b00461a1bc424ee6447fe5808e94457d6d0e"
+      darwin/amd64: "2becfee4a56b7204ee1784e93ed4b00461a1bc424ee6447fe5808e94457d6d0e"
+      linux/arm64: "a3e6445161734d97211d6ec9fa255378ed2f15723951d2b46aa75c7e801d4b53"
+      linux/amd64: "f6d86bc7960d85af94eb46f8f480ac8d113aa78e78b15d6f8d2f53d80daab2ce"
   - version: 0.46.1
     sha256:
       darwin/arm64: "32f1ee337d75fe23a10246c54e050a0723d0943254e549afc6a418744b293eb8"

@@ -23,6 +23,12 @@ test:
   - run: cargo-tarpaulin --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.37.6
+    sha256:
+      darwin/arm64: "5eef7e9c92bab4483272273b54433809cba17116ecb83fc264b2807845662c62"
+      darwin/amd64: "36113a28a97af201da176f0b683b44d242140f9211454e89e6020c14b99f44ad"
+      linux/arm64: "85ebeeb32cbd0c9dfeda7acf2014a4de1948341587c02dae0572103df738eb2a"
+      linux/amd64: "952ee5dc4ddc04a94a877263e4b44524cf5ec1cd93a0d4a5f74bfa24db0679b2"
   - version: 0.37.5
     sha256:
       darwin/arm64: "079019d2881bc80cbc98daafbe23735a757548388f39321713a6f5bf4c19e41d"

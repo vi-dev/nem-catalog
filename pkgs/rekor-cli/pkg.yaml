@@ -22,6 +22,18 @@ test:
   - run: rekor-cli version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.6.0
+    sha256:
+      darwin/arm64: "26adf6ff806471d4267a305b0cf66c97fc63a61e0f7076ea90784ced628fb66c"
+      darwin/amd64: "f0fd1820ced163a5a236f1995094d1d7a8a1e3b0e587f32ab1efdd5e51146d35"
+      linux/arm64: "7b5ff83eb25028ed173da80abaa7b52fb50fb05945e33661088e989d18ba1e88"
+      linux/amd64: "2d471e9f66b6258bc5b6d969483324fbd289ce410c6b75e0b792ae79633afa8f"
+  - version: 1.5.6
+    sha256:
+      darwin/arm64: "7814f153e87c35a3f6f864dbcd164300cfb53c8afb78cf0013e6f45b221f78ce"
+      darwin/amd64: "cd00ec29507d306fd1f7c6987ab60714a360e6b0eadd120b4508d178abe30709"
+      linux/arm64: "31e20074ec7afbb011c6baf5e27af844b76b747c94dfbb46b21d8a83c8ddcd59"
+      linux/amd64: "e333f1ac629bf02319764913b51711fab62d5b6f25cd19fe92819bf04e8b961e"
   - version: 1.5.5
     sha256:
       darwin/arm64: "b279d0c311b5ec72326fb130dad3a679a6290ccb47fc87533f4461f27bdbf4b7"

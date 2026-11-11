@@ -22,6 +22,12 @@ test:
   - run: jreleaser --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 1.27.0
+    sha256:
+      darwin/arm64: "ca582f8712c4f79465851009c108e30803e0241a75621afca61df7a903b31426"
+      darwin/amd64: "b8565326296839e4165bdd9d78fa0847a21e0b68721b773c0755620971c7bae1"
+      linux/arm64: "53ff94e31de7b1f06b1e6decb5009d0ae422904b719157157d6338d736290e99"
+      linux/amd64: "23e33008977c309e92081e64c1b41376f1c1d248b4878ececacbdf66e4745e69"
   - version: 1.26.0
     sha256:
       darwin/arm64: "0bd1d7be189c11d4612c58a14032c9ff1de6e6f09ee160483c072eac5e001187"

@@ -23,6 +23,36 @@ test:
   - run: render --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.36.0
+    sha256:
+      darwin/arm64: "12daa4f0d267fb8ea181f45bd05f8f9d17afcd1eb76c0560db9f3a7b9ae227db"
+      darwin/amd64: "171c87b04eedea77fb39b61902eae742d4abb2a6699318bffdb4221f98a9f1b3"
+      linux/arm64: "adac41c9a6195b0bec4ca72d0b35cf58700ce49351d8ebba0e895508487b3096"
+      linux/amd64: "97c83ceae5e99c8bc2d342a71c18c0af39841bc8af3429d01ca9a629aca66d0e"
+  - version: 2.35.0
+    sha256:
+      darwin/arm64: "81879ccdbde66211de7eb53d34ac0d9c532636d19982adab3bc966a1a8014361"
+      darwin/amd64: "24ece0678f37ba5c84ad705ac7acf66efd93b073beaa710e9904c33695fe5577"
+      linux/arm64: "3fa22f543a2a9d8f2c86065aba4fb52ab93a2ae20c4640a60aa7a4ff40dc94bf"
+      linux/amd64: "8860394b50635f214e27c22c3f3029dda83f95988b906e03bb512580dd894628"
+  - version: 2.34.0
+    sha256:
+      darwin/arm64: "d98281473e486efcad267896f4c147ade52be2a64e8d04f3184aa33b4d5407ec"
+      darwin/amd64: "def573ffd09becfa4e3197443e8f756ce217f2f66b1dd55812e28d5326933501"
+      linux/arm64: "978a7fd4a07e48c8c09f11ca5ff94d6e614725f70c3a1e1172c64ddcda10d10a"
+      linux/amd64: "6774a558bc3972b3487d851873d8ea6eeeb5a2b003a4696e6ba5c6a7f20736ad"
+  - version: 2.33.0
+    sha256:
+      darwin/arm64: "ae068dddb0c2df75c2efcd341b651e993084b638492f170651af50e2951af465"
+      darwin/amd64: "2561d041c10b7a9ec57dc2f6ba4b876aba413a4eee12eeb906a82d93129bb69c"
+      linux/arm64: "317d4c95d6f2521afb5a5ab6fe264d41b5557be023aa3709fda1b470e6fe6097"
+      linux/amd64: "038bd9b47f8737b560bcddb3c5d59e04114b8ea002b05bba144e52e56e2a824e"
+  - version: 2.32.0
+    sha256:
+      darwin/arm64: "827d2e4b10c0b7ee782d4a490e5af003dcfe50fd0a099b9e09cb9e5ad58f17d3"
+      darwin/amd64: "f18621bdcd16878cb482add8e7e6acbd12f9a065f4c188958ab3e00bc70dc8c0"
+      linux/arm64: "3894e5f28a7d3caf4c248b68f46f9cfcca52921756491b3f7ff031ac46500f99"
+      linux/amd64: "b2663678b6d460d3ee4435ccf6edaebba70720abbb214692e6bc8e2e35ae6de7"
   - version: 2.31.0
     sha256:
       darwin/arm64: "a3e68bc09243e43e4f80aca5da6e4553e71a52d2aef3fe29783ddcc48ac2cdc0"

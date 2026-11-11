@@ -23,6 +23,12 @@ test:
   - run: tfcmt --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 4.14.20
+    sha256:
+      darwin/arm64: "e30a11dd32de0171851c013bd1e86a205b4fc21a3a25ebf26088766c6420c373"
+      darwin/amd64: "b39683b4234c285e23d6e41908527d13a3481546d9af916858adc9bd25ba6861"
+      linux/arm64: "e972bfdf322f036d927c5ddb26e8c7508e1cd28d7778ee96437cd48bb44f4381"
+      linux/amd64: "37b6ae180e49e43005c19c91ad35e0d696f991973eb77e0c76ee6ea15c57c3bf"
   - version: 4.14.19
     sha256:
       darwin/arm64: "05dbd97f9c69d27dd669e7a803e579b434b8d7320b442ecc42f666f0445cc2ee"

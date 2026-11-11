@@ -24,6 +24,26 @@ install:
 bins: ["bin"]
 
 versions:
+  - version: 1.37.2_k0s.1
+    sha256:
+      linux/arm64: "d04426041ef9ac002b957fbf43fc36dd736398147db7589fad53687753bedd52"
+      linux/amd64: "4770cf89ff45e43292819f6e3a02a25a453bc750c777f6f7ad2de335f3f41df5"
+  - version: 1.37.2_k0s.0
+    sha256:
+      linux/arm64: "6893be9956c202911a387fae44c8d454da5d5dba68943ff6a4e84232f9f8be2f"
+      linux/amd64: "19ab68793419c8d66be258f3c00969d39fd4493d5e2b2557c84d77cfe88f0f70"
+  - version: 1.37.1_k0s.0
+    sha256:
+      linux/arm64: "4571aac817ca97df0ae7e0cc0e291d569a35a3a8cf00891ecb486087a7a171f7"
+      linux/amd64: "f44181007cecbb593f8fc8bcbf30f8363277f3f7d368d1bc2ef72749bcb33148"
+  - version: 1.36.6_k0s.0
+    sha256:
+      linux/arm64: "cf4763c6c0e08b9c53b3c3ecd7f35f7bee50aff2a2347fa5a8cc4c47ab489b2f"
+      linux/amd64: "60bac39d4ed8292adb8576a55866389cde4700f9be7d152587e15f8aa67c12fc"
+  - version: 1.36.5_k0s.0
+    sha256:
+      linux/arm64: "88d730866e610fe6ad32e877bf79ed10eafd48fe14e699fff6f5133c11d598b7"
+      linux/amd64: "377cdb372f37a3c23f1f6072e4f11838b45b463b458f2afdd0c2607157fbe04f"
   - version: 1.36.4_k0s.1
     sha256:
       linux/arm64: "04f685c8c9c29262da64acf26fd928452f19d449ac58729592f686f915882319"

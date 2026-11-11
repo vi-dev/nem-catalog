@@ -23,6 +23,12 @@ test:
   - run: tfupdate --version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.10.3
+    sha256:
+      darwin/arm64: "3fa0da51fd1e0da6df8834e923094682239f1ee4aa382b6ac2717078c7f8db28"
+      darwin/amd64: "17be2147d5ebd1f0ea6aea97b28018a494deab7f436820131331c68850cd41c8"
+      linux/arm64: "fc61718091b5bb9bbcdcaefae6b5633514755d68eb628bb874287f9c73c1b572"
+      linux/amd64: "0165a5e9326f3c426766bfa6fba0f6630127b1fffa5e1a6a557b6457884f7396"
   - version: 0.10.2
     sha256:
       darwin/arm64: "a1403215422af47afdc47e94432bb53245888d772965621185ec3f762e9d2d00"

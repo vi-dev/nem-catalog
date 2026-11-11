@@ -23,6 +23,12 @@ test:
   - run: cargo-generate --version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 0.26.0
+    sha256:
+      darwin/arm64: "1bec95b01ac7a5d43d2a8ece6d5a88e1ccb4066584ac9a59ff613a66364b2fe6"
+      darwin/amd64: "429ba1e5630b9efadd645d51eac38c839eb53ca0a8fee626c1e9e0a849202ded"
+      linux/arm64: "7a3d11129b12b30694ec8c4356face44570ac23c3e7f039012df5d229c6d8c66"
+      linux/amd64: "67933b2bc504cbf7a1170b4543eaf081a071de45ebc970ec9bef9558941559bb"
   - version: 0.25.1
     sha256:
       darwin/arm64: "632c3cced445a203cbb881e034be5cf4caf1ea32f75271635e498a434d02429b"

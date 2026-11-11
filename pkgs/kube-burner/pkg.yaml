@@ -23,6 +23,12 @@ test:
   - run: kube-burner version | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 2.8.7
+    sha256:
+      darwin/arm64: "2439fd073a4acaf12e628e087866e6c0f0a0abc2da37c8ae0e69125527d46221"
+      darwin/amd64: "a3ca332afcd2142c5e8e487f7ed748f8b993bcfa229c9d7aa1921387bfc67b22"
+      linux/arm64: "609dc302ae5b07dd9cf904858b5dacd9664b28347914e2df3b9bb0f2d3b56f71"
+      linux/amd64: "7648b6a72f03289b4b7cab95542da500b4d7db2cf8abc998f93762d3dc7da6d6"
   - version: 2.8.6
     sha256:
       darwin/arm64: "6e902483904a299cb53bebd28e8e581e17be4866972dd607ac42c7661e59819c"

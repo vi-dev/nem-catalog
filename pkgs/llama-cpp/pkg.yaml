@@ -26,6 +26,13 @@ test:
   - run: 'llama-cli --version 2>&1 | grep -q "version: ${NEM_VERSION}"'
 
 versions:
+  - version: 0.9.0
+    meta: {build: "b12110"}
+    sha256:
+      darwin/arm64: "4f5b8de12e0b9516658ca6a5764c6ffb3d7c659c3dd538556b1413c7b4050662"
+      darwin/amd64: "c8094268b6bf62f4998f0e45656fd9f5e2d4afb6b1cd0044d761db64be1dd47d"
+      linux/arm64: "4758b51335e37b4346251f2687d64841ff1c07ecb27fc46323945bb2ec9c44d2"
+      linux/amd64: "368227edcc229be5f9bed16a2223d79b5e41d0ac2e19bcf5825e82291c060e55"
   - version: 0.7.0
     meta: {build: "b11669"}
     sha256:

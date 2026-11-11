@@ -23,6 +23,18 @@ test:
   - run: aliyun version 2>&1 | grep -q "$NEM_VERSION"
 
 versions:
+  - version: 3.5.3
+    sha256:
+      darwin/arm64: "ae692c4f55b22edb3931b74a666f634f28b5a0704cbda4d51ee9b0667f46f580"
+      darwin/amd64: "5775475b1e2632285f1333d1a02010e318412c27ae0877a22dd96e6dc5632732"
+      linux/arm64: "c9986e8f13a1910fe70b9d6354808d8d0e758505129742b28d29358f875f3907"
+      linux/amd64: "defcbc01a28c9bbb27706fd53473020175a96886186df176dfa934ab6661fbde"
+  - version: 3.5.2
+    sha256:
+      darwin/arm64: "076e14de5450e4d61c59a54957e72529a644e8e4309b6ff5118d01db2c4aca6f"
+      darwin/amd64: "5f03795a4a4dc5febeed8bc508090649f9d877afea894cacef96197a8e5b6788"
+      linux/arm64: "e2e0b5e6089b2b56822a2a373249227b83fe5ef4a20a134bbf803869299f8926"
+      linux/amd64: "8058cb91fa0e2d46a7c5fd47e44ab6a465be8477b28595d408dcc03a0ed5bd4e"
   - version: 3.5.1
     sha256:
       darwin/arm64: "cbd7d5b92e5f74d6bc530c20cbbfbd5a03fe38c8e823eecc36551e1c0a5e2994"
