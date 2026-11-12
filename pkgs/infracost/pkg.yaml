@@ -1,4 +1,4 @@
-schema: 3
+schema: 4
 name: infracost
 description: Cloud cost estimates for Terraform
 homepage: https://www.infracost.io
@@ -21,6 +21,9 @@ bins: ["bin"]
 
 versions:
   - version: 0.10.49
+    excluded:
+      reason: "The upstream release binary reports version 0.10.48"
+      use: 0.10.47
     sha256:
       darwin/arm64: "c3fd28e9d5adaaf122bbbcdce7c0b5f334d5b2ac961c2c95571c605d85aa40ef"
       darwin/amd64: "398148dfae496167b52fb567c46e8fc5c26ec2cc8769f708fed61faaee7a73ff"
