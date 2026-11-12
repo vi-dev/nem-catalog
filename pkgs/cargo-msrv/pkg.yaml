@@ -1,4 +1,4 @@
-schema: 3
+schema: 4
 name: cargo-msrv
 description: Find the minimum supported Rust version of a project
 homepage: https://foresterre.github.io/cargo-msrv
@@ -25,11 +25,17 @@ test:
 
 versions:
   - version: 0.19.6
+    excluded:
+      reason: "The upstream release binaries are 0.20.0-beta.4, not 0.19.6"
+      use: 0.19.3
     sha256:
       darwin/arm64: "9c2af7930eab0bb325321a0d32c34a09fc3bcb7116f36f92e0d5e110984f6244"
       darwin/amd64: "f1525fb20fe47e5e1c380ea2158cf67f4588fd74f1a081734c9444f95f0cd0b0"
       linux/amd64: "5fa075586e40d1fb0c57bc1c69e31e6608e2765fa4a16c1920d4e4c1ca76efef"
   - version: 0.19.5
+    excluded:
+      reason: "The upstream release binaries are 0.20.0-beta.3, not 0.19.5"
+      use: 0.19.3
     sha256:
       darwin/arm64: "37080115e19030e83d3ef6080b15e44b23e2be8061285f74bbe2d1123b400311"
       darwin/amd64: "01333badde083f932be95d09e487f65ba3a31b02546602de88a410a5794e65b2"
